@@ -1,0 +1,57 @@
+@import "../../../../../assets/styles/scss/views/table";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    unidad: (
+      width: 12rem
+    ),
+    tambo: (
+      width: 12rem
+    ),
+    tipo: (
+      width: 9rem
+    ),
+    marca: (
+      width: 9rem
+    ),
+    placa: (
+      width: 6rem
+    ),
+    horaSalida: (
+      width: 6rem
+    ),
+    horaLlegada: (
+      width: 8rem
+    ),
+    kilometrajeSalida: (
+      width: 6rem
+    ),
+    kilometrajeLlegada: (
+      width: 6rem
+    ),
+    kilometrosRecorrido: (
+      width: 6rem
+    ),
+    lugarPartida: (
+      width: 6rem
+    ),
+    lugarDestino: (
+      width: 7rem
+    ),
+    codComisionSISMONITOR: (
+      width: 7rem
+    ),
+    opt: (
+      width: 6rem
+    )
+  )
+);
+
+
+// td.mat-cell:last-child {
+//   /* row border */
+//   border-left: 1px solid #ffa600;
+// }

@@ -1,0 +1,47 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { IntranetRoutingModule } from './intranet-routing.module';
+import { HomeComponent } from './components/home/home.component';
+import { MaterialModule } from '../material.module';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { RegistrarVehiculoComponent } from './components/home/registrar-vehiculo/registrar-vehiculo.component';
+import { RegistrarRevTecnicaComponent } from './components/home/registrar-rev-tecnica/registrar-rev-tecnica.component';
+import { RegistrarSoatComponent } from './components/home/registrar-soat/registrar-soat.component';
+import { RegistrarAsigCombustComponent } from './components/home/registrar-asig-combust/registrar-asig-combust.component';
+import { ControlKilometrajeComponent } from './components/control-kilometraje/control-kilometraje.component';
+import { RegKilometrajeComponent } from './components/control-kilometraje/reg-kilometraje/reg-kilometraje.component';
+import { VerObservacionComponent } from './components/control-kilometraje/ver-observacion/ver-observacion.component';
+import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { ResponsiveRowsDirective } from 'src/app/core/directives/responsive-rows.directive';
+
+@NgModule({
+  entryComponents: [
+    RegistrarVehiculoComponent,
+    RegistrarRevTecnicaComponent,
+    RegistrarSoatComponent,
+    RegistrarAsigCombustComponent,
+    RegKilometrajeComponent,
+    VerObservacionComponent
+  ],
+  declarations: [
+    HomeComponent, //Declaracion de nuestro componente
+    NavbarComponent,
+    RegistrarVehiculoComponent,
+    RegistrarRevTecnicaComponent,
+    RegistrarSoatComponent,
+    RegistrarAsigCombustComponent,
+    ControlKilometrajeComponent,
+    RegKilometrajeComponent,
+    VerObservacionComponent,
+    ResponsiveRowsDirective
+  ],
+  imports: [
+    CommonModule,
+    IntranetRoutingModule, //Routing del modulo separado
+    MaterialModule,
+    Ng4LoadingSpinnerModule.forRoot()
+  ]
+})
+export class IntranetModule { }

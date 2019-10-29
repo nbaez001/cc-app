@@ -1,0 +1,78 @@
+@import "../../../../../assets/styles/scss/views/table";
+
+.page-vehiculo {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}
+
+// .example-container > mat-grid-list > mat-grid-tile {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+mat-form-field {
+  width: 100%;
+  margin: auto 10px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    unidad: (
+      width: 12rem
+    ),
+    tambo: (
+      width: 12rem
+    ),
+    tipo: (
+      width: 9rem
+    ),
+    marca: (
+      width: 9rem
+    ),
+    placa: (
+      width: 6rem
+    ),
+    ultMantenimiento: (
+      width: 6rem
+    ),
+    estadoVehiculo: (
+      width: 8rem
+    ),
+    iniVigenciaRevTecnica: (
+      width: 6rem
+    ),
+    finVigenciaRevTecnica: (
+      width: 6rem
+    ),
+    iniVigenciaSOAT: (
+      width: 6rem
+    ),
+    finVigenciaSOAT: (
+      width: 6rem
+    ),
+    tipoCombustible: (
+      width: 7rem
+    ),
+    asignacionCombustible: (
+      width: 6rem
+    ),
+    fecInfraccionVehicular: (
+      width: 7rem
+    ),
+    opt: (
+      width: 10rem
+    )
+  )
+);
+
+// td.mat-cell:last-child {
+//   /* row border */
+//   border-left: 1px solid #ffa600;
+// }

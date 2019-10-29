@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Registrar SOAT</h1>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Tipo combustible</mat-label>
+      <mat-select disableOptionCentering>
+        <mat-option *ngFor="let tipocombustible of tiposcombustible" [value]="tipocombustible.id">
+          {{tipocombustible.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Cantidad de combustible asignado">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="button" (click)="onNoClick()">Guardar</button>
+  </form>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="nro">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.nro}} </td>
+      </ng-container>
+      <ng-container matColumnDef="combustible">
+        <th mat-header-cell *matHeaderCellDef> Combustible </th>
+        <td mat-cell *matCellDef="let element"> {{element.combustible}} </td>
+      </ng-container>
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef> Cantidad (gal) </th>
+        <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Salir</button>
+</div>

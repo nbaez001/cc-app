@@ -1,0 +1,29 @@
+.login-card {
+  width: 300px;
+  max-width: 300px;
+  text-align: center;
+  mat-card-header {
+    mat-card-title {
+      display: flex;
+      font-size: 25px !important;
+      justify-content: center !important;
+    }
+  }
+}
+.login-card-header-image {
+  background-image: url("../../../../../assets/icons/logoPAIS.png");
+  background-size: cover;
+}
+
+.loginForm-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginForm-container > * {
+  width: 100%;
+}
+
+.checkbox {
+  display: inline-flex;
+}

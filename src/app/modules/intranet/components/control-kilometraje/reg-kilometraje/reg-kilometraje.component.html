@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>Registrar record kilometraje</h1>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Unidad</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
+          {{unidad.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tambo</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
+          {{tambo.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Tipo vehiculo</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo.id">
+          {{tipovehiculo.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Marca vehiculo">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Nro placa vehicular">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="time" placeholder="Hora salida">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="time" placeholder="Hora llegada">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Kilometraje salida">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Kilometraje llegada">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Total kilometraje" disabled>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Lugar partida">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Lugar destino">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Codigo comision SISMONITOR">
+    </mat-form-field>
+    <mat-form-field style="width: 100%;">
+      <textarea matInput placeholder="Observaciones">
+        </textarea>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onNoClick()">Guardar</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Salir</button>
+</div>

@@ -1,0 +1,36 @@
+<mat-grid-list cols="1" rowHeight="2:1">
+  <mat-grid-tile>
+    <mat-card class="login-card">
+      <mat-card-header>
+        <mat-card-title>
+          <div mat-card-avatar class="login-card-header-image"></div>
+          CC-APP
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Ingresa a tu cuenta</p>
+        <form [formGroup]="loginForm">
+          <div class="loginForm-container">
+            <mat-form-field>
+              <input matInput formControlName="usuario" type="text" id="usuario" placeholder="Inserte su ID de usuario"
+                [ngClass]="{'is-invalid': formErrors.usuario}" (keyup.enter)="autenticar()">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput formControlName="contrasenia" type="password" id="contrasenia"
+                placeholder="Inserte su contraseña" [ngClass]="{'is-invalid': formErrors.contrasenia}"
+                (keyup.enter)="autenticar()">
+            </mat-form-field>
+            <section class="checkbox">
+              <mat-checkbox>Recordar</mat-checkbox>
+            </section>
+            <button mat-button color="primary" (click)="autenticar()">Ingresar</button>
+          </div>
+        </form>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button mat-button color="primary" (click)="autenticar()">Olvido la contraseña</button>
+        <button mat-button>Nueva cuenta</button> -->
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
