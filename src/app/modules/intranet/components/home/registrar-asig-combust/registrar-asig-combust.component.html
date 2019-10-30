@@ -1,21 +1,30 @@
 <h1 mat-dialog-title>Registrar SOAT</h1>
 <div mat-dialog-content>
   <form>
-    <mat-form-field>
-      <mat-label>Tipo combustible</mat-label>
-      <mat-select disableOptionCentering>
-        <mat-option *ngFor="let tipocombustible of tiposcombustible" [value]="tipocombustible.id">
-          {{tipocombustible.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="number" placeholder="Cantidad de combustible asignado">
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="button" (click)="onNoClick()">Guardar</button>
+    <mat-grid-list cols="12" rowHeight="50px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <mat-label>Tipo combustible</mat-label>
+          <mat-select disableOptionCentering>
+            <mat-option *ngFor="let tipocombustible of tiposcombustible" [value]="tipocombustible.id">
+              {{tipocombustible.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Cantidad de combustible asignado">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}" class="dialog-form-actions">
+        <button mat-raised-button color="primary" type="button" (click)="onNoClick()">Guardar</button>
+        <button mat-raised-button type="button" (click)="limpiar()">Limpiar</button>
+      </mat-grid-tile>
+    </mat-grid-list>
   </form>
 
-  <div class="mat-elevation-z8">
+  <div class="table-container">
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="nro">
         <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -37,6 +46,6 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
   </div>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="center">
   <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Salir</button>
 </div>

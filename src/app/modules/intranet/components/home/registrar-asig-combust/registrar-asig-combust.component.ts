@@ -37,6 +37,10 @@ export class RegistrarAsigCombustComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  limpiar(): void{
+    console.log('limpiar');
+  }
+
 }
 
 

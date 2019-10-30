@@ -14,4 +14,5 @@ export class Kilometraje {
     lugarDestino: string;
     observaciones: string;
     codComisionSISMONITOR: string;
+    fechaComision: string;
 }

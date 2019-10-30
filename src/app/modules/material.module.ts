@@ -5,7 +5,9 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { ResponsiveRowsDirective } from '../core/directives/responsive-rows.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ResponsiveRowsDirective
+  ],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -47,7 +49,8 @@ import { ResponsiveRowsDirective } from '../core/directives/responsive-rows.dire
     MatPaginatorModule,
     MatDialogModule,
     MatTooltipModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ResponsiveRowsDirective
   ]
 })
 export class MaterialModule { }

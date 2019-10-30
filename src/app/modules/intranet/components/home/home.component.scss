@@ -9,16 +9,6 @@
   }
 }
 
-// .example-container > mat-grid-list > mat-grid-tile {
-//   display: flex;
-//   flex-direction: column;
-// }
-
-mat-form-field {
-  width: 100%;
-  margin: auto 10px;
-}
-
 @include mat-table-columns(
   (
     id: (
@@ -71,8 +61,3 @@ mat-form-field {
     )
   )
 );
-
-// td.mat-cell:last-child {
-//   /* row border */
-//   border-left: 1px solid #ffa600;
-// }

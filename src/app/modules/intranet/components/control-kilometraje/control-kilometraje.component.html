@@ -1,175 +1,120 @@
 <navbar>
-  <mat-grid-list cols="1" rowHeight="750px">
-    <mat-grid-tile>
-      <mat-accordion class="example-headers-align" [multi]="true">
-        <mat-expansion-panel [expanded]="true" hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Busqueda de kilometrajes
-            </mat-panel-title>
-            <mat-panel-description>
-              <i></i>
-              <mat-icon>expand_more</mat-icon>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-form-field>
-            <mat-label>Unidad</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
-                {{unidad.nombre}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Tambo</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
-                {{tambo.nombre}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Tipo vehiculo</mat-label>
-            <mat-select>
-              <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo.id">
-                {{tipovehiculo.nombre}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Fecha inicio busqueda">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field>
-            <input matInput [matDatepicker]="picker2" placeholder="Fecha fin busqueda">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2></mat-datepicker>
-          </mat-form-field>
-          <button mat-raised-button (click)="buscar()">
-            <mat-icon>search</mat-icon>
-            Buscar
-          </button>
+  <div class="page-bandeja">
+    <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
+    <mat-card class="box-filtros">
+      <mat-card-header class="box-section-header">
+        <mat-card-title class="box-section-title"> BUSQUEDA KILOMETRAJES </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="example-container">
+          <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Unidad</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
+                    {{unidad.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Tambo</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
+                    {{tambo.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Tipo vehiculo</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo.id">
+                    {{tipovehiculo.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha inicio busqueda">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <input matInput [matDatepicker]="picker2" placeholder="Fecha fin busqueda">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="btnRigth" align="end">
+        <button mat-raised-button color="primary" (click)="buscar()">
+          <mat-icon>search</mat-icon>
+          <strong> BUSCAR</strong>
+        </button>
+        <button mat-raised-button (click)="regKilometraje(null)">
+          <mat-icon>add_box</mat-icon>
+          <strong> REGISTRAR NUEVO</strong>
+        </button>
+        <button mat-raised-button (click)="exportarExcel()">
+          <mat-icon>file_copy</mat-icon>
+          <strong>EXPORTAR A EXCEL</strong>
+        </button>
+      </mat-card-actions>
+    </mat-card>
 
-          <br>
-          <br>
-          <button mat-raised-button color="primary" (click)="regKilometraje(null)">
-            <mat-icon>add_box</mat-icon>
-            Nuevo registro
-          </button>
-          <button mat-raised-button color="primary" class="button-separate" (click)="ExportarExcel()">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172"
-              style=" fill:#000000;">
-              <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-                stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-                font-family="none" font-weight="none" font-size="none" text-anchor="none"
-                style="mix-blend-mode: normal">
-                <path d="M0,172v-172h172v172z" fill="none"></path>
-                <g fill="#ffffff">
-                  <path
-                    d="M86,21.5l-71.66667,14.33333v100.33333l71.66667,14.33333zM100.33333,35.83333v14.33333h14.33333v14.33333h-14.33333v14.33333h14.33333v14.33333h-14.33333v14.33333h14.33333v14.33333h-14.33333v14.33333h50.16667c3.956,0 7.16667,-3.21067 7.16667,-7.16667v-86c0,-3.956 -3.21067,-7.16667 -7.16667,-7.16667zM129,50.16667h14.33333v14.33333h-14.33333zM29.92643,59.46094h12.73763l6.62077,15.87305c0.5375,1.29717 0.94208,2.80149 1.35775,4.50716h0.18197c0.2365,-1.02483 0.7179,-2.59064 1.44173,-4.63314l7.37663,-15.74707h11.61784l-13.87142,26.30111l14.27734,26.77702h-12.3877l-7.97852,-17.30078c-0.301,-0.60917 -0.65799,-1.83567 -0.95182,-3.54134h-0.11198c-0.17917,0.817 -0.5403,2.04015 -1.0778,3.68132l-8.0485,17.16081h-12.44368l14.76725,-26.56706zM129,78.83333h14.33333v14.33333h-14.33333zM129,107.5h14.33333v14.33333h-14.33333z">
-                  </path>
-                </g>
-              </g>
-            </svg>
-            Exportar
-          </button>
+    <mat-card class="table-resultados">
+      <mat-card-header>
+        <mat-card-title> LISTA DE KILOMETRAJES: </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-container">
+        <div class="table-container clear-both">
+          <table mat-table [dataSource]="dataSource" matSort>
 
-        </mat-expansion-panel>
+            <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+              <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+            </ng-container>
 
-        <mat-expansion-panel [expanded]="true" hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Resultados de busqueda
-            </mat-panel-title>
-            <mat-panel-description>
-              <i></i>
-              <mat-icon>expand_more</mat-icon>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
+            <ng-container matColumnDef="opt" stickyEnd>
+              <th mat-header-cell *matHeaderCellDef>OPCIONES</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button matTooltip="Ver observaciones" (click)="verObsKilometraje(element)">
+                  <mat-icon>comment</mat-icon>
+                </button>
+                <button mat-icon-button matTooltip="Editar Kilometraje" (click)="regKilometraje(element)">
+                  <mat-icon>create</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
-          <div class="table-container">
-            <table mat-table [dataSource]="dataSource">
-              <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-              </ng-container>
-              <ng-container matColumnDef="unidad">
-                <th mat-header-cell *matHeaderCellDef> Unidad </th>
-                <td mat-cell *matCellDef="let element"> {{element.unidad}} </td>
-              </ng-container>
-              <ng-container matColumnDef="tambo">
-                <th mat-header-cell *matHeaderCellDef> Tambo </th>
-                <td mat-cell *matCellDef="let element"> {{element.tambo}} </td>
-              </ng-container>
-              <ng-container matColumnDef="tipo">
-                <th mat-header-cell *matHeaderCellDef> Tipo vehiculo </th>
-                <td mat-cell *matCellDef="let element"> {{element.tipo}} </td>
-              </ng-container>
-              <ng-container matColumnDef="marca">
-                <th mat-header-cell *matHeaderCellDef> Marca vehiculo </th>
-                <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
-              </ng-container>
-              <ng-container matColumnDef="placa">
-                <th mat-header-cell *matHeaderCellDef> Placa vehiculo </th>
-                <td mat-cell *matCellDef="let element"> {{element.placa}} </td>
-              </ng-container>
-              'placa', '', '', '', '', '', '', '', '', '', 'opt'];
-              <ng-container matColumnDef="horaSalida">
-                <th mat-header-cell *matHeaderCellDef> Hora salida </th>
-                <td mat-cell *matCellDef="let element"> {{element.horaSalida}} </td>
-              </ng-container>
-              <ng-container matColumnDef="horaLlegada">
-                <th mat-header-cell *matHeaderCellDef> Hora llegada </th>
-                <td mat-cell *matCellDef="let element"> {{element.horaLlegada}} </td>
-              </ng-container>
-              <ng-container matColumnDef="kilometrajeSalida">
-                <th mat-header-cell *matHeaderCellDef> Kilometraje salida </th>
-                <td mat-cell *matCellDef="let element"> {{element.kilometrajeSalida}} </td>
-              </ng-container>
-              <ng-container matColumnDef="kilometrajeLlegada">
-                <th mat-header-cell *matHeaderCellDef> Kilometraje llegada </th>
-                <td mat-cell *matCellDef="let element"> {{element.kilometrajeLlegada}} </td>
-              </ng-container>
-              <ng-container matColumnDef="kilometrosRecorrido">
-                <th mat-header-cell *matHeaderCellDef> Total kilometros recorrido </th>
-                <td mat-cell *matCellDef="let element"> {{element.kilometrosRecorrido}} </td>
-              </ng-container>
-              <ng-container matColumnDef="lugarPartida">
-                <th mat-header-cell *matHeaderCellDef> Lugar partida </th>
-                <td mat-cell *matCellDef="let element"> {{element.lugarPartida}} </td>
-              </ng-container>
-              <ng-container matColumnDef="lugarDestino">
-                <th mat-header-cell *matHeaderCellDef> Lugar destino </th>
-                <td mat-cell *matCellDef="let element"> {{element.lugarDestino}} </td>
-              </ng-container>
-              <ng-container matColumnDef="codComisionSISMONITOR">
-                <th mat-header-cell *matHeaderCellDef> Codigo comision SISMONITOR </th>
-                <td mat-cell *matCellDef="let element"> {{element.codComisionSISMONITOR}} </td>
-              </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
+          </table>
 
-              <ng-container matColumnDef="opt" stickyEnd>
-                <th mat-header-cell *matHeaderCellDef>Opciones</th>
-                <td mat-cell *matCellDef="let element">
-                  <button mat-icon-button matTooltip="Ver observaciones" (click)="verObsKilometraje(element)">
-                    <mat-icon>comment</mat-icon>
-                  </button>
-                  <button mat-icon-button matTooltip="Editar Kilometraje" (click)="regKilometraje(element)">
-                    <mat-icon>create</mat-icon>
-                  </button>
-                </td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          <div class="empty" *ngIf="dataSource === null">
+            No existe datos para mostrar en la tabla
           </div>
 
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-grid-tile>
-  </mat-grid-list>
+          <!-- <mat-card *ngIf="isLoading" class="spinerTable">
+            <mat-progress-spinner color="primary" mode="indeterminate">
+            </mat-progress-spinner>
+          </mat-card> -->
+
+          <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+          </mat-paginator>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </navbar>

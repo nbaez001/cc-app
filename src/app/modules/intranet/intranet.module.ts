@@ -13,8 +13,9 @@ import { ControlKilometrajeComponent } from './components/control-kilometraje/co
 import { RegKilometrajeComponent } from './components/control-kilometraje/reg-kilometraje/reg-kilometraje.component';
 import { VerObservacionComponent } from './components/control-kilometraje/ver-observacion/ver-observacion.component';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { ResponsiveRowsDirective } from 'src/app/core/directives/responsive-rows.directive';
+import { ControlGenElectricoComponent } from './components/control-gen-electrico/control-gen-electrico.component';
+import { RegConsumoGeneradorComponent } from './components/control-gen-electrico/reg-consumo-generador/reg-consumo-generador.component';
+import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico/bandeja-gen-electrico.component';
 
 @NgModule({
   entryComponents: [
@@ -35,7 +36,9 @@ import { ResponsiveRowsDirective } from 'src/app/core/directives/responsive-rows
     ControlKilometrajeComponent,
     RegKilometrajeComponent,
     VerObservacionComponent,
-    ResponsiveRowsDirective
+    ControlGenElectricoComponent,
+    RegConsumoGeneradorComponent,
+    BandejaGenElectricoComponent
   ],
   imports: [
     CommonModule,

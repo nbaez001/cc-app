@@ -31,6 +31,10 @@ export class RegistrarSoatComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  limpiar(): void{
+    console.log('limpiar');
+  }
+
 }
 
 

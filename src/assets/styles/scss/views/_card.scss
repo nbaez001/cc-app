@@ -1,24 +1,6 @@
-mat-card{
+mat-card {
   margin: 15px;
 }
-
-// .mat-grid-tile .mat-figure {
-//   align-items: flex-start !important; //JUSTIFICA AL INICIO DEL PANEL VERTICALMENTE
-// }
-
-// .example-headers-align .mat-expansion-panel-header-title,
-// .example-headers-align .mat-expansion-panel-header-description {
-//   flex-basis: 0;
-// }
-
-// .example-headers-align .mat-expansion-panel-header-description {
-//   justify-content: space-between;
-//   align-items: center;
-// }
-
-// mat-form-field {
-//   margin-right: 12px;
-// }
 
 .button-separate {
   margin-left: 10px !important;
@@ -26,4 +8,16 @@ mat-card{
 
 table {
   width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: auto 10px;
+  textarea{
+    height: 100%;
+  }
+}
+
+mat-dialog-content > * {
+  font-size: 12px !important;
 }

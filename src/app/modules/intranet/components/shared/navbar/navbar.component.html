@@ -7,15 +7,16 @@
     </mat-toolbar>
     <div class="span-usuario">
       <span>
-        Jefe unidad Territorial
+        {{perfil.nombre}}
         <br>
-        (JUT)
+        ({{perfil.abreviacion}})
       </span>
     </div>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/intranet/home']" routerLinkActive="active-list-item">Control vehiculos</a>
-      <a mat-list-item [routerLink]="['/intranet/kilometraje']">Control kilometraje</a>
-      <a mat-list-item href="#">Link 3</a>
+      <a mat-list-item [routerLink]="['/intranet/home']" routerLinkActive="active-list-item"><mat-icon>directions_car</mat-icon>  Vehiculos</a>
+      <a mat-list-item routerLinkActive="active-list-item"><mat-icon>ev_station</mat-icon>  Generadores electricos</a>
+      <a mat-list-item [routerLink]="['/intranet/kilometraje']" routerLinkActive="active-list-item"><mat-icon>score</mat-icon>  Control kilometraje</a>
+      <a mat-list-item [routerLink]="['/intranet/generador-electrico']" routerLinkActive="active-list-item"><mat-icon>assignment</mat-icon>  Control consumo generador</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -27,8 +28,8 @@
       <span>Control de combustible</span>
       <span class="spacer"></span>
       <button mat-button [matMenuTriggerFor]="usuario">
-        Nerio Baez
-        <span>(Jefe Unidad Territorial)</span>
+        {{nomUsuario}}
+        <!-- <span>(Jefe Unidad Territorial)</span> -->
         <mat-icon>expand_more</mat-icon>
       </button>
       <mat-menu #usuario="matMenu" xPosition="after" [overlapTrigger]="false">

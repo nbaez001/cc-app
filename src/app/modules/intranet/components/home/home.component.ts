@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
     }
   };
 
-  public columnsGrilla = [
+  columnsGrilla = [
     {
       columnDef: 'id',
       header: 'N°',
@@ -157,9 +157,7 @@ export class HomeComponent implements OnInit {
 
   public inicializarVariables(): void {
     this.dataSource = null;
-    
     // this.banMonitoreoFrmGrp.get('estadoMonitoreoFrmCtrl').setValue(ESTADO_MONITOREO.pendienteInformacion);
-
     this.cargarDatosTabla();
   }
 
@@ -184,14 +182,14 @@ export class HomeComponent implements OnInit {
     console.log('Buscar');
   }
 
-  ExportarExcel() {
+  exportarExcel() {
     console.log('Exportar');
   }
 
   regVehiculo(obj): void {
     console.log(obj);
     const dialogRef = this.dialog.open(RegistrarVehiculoComponent, {
-      width: '460px',
+      width: '500px',
       data: { name: 'NERIO', animal: 'LEON' }
     });
 
@@ -226,7 +224,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  asigCombustible(obj): void {
+  regArticulosEmergencia(obj): void {
     console.log(obj);
     const dialogRef = this.dialog.open(RegistrarAsigCombustComponent, {
       width: '500px',

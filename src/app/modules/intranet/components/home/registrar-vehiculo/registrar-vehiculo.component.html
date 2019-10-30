@@ -1,60 +1,78 @@
 <h1 mat-dialog-title>Registrar vehiculo</h1>
 <div mat-dialog-content>
   <form>
-    <mat-form-field>
-      <mat-label>Unidad</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
-          {{unidad.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tambo</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
-          {{tambo.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tipo vehiculo</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo.id">
-          {{tipovehiculo.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="text" placeholder="Marca vehiculo">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="text" placeholder="Nro placa vehicular">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput [matDatepicker]="picker" placeholder="Fecha mantenimiento">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Estado de unidad vehicular</mat-label>
-      <mat-select disableOptionCentering>
-        <mat-option *ngFor="let estadovehiculo of estadosvehiculo" [value]="estadovehiculo.id">
-          {{estadovehiculo.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tipo combustible</mat-label>
-      <mat-select disableOptionCentering>
-        <mat-option *ngFor="let tipocombustible of tiposcombustible" [value]="tipocombustible.id">
-          {{tipocombustible.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-grid-list cols="12" rowHeight="50px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Unidad</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let unidad of unidades" [value]="unidad">
+              {{unidad.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Tambo</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
+              {{tambo.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Tipo vehiculo</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo.id">
+              {{tipovehiculo.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <input matInput type="text" placeholder="Marca vehiculo">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <input matInput type="text" placeholder="Nro placa vehicular">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <input matInput [matDatepicker]="picker" placeholder="Fecha mantenimiento">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Estado de unidad vehicular</mat-label>
+          <mat-select disableOptionCentering>
+            <mat-option *ngFor="let estadovehiculo of estadosvehiculo" [value]="estadovehiculo.id">
+              {{estadovehiculo.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Tipo combustible</mat-label>
+          <mat-select disableOptionCentering>
+            <mat-option *ngFor="let tipocombustible of tiposcombustible" [value]="tipocombustible.id">
+              {{tipocombustible.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
   </form>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions align="center">
   <button mat-raised-button color="primary" (click)="onNoClick()">Guardar</button>
   <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Salir</button>
 </div>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ControlKilometrajeComponent } from './components/control-kilometraje/control-kilometraje.component';
+import { ControlGenElectricoComponent } from './components/control-gen-electrico/control-gen-electrico.component';
 
 const intranetRoutes: Routes = [
   {
@@ -19,6 +20,10 @@ const intranetRoutes: Routes = [
         path: 'kilometraje',
         component: ControlKilometrajeComponent,
         data: { title: 'Kilometraje' }
+      }, {
+        path: 'generador-electrico',
+        component: ControlGenElectricoComponent,
+        data: { title: 'Generador electrico' }
       }
     ]
   }

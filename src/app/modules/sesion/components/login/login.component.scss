@@ -1,4 +1,5 @@
 .login-card {
+  margin: 10% auto 0%;
   width: 300px;
   max-width: 300px;
   text-align: center;
@@ -9,21 +10,33 @@
       justify-content: center !important;
     }
   }
+  form {
+    mat-grid-tile {
+      button {
+        width: 90%;
+      }
+    }
+  }
 }
+
 .login-card-header-image {
   background-image: url("../../../../../assets/icons/logoPAIS.png");
   background-size: cover;
 }
 
-.loginForm-container {
-  display: flex;
-  flex-direction: column;
-}
+// .loginForm-container {
+//   display: flex;
+//   flex-direction: column;
+// }
 
-.loginForm-container > * {
-  width: 100%;
-}
+// .loginForm-container > * {
+//   width: 100%;
+// }
 
-.checkbox {
-  display: inline-flex;
+// .checkbox {
+//   display: inline-flex;
+// }
+
+mat-checkbox {
+  padding-left: 10px;
 }

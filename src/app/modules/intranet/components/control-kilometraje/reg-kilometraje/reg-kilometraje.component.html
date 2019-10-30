@@ -1,64 +1,95 @@
 <h1 mat-dialog-title>Registrar record kilometraje</h1>
 <div mat-dialog-content>
   <form>
-    <mat-form-field>
-      <mat-label>Unidad</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
-          {{unidad.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tambo</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
-          {{tambo.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Tipo vehiculo</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo.id">
-          {{tipovehiculo.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="text" placeholder="Marca vehiculo">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="text" placeholder="Nro placa vehicular">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="time" placeholder="Hora salida">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="time" placeholder="Hora llegada">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="number" placeholder="Kilometraje salida">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="number" placeholder="Kilometraje llegada">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="number" placeholder="Total kilometraje" disabled>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="text" placeholder="Lugar partida">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="text" placeholder="Lugar destino">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput type="text" placeholder="Codigo comision SISMONITOR">
-    </mat-form-field>
-    <mat-form-field style="width: 100%;">
-      <textarea matInput placeholder="Observaciones">
-        </textarea>
-    </mat-form-field>
+    <mat-grid-list cols="12" rowHeight="50px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <mat-label>Unidad</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
+              {{unidad.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <mat-label>Tambo</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
+              {{tambo.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <mat-label>Tipo vehiculo</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo.id">
+              {{tipovehiculo.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Marca vehiculo">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Nro placa vehicular">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="time" placeholder="Hora salida">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="time" placeholder="Hora llegada">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Kilometraje salida">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Kilometraje llegada">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="number" placeholder="Total kilometraje" disabled>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Lugar partida">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Lugar destino">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+        <mat-form-field>
+          <input matInput type="text" placeholder="Codigo comision SISMONITOR">
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="12" rowHeight="70px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+        <mat-form-field>
+          <textarea matInput placeholder="Observaciones"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
   </form>
 </div>
 <div mat-dialog-actions>
