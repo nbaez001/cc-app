@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Registrar vehiculo</h1>
 <div mat-dialog-content>
-  <form>
+  <form [formGroup]="vehiculoGrp">
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">

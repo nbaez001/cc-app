@@ -13,23 +13,21 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
   styleUrls: ['./control-kilometraje.component.scss']
 })
 export class ControlKilometrajeComponent implements OnInit {
+  bdjKilometrajeGrp: FormGroup;
+  user: Object;
   unidades = UNIDADES;
   tambos = TAMBOS;
   tiposvehiculo = TIPOSVEHICULO;
   listaKilometrajes: Kilometraje[] = [
-    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'SEDE', tipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', horaSalida: '', horaLlegada: '', kilometrajeSalida: '', kilometrajeLlegada: '', kilometrosRecorrido: '0', lugarPartida: '', lugarDestino: '', observaciones: 'LA CAMIONETA NO SE MOVILIZO POR LA FALTA DE MANTENIMIENTO', codComisionSISMONITOR: '', fechaComision: '01/10/2019' },
-    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'ANCARPATA', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', horaSalida: '', horaLlegada: '', kilometrajeSalida: '', kilometrajeLlegada: '', kilometrosRecorrido: '0', lugarPartida: '', lugarDestino: '', observaciones: 'DESDE MES DE ENERO NO SE UTILIZO LA MOTO POR MOTIVO DE LLUVIA', codComisionSISMONITOR: '', fechaComision: '05/10/2019' },
-    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '9:00 AM', horaLlegada: '9:10 AM', kilometrajeSalida: '5155', kilometrajeLlegada: '5159.5', kilometrosRecorrido: '4.5', lugarPartida: 'VISTA ALEGRE', lugarDestino: 'CP QUIÑASI', observaciones: 'COORIDNACION CON AUTORIDADES DEL C.P. QUIÑASI', codComisionSISMONITOR: '012', fechaComision: '10/10/2019' },
-    { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '10:00 AM', horaLlegada: '10:10 AM', kilometrajeSalida: '5159.5', kilometrajeLlegada: '5164', kilometrosRecorrido: '4.5', lugarPartida: 'CP QUIÑASI', lugarDestino: 'VISTA ALEGRE', observaciones: 'RETORNO', codComisionSISMONITOR: '012', fechaComision: '15/10/2019' },
-    { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '11:00 AM', horaLlegada: '12:00 AM', kilometrajeSalida: '5164', kilometrajeLlegada: '5180.5', kilometrosRecorrido: '16.5', lugarPartida: 'TAMBO BARRIO VISTA ALEGRE', lugarDestino: 'TOTOS', observaciones: 'COORIDNACION CON LA MUNICIPALIDAD DISTRITAL DE TOTOS', codComisionSISMONITOR: '016', fechaComision: '20/10/2019' },
-    { id: 6, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '3:00 PM', horaLlegada: '4:00 PM', kilometrajeSalida: '5180.5', kilometrajeLlegada: '5197', kilometrosRecorrido: '16.5', lugarPartida: 'TOTOS', lugarDestino: 'TAMBO BARRIO VISTA ALEGRE', observaciones: 'RETORNO', codComisionSISMONITOR: '016', fechaComision: '25/10/2019' },
-    { id: 7, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '9:30 AM', horaLlegada: '9:40 AM', kilometrajeSalida: '5197', kilometrajeLlegada: '5199', kilometrosRecorrido: '2', lugarPartida: 'TAMBO BARRIO VISTA ALEGRE', lugarDestino: 'CP QUIÑASI', observaciones: 'VERIFICACION DE CHACRAS AFECTADAS POR LA SEQUIA', codComisionSISMONITOR: '051', fechaComision: '30/10/2019' }
+    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'SEDE', tipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', horaSalida: '', horaLlegada: '', kilometrajeSalida: '', kilometrajeLlegada: '', kilometrosRecorrido: '0', lugarDestino: '', observaciones: 'LA CAMIONETA NO SE MOVILIZO POR LA FALTA DE MANTENIMIENTO', codComisionSISMONITOR: '', fechaComision: '01/10/2019' },
+    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'ANCARPATA', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', horaSalida: '', horaLlegada: '', kilometrajeSalida: '', kilometrajeLlegada: '', kilometrosRecorrido: '0', lugarDestino: '', observaciones: 'DESDE MES DE ENERO NO SE UTILIZO LA MOTO POR MOTIVO DE LLUVIA', codComisionSISMONITOR: '', fechaComision: '05/10/2019' },
+    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '9:00 AM', horaLlegada: '9:10 AM', kilometrajeSalida: '5155', kilometrajeLlegada: '5159.5', kilometrosRecorrido: '4.5', lugarDestino: 'CP QUIÑASI', observaciones: 'COORIDNACION CON AUTORIDADES DEL C.P. QUIÑASI', codComisionSISMONITOR: '012', fechaComision: '10/10/2019' },
+    { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '11:00 AM', horaLlegada: '12:00 AM', kilometrajeSalida: '5164', kilometrajeLlegada: '5180.5', kilometrosRecorrido: '16.5', lugarDestino: 'TOTOS', observaciones: 'COORIDNACION CON LA MUNICIPALIDAD DISTRITAL DE TOTOS', codComisionSISMONITOR: '016', fechaComision: '20/10/2019' },
+    { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '9:30 AM', horaLlegada: '9:40 AM', kilometrajeSalida: '5197', kilometrajeLlegada: '5199', kilometrosRecorrido: '2', lugarDestino: 'CP QUIÑASI', observaciones: 'VERIFICACION DE CHACRAS AFECTADAS POR LA SEQUIA', codComisionSISMONITOR: '051', fechaComision: '30/10/2019' }
   ];
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<Kilometraje>;
-
-  bdjKilometrajeGrp: FormGroup;
 
   columnsGrilla = [
     {
@@ -77,10 +75,6 @@ export class ControlKilometrajeComponent implements OnInit {
       header: 'KILOMETRAJE RECORRIDO',
       cell: (kilometraje: Kilometraje) => `${kilometraje.kilometrosRecorrido}`
     }, {
-      columnDef: 'lugarPartida',
-      header: 'LUGAR PARTIDA',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.lugarPartida}`
-    }, {
       columnDef: 'lugarDestino',
       header: 'LUGAR DESTINO',
       cell: (kilometraje: Kilometraje) => `${kilometraje.lugarDestino}`
@@ -100,10 +94,11 @@ export class ControlKilometrajeComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
+    this.user = JSON.parse(sessionStorage.getItem('user'));
     this.spinnerService.show();
 
     this.bdjKilometrajeGrp = this.fb.group({
-      name: ['', [Validators.required]]
+      unidad: ['', [Validators.required]]
     });
 
     this.definirTabla();
@@ -150,6 +145,24 @@ export class ControlKilometrajeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
+      this.listaKilometrajes.push(result);
+
+      this.cargarDatosTabla();
+    });
+  }
+
+  editKilometraje(obj): void {
+    let indice = this.listaKilometrajes.indexOf(obj);
+    const dialogRef = this.dialog.open(RegKilometrajeComponent, {
+      width: '700px',
+      data: { name: 'NERIO', animal: 'LEON' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      // this.listaKilometrajes.splice(indice,1);
+      // this.listaKilometrajes.push(result);
+      // this.cargarDatosTabla();
     });
   }
 
@@ -157,11 +170,11 @@ export class ControlKilometrajeComponent implements OnInit {
     console.log(obj);
     const dialogRef = this.dialog.open(VerObservacionComponent, {
       width: '500px',
-      data: { name: 'NERIO', animal: 'LEON' }
+      data: obj
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // console.log(result);
     });
   }
 

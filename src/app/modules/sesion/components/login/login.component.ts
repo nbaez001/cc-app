@@ -47,9 +47,8 @@ export class LoginComponent implements OnInit {
   }
 
   autenticar() {
-    sessionStorage.setItem('usuario', this.loginForm.get('usuario').value);
-    sessionStorage.setItem('perfil', JSON.stringify(this.loginForm.get('perfil').value));
-    console.log(this.loginForm.get('usuario').value);
+    sessionStorage.setItem('user', JSON.stringify(this.loginForm.value));
+    console.log(this.loginForm.value);
     this.router.navigate(['/intranet/home']);
   }
 

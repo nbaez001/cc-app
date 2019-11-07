@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registrar-asig-combust',
@@ -7,6 +8,7 @@ import { MatTableDataSource, MatPaginator, MatDialogRef, MAT_DIALOG_DATA } from 
   styleUrls: ['./registrar-asig-combust.component.scss']
 })
 export class RegistrarAsigCombustComponent implements OnInit {
+  asigCombustibleGrp:FormGroup;
   tiposcombustible: Object[];
   displayedColumns: string[] = ['nro', 'combustible', 'cantidad'];
   dataSource: MatTableDataSource<Object>;
@@ -14,10 +16,14 @@ export class RegistrarAsigCombustComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(public dialogRef: MatDialogRef<RegistrarAsigCombustComponent>,
+  constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<RegistrarAsigCombustComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
+    this.asigCombustibleGrp = this.fb.group({
+      name: ['', [Validators.required]]
+    });
+
     this.tiposcombustible = [
       { id: 1, nombre: 'DIESEL B5' },
       { id: 2, nombre: 'GASOHOL 90' }

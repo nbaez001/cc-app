@@ -7,7 +7,7 @@
     </mat-toolbar>
     <div class="span-usuario">
       <span>
-        {{perfil.nombre}}
+        {{user.perfil.nombre}}
         <br>
         (U.T. AYACUCHO NORTE)
       </span>
@@ -28,7 +28,7 @@
       <span>Control de combustible</span>
       <span class="spacer"></span>
       <button mat-button [matMenuTriggerFor]="usuario">
-        {{nomUsuario}}
+        {{user.usuario}}
         <!-- <span>(Jefe Unidad Territorial)</span> -->
         <mat-icon>expand_more</mat-icon>
       </button>

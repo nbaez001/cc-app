@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registrar-vehiculo',
@@ -7,16 +8,22 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./registrar-vehiculo.component.scss']
 })
 export class RegistrarVehiculoComponent implements OnInit {
+  vehiculoGrp: FormGroup;
+  
   unidades: Object[];
   tambos:Object[];
   tiposvehiculo:Object[];
   estadosvehiculo: Object[];
   tiposcombustible: Object[];
 
-  constructor(public dialogRef: MatDialogRef<RegistrarVehiculoComponent>,
+  constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<RegistrarVehiculoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
+    this.vehiculoGrp = this.fb.group({
+      name: ['', [Validators.required]]
+    });
+
     this.unidades = [
       { id: 1, nombre: 'UNIDAD TERRITORIAL DE AYACUCHO NORTE' },
       { id: 2, nombre: 'UNIDAD TERRITORIAL DE HUANCAVELICA' },

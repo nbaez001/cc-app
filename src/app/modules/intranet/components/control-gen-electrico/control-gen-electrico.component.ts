@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ConsumoGenerador } from 'src/app/model/consumo-generador.model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
+import { RegConsumoGeneradorComponent } from './reg-consumo-generador/reg-consumo-generador.component';
 
 @Component({
   selector: 'app-control-gen-electrico',
@@ -11,23 +12,20 @@ import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
   styleUrls: ['./control-gen-electrico.component.scss']
 })
 export class ControlGenElectricoComponent implements OnInit {
+  bdjConsumoGenElectricoGrp: FormGroup;
   unidades = UNIDADES;
   tambos = TAMBOS;
   tiposvehiculo = TIPOSVEHICULO;
   listaConsumos: ConsumoGenerador[] = [
-    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'SEDE', marca: 'AKSA', serie: 'EGT-079', horaInicio: '', horaFin: '', horas: 0.00, fecha: '01/10/2019' },
-    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'ANCARPATA', marca: 'CUMMINS', serie: 'EA-9256', horaInicio: '', horaFin: '', horas: 0.00, fecha: '05/10/2019' },
-    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'VISTA ALEGRE', marca: 'PERKINS', serie: 'EA-9263', horaInicio: '9:00 AM', horaFin: '9:10 AM', horas: 0.4,fecha: '10/10/2019' },
-    { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'CCERAOCRO', marca: 'VOLVO PENTA', serie: 'EA-9263', horaInicio: '10:00 AM', horaFin: '10:10 AM', horas: 0.8,  fecha: '15/10/2019' },
-    { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'CHACHASPATA', marca: 'JOHN DEERE', serie: 'EA-9263', horaInicio: '11:00 AM', horaFin: '12:00 AM', horas: 0.2, fecha: '20/10/2019' },
-    { id: 6, unidad: 'AYACUCHO NORTE', tambo: 'CHURUNMARCA', marca: 'DOOSAN', serie: 'EA-9263', horaInicio: '3:00 PM', horaFin: '4:00 PM', horas: 0.3, fecha: '25/10/2019' },
-    { id: 7, unidad: 'AYACUCHO NORTE', tambo: 'COCHAPAMPA', marca: 'MITSUBISHI', serie: 'EA-9263', horaInicio: '9:30 AM', horaFin: '9:40 AM', horas: 0.4,  fecha: '30/10/2019' }
+    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'VISTA ALEGRE', marca: 'PERKINS', serie: 'EA-9263', horaInicio: '9:00 AM', horaFin: '9:30 AM', horas: 0.5, fecha: '10/10/2019', observacion: '' },
+    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'CCERAOCRO', marca: 'VOLVO PENTA', serie: 'EA-9263', horaInicio: '10:00 AM', horaFin: '11:00 AM', horas: 1.0, fecha: '15/10/2019', observacion: '' },
+    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'CHACHASPATA', marca: 'JOHN DEERE', serie: 'EA-9263', horaInicio: '11:00 AM', horaFin: '12:00 AM', horas: 1.0, fecha: '20/10/2019', observacion: '' },
+    { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'CHURUNMARCA', marca: 'DOOSAN', serie: 'EA-9263', horaInicio: '3:00 PM', horaFin: '4:00 PM', horas: 1.0, fecha: '25/10/2019', observacion: '' },
+    { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'COCHAPAMPA', marca: 'MITSUBISHI', serie: 'EA-9263', horaInicio: '9:30 AM', horaFin: '2:30 AM', horas: 5.0, fecha: '30/10/2019', observacion: '' }
   ];
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<ConsumoGenerador>;
-
-  bdjConsumoGrp: FormGroup;
 
   columnsGrilla = [
     {
@@ -76,7 +74,7 @@ export class ControlGenElectricoComponent implements OnInit {
   ngOnInit() {
     this.spinnerService.show();
 
-    this.bdjConsumoGrp = this.fb.group({
+    this.bdjConsumoGenElectricoGrp = this.fb.group({
       name: ['', [Validators.required]]
     });
 
@@ -115,15 +113,17 @@ export class ControlGenElectricoComponent implements OnInit {
     console.log('Exportar');
   }
 
-  regKilometraje(obj): void {
+  regConsumo(obj): void {
     console.log(obj);
-    // const dialogRef = this.dialog.open(RegKilometrajeComponent, {
-    //   width: '700px',
-    //   data: { name: 'NERIO', animal: 'LEON' }
-    // });
+    const dialogRef = this.dialog.open(RegConsumoGeneradorComponent, {
+      width: '700px',
+      data: obj
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(result);
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      this.listaConsumos.push(result);
+      this.cargarDatosTabla();
+    });
   }
 }

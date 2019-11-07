@@ -10,7 +10,6 @@ export class Kilometraje {
     kilometrajeSalida: string;
     kilometrajeLlegada: string;
     kilometrosRecorrido: string;
-    lugarPartida: string;
     lugarDestino: string;
     observaciones: string;
     codComisionSISMONITOR: string;

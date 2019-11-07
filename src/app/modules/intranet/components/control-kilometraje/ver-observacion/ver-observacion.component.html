@@ -1,10 +1,8 @@
 <h1 mat-dialog-title>Ver observacion</h1>
 <div mat-dialog-content>
-  <form>
+  <form [formGroup]="observacionGrp">
     <mat-form-field style="width: 100%;">
-      <textarea matInput placeholder="Textarea">
-DESDE MES DE ENERO NO SE UTILIZO LA MOTO POR MOTIVO DE LLUVIA
-      </textarea>
+      <textarea formControlName="observacion" matInput placeholder="Textarea"></textarea>
     </mat-form-field>
   </form>
 </div>

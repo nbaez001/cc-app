@@ -1,9 +1,9 @@
 import { Master } from './model/master.model';
 
 export const UNIDADES: Master[] = [
-    { id: 1, nombre: 'UNIDAD TERRITORIAL DE AYACUCHO NORTE' },
-    { id: 2, nombre: 'UNIDAD TERRITORIAL DE HUANCAVELICA' },
-    { id: 3, nombre: 'UNIDAD TERRITORIAL DE CUSCO' }
+    { id: 1, nombre: 'U.T. DE AYACUCHO NORTE' },
+    { id: 2, nombre: 'U.T. DE HUANCAVELICA' },
+    { id: 3, nombre: 'U.T. DE CUSCO' }
 ];
 
 export const TAMBOS: Master[] = [

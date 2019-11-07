@@ -24,7 +24,8 @@ import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico
     RegistrarSoatComponent,
     RegistrarAsigCombustComponent,
     RegKilometrajeComponent,
-    VerObservacionComponent
+    VerObservacionComponent,
+    RegConsumoGeneradorComponent
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente

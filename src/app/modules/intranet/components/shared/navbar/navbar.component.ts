@@ -11,8 +11,7 @@ import { Perfil } from 'src/app/model/perfil.model';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  nomUsuario: string;
-  perfil: Perfil;
+  user: Object;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -22,9 +21,8 @@ export class NavbarComponent {
   constructor(private breakpointObserver: BreakpointObserver, private router: Router) { }
 
   ngOnInit() {
-    this.nomUsuario = sessionStorage.getItem('usuario');
-    this.perfil = JSON.parse(sessionStorage.getItem('perfil'));
-    console.log(sessionStorage.getItem('perfil'));
+    this.user = JSON.parse(sessionStorage.getItem('user'));
+    console.log(this.user);
   }
 
   salir() {

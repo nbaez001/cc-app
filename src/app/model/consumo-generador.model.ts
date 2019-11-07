@@ -8,4 +8,5 @@ export class ConsumoGenerador {
     horaFin: string;
     horas: number;
     fecha: string;
+    observacion: string;
 }
