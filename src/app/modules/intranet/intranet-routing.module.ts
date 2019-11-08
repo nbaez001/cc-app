@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ControlKilometrajeComponent } from './components/control-kilometraje/control-kilometraje.component';
 import { ControlGenElectricoComponent } from './components/control-gen-electrico/control-gen-electrico.component';
+import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
 
 const intranetRoutes: Routes = [
   {
@@ -24,6 +25,10 @@ const intranetRoutes: Routes = [
         path: 'generador-electrico',
         component: ControlGenElectricoComponent,
         data: { title: 'Generador electrico' }
+      }, {
+        path: 'cuadro-control',
+        component: CuadroControlComponent,
+        data: { title: 'Cuadro control' }
       }
     ]
   }

@@ -6,6 +6,7 @@ import { VerObservacionComponent } from './ver-observacion/ver-observacion.compo
 import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Usuario } from 'src/app/model/usuario.model';
 
 @Component({
   selector: 'app-control-kilometraje',
@@ -14,7 +15,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 })
 export class ControlKilometrajeComponent implements OnInit {
   bdjKilometrajeGrp: FormGroup;
-  user: Object;
+  user: Usuario;
   unidades = UNIDADES;
   tambos = TAMBOS;
   tiposvehiculo = TIPOSVEHICULO;

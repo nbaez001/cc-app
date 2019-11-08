@@ -1,0 +1,125 @@
+<navbar>
+  <div class="page-bandeja">
+    <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
+    <mat-card class="box-filtros">
+      <mat-card-header class="box-section-header">
+        <mat-card-title class="box-section-title"> BUSQUEDA USO GENERADOR ELECTRICO </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="bdjCuadroControlGrp" class="example-container">
+          <mat-grid-list cols="12" rowHeight="50px">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Unidad</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
+                    {{unidad.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Año</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let anio of anios" [value]="anio.valor">
+                    {{anio.valor}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Mes</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let mes of meses" [value]="mes.valor">
+                    {{mes.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="btnRigth" align="end">
+        <button mat-raised-button color="primary" (click)="buscar()">
+          <mat-icon>search</mat-icon>
+          <strong> BUSCAR</strong>
+        </button>
+        <button mat-raised-button (click)="exportarExcel()">
+          <mat-icon>file_copy</mat-icon>
+          <strong>EXPORTAR A EXCEL</strong>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="table-resultados">
+      <mat-card-header>
+        <mat-card-title> CUADRO DE CONTROL DEL COMBUSTIBLE DE LA FLOTA VEHICULAR Y OTROS EQUIPOS </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="card-container">
+        <div class="table-container clear-both">
+          <table class="mat-table">
+            <thead>
+              <tr class="mat-header-row">
+                <th class="mat-header-cell" rowspan="3"> SEC. FUNC.</th>
+                <th class="mat-header-cell" rowspan="3"> REGIONES TERRITORIALES</th>
+                <th class="mat-header-cell" colspan="4"> DIESEL B5 - USO CAMIONETAS</th>
+                <th class="mat-header-cell" colspan="6"> GASOHOL 90 - MOTOCICLETAS/GENERADORES</th>
+                <th class="mat-header-cell" colspan="5"> GRASAS LUBRICANTES AFINES</th>
+              </tr>
+              <tr class="mat-header-row">
+                <th class="mat-header-cell" rowspan="2"> CONSUMO MENSUAL</th>
+                <th class="mat-header-cell" rowspan="2"> CONSUMO ANUAL</th>
+                <th class="mat-header-cell" colspan="2"> IMPORTE</th>
+                <th class="mat-header-cell" colspan="2"> ASIGNADO/GL</th>
+                <th class="mat-header-cell" rowspan="2"> CONSUMO MENSUAL</th>
+                <th class="mat-header-cell" rowspan="2"> CONSUMO ANUAL</th>
+                <th class="mat-header-cell" colspan="2"> IMPORTE S/.</th>
+                <th class="mat-header-cell" rowspan="2"> PROD.</th>
+                <th class="mat-header-cell" rowspan="2"> COSTO MOT/CMTA</th>
+                <th class="mat-header-cell" rowspan="2"> CANT MOT/CMTA</th>
+                <th class="mat-header-cell" rowspan="2"> CONSUMO MENSUAL</th>
+                <th class="mat-header-cell" rowspan="2"> CONSUMO ANUAL</th>
+              </tr>
+              <tr class="mat-header-row">
+                <th class="mat-header-cell"> GALON</th>
+                <th class="mat-header-cell"> ANUAL</th>
+                <th class="mat-header-cell"> TAMBOS</th>
+                <th class="mat-header-cell"> GALON</th>
+                <th class="mat-header-cell"> GALON</th>
+                <th class="mat-header-cell"> ANUAL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="mat-row" *ngFor="let con of listaControl">
+                <td class="mat-cell">{{con.secFun}}</td>
+                <td class="mat-cell">{{con.unidad}}</td>
+                <td class="mat-cell">{{con.dieselConsMensual}}</td>
+                <td class="mat-cell">{{con.dieselConsAnual}}</td>
+                <td class="mat-cell">{{con.dieselImpGalon}}</td>
+                <td class="mat-cell">{{con.dieselImpAnual}}</td>
+                <td class="mat-cell">{{con.cantTambos}}</td>
+                <td class="mat-cell">{{con.gasGalonPromedioMes}}</td>
+                <td class="mat-cell">{{con.gasConsMensual}}</td>
+                <td class="mat-cell">{{con.gasConsAnual}}</td>
+                <td class="mat-cell">{{con.gasImporteGalon}}</td>
+                <td class="mat-cell">{{con.gasImporteAnual}}</td>
+                <td class="mat-cell">{{con.lubricProd}}</td>
+                <td class="mat-cell">{{con.lubricCosto}}</td>
+                <td class="mat-cell">{{con.lubricCantidad}}</td>
+                <td class="mat-cell">{{con.lubricConsMensual}}</td>
+                <td class="mat-cell">{{con.lubricConsanual}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="empty" *ngIf="listaControl.length == 0">
+            No existe datos para mostrar en la tabla
+          </div>
+
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</navbar>

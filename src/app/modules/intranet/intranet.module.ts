@@ -16,6 +16,8 @@ import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ControlGenElectricoComponent } from './components/control-gen-electrico/control-gen-electrico.component';
 import { RegConsumoGeneradorComponent } from './components/control-gen-electrico/reg-consumo-generador/reg-consumo-generador.component';
 import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico/bandeja-gen-electrico.component';
+import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
+import { RegArtEmergenciaComponent } from './components/home/reg-art-emergencia/reg-art-emergencia.component';
 
 @NgModule({
   entryComponents: [
@@ -25,7 +27,8 @@ import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico
     RegistrarAsigCombustComponent,
     RegKilometrajeComponent,
     VerObservacionComponent,
-    RegConsumoGeneradorComponent
+    RegConsumoGeneradorComponent,
+    RegArtEmergenciaComponent
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente
@@ -39,7 +42,9 @@ import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico
     VerObservacionComponent,
     ControlGenElectricoComponent,
     RegConsumoGeneradorComponent,
-    BandejaGenElectricoComponent
+    BandejaGenElectricoComponent,
+    CuadroControlComponent,
+    RegArtEmergenciaComponent
   ],
   imports: [
     CommonModule,

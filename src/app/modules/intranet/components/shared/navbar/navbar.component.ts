@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Perfil } from 'src/app/model/perfil.model';
+import { Usuario } from 'src/app/model/usuario.model';
 
 @Component({
   selector: 'navbar',
@@ -11,7 +12,7 @@ import { Perfil } from 'src/app/model/perfil.model';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  user: Object;
+  user: Usuario;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

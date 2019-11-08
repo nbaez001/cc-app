@@ -5,6 +5,7 @@ import { ConsumoGenerador } from 'src/app/model/consumo-generador.model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
 import { RegConsumoGeneradorComponent } from './reg-consumo-generador/reg-consumo-generador.component';
+import { Usuario } from 'src/app/model/usuario.model';
 
 @Component({
   selector: 'app-control-gen-electrico',
@@ -12,6 +13,7 @@ import { RegConsumoGeneradorComponent } from './reg-consumo-generador/reg-consum
   styleUrls: ['./control-gen-electrico.component.scss']
 })
 export class ControlGenElectricoComponent implements OnInit {
+  user: Usuario;
   bdjConsumoGenElectricoGrp: FormGroup;
   unidades = UNIDADES;
   tambos = TAMBOS;
@@ -72,6 +74,7 @@ export class ControlGenElectricoComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
+    this.user = JSON.parse(sessionStorage.getItem('user'));
     this.spinnerService.show();
 
     this.bdjConsumoGenElectricoGrp = this.fb.group({

@@ -8,6 +8,7 @@ import { RegistrarAsigCombustComponent } from './registrar-asig-combust/registra
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
+import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
 
 @Component({
   selector: 'app-home',
@@ -226,7 +227,7 @@ export class HomeComponent implements OnInit {
 
   regArticulosEmergencia(obj): void {
     console.log(obj);
-    const dialogRef = this.dialog.open(RegistrarAsigCombustComponent, {
+    const dialogRef = this.dialog.open(RegArtEmergenciaComponent, {
       width: '500px',
       data: { name: 'NERIO', animal: 'LEON' }
     });
