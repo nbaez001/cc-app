@@ -9,6 +9,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
 import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
+import { RegConductorComponent } from './reg-conductor/reg-conductor.component';
 
 @Component({
   selector: 'app-home',
@@ -230,6 +231,17 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(RegArtEmergenciaComponent, {
       width: '500px',
       data: { name: 'NERIO', animal: 'LEON' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  regConductor(): void {
+    const dialogRef = this.dialog.open(RegConductorComponent, {
+      width: '500px',
+      data: { name: 'NERIO'}
     });
 
     dialogRef.afterClosed().subscribe(result => {

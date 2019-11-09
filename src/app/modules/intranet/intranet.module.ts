@@ -18,6 +18,9 @@ import { RegConsumoGeneradorComponent } from './components/control-gen-electrico
 import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico/bandeja-gen-electrico.component';
 import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
 import { RegArtEmergenciaComponent } from './components/home/reg-art-emergencia/reg-art-emergencia.component';
+import { RegConductorComponent } from './components/home/reg-conductor/reg-conductor.component';
+import { BandejaAdquisicionComponent } from './components/bandeja-adquisicion/bandeja-adquisicion.component';
+import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/bdj-asig-econ-presupuestal.component';
 
 @NgModule({
   entryComponents: [
@@ -28,7 +31,8 @@ import { RegArtEmergenciaComponent } from './components/home/reg-art-emergencia/
     RegKilometrajeComponent,
     VerObservacionComponent,
     RegConsumoGeneradorComponent,
-    RegArtEmergenciaComponent
+    RegArtEmergenciaComponent,
+    RegConductorComponent
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente
@@ -44,7 +48,10 @@ import { RegArtEmergenciaComponent } from './components/home/reg-art-emergencia/
     RegConsumoGeneradorComponent,
     BandejaGenElectricoComponent,
     CuadroControlComponent,
-    RegArtEmergenciaComponent
+    RegArtEmergenciaComponent,
+    RegConductorComponent,
+    BandejaAdquisicionComponent,
+    BdjAsigEconPresupuestalComponent
   ],
   imports: [
     CommonModule,

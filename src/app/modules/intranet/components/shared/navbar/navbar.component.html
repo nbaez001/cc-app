@@ -3,7 +3,7 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="!(isHandset$ | async)">
     <mat-toolbar>
-      <img class="img-responsive" src="../../../../../../assets/icons/pais.png">
+      <img class="img-responsive" src="../../../../../../assets/images/logo/pais.png">
     </mat-toolbar>
     <div class="span-usuario">
       <span>
@@ -17,6 +17,8 @@
       <a mat-list-item routerLinkActive="active-list-item"><mat-icon>ev_station</mat-icon>  Generadores electricos</a>
       <a mat-list-item [routerLink]="['/intranet/kilometraje']" routerLinkActive="active-list-item"><mat-icon>score</mat-icon>  Control kilometraje</a>
       <a mat-list-item [routerLink]="['/intranet/generador-electrico']" routerLinkActive="active-list-item"><mat-icon>assignment</mat-icon>  Control consumo generador</a>
+      <a mat-list-item [routerLink]="['/intranet/asignacion-econ-presupuestal']" routerLinkActive="active-list-item"><mat-icon>assignment</mat-icon> Asignacion presupuestal</a>
+      <a mat-list-item [routerLink]="['/intranet/bandeja-adquisicion']" routerLinkActive="active-list-item"><mat-icon>assignment</mat-icon>  Bandeja adquisicion</a>
       <a mat-list-item [routerLink]="['/intranet/cuadro-control']" routerLinkActive="active-list-item"><mat-icon>airplay</mat-icon> Cuadro control</a>
     </mat-nav-list>
   </mat-sidenav>
