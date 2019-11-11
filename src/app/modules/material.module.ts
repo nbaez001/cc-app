@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatToolbarModule, MatInputModule, MatCardModule, MatGridListModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatTableModule, MatPaginatorModule, MatDialogModule, MatTooltipModule, MatCheckboxModule, MatRadioModule } from '@angular/material';
+import { MatButtonModule, MatToolbarModule, MatInputModule, MatCardModule, MatGridListModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule, MatExpansionModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatTableModule, MatPaginatorModule, MatDialogModule, MatTooltipModule, MatCheckboxModule, MatRadioModule, MatProgressSpinnerModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ResponsiveRowsDirective } from '../core/directives/responsive-rows.directive';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UppercaseDirective } from '../core/directives/uppercase.directive';
 
 @NgModule({
   declarations: [
-    ResponsiveRowsDirective
+    ResponsiveRowsDirective,
+    UppercaseDirective //DIRECTIVA UPPERCASE
   ],
   imports: [
     ReactiveFormsModule,
@@ -32,7 +34,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatDialogModule,
     MatTooltipModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -57,7 +60,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatTooltipModule,
     MatCheckboxModule,
     MatRadioModule,
-    ResponsiveRowsDirective
+    MatProgressSpinnerModule,
+
+    ResponsiveRowsDirective,
+    UppercaseDirective //DIRECTIVA UPPERCASE
   ]
 })
 export class MaterialModule { }

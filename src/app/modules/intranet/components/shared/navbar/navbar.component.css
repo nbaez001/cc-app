@@ -25,7 +25,7 @@
 
 .span-usuario{
   width: 200px;
-  height: 60px;
+  height: auto;
   color: white;
   font-size: 18px;
   text-align: center;

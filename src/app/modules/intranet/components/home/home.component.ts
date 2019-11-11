@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialog, MatSort } from '@angular/material';
 import { Vehiculo } from 'src/app/model/vehiculo.model';
 import { RegistrarVehiculoComponent } from './registrar-vehiculo/registrar-vehiculo.component';
@@ -10,6 +10,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
 import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './reg-conductor/reg-conductor.component';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-home',
@@ -144,7 +145,8 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog, 
+    private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
     this.spinnerService.show();

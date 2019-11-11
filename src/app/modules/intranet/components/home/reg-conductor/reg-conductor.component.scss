@@ -1,0 +1,31 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nombres: (
+      width: 4rem
+    ),
+    apellidos: (
+      width: 10rem
+    ),
+    nroBrevete: (
+      width: 8rem
+    ),
+    iniVigenciaBrevete: (
+      width: 5rem
+    ),
+    finVigenciaBrevete: (
+      width: 5rem
+    ),
+    opt: (
+      width: 5rem
+    )
+  )
+);

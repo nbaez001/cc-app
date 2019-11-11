@@ -3,7 +3,7 @@ import { MatTableDataSource, MatPaginator, MatDialog, MatSort } from '@angular/m
 import { Kilometraje } from 'src/app/model/kilometraje.model';
 import { RegKilometrajeComponent } from './reg-kilometraje/reg-kilometraje.component';
 import { VerObservacionComponent } from './ver-observacion/ver-observacion.component';
-import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
+import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Usuario } from 'src/app/model/usuario.model';
@@ -15,17 +15,28 @@ import { Usuario } from 'src/app/model/usuario.model';
 })
 export class ControlKilometrajeComponent implements OnInit {
   bdjKilometrajeGrp: FormGroup;
+  messages = {
+    'unidad': {
+      'required': 'Campo obligatorio'
+    },
+    'tambo': {
+      'required': 'Campo obligatorio'
+    },
+    'vehiculo': {
+      'required': 'Campo obligatorio'
+    }
+  };
+  formErrors = {
+    'unidad': '',
+    'tambo': '',
+    'vehiculo': ''
+  };
+
   user: Usuario;
   unidades = UNIDADES;
   tambos = TAMBOS;
-  tiposvehiculo = TIPOSVEHICULO;
-  listaKilometrajes: Kilometraje[] = [
-    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'SEDE', tipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', horaSalida: '', horaLlegada: '', kilometrajeSalida: '', kilometrajeLlegada: '', kilometrosRecorrido: '0', lugarDestino: '', observaciones: 'LA CAMIONETA NO SE MOVILIZO POR LA FALTA DE MANTENIMIENTO', codComisionSISMONITOR: '', fechaComision: '01/10/2019' },
-    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'ANCARPATA', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', horaSalida: '', horaLlegada: '', kilometrajeSalida: '', kilometrajeLlegada: '', kilometrosRecorrido: '0', lugarDestino: '', observaciones: 'DESDE MES DE ENERO NO SE UTILIZO LA MOTO POR MOTIVO DE LLUVIA', codComisionSISMONITOR: '', fechaComision: '05/10/2019' },
-    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '9:00 AM', horaLlegada: '9:10 AM', kilometrajeSalida: '5155', kilometrajeLlegada: '5159.5', kilometrosRecorrido: '4.5', lugarDestino: 'CP QUIÑASI', observaciones: 'COORIDNACION CON AUTORIDADES DEL C.P. QUIÑASI', codComisionSISMONITOR: '012', fechaComision: '10/10/2019' },
-    { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '11:00 AM', horaLlegada: '12:00 AM', kilometrajeSalida: '5164', kilometrajeLlegada: '5180.5', kilometrosRecorrido: '16.5', lugarDestino: 'TOTOS', observaciones: 'COORIDNACION CON LA MUNICIPALIDAD DISTRITAL DE TOTOS', codComisionSISMONITOR: '016', fechaComision: '20/10/2019' },
-    { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', horaSalida: '9:30 AM', horaLlegada: '9:40 AM', kilometrajeSalida: '5197', kilometrajeLlegada: '5199', kilometrosRecorrido: '2', lugarDestino: 'CP QUIÑASI', observaciones: 'VERIFICACION DE CHACRAS AFECTADAS POR LA SEQUIA', codComisionSISMONITOR: '051', fechaComision: '30/10/2019' }
-  ];
+  vehiculos = [];
+  listaKilometrajes: Kilometraje[];
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<Kilometraje>;
@@ -34,72 +45,77 @@ export class ControlKilometrajeComponent implements OnInit {
     {
       columnDef: 'id',
       header: 'N°',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.id}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.id != null) ? `${kilometraje.id}` : ''
     }, {
       columnDef: 'unidad',
       header: 'UNIDAD',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.unidad}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.unidad != null) ? `${kilometraje.unidad}` : ''
     }, {
       columnDef: 'tambo',
       header: 'TAMBO',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.tambo}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.tambo != null) ? `${kilometraje.tambo}` : ''
     }, {
       columnDef: 'tipo',
       header: 'TIPO',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.tipo}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.tipo != null) ? `${kilometraje.tipo}` : ''
     }, {
       columnDef: 'marca',
       header: 'MARCA',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.marca}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.marca != null) ? `${kilometraje.marca}` : ''
     }, {
       columnDef: 'placa',
       header: 'PLACA',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.placa}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.placa != null) ? `${kilometraje.placa}` : ''
     }, {
       columnDef: 'horaSalida',
       header: 'HORA SALIDA',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.horaSalida}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.horaSalida != null) ? `${kilometraje.horaSalida}` : ''
     }, {
       columnDef: 'horaLlegada',
       header: 'HORA LLEGADA',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.horaLlegada}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.horaLlegada != null) ? `${kilometraje.horaLlegada}` : ''
     }, {
       columnDef: 'kilometrajeSalida',
       header: 'KILOMETRAJE SALIDA',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.kilometrajeSalida}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.kilometrajeSalida != null) ? `${kilometraje.kilometrajeSalida}` : ''
     }, {
       columnDef: 'kilometrajeLlegada',
       header: 'KILOMETRAJE LLEGADA',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.kilometrajeLlegada}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.kilometrajeLlegada != null) ? `${kilometraje.kilometrajeLlegada}` : ''
     }, {
       columnDef: 'kilometrosRecorrido',
       header: 'KILOMETRAJE RECORRIDO',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.kilometrosRecorrido}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.kilometrosRecorrido != null) ? `${kilometraje.kilometrosRecorrido}` : ''
     }, {
       columnDef: 'lugarDestino',
       header: 'LUGAR DESTINO',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.lugarDestino}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.lugarDestino != null) ? `${kilometraje.lugarDestino}` : ''
     }, {
       columnDef: 'codComisionSISMONITOR',
       header: 'COD. COMISION SISMONITOR',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.codComisionSISMONITOR}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.codComisionSISMONITOR != null) ? `${kilometraje.codComisionSISMONITOR}` : ''
     }, {
       columnDef: 'fechaComision',
       header: 'FECHA COMISION',
-      cell: (kilometraje: Kilometraje) => `${kilometraje.fechaComision}`
+      cell: (kilometraje: Kilometraje) => (kilometraje.fechaComision != null) ? `${kilometraje.fechaComision}` : ''
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog,
+    private spinnerService: Ng4LoadingSpinnerService,
+
+  ) { }
 
   ngOnInit() {
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.spinnerService.show();
 
     this.bdjKilometrajeGrp = this.fb.group({
-      unidad: ['', [Validators.required]]
+      unidad: ['', [Validators.required]],
+      tambo: ['', [Validators.required]],
+      vehiculo: ['', [Validators.required]]
     });
 
     this.definirTabla();
@@ -107,9 +123,24 @@ export class ControlKilometrajeComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
+    
+    console.log(this.user);
+    console.log(this.unidades.filter(el => el.id == this.user.idUnidad));
     this.dataSource = null;
-    // this.banMonitoreoFrmGrp.get('estadoMonitoreoFrmCtrl').setValue(ESTADO_MONITOREO.pendienteInformacion);
-    this.cargarDatosTabla();
+    this.bdjKilometrajeGrp.get('unidad').setValue(
+      (this.unidades.filter(el => el.id == this.user.idUnidad))[0]
+    );
+    this.bdjKilometrajeGrp.get('tambo').setValue(
+      (this.tambos.filter(el => el.id == this.user.idTambo))[0]
+    );
+    this.bdjKilometrajeGrp.get('vehiculo').setValue(this.vehiculos[0]);
+    this.spinnerService.hide();
+  }
+
+  public cargarUnidad() {
+    this.unidades
+    request.codRol = ROLES.responsableMonitoreo;
+
   }
 
   definirTabla(): void {
@@ -121,6 +152,7 @@ export class ControlKilometrajeComponent implements OnInit {
   }
 
   public cargarDatosTabla(): void {
+    this.dataSource = null;
     if (this.listaKilometrajes.length > 0) {
       this.dataSource = new MatTableDataSource(this.listaKilometrajes);
       this.dataSource.paginator = this.paginator;
@@ -129,8 +161,44 @@ export class ControlKilometrajeComponent implements OnInit {
     this.spinnerService.hide();
   }
 
+  calcularSumaKilomatrajes(vehiculo): void {
+    if (this.user.perfil.id == 3) {
+      let suma = 0.0;
+      let galones = '';
+      this.listaKilometrajes.forEach(el => {
+        suma += el.kilometrosRecorrido;
+      });
+
+      if (vehiculo.tipo == 'CAMIONETA') {
+        galones = (suma / 35).toFixed(2);//EQUIVALENCIA CAMIONETAS
+      } else {
+        galones = (suma / 80).toFixed(2);;//EQUIVALENCIA MOTOCILCETAS
+      }
+      let total = new Kilometraje();
+      total.kilometrajeLlegada = 'TOTAL KILOMETROS';
+      total.kilometrosRecorrido = suma;
+      total.lugarDestino = 'TOTAL GALONES';
+      total.codComisionSISMONITOR = galones + '';
+
+      this.listaKilometrajes.push(total);
+    }
+  }
+
   buscar() {
     console.log('Buscar');
+    let uni = this.bdjKilometrajeGrp.get('unidad').value;
+    let tam = this.bdjKilometrajeGrp.get('tambo').value;
+    let veh = this.bdjKilometrajeGrp.get('vehiculo').value;
+
+    if (veh.placa != '*') {
+      this.listaKilometrajes = this.data.filter(kil => kil.placa == veh.placa);
+      this.calcularSumaKilomatrajes(veh);
+    } else {
+      this.listaKilometrajes = this.data;
+    }
+
+    console.log(this.listaKilometrajes);
+    this.cargarDatosTabla();
   }
 
   exportarExcel() {
@@ -145,10 +213,10 @@ export class ControlKilometrajeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.listaKilometrajes.push(result);
-
-      this.cargarDatosTabla();
+      if (result) {
+        this.listaKilometrajes.unshift(result);
+        this.cargarDatosTabla();
+      }
     });
   }
 

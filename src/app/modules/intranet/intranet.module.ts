@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { IntranetRoutingModule } from './intranet-routing.module';
 import { HomeComponent } from './components/home/home.component';
@@ -58,6 +58,9 @@ import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-pre
     IntranetRoutingModule, //Routing del modulo separado
     MaterialModule,
     Ng4LoadingSpinnerModule.forRoot()
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class IntranetModule { }

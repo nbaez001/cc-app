@@ -27,10 +27,10 @@
       width: 8rem
     ),
     kilometrajeSalida: (
-      width: 6rem
+      width: 7rem
     ),
     kilometrajeLlegada: (
-      width: 6rem
+      width: 7rem
     ),
     kilometrosRecorrido: (
       width: 6rem
@@ -60,4 +60,9 @@
       max-height: 400px;
     }
   }
+}
+  
+.sobresaltarUltimo {
+	// color: rgb(66, 54, 241);
+	background-color: rgb(157, 176, 228) !important;
 }

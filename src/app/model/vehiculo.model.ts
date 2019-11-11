@@ -7,17 +7,12 @@ import { InfraccionVehicular } from './infraccion-vehicular.model';
 
 export class Vehiculo {
     id: number;
+    idUnidad: number;
     unidad: string;
+    idTambo: number;
     tambo: string;
     tipo: string;
     marca: string;
     placa: string;
-    ultMantenimiento: string;
-    estadoVehiculo: string;
-    iniVigenciaRevTecnica: string;
-    finVigenciaRevTecnica: string;
-    iniVigenciaSOAT: string;
-    finVigenciaSOAT: string;
-    tipoCombustible: string;
-    fecInfraccionVehicular: string;
+    codPatrimonio: string;
 }

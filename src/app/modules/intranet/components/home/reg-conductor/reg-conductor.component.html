@@ -1,59 +1,86 @@
-<h1 mat-dialog-title>Registrar SOAT</h1>
+<h1 mat-dialog-title>Registrar conductor</h1>
 <div mat-dialog-content>
-  <form [formGroup]="soatGrp">
+  <form [formGroup]="conductorGrp" *ngIf="">
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
-          <input matInput placeholder="Empresa">
+          <input matInput formControlName="nombres" placeholder="Nombres" type="text"
+            [ngClass]="{'is-invalid': formErrors.nombres}" [Uppercased]>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker2" placeholder="Inicio vigencia rev. tecnica">
+          <input matInput formControlName="apellidos" placeholder="Apellidos completos" type="text"
+            [ngClass]="{'is-invalid': formErrors.apellidos}" [Uppercased]>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <input matInput formControlName="nroBrevete" placeholder="Numero brevete" type="text"
+            [ngClass]="{'is-invalid': formErrors.nroBrevete}" [Uppercased]>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <input matInput formControlName="iniVigenciaBrevete" [matDatepicker]="picker2"
+            placeholder="Inicio vigencia brevete" [ngClass]="{'is-invalid': formErrors.iniVigenciaBrevete}">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker3" placeholder="Fin vigencia rev. tecnica">
-          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-          <mat-datepicker #picker3></mat-datepicker>
+          <input matInput formControlName="finVigenciaBrevete" [matDatepicker]="picker"
+            placeholder="Fin vigencia brevete" [ngClass]="{'is-invalid': formErrors.finVigenciaBrevete}">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}" class="dialog-form-actions">
-        <button mat-raised-button color="primary" type="button" (click)="onNoClick()">Guardar</button>
+        <button mat-raised-button color="primary" type="button" (click)="guardar()">Guardar</button>
         <button mat-raised-button type="button" (click)="limpiar()">Limpiar</button>
       </mat-grid-tile>
     </mat-grid-list>
   </form>
 
   <div class="table-container">
-    <table mat-table [dataSource]="dataSource">
-      <ng-container matColumnDef="nro">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.nro}} </td>
-      </ng-container>
-      <ng-container matColumnDef="empresa">
-        <th mat-header-cell *matHeaderCellDef> Empresa </th>
-        <td mat-cell *matCellDef="let element"> {{element.empresa}} </td>
-      </ng-container>
-      <ng-container matColumnDef="fechaInicio">
-        <th mat-header-cell *matHeaderCellDef> Fecha inicio </th>
-        <td mat-cell *matCellDef="let element"> {{element.fechaInicio}} </td>
-      </ng-container>
-      <ng-container matColumnDef="fechaFin">
-        <th mat-header-cell *matHeaderCellDef> Fecha fin </th>
-        <td mat-cell *matCellDef="let element"> {{element.fechaFin}} </td>
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+        <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <ng-container matColumnDef="opt" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button matTooltip="Editar Vehiculo" (click)="regVehiculo(element)">
+            <mat-icon>create</mat-icon>
+          </button>
+          <button mat-icon-button matTooltip="Registrar revision tecnica" (click)="regRevTecnica(element)">
+            <mat-icon><img src="https://img.icons8.com/material/24/000000/maintenance--v1.png"></mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
     </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <div class="empty" *ngIf="!isLoading && dataSource === null">
+      No existe datos para mostrar en la tabla
+    </div>
+
+    <div *ngIf="isLoading" class="spinerTable">
+      <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+
+    <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+    </mat-paginator>
   </div>
 </div>
 <div mat-dialog-actions align="center">
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Salir</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Salir</button>
 </div>

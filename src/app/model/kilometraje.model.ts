@@ -1,7 +1,10 @@
 export class Kilometraje {
     id: number;
+    idUnidad: number;
     unidad: string;
+    idTambo: number;
     tambo: string;
+    idVehiculo: number;
     tipo: string;
     marca: string;
     placa: string;
@@ -9,7 +12,7 @@ export class Kilometraje {
     horaLlegada: string;
     kilometrajeSalida: string;
     kilometrajeLlegada: string;
-    kilometrosRecorrido: string;
+    kilometrosRecorrido: number;
     lugarDestino: string;
     observaciones: string;
     codComisionSISMONITOR: string;
