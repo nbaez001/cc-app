@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>Registrar asignacion presupuestal</h1>
+<div mat-dialog-content>
+  <form [formGroup]="asigPresupuestalGrp">
+    <mat-grid-list cols="12" rowHeight="50px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Unidad</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let unidad of unidades" [value]="unidad">
+              {{unidad.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Tambo</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let tambo of tambos" [value]="tambo">
+              {{tambo.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Tipo asignacion presupuestal</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let tipoasignacion of tipoasignacion" [value]="tipoasignacion">
+              {{tipoasignacion.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <mat-label>Partida</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let partida of partidas" [value]="partida">
+              {{partida.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <input matInput type="number" placeholder="Monto asignacion">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <input matInput [matDatepicker]="picker" placeholder="Fecha asignacion">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="12" rowHeight="70px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+        <mat-form-field>
+          <textarea matInput placeholder="Observaciones"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="onNoClick()">Guardar</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Salir</button>
+</div>

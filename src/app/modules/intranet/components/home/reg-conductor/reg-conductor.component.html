@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Registrar conductor</h1>
 <div mat-dialog-content>
-  <form [formGroup]="conductorGrp" *ngIf="">
+  <form [formGroup]="conductorGrp" *ngIf="user.perfil.id==3">
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>

@@ -3,7 +3,7 @@ import { MatTableDataSource, MatPaginator, MatDialog, MatSort } from '@angular/m
 import { Kilometraje } from 'src/app/model/kilometraje.model';
 import { RegKilometrajeComponent } from './reg-kilometraje/reg-kilometraje.component';
 import { VerObservacionComponent } from './ver-observacion/ver-observacion.component';
-import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common';
+import { UNIDADES, TAMBOS, KILOMETRAJES, VEHICULOS } from 'src/app/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Usuario } from 'src/app/model/usuario.model';
@@ -34,7 +34,7 @@ export class ControlKilometrajeComponent implements OnInit {
 
   user: Usuario;
   unidades = UNIDADES;
-  tambos = TAMBOS;
+  tambos = [];
   vehiculos = [];
   listaKilometrajes: Kilometraje[];
 
@@ -123,24 +123,36 @@ export class ControlKilometrajeComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    
-    console.log(this.user);
-    console.log(this.unidades.filter(el => el.id == this.user.idUnidad));
+    this.cargarTambos();
+    this.cargarVehiculos();
+
     this.dataSource = null;
-    this.bdjKilometrajeGrp.get('unidad').setValue(
-      (this.unidades.filter(el => el.id == this.user.idUnidad))[0]
-    );
-    this.bdjKilometrajeGrp.get('tambo').setValue(
-      (this.tambos.filter(el => el.id == this.user.idTambo))[0]
-    );
+    this.bdjKilometrajeGrp.get('unidad').setValue(this.unidades[0]);
+    this.bdjKilometrajeGrp.get('tambo').setValue(this.tambos[0]);
     this.bdjKilometrajeGrp.get('vehiculo').setValue(this.vehiculos[0]);
     this.spinnerService.hide();
   }
 
-  public cargarUnidad() {
-    this.unidades
-    request.codRol = ROLES.responsableMonitoreo;
+  public cargarTambos() {
+    console.log('Cargar tambos ejecutado');
+    let idUnidad = this.bdjKilometrajeGrp.get('unidad').value.id;
 
+    this.tambos = TAMBOS.filter(tb => tb.idunidad == idUnidad);
+    this.tambos.unshift({ id: 0, nombre: 'TODOS', idunidad: 0 });
+    // request.codRol = ROLES.responsableMonitoreo;
+    this.bdjKilometrajeGrp.get('tambo').setValue(this.tambos[0]);
+
+    this.cargarVehiculos();
+  }
+
+  public cargarVehiculos() {
+    let idUnidad = this.bdjKilometrajeGrp.get('unidad').value.id;
+    let idTambo = this.bdjKilometrajeGrp.get('tambo').value.id;
+
+    this.vehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad && el.idTambo == idTambo) || (idTambo == 0 && el.idUnidad == idUnidad));
+    this.vehiculos.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bdjKilometrajeGrp.get('vehiculo').setValue(this.vehiculos[0]);
   }
 
   definirTabla(): void {
@@ -186,18 +198,17 @@ export class ControlKilometrajeComponent implements OnInit {
 
   buscar() {
     console.log('Buscar');
-    let uni = this.bdjKilometrajeGrp.get('unidad').value;
-    let tam = this.bdjKilometrajeGrp.get('tambo').value;
-    let veh = this.bdjKilometrajeGrp.get('vehiculo').value;
+    let idUnidad = this.bdjKilometrajeGrp.get('unidad').value.id;
+    let idTambo = this.bdjKilometrajeGrp.get('tambo').value.id;
+    let idVehiculo = this.bdjKilometrajeGrp.get('vehiculo').value.id;
 
-    if (veh.placa != '*') {
-      this.listaKilometrajes = this.data.filter(kil => kil.placa == veh.placa);
-      this.calcularSumaKilomatrajes(veh);
-    } else {
-      this.listaKilometrajes = this.data;
+    console.log(idUnidad + ' ' + idTambo + ' ' + idVehiculo);
+
+    this.listaKilometrajes = KILOMETRAJES.filter(el => (el.idUnidad == idUnidad && el.idTambo == idTambo && el.idVehiculo == idVehiculo) || (el.idUnidad == idUnidad && el.idTambo == idTambo && 0 == idVehiculo) || (el.idUnidad == idUnidad && 0 == idTambo && 0 == idVehiculo) || (0 == idUnidad && 0 == idTambo && 0 == idVehiculo));
+
+    if (idVehiculo != 0) {
+      this.calcularSumaKilomatrajes(this.bdjKilometrajeGrp.get('vehiculo').value);
     }
-
-    console.log(this.listaKilometrajes);
     this.cargarDatosTabla();
   }
 

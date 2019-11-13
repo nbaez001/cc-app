@@ -15,4 +15,5 @@ export class Vehiculo {
     marca: string;
     placa: string;
     codPatrimonio: string;
+    nombre: string;
 }

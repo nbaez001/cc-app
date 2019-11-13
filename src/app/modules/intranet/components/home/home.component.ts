@@ -7,7 +7,7 @@ import { RegistrarSoatComponent } from './registrar-soat/registrar-soat.componen
 import { RegistrarAsigCombustComponent } from './registrar-asig-combust/registrar-asig-combust.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
+import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common';
 import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './reg-conductor/reg-conductor.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -21,16 +21,7 @@ export class HomeComponent implements OnInit {
   unidades = UNIDADES;
   tambos = TAMBOS;
   tiposvehiculo = TIPOSVEHICULO;
-
-  listaVehiculos: Vehiculo[] = [
-    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'SEDE', tipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', ultMantenimiento: 'DIC 2018', estadoVehiculo: 'NO OPERATIVO', iniVigenciaRevTecnica: '19/05/2018', finVigenciaRevTecnica: '19/06/2019', iniVigenciaSOAT: '26/02/2018', finVigenciaSOAT: '26/02/2019', tipoCombustible: 'DIESEL B5', fecInfraccionVehicular: '' },
-    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'ANCARPATA', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', ultMantenimiento: 'DIC 2018', estadoVehiculo: 'CON LIMITACIONES', iniVigenciaRevTecnica: '', finVigenciaRevTecnica: '', iniVigenciaSOAT: '14/03/2018', finVigenciaSOAT: '14/03/2019', tipoCombustible: 'GASOHOL 90', fecInfraccionVehicular: '' },
-    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', ultMantenimiento: 'DIC 2018', estadoVehiculo: 'OPERATIVO', iniVigenciaRevTecnica: '', finVigenciaRevTecnica: '', iniVigenciaSOAT: '14/03/2018', finVigenciaSOAT: '14/03/2019', tipoCombustible: 'GASOHOL 90', fecInfraccionVehicular: '' },
-    { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'CCERAOCRO', tipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0715', ultMantenimiento: '', estadoVehiculo: 'OPERATIVO', iniVigenciaRevTecnica: '', finVigenciaRevTecnica: '', iniVigenciaSOAT: '13/08/2018', finVigenciaSOAT: '13/08/2019', tipoCombustible: 'GASOHOL 90', fecInfraccionVehicular: '2017' },
-    { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'CHACHASPATA', tipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EB-7316', ultMantenimiento: 'NOVIEMBRE 2018', estadoVehiculo: 'OPERATIVO', iniVigenciaRevTecnica: '', finVigenciaRevTecnica: '', iniVigenciaSOAT: '08/08/2018', finVigenciaSOAT: '08/08/2019', tipoCombustible: 'GASOHOL 90', fecInfraccionVehicular: '' },
-    { id: 6, unidad: 'AYACUCHO NORTE', tambo: 'CHURUNMARCA', tipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0724', ultMantenimiento: '', estadoVehiculo: 'OPERATIVO', iniVigenciaRevTecnica: '', finVigenciaRevTecnica: '', iniVigenciaSOAT: '13/08/2018', finVigenciaSOAT: '13/08/2019', tipoCombustible: 'GASOHOL 90', fecInfraccionVehicular: '' },
-    { id: 7, unidad: 'AYACUCHO NORTE', tambo: 'COCHAPAMPA', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9316', ultMantenimiento: 'NOVIEMBRE 2018', estadoVehiculo: 'CON LIMITACIONES', iniVigenciaRevTecnica: '', finVigenciaRevTecnica: '', iniVigenciaSOAT: '29/11/2018', finVigenciaSOAT: '29/11/2019', tipoCombustible: 'GASOHOL 90', fecInfraccionVehicular: '' }
-  ];
+  listaVehiculos: Vehiculo[] = VEHICULOS;
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<Vehiculo>;
@@ -108,44 +99,12 @@ export class HomeComponent implements OnInit {
       columnDef: 'placa',
       header: 'PLACA',
       cell: (vehiculo: Vehiculo) => `${vehiculo.placa}`
-    }, {
-      columnDef: 'ultMantenimiento',
-      header: 'ULTIMO MANTENIMIENTO',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.ultMantenimiento}`
-    }, {
-      columnDef: 'estadoVehiculo',
-      header: 'ESTADO VEHICULO',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.estadoVehiculo}`
-    }, {
-      columnDef: 'iniVigenciaRevTecnica',
-      header: 'INICIO VIG. REVISION TECNICA',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.iniVigenciaRevTecnica}`
-    }, {
-      columnDef: 'finVigenciaRevTecnica',
-      header: 'FIN VIG. REVISION TECNICA',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.finVigenciaRevTecnica}`
-    }, {
-      columnDef: 'iniVigenciaSOAT',
-      header: 'INICIO VIG. SOAT',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.iniVigenciaSOAT}`
-    }, {
-      columnDef: 'finVigenciaSOAT',
-      header: 'FIN VIG. SOAT',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.finVigenciaSOAT}`
-    }, {
-      columnDef: 'tipoCombustible',
-      header: 'TIPO COMBUSTIBLE',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.tipoCombustible}`
-    }, {
-      columnDef: 'fecInfraccionVehicular',
-      header: 'FEC. INFRACCION',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.fecInfraccionVehicular}`
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, 
+  constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
@@ -243,7 +202,7 @@ export class HomeComponent implements OnInit {
   regConductor(): void {
     const dialogRef = this.dialog.open(RegConductorComponent, {
       width: '500px',
-      data: { name: 'NERIO'}
+      data: { name: 'NERIO' }
     });
 
     dialogRef.afterClosed().subscribe(result => {

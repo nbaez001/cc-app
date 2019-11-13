@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-reg-art-emergencia',
@@ -17,7 +18,8 @@ export class RegArtEmergenciaComponent implements OnInit {
   tiposcombustible: Object[];
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegArtEmergenciaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.artEmergenciaGrp = this.fb.group({

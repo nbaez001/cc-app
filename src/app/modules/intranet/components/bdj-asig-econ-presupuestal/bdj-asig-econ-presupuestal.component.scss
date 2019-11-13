@@ -1,0 +1,32 @@
+@import "../../../../../assets/styles/scss/views/table";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomTipoAsignacion: (
+      width: 18rem
+    ),
+    nomPartida: (
+      width: 8rem
+    ),
+    monto: (
+      width: 9rem
+    ),
+    fecha: (
+      width: 9rem
+    ),
+    opt: (
+      width: 3rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

@@ -21,6 +21,8 @@ import { RegArtEmergenciaComponent } from './components/home/reg-art-emergencia/
 import { RegConductorComponent } from './components/home/reg-conductor/reg-conductor.component';
 import { BandejaAdquisicionComponent } from './components/bandeja-adquisicion/bandeja-adquisicion.component';
 import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/bdj-asig-econ-presupuestal.component';
+import { RegAsigPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/reg-asig-presupuestal/reg-asig-presupuestal.component';
+import { RegAdquisicionComponent } from './components/bandeja-adquisicion/reg-adquisicion/reg-adquisicion.component';
 
 @NgModule({
   entryComponents: [
@@ -32,7 +34,9 @@ import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-pre
     VerObservacionComponent,
     RegConsumoGeneradorComponent,
     RegArtEmergenciaComponent,
-    RegConductorComponent
+    RegConductorComponent,
+    RegAsigPresupuestalComponent,
+    RegAdquisicionComponent
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente
@@ -51,7 +55,9 @@ import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-pre
     RegArtEmergenciaComponent,
     RegConductorComponent,
     BandejaAdquisicionComponent,
-    BdjAsigEconPresupuestalComponent
+    BdjAsigEconPresupuestalComponent,
+    RegAsigPresupuestalComponent,
+    RegAdquisicionComponent
   ],
   imports: [
     CommonModule,

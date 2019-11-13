@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-registrar-rev-tecnica',
@@ -16,7 +17,8 @@ export class RegistrarRevTecnicaComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegistrarRevTecnicaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.revTecnicaGrp = this.fb.group({

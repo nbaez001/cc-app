@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         this.usuario.idTambo = 0;
       }
     } else {
+      this.usuario.idTambo = 0;
       this.usuario.idUnidad = 0;
     }
 
