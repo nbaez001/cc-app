@@ -64,11 +64,14 @@
               <tr class="mat-header-row">
                 <th class="mat-header-cell" rowspan="3"> SEC. FUNC.</th>
                 <th class="mat-header-cell" rowspan="3"> REGIONES TERRITORIALES</th>
+                <th class="mat-header-cell" colspan="2"> ASIGNACION PRESUPUESTAL</th>
                 <th class="mat-header-cell" colspan="4"> DIESEL B5 - USO CAMIONETAS</th>
                 <th class="mat-header-cell" colspan="6"> GASOHOL 90 - MOTOCICLETAS/GENERADORES</th>
                 <th class="mat-header-cell" colspan="5"> GRASAS LUBRICANTES AFINES</th>
               </tr>
               <tr class="mat-header-row">
+                <th class="mat-header-cell" rowspan="2"> PARTIDA</th>
+                <th class="mat-header-cell" rowspan="2"> TOTAL</th>
                 <th class="mat-header-cell" rowspan="2"> CONSUMO MENSUAL</th>
                 <th class="mat-header-cell" rowspan="2"> CONSUMO ANUAL</th>
                 <th class="mat-header-cell" colspan="2"> IMPORTE</th>
@@ -95,6 +98,8 @@
               <tr class="mat-row" *ngFor="let con of listaControl">
                 <td class="mat-cell">{{con.secFun}}</td>
                 <td class="mat-cell">{{con.unidad}}</td>
+                <td class="mat-cell">{{con.partida}}</td>
+                <td class="mat-cell">{{con.total}}</td>
                 <td class="mat-cell">{{con.dieselConsMensual}}</td>
                 <td class="mat-cell">{{con.dieselConsAnual}}</td>
                 <td class="mat-cell">{{con.dieselImpGalon}}</td>

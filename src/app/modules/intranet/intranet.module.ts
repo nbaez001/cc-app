@@ -23,6 +23,8 @@ import { BandejaAdquisicionComponent } from './components/bandeja-adquisicion/ba
 import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/bdj-asig-econ-presupuestal.component';
 import { RegAsigPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/reg-asig-presupuestal/reg-asig-presupuestal.component';
 import { RegAdquisicionComponent } from './components/bandeja-adquisicion/reg-adquisicion/reg-adquisicion.component';
+import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/bandeja-orden-compra.component';
+import { ConfOrdenCompraComponent } from './components/bandeja-orden-compra/conf-orden-compra/conf-orden-compra.component';
 
 @NgModule({
   entryComponents: [
@@ -57,7 +59,9 @@ import { RegAdquisicionComponent } from './components/bandeja-adquisicion/reg-ad
     BandejaAdquisicionComponent,
     BdjAsigEconPresupuestalComponent,
     RegAsigPresupuestalComponent,
-    RegAdquisicionComponent
+    RegAdquisicionComponent,
+    BandejaOrdenCompraComponent,
+    ConfOrdenCompraComponent
   ],
   imports: [
     CommonModule,

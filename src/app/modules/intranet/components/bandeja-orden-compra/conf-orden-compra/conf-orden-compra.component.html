@@ -1,26 +1,39 @@
-<h1 mat-dialog-title>Registrar revision tecnica</h1>
+<h1 mat-dialog-title>Registrar SOAT</h1>
 <div mat-dialog-content>
-  <form [formGroup]="revTecnicaGrp" *ngIf="getUser.perfil.id != 3">
+  <form [formGroup]="soatGrp" *ngIf="getUser.perfil.id != 3">
     <mat-grid-list cols="12" rowHeight="50px">
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
         <mat-form-field>
-          <input matInput placeholder="Empresa">
+          <input matInput placeholder="N° Orden Servicio" [disabled]="true">
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker2" placeholder="Inicio vigencia rev. tecnica">
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
+          <input matInput placeholder="N° exp SIAF" [disabled]="true">
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker3" placeholder="Fin vigencia rev. tecnica">
-          <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-          <mat-datepicker #picker3></mat-datepicker>
+          <input matInput placeholder="Proveedor">
+          <button mat-icon-button matTooltip="Buscar proveedor" type="button"
+            class="btn-action" color="primary" (click)="buscarProveedor()">
+            <mat-icon>search</mat-icon>
+          </button>
         </mat-form-field>
       </mat-grid-tile>
+
+
+
+
+
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="fecha">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}" class="dialog-form-actions">
         <button mat-raised-button color="primary" type="button" (click)="onNoClick()">Guardar</button>
         <button mat-raised-button type="button" (click)="limpiar()">Limpiar</button>

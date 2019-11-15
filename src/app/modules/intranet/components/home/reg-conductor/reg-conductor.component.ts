@@ -101,6 +101,8 @@ export class RegConductorComponent implements OnInit {
     this.inicializarVariables();
   }
 
+  get getUser(): UsuarioService { return this.user; }
+
   definirTabla(): void {
     this.displayedColumns = [];
     this.columnsGrilla.forEach(c => {

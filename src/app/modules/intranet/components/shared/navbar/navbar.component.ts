@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject , Input} from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  @Input() showSubmenu: boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
@@ -26,6 +27,10 @@ export class NavbarComponent {
     this.consultarUsuario();
     // this.user = JSON.parse(sessionStorage.getItem('user'));
     console.log(this.user);
+  }
+
+  get getUser(): UsuarioService {
+    return this.user;
   }
 
   public consultarUsuario() {

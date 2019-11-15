@@ -5,12 +5,12 @@ import { Perfil } from '../model/perfil.model';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private id: number;
-  private usuario: string;
-  private contrasenia: string;
-  private perfil: Perfil;
-  private idUnidad: number;
-  private idTambo: number;
+  id: number;
+  usuario: string;
+  contrasenia: string;
+  perfil: Perfil;
+  idUnidad: number;
+  idTambo: number;
 
   constructor() { }
 

@@ -7,20 +7,22 @@
     </mat-toolbar>
     <div class="span-usuario">
       <span>
-        {{user.perfil.nombre}}
+        {{getUser.perfil.nombre}}
         <br>
         (U.T. AYACUCHO NORTE)
       </span>
     </div>
     <mat-nav-list>
-      <a mat-list-item [routerLink]="['/intranet/home']" routerLinkActive="active-list-item" *ngIf="user.perfil.id==3">
+      <a mat-list-item [routerLink]="['/intranet/home']" routerLinkActive="active-list-item"
+        *ngIf="getUser.perfil.id==3">
         <mat-icon>directions_car</mat-icon> Vehiculos
       </a>
-      <a mat-list-item routerLinkActive="active-list-item" *ngIf="user.perfil.id==3">
+      <a mat-list-item [routerLink]="['/intranet/generador']" routerLinkActive="active-list-item"
+        *ngIf="getUser.perfil.id==3">
         <mat-icon>ev_station</mat-icon> Generadores electricos
       </a>
       <a mat-list-item [routerLink]="['/intranet/asignacion-econ-presupuestal']" routerLinkActive="active-list-item"
-        *ngIf="user.perfil.id==3">
+        *ngIf="getUser.perfil.id==3">
         <mat-icon>attach_money</mat-icon> Asignacion presupuestal
       </a>
       <a mat-list-item [routerLink]="['/intranet/bandeja-adquisicion']" routerLinkActive="active-list-item">
@@ -33,9 +35,21 @@
         <mat-icon>assignment</mat-icon> Control consumo generador
       </a>
       <a mat-list-item [routerLink]="['/intranet/cuadro-control']" routerLinkActive="active-list-item"
-        *ngIf="user.perfil.id==3">
+        *ngIf="getUser.perfil.id==3">
         <mat-icon>airplay</mat-icon> Cuadro control
       </a>
+      <a mat-list-item routerLinkActive="active-list-item" *ngIf="getUser.perfil.id==3"
+        (click)="showSubmenu = !showSubmenu">
+        <mat-icon>extension</mat-icon> Configuracion
+        <span class="spacer"></span>
+        <mat-icon>expand_more</mat-icon>
+      </a>
+      <div *ngIf="showSubmenu">
+        <a mat-list-item [routerLink]="['/intranet/orden-compra']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '15px'}">
+          <mat-icon>add_to_queue</mat-icon> Orden compra
+        </a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -47,7 +61,7 @@
       <span>Control de combustible</span>
       <span class="spacer"></span>
       <button mat-button [matMenuTriggerFor]="usuario">
-        {{user.usuario}}
+        {{getUser.usuario}}
         <!-- <span>(Jefe Unidad Territorial)</span> -->
         <mat-icon>expand_more</mat-icon>
       </button>

@@ -11,7 +11,7 @@
   background-color: rgb(42, 63, 84);
 }
 
-.sidenav > .mat-nav-list > a {
+.mat-list-item {
   color: white;
 }
 
@@ -60,4 +60,8 @@ mat-toolbar a {
 
 .mat-nav-list {
   padding-top: 0px;
+}
+
+.spander{
+  
 }

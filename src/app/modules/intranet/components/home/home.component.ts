@@ -7,8 +7,7 @@ import { RegistrarSoatComponent } from './registrar-soat/registrar-soat.componen
 import { RegistrarAsigCombustComponent } from './registrar-asig-combust/registrar-asig-combust.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common';
-import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
+import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common';import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './reg-conductor/reg-conductor.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
 

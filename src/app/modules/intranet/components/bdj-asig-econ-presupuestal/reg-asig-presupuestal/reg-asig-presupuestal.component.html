@@ -14,16 +14,6 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
-          <mat-label>Tambo</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let tambo of tambos" [value]="tambo">
-              {{tambo.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
-        <mat-form-field appearance="legacy">
           <mat-label>Tipo asignacion presupuestal</mat-label>
           <mat-select>
             <mat-option *ngFor="let tipoasignacion of tipoasignacion" [value]="tipoasignacion">

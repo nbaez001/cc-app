@@ -6,6 +6,8 @@ import { ControlGenElectricoComponent } from './components/control-gen-electrico
 import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
 import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/bdj-asig-econ-presupuestal.component';
 import { BandejaAdquisicionComponent } from './components/bandeja-adquisicion/bandeja-adquisicion.component';
+import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico/bandeja-gen-electrico.component';
+import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/bandeja-orden-compra.component';
 
 const intranetRoutes: Routes = [
   {
@@ -19,6 +21,10 @@ const intranetRoutes: Routes = [
         path: 'home',
         component: HomeComponent,
         data: { title: 'Home' }
+      }, {
+        path: 'generador',
+        component: BandejaGenElectricoComponent,
+        data: { title: 'Generadores' }
       }, {
         path: 'kilometraje',
         component: ControlKilometrajeComponent,
@@ -39,6 +45,10 @@ const intranetRoutes: Routes = [
         path: 'cuadro-control',
         component: CuadroControlComponent,
         data: { title: 'Cuadro control' }
+      }, {
+        path: 'orden-compra',
+        component: BandejaOrdenCompraComponent,
+        data: { title: 'Ordenes de compra' }
       }
     ]
   }

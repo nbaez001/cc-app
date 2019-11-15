@@ -35,6 +35,10 @@ export class RegistrarRevTecnicaComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  get getUser(): UsuarioService {
+    return this.user;
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
