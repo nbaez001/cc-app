@@ -124,9 +124,7 @@ export class ControlKilometrajeComponent implements OnInit {
 
   public inicializarVariables(): void {
     this.cargarTambos();
-    this.cargarVehiculos();
 
-    this.dataSource = null;
     this.bdjKilometrajeGrp.get('unidad').setValue(this.unidades[0]);
     this.bdjKilometrajeGrp.get('tambo').setValue(this.tambos[0]);
     this.bdjKilometrajeGrp.get('vehiculo').setValue(this.vehiculos[0]);

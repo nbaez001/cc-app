@@ -11,7 +11,8 @@ export class Vehiculo {
     unidad: string;
     idTambo: number;
     tambo: string;
-    tipo: string;
+    idTipo: number;
+    nomTipo: string;
     marca: string;
     placa: string;
     codPatrimonio: string;

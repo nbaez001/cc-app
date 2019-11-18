@@ -1,47 +1,7 @@
-<h1 mat-dialog-title>Registrar vehiculo</h1>
+<h1 mat-dialog-title>Configurar vehiculo</h1>
 <div mat-dialog-content>
   <form [formGroup]="vehiculoGrp">
     <mat-grid-list cols="12" rowHeight="50px">
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <mat-label>Unidad</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let unidad of unidades" [value]="unidad">
-              {{unidad.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <mat-label>Tambo</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
-              {{tambo.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <mat-label>Tipo vehiculo</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let tipovehiculo of tiposvehiculo" [value]="tipovehiculo.id">
-              {{tipovehiculo.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
-        <mat-form-field appearance="legacy">
-          <input matInput type="text" placeholder="Marca vehiculo">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
-        <mat-form-field appearance="legacy">
-          <input matInput type="text" placeholder="Nro placa vehicular">
-        </mat-form-field>
-      </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
           <input matInput [matDatepicker]="picker" placeholder="Fecha mantenimiento">

@@ -13,7 +13,10 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+  @Input() showSubmenu1: boolean;
+  @Input() showSubmenu2: boolean;
   @Input() showSubmenu: boolean;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)

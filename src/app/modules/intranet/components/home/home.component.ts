@@ -7,7 +7,7 @@ import { RegistrarSoatComponent } from './registrar-soat/registrar-soat.componen
 import { RegistrarAsigCombustComponent } from './registrar-asig-combust/registrar-asig-combust.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common';import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
+import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common'; import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './reg-conductor/reg-conductor.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -17,15 +17,15 @@ import { UsuarioService } from 'src/app/services/usuario.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  unidades = UNIDADES;
-  tambos = TAMBOS;
-  tiposvehiculo = TIPOSVEHICULO;
-  listaVehiculos: Vehiculo[] = VEHICULOS;
+  unidades = [];
+  tambos = [];
+  tiposvehiculo = [];
+  listaVehiculos: Vehiculo[] = [];
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<Vehiculo>;
 
-  bdjVehiculoGrp: FormGroup;
+  bandejaGrp: FormGroup;
   messages = {
     'name': {
       'required': 'Field is required',
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
     }, {
       columnDef: 'tipo',
       header: 'TIPO',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.tipo}`
+      cell: (vehiculo: Vehiculo) => `${vehiculo.nomTipo}`
     }, {
       columnDef: 'marca',
       header: 'MARCA',
@@ -109,8 +109,10 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.spinnerService.show();
 
-    this.bdjVehiculoGrp = this.fb.group({
-      name: ['', [Validators.required]]
+    this.bandejaGrp = this.fb.group({
+      unidad: ['unidad', [Validators.required]],
+      tambo: ['tambo', [Validators.required]],
+      tipovehiculo: ['tipovehiculo', [Validators.required]]
     });
 
     this.definirTabla();
@@ -119,7 +121,48 @@ export class HomeComponent implements OnInit {
 
   public inicializarVariables(): void {
     this.dataSource = null;
-    // this.banMonitoreoFrmGrp.get('estadoMonitoreoFrmCtrl').setValue(ESTADO_MONITOREO.pendienteInformacion);
+    this.cargarTiposvehiculo();
+    this.cargarUnidades();
+
+    this.spinnerService.hide();
+  }
+
+  public cargarTiposvehiculo() {
+    this.tiposvehiculo = JSON.parse(JSON.stringify(TIPOSVEHICULO));
+    this.tiposvehiculo.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bandejaGrp.get('tipovehiculo').setValue(this.tiposvehiculo[0]);
+  }
+
+  public cargarUnidades() {
+    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
+    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+
+    this.cargarTambos();
+  }
+
+  public cargarTambos() {
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idunidad == idUnidad)));
+    this.tambos.unshift({ id: 0, nombre: 'TODOS', idunidad: 0 });
+
+    this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
+
+    this.buscar();
+  }
+
+  buscar() {
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+    let idTambo = this.bandejaGrp.get('tambo').value.id;
+    let idTipovehiculo = this.bandejaGrp.get('tipovehiculo').value.id;
+
+    this.listaVehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
+    this.listaVehiculos = VEHICULOS.filter(el => (el.idTambo == idTambo) || (0 == idTambo));
+    this.listaVehiculos = VEHICULOS.filter(el => (el.idTipo == idTipovehiculo) || (0 == idTipovehiculo));
+
     this.cargarDatosTabla();
   }
 
@@ -132,16 +175,14 @@ export class HomeComponent implements OnInit {
   }
 
   public cargarDatosTabla(): void {
+    this.spinnerService.show();
+    this.dataSource = null;
     if (this.listaVehiculos.length > 0) {
       this.dataSource = new MatTableDataSource(this.listaVehiculos);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
     this.spinnerService.hide();
-  }
-
-  buscar() {
-    console.log('Buscar');
   }
 
   exportarExcel() {

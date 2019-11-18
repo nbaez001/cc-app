@@ -9,7 +9,6 @@ import { Adquisicion } from './model/adquisicion.model';
 import { Generador } from './model/generador.model';
 
 export const UNIDADES: Unidad[] = [
-    { id: 0, nombre: 'TODOS' },
     { id: 1, nombre: 'U.T. DE AYACUCHO NORTE' },
     { id: 2, nombre: 'U.T. DE HUANCAVELICA' },
     { id: 3, nombre: 'U.T. DE CUSCO' }
@@ -40,13 +39,13 @@ export const PERFILES: Perfil[] = [
 
 
 export const VEHICULOS: Vehiculo[] = [
-    { id: 1, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 0, tambo: '', tipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', codPatrimonio: '01212', nombre: 'CAMIONETA NISSAN EGT-079' },
-    { id: 2, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 1, tambo: 'ANCARPATA', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', codPatrimonio: '01216', nombre: 'MOTOCICLETA ZONGSHEN EA-9256' },
-    { id: 3, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 2, tambo: 'BARRIO VISTA ALEGRE', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', codPatrimonio: '01342', nombre: 'MOTOCICLETA ZONGSHEN EA-9263' },
-    { id: 4, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 3, tambo: 'CCERAOCRO', tipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0715', codPatrimonio: '01565', nombre: 'MOTOCICLETA HONDA EW-0715' },
-    { id: 5, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 4, tambo: 'CHACHASPATA', tipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EB-7316', codPatrimonio: '01652', nombre: 'MOTOCICLETA HONDA EB-7316' },
-    { id: 6, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 5, tambo: 'CHURUNMARCA', tipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0724', codPatrimonio: '01664', nombre: 'MOTOCICLETA HONDA EW-0724' },
-    { id: 7, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 6, tambo: 'COCHAPAMPA', tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9316', codPatrimonio: '01733', nombre: 'MOTOCICLETA ZONGSHEN EA-9316' }
+    { id: 1, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 0, tambo: '', idTipo: 1, nomTipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', codPatrimonio: '01212', nombre: 'CAMIONETA NISSAN EGT-079' },
+    { id: 2, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 1, tambo: 'ANCARPATA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', codPatrimonio: '01216', nombre: 'MOTOCICLETA ZONGSHEN EA-9256' },
+    { id: 3, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 2, tambo: 'BARRIO VISTA ALEGRE', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', codPatrimonio: '01342', nombre: 'MOTOCICLETA ZONGSHEN EA-9263' },
+    { id: 4, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 3, tambo: 'CCERAOCRO', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0715', codPatrimonio: '01565', nombre: 'MOTOCICLETA HONDA EW-0715' },
+    { id: 5, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 4, tambo: 'CHACHASPATA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EB-7316', codPatrimonio: '01652', nombre: 'MOTOCICLETA HONDA EB-7316' },
+    { id: 6, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 5, tambo: 'CHURUNMARCA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0724', codPatrimonio: '01664', nombre: 'MOTOCICLETA HONDA EW-0724' },
+    { id: 7, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 6, tambo: 'COCHAPAMPA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9316', codPatrimonio: '01733', nombre: 'MOTOCICLETA ZONGSHEN EA-9316' }
 ];
 
 export const KILOMETRAJES: Kilometraje[] = [
