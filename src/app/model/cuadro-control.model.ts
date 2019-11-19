@@ -1,8 +1,10 @@
 export class CuadroControl {
     secFun: number;
-    unidad: string;
+    idUnidad: number;
+    nomUnidad: string;
     partida: string;
     total: number;
+    saldo: number;
     dieselConsMensual: number;
     dieselConsAnual: number;
     dieselImpGalon: number;

@@ -93,7 +93,7 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
     }, {
       columnDef: 'nroOrdencompra',
       header: 'Orden compra/Res. administracion',
-      cell: (asig: AsignacionPresupuestal) => (asig.idTipoAsignacion != 1) ? `${asig.nroOrdencompra}` : `${asig.nroResAdministracion}`
+      cell: (asig: AsignacionPresupuestal) => (asig.idTipoAsignacion == 1) ? `${asig.nroOrdencompra}` : `${asig.nroResAdministracion}`
     }, {
       columnDef: 'fecha',
       header: 'Fecha',
