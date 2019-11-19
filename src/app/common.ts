@@ -26,6 +26,12 @@ export const TIPOSVEHICULO: Master[] = [
     { id: 2, nombre: 'MOTOCICLETA' }
 ];
 
+export const ESTADOVEHICULO: Master[] = [
+    { id: 1, nombre: 'OPERATIVO' },
+    { id: 2, nombre: 'NO OPERATIVO' },
+    { id: 3, nombre: 'CON LIMITACIONES' }
+];
+
 export const TIPOSCOMBUSTIBLE: Master[] = [
     { id: 1, nombre: 'DIESEL B-5' },
     { id: 2, nombre: 'GASOHOL' }
@@ -39,13 +45,13 @@ export const PERFILES: Perfil[] = [
 
 
 export const VEHICULOS: Vehiculo[] = [
-    { id: 1, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 0, tambo: '', idTipo: 1, nomTipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', codPatrimonio: '01212', nombre: 'CAMIONETA NISSAN EGT-079' },
-    { id: 2, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 1, tambo: 'ANCARPATA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', codPatrimonio: '01216', nombre: 'MOTOCICLETA ZONGSHEN EA-9256' },
-    { id: 3, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 2, tambo: 'BARRIO VISTA ALEGRE', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', codPatrimonio: '01342', nombre: 'MOTOCICLETA ZONGSHEN EA-9263' },
-    { id: 4, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 3, tambo: 'CCERAOCRO', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0715', codPatrimonio: '01565', nombre: 'MOTOCICLETA HONDA EW-0715' },
-    { id: 5, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 4, tambo: 'CHACHASPATA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EB-7316', codPatrimonio: '01652', nombre: 'MOTOCICLETA HONDA EB-7316' },
-    { id: 6, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 5, tambo: 'CHURUNMARCA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0724', codPatrimonio: '01664', nombre: 'MOTOCICLETA HONDA EW-0724' },
-    { id: 7, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 6, tambo: 'COCHAPAMPA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9316', codPatrimonio: '01733', nombre: 'MOTOCICLETA ZONGSHEN EA-9316' }
+    { id: 1, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 0, tambo: '', idTipo: 1, nomTipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', codPatrimonio: '01212', nombre: 'CAMIONETA NISSAN EGT-079', idTipocombustible: 1, nomTipocombustible: 'DIESEL B-5', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10') },
+    { id: 2, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 1, tambo: 'ANCARPATA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', codPatrimonio: '01216', nombre: 'MOTOCICLETA ZONGSHEN EA-9256', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10') },
+    { id: 3, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 2, tambo: 'BARRIO VISTA ALEGRE', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', codPatrimonio: '01342', nombre: 'MOTOCICLETA ZONGSHEN EA-9263', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10') },
+    { id: 4, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 3, tambo: 'CCERAOCRO', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0715', codPatrimonio: '01565', nombre: 'MOTOCICLETA HONDA EW-0715', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10') },
+    { id: 5, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 4, tambo: 'CHACHASPATA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EB-7316', codPatrimonio: '01652', nombre: 'MOTOCICLETA HONDA EB-7316', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10') },
+    { id: 6, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 5, tambo: 'CHURUNMARCA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0724', codPatrimonio: '01664', nombre: 'MOTOCICLETA HONDA EW-0724', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10') },
+    { id: 7, idUnidad: 1, unidad: 'AYACUCHO NORTE', idTambo: 6, tambo: 'COCHAPAMPA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9316', codPatrimonio: '01733', nombre: 'MOTOCICLETA ZONGSHEN EA-9316', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10') }
 ];
 
 export const KILOMETRAJES: Kilometraje[] = [
@@ -66,16 +72,15 @@ export const TIPOASIGNACION: Master[] = [
 
 
 export const PARTIDAS: Master[] = [
-    { id: 1, nombre: '2.3.1.3.1.1' },
-    { id: 2, nombre: '2.3.1.3.1.3' }
+    { id: 1, nombre: '2.3.13.11' },
+    { id: 2, nombre: '2.3.13.13' }
 ];
 
 export const ASIGNACIONPRESUPUESTAL: AsignacionPresupuestal[] = [
-    { id: 1, idTipoAsignacion: 1, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idPartida: 1, nomPartida: '2.3.1.3.1.1', monto: 25000, fecha: new Date('2019-11-12') },
-    { id: 2, idTipoAsignacion: 1, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idPartida: 2, nomPartida: '2.3.1.3.1.3', monto: 6945, fecha: new Date('2019-10-05') },
-    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idPartida: 2, nomPartida: '2.3.1.3.1.3', monto: 23540, fecha: new Date('2019-09-15') },
-    { id: 4, idTipoAsignacion: 2, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idPartida: 1, nomPartida: '2.3.1.3.1.1', monto: 4322, fecha: new Date('2019-09-14') },
-    { id: 5, idTipoAsignacion: 2, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idPartida: 1, nomPartida: '2.3.1.3.1.1', monto: 43230, fecha: new Date('2019-10-11') }
+    { id: 1, idTipoAsignacion: 2, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '165-2018', monto: 10290.00, fecha: new Date('2018-07-20') },
+    { id: 2, idTipoAsignacion: 2, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '102-2018', monto: 6945.00, fecha: new Date('2018-01-01') },
+    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000060-2019', nroResAdministracion: '', monto: 10188.08, fecha: new Date('2019-06-15') },
+    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000019-2019', nroResAdministracion: '', monto: 7245.00, fecha: new Date('2019-01-01') }
 ];
 
 export const ADQUISICION: Adquisicion[] = [

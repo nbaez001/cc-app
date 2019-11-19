@@ -72,6 +72,6 @@
   </form>
 </div>
 <div mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" (click)="onNoClick()">Guardar</button>
+  <button mat-raised-button color="primary" (click)="onNoClick()" *ngIf="user.perfil.id != 3">Guardar</button>
   <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Salir</button>
 </div>

@@ -1,0 +1,61 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomUnidad: (
+      width: 10rem
+    ),
+    nomTambo: (
+      width: 10rem
+    ),
+    nomTipocombustible: (
+      width: 8rem
+    ),
+    totalRequerimiento: (
+      width: 6rem
+    ),
+    precio: (
+      width: 6rem
+    ),
+    total: (
+      width: 6rem
+    ),
+    ciudadAbastecimiento: (
+      width: 10rem
+    ),
+    distCiudadAbastecimiento: (
+      width: 6rem
+    ),
+    proveedor: (
+      width: 8rem
+    ),
+    rucProveedor: (
+      width: 6rem
+    ),
+    nombreGestor: (
+      width: 10rem
+    ),
+    factura: (
+      width: 6rem
+    ),
+    direccionGrifo: (
+      width: 8rem
+    ),
+    opt: (
+      width: 3rem
+    )
+  )
+);
+
+// .empty {
+//   padding: 20px;
+//   text-align: center;
+//   position: sticky;
+//   bottom: 0px;
+//   left: 0px;
+//   font-size: 0.8em;
+//   font-weight: 500;
+// }

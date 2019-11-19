@@ -19,12 +19,13 @@ import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico
 import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
 import { RegArtEmergenciaComponent } from './components/home/reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './components/home/reg-conductor/reg-conductor.component';
-import { BandejaAdquisicionComponent } from './components/bandeja-adquisicion/bandeja-adquisicion.component';
 import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/bdj-asig-econ-presupuestal.component';
 import { RegAsigPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/reg-asig-presupuestal/reg-asig-presupuestal.component';
-import { RegAdquisicionComponent } from './components/bandeja-adquisicion/reg-adquisicion/reg-adquisicion.component';
 import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/bandeja-orden-compra.component';
 import { ConfOrdenCompraComponent } from './components/bandeja-orden-compra/conf-orden-compra/conf-orden-compra.component';
+import { DistAsigPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/dist-asig-presupuestal/dist-asig-presupuestal.component';
+import { VerObservacionConsComponent } from './components/control-gen-electrico/ver-observacion-cons/ver-observacion-cons.component';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
   entryComponents: [
@@ -38,7 +39,8 @@ import { ConfOrdenCompraComponent } from './components/bandeja-orden-compra/conf
     RegArtEmergenciaComponent,
     RegConductorComponent,
     RegAsigPresupuestalComponent,
-    RegAdquisicionComponent
+    DistAsigPresupuestalComponent,
+    VerObservacionConsComponent
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente
@@ -56,12 +58,12 @@ import { ConfOrdenCompraComponent } from './components/bandeja-orden-compra/conf
     CuadroControlComponent,
     RegArtEmergenciaComponent,
     RegConductorComponent,
-    BandejaAdquisicionComponent,
     BdjAsigEconPresupuestalComponent,
     RegAsigPresupuestalComponent,
-    RegAdquisicionComponent,
     BandejaOrdenCompraComponent,
-    ConfOrdenCompraComponent
+    ConfOrdenCompraComponent,
+    DistAsigPresupuestalComponent,
+    VerObservacionConsComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +72,8 @@ import { ConfOrdenCompraComponent } from './components/bandeja-orden-compra/conf
     Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [
-    DatePipe
+    DatePipe,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }//DATEPICKER MUESTRA LA FECHA EN FORMATO DD/MM/YYYY
   ]
 })
 export class IntranetModule { }

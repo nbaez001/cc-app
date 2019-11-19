@@ -37,11 +37,6 @@
         *ngIf="getUser.perfil.id==3">
         <mat-icon>attach_money</mat-icon> Asignacion presupuestal
       </a>
-      <a mat-list-item [routerLink]="['/intranet/bandeja-adquisicion']" routerLinkActive="active-list-item">
-        <mat-icon>local_gas_station</mat-icon> Bandeja adquisicion
-      </a>
-
-
       <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu2 = !showSubmenu2">
         <mat-icon>score</mat-icon> Control combustible
         <span class="spacer"></span>

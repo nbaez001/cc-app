@@ -6,6 +6,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
 import { RegConsumoGeneradorComponent } from './reg-consumo-generador/reg-consumo-generador.component';
 import { Usuario } from 'src/app/model/usuario.model';
+import { VerObservacionConsComponent } from './ver-observacion-cons/ver-observacion-cons.component';
 
 @Component({
   selector: 'app-control-gen-electrico',
@@ -19,9 +20,9 @@ export class ControlGenElectricoComponent implements OnInit {
   tambos = TAMBOS;
   tiposvehiculo = TIPOSVEHICULO;
   listaConsumos: ConsumoGenerador[] = [
-    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'VISTA ALEGRE', marca: 'PERKINS', serie: 'EA-9263', horaInicio: '9:00 AM', horaFin: '9:30 AM', horas: 0.5, fecha: '10/10/2019', observacion: '' },
-    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'CCERAOCRO', marca: 'VOLVO PENTA', serie: 'EA-9263', horaInicio: '10:00 AM', horaFin: '11:00 AM', horas: 1.0, fecha: '15/10/2019', observacion: '' },
-    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'CHACHASPATA', marca: 'JOHN DEERE', serie: 'EA-9263', horaInicio: '11:00 AM', horaFin: '12:00 AM', horas: 1.0, fecha: '20/10/2019', observacion: '' },
+    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'VISTA ALEGRE', marca: 'PERKINS', serie: 'EA-9263', horaInicio: '9:00 AM', horaFin: '9:30 AM', horas: 0.5, fecha: '10/10/2019', observacion: 'SE USO GENERADOR EN EL TAMBO POR CAUSA DE CORTE DE ENERGIA ELECTRICA' },
+    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'CCERAOCRO', marca: 'VOLVO PENTA', serie: 'EA-9263', horaInicio: '10:00 AM', horaFin: '11:00 AM', horas: 1.0, fecha: '15/10/2019', observacion: 'SE USO GENERADOR PARA LA TENCION INTEGRAL EN SALUD' },
+    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'CHACHASPATA', marca: 'JOHN DEERE', serie: 'EA-9263', horaInicio: '11:00 AM', horaFin: '12:00 AM', horas: 1.0, fecha: '20/10/2019', observacion: 'SE USO GENERADOR PARA DESARROLLO DE ACTIVIDADES E ILUMINACION EN LA PLATAFORMA' },
     { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'CHURUNMARCA', marca: 'DOOSAN', serie: 'EA-9263', horaInicio: '3:00 PM', horaFin: '4:00 PM', horas: 1.0, fecha: '25/10/2019', observacion: '' },
     { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'COCHAPAMPA', marca: 'MITSUBISHI', serie: 'EA-9263', horaInicio: '9:30 AM', horaFin: '2:30 AM', horas: 5.0, fecha: '30/10/2019', observacion: '' }
   ];
@@ -127,6 +128,17 @@ export class ControlGenElectricoComponent implements OnInit {
       console.log(result);
       this.listaConsumos.push(result);
       this.cargarDatosTabla();
+    });
+  }
+
+  verObsConsumo(obj): void {
+    const dialogRef = this.dialog.open(VerObservacionConsComponent, {
+      width: '600px',
+      data: obj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      
     });
   }
 }

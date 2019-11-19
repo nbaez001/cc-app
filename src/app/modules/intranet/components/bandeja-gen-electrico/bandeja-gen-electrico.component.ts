@@ -111,7 +111,7 @@ export class BandejaGenElectricoComponent implements OnInit {
     this.columnsGrilla.forEach(c => {
       this.displayedColumns.push(c.columnDef);
     });
-    this.displayedColumns.push('opt');
+    // this.displayedColumns.push('opt');
   }
 
   public cargarDatosTabla(): void {

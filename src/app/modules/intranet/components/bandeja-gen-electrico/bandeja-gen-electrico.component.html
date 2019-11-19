@@ -6,7 +6,7 @@
         <mat-card-title class="box-section-title"> BUSQUEDA GENERADORES </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="bdjVehiculoGrp" class="example-container">
+        <form [formGroup]="bdjGeneradorGrp" class="example-container">
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
@@ -55,10 +55,10 @@
           <mat-icon>search</mat-icon>
           <strong> BUSCAR</strong>
         </button>
-        <button mat-raised-button (click)="regVehiculo(null)">
+        <!-- <button mat-raised-button (click)="regVehiculo(null)">
           <mat-icon>add_box</mat-icon>
           <strong> NUEVO VEHICULO</strong>
-        </button>
+        </button> -->
         <button mat-raised-button (click)="exportarExcel()">
           <mat-icon>file_copy</mat-icon>
           <strong>EXPORTAR A EXCEL</strong>
@@ -79,14 +79,14 @@
               <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
             </ng-container>
 
-            <ng-container matColumnDef="opt" stickyEnd>
+            <!-- <ng-container matColumnDef="opt" stickyEnd>
               <th mat-header-cell *matHeaderCellDef>OPCIONES</th>
               <td mat-cell *matCellDef="let element">
                 <button mat-icon-button matTooltip="Editar Vehiculo" (click)="regVehiculo(element)">
                   <mat-icon>create</mat-icon>
                 </button>
               </td>
-            </ng-container>
+            </ng-container> -->
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

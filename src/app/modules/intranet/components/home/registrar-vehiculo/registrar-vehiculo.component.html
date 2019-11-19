@@ -4,7 +4,7 @@
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
-          <input matInput [matDatepicker]="picker" placeholder="Fecha mantenimiento">
+          <input matInput formControlName="fechaMantenimiento" [matDatepicker]="picker" placeholder="Fecha mantenimiento">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -12,8 +12,8 @@
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
           <mat-label>Estado de unidad vehicular</mat-label>
-          <mat-select disableOptionCentering>
-            <mat-option *ngFor="let estadovehiculo of estadosvehiculo" [value]="estadovehiculo.id">
+          <mat-select disableOptionCentering formControlName="estadovehiculo">
+            <mat-option *ngFor="let estadovehiculo of estadosvehiculo" [value]="estadovehiculo">
               {{estadovehiculo.nombre}}
             </mat-option>
           </mat-select>
@@ -22,8 +22,8 @@
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
           <mat-label>Tipo combustible</mat-label>
-          <mat-select disableOptionCentering>
-            <mat-option *ngFor="let tipocombustible of tiposcombustible" [value]="tipocombustible.id">
+          <mat-select disableOptionCentering formControlName="tipocombustible">
+            <mat-option *ngFor="let tipocombustible of tiposcombustible" [value]="tipocombustible">
               {{tipocombustible.nombre}}
             </mat-option>
           </mat-select>

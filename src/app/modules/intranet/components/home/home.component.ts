@@ -7,7 +7,8 @@ import { RegistrarSoatComponent } from './registrar-soat/registrar-soat.componen
 import { RegistrarAsigCombustComponent } from './registrar-asig-combust/registrar-asig-combust.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common'; import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
+import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common'; 
+import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './reg-conductor/reg-conductor.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -150,8 +151,6 @@ export class HomeComponent implements OnInit {
     this.tambos.unshift({ id: 0, nombre: 'TODOS', idunidad: 0 });
 
     this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
-
-    this.buscar();
   }
 
   buscar() {
@@ -160,8 +159,8 @@ export class HomeComponent implements OnInit {
     let idTipovehiculo = this.bandejaGrp.get('tipovehiculo').value.id;
 
     this.listaVehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
-    this.listaVehiculos = VEHICULOS.filter(el => (el.idTambo == idTambo) || (0 == idTambo));
-    this.listaVehiculos = VEHICULOS.filter(el => (el.idTipo == idTipovehiculo) || (0 == idTipovehiculo));
+    this.listaVehiculos = this.listaVehiculos.filter(el => (el.idTambo == idTambo) || (0 == idTambo));
+    this.listaVehiculos = this.listaVehiculos.filter(el => (el.idTipo == idTipovehiculo) || (0 == idTipovehiculo));
 
     this.cargarDatosTabla();
   }
@@ -190,10 +189,9 @@ export class HomeComponent implements OnInit {
   }
 
   regVehiculo(obj): void {
-    console.log(obj);
     const dialogRef = this.dialog.open(RegistrarVehiculoComponent, {
       width: '500px',
-      data: { name: 'NERIO', animal: 'LEON' }
+      data: obj
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -203,10 +201,9 @@ export class HomeComponent implements OnInit {
 
 
   regRevTecnica(obj): void {
-    console.log(obj);
     const dialogRef = this.dialog.open(RegistrarRevTecnicaComponent, {
       width: '500px',
-      data: { name: 'NERIO', animal: 'LEON' }
+      data: { name: 'NERIO'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -218,7 +215,7 @@ export class HomeComponent implements OnInit {
     console.log(obj);
     const dialogRef = this.dialog.open(RegistrarSoatComponent, {
       width: '500px',
-      data: { name: 'NERIO', animal: 'LEON' }
+      data: { name: 'NERIO'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -231,7 +228,7 @@ export class HomeComponent implements OnInit {
     console.log(obj);
     const dialogRef = this.dialog.open(RegArtEmergenciaComponent, {
       width: '500px',
-      data: { name: 'NERIO', animal: 'LEON' }
+      data: { name: 'NERIO'}
     });
 
     dialogRef.afterClosed().subscribe(result => {

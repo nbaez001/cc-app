@@ -17,4 +17,10 @@ export class Vehiculo {
     placa: string;
     codPatrimonio: string;
     nombre: string;
+
+    idTipocombustible: number;
+    nomTipocombustible: string;
+    idEstado: number;
+    nomEstado: string;
+    fechaMantenimiento: Date;
 }

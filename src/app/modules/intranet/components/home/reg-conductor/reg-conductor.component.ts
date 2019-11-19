@@ -112,6 +112,7 @@ export class RegConductorComponent implements OnInit {
   }
 
   public cargarDatosTabla(): void {
+    this.dataSource = null;
     if (this.listaConductores.length > 0) {
       this.dataSource = new MatTableDataSource(this.listaConductores);
       this.dataSource.paginator = this.paginator;
@@ -164,6 +165,13 @@ export class RegConductorComponent implements OnInit {
     this.conductorGrp.get('nroBrevete').setValue('');
     this.conductorGrp.get('iniVigenciaBrevete').setValue('');
     this.conductorGrp.get('finVigenciaBrevete').setValue('');
+  }
+
+  delConductor(obj): void {
+    let index = this.listaConductores.indexOf(obj);
+    this.listaConductores.splice(index, 1);
+
+    this.cargarDatosTabla();
   }
 
 }

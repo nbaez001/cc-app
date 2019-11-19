@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatePipe } from '@angular/common';
 import { RegAsigPresupuestalComponent } from './reg-asig-presupuestal/reg-asig-presupuestal.component';
+import { DistAsigPresupuestalComponent } from './dist-asig-presupuestal/dist-asig-presupuestal.component';
 
 @Component({
   selector: 'app-bdj-asig-econ-presupuestal',
@@ -82,17 +83,17 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
       header: 'N°',
       cell: (asig: AsignacionPresupuestal) => `${asig.id}`
     }, {
+      columnDef: 'nomUnidad',
+      header: 'Nombre unidad',
+      cell: (asig: AsignacionPresupuestal) => `${asig.nomUnidad}`
+    }, {
       columnDef: 'nomTipoAsignacion',
       header: 'Tipo asignacion',
       cell: (asig: AsignacionPresupuestal) => `${asig.nomTipoAsignacion}`
     }, {
-      columnDef: 'nomPartida',
-      header: 'Partida',
-      cell: (asig: AsignacionPresupuestal) => `${asig.nomPartida}`
-    }, {
-      columnDef: 'monto',
-      header: 'Monto',
-      cell: (asig: AsignacionPresupuestal) => `${asig.monto}`
+      columnDef: 'nroOrdencompra',
+      header: 'Orden compra/Res. administracion',
+      cell: (asig: AsignacionPresupuestal) => (asig.idTipoAsignacion != 1) ? `${asig.nroOrdencompra}` : `${asig.nroResAdministracion}`
     }, {
       columnDef: 'fecha',
       header: 'Fecha',
@@ -151,8 +152,20 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
   regAsigPresupuestal(obj): void {
     console.log(obj);
     const dialogRef = this.dialog.open(RegAsigPresupuestalComponent, {
-      width: '500px',
+      width: '800px',
       data: { name: 'NERIO', animal: 'LEON' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  regDistribucionAsignacion(obj): void {
+    console.log(obj);
+    const dialogRef = this.dialog.open(DistAsigPresupuestalComponent, {
+      width: '800px',
+      data: { title: 'NERIO', objeto: obj }
     });
 
     dialogRef.afterClosed().subscribe(result => {
