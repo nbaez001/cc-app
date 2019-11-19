@@ -123,21 +123,26 @@ export class ControlKilometrajeComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.cargarTambos();
+    this.cargarUnidades();
 
-    this.bdjKilometrajeGrp.get('unidad').setValue(this.unidades[0]);
-    this.bdjKilometrajeGrp.get('tambo').setValue(this.tambos[0]);
-    this.bdjKilometrajeGrp.get('vehiculo').setValue(this.vehiculos[0]);
     this.spinnerService.hide();
   }
 
+  public cargarUnidades() {
+    this.unidades = JSON.parse(JSON.stringify(TAMBOS));
+    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bdjKilometrajeGrp.get('unidad').setValue(this.unidades[0]);
+
+    this.cargarTambos();
+  }
+
   public cargarTambos() {
-    console.log('Cargar tambos ejecutado');
     let idUnidad = this.bdjKilometrajeGrp.get('unidad').value.id;
 
-    this.tambos = TAMBOS.filter(tb => tb.idunidad == idUnidad);
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idunidad == idUnidad)));
     this.tambos.unshift({ id: 0, nombre: 'TODOS', idunidad: 0 });
-    // request.codRol = ROLES.responsableMonitoreo;
+
     this.bdjKilometrajeGrp.get('tambo').setValue(this.tambos[0]);
 
     this.cargarVehiculos();
@@ -147,10 +152,14 @@ export class ControlKilometrajeComponent implements OnInit {
     let idUnidad = this.bdjKilometrajeGrp.get('unidad').value.id;
     let idTambo = this.bdjKilometrajeGrp.get('tambo').value.id;
 
-    this.vehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad && el.idTambo == idTambo) || (idTambo == 0 && el.idUnidad == idUnidad));
+    this.vehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad || 0 == idUnidad));
+    this.vehiculos = this.vehiculos.filter(el => (el.idTambo == idTambo || 0 == idTambo));
+
     this.vehiculos.unshift({ id: 0, nombre: 'TODOS' });
 
     this.bdjKilometrajeGrp.get('vehiculo').setValue(this.vehiculos[0]);
+
+    this.buscar();
   }
 
   definirTabla(): void {

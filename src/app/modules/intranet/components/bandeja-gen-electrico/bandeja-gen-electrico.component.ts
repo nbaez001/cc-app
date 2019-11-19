@@ -13,12 +13,12 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 export class BandejaGenElectricoComponent implements OnInit {
   unidades = UNIDADES;
   tambos = TAMBOS;
-  listaGeneradores: Generador[] = generadores;
+  listaGeneradores: Generador[] = [];
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<Generador>;
 
-  bdjGeneradorGrp: FormGroup;
+  bandejaGrp: FormGroup;
   messages = {
     'name': {
       'required': 'Field is required',
@@ -92,8 +92,9 @@ export class BandejaGenElectricoComponent implements OnInit {
   ngOnInit() {
     this.spinnerService.show();
 
-    this.bdjGeneradorGrp = this.fb.group({
-      name: ['', [Validators.required]]
+    this.bandejaGrp = this.fb.group({
+      unidad: ['', [Validators.required]],
+      tambo: ['', [Validators.required]]
     });
 
     this.definirTabla();
@@ -101,9 +102,9 @@ export class BandejaGenElectricoComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.dataSource = null;
-    // this.banMonitoreoFrmGrp.get('estadoMonitoreoFrmCtrl').setValue(ESTADO_MONITOREO.pendienteInformacion);
-    this.cargarDatosTabla();
+    this.cargarUnidades();
+
+    this.spinnerService.hide();
   }
 
   definirTabla(): void {
@@ -114,7 +115,8 @@ export class BandejaGenElectricoComponent implements OnInit {
     // this.displayedColumns.push('opt');
   }
 
-  public cargarDatosTabla(): void {
+  cargarDatosTabla(): void {
+    this.dataSource = null;
     if (this.listaGeneradores.length > 0) {
       this.dataSource = new MatTableDataSource(this.listaGeneradores);
       this.dataSource.paginator = this.paginator;
@@ -123,8 +125,34 @@ export class BandejaGenElectricoComponent implements OnInit {
     this.spinnerService.hide();
   }
 
+  cargarUnidades() {
+    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
+    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+
+    this.cargarTambos();
+  }
+
+  cargarTambos() {
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idunidad == idUnidad)));
+    this.tambos.unshift({ id: 0, nombre: 'TODOS', idunidad: 0 });
+
+    this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
+
+    this.buscar();
+  }
+
   buscar() {
-    console.log('Buscar');
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+    let idTambo = this.bandejaGrp.get('tambo').value.id;
+
+    this.listaGeneradores = generadores.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
+    this.listaGeneradores = this.listaGeneradores.filter(el => (el.idTambo == idTambo) || (0 == idTambo));
+
+    this.cargarDatosTabla();
   }
 
   exportarExcel() {

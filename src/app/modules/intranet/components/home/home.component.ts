@@ -121,7 +121,6 @@ export class HomeComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.dataSource = null;
     this.cargarTiposvehiculo();
     this.cargarUnidades();
 
@@ -151,6 +150,8 @@ export class HomeComponent implements OnInit {
     this.tambos.unshift({ id: 0, nombre: 'TODOS', idunidad: 0 });
 
     this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
+
+    this.buscar();
   }
 
   buscar() {

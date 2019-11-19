@@ -1,3 +1,5 @@
+@import "../../../../../assets/styles/scss/views/table";
+
 .tddisabled {
   background-color: rgb(224, 224, 224);
 }
@@ -62,4 +64,13 @@
 .mat-footer-cell,
 .mat-header-cell {
   padding-left: 0px;
+}
+
+.celda-right {
+  text-align: right;
+  padding-right: 5px;
+}
+
+.celda-center {
+  text-align: center;
 }
