@@ -78,10 +78,10 @@ export const PARTIDAS: Master[] = [
 ];
 
 export const ASIGNACIONPRESUPUESTAL: AsignacionPresupuestal[] = [
-    { id: 1, idTipoAsignacion: 2, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '165-2018', monto: 10290.00, fecha: new Date('2018-07-20') },
-    { id: 2, idTipoAsignacion: 2, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '102-2018', monto: 6945.00, fecha: new Date('2018-01-01') },
-    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000060-2019', nroResAdministracion: '', monto: 10188.08, fecha: new Date('2019-06-15') },
-    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000019-2019', nroResAdministracion: '', monto: 7245.00, fecha: new Date('2019-01-01') }
+    { id: 1, idTipoAsignacion: 2, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '165-2018', monto: 10290.00, fecha: new Date('2018-07-20'), observacion: '' },
+    { id: 2, idTipoAsignacion: 2, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '102-2018', monto: 6945.00, fecha: new Date('2018-01-01'), observacion: '' },
+    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000060-2019', nroResAdministracion: '', monto: 10188.08, fecha: new Date('2019-06-15'), observacion: '' },
+    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000019-2019', nroResAdministracion: '', monto: 7245.00, fecha: new Date('2019-01-01'), observacion: '' }
 ];
 
 export const ADQUISICION: Adquisicion[] = [
