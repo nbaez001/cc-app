@@ -14,19 +14,12 @@ import { LayoutStyleBuilder } from '@angular/flex-layout';
 })
 export class CuadroControlComponent implements OnInit {
   user: Usuario;
-  bdjCuadroControlGrp: FormGroup;
+  bandejaGrp: FormGroup;
   unidades = UNIDADES;
-  anios: Object[] = [{ valor: 2017 }, { valor: 2018 }, { valor: 2019 }];
+  anios: Object[] = [{ valor: 2019 }, { valor: 2018 }, { valor: 2017 }];
   meses: Object[] = [{ valor: 0, nombre: 'ENERO' }, { valor: 1, nombre: 'FEBRERO' }, { valor: 2, nombre: 'MARZO' }, { valor: 3, nombre: 'ABRIL' }, { valor: 4, nombre: 'MAYO' }, { valor: 5, nombre: 'JUNIO' }, { valor: 6, nombre: 'JULIO' }, { valor: 7, nombre: 'AGOSTO' }, { valor: 8, nombre: 'SETIEMBRE' }, { valor: 9, nombre: 'OCTUBRE' }, { valor: 10, nombre: 'NOVIEMBRE' }, { valor: 11, nombre: 'DICIEMBRE' }];
 
   listaControl: CuadroControl[] = [];
-
-  // displayedColumns: string[];
-  // dataSource: MatTableDataSource<ConsumoGenerador>;
-
-
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  // @ViewChild(MatSort) sort: MatSort;
 
   constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService) { }
 
@@ -34,8 +27,9 @@ export class CuadroControlComponent implements OnInit {
     this.user = JSON.parse(sessionStorage.getItem('user'));
     this.spinnerService.show();
 
-    this.bdjCuadroControlGrp = this.fb.group({
-      name: ['', [Validators.required]]
+    this.bandejaGrp = this.fb.group({
+      unidad: ['', [Validators.required]],
+      anio: ['', [Validators.required]]
     });
 
     // this.definirTabla();
@@ -43,31 +37,25 @@ export class CuadroControlComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    // this.dataSource = null;
-    // this.banMonitoreoFrmGrp.get('estadoMonitoreoFrmCtrl').setValue(ESTADO_MONITOREO.pendienteInformacion);
-    this.cargarDatosTabla();
+    this.cargarUnidades();
   }
 
-  // definirTabla(): void {
-  // this.displayedColumns = [];
-  // this.columnsGrilla.forEach(c => {
-  //   this.displayedColumns.push(c.columnDef);
-  // });
-  // this.displayedColumns.push('opt');
-  // }
+  public cargarUnidades() {
+    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
+    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
 
-  public cargarDatosTabla(): void {
-    // if (this.listaConsumos.length > 0) {
-    //   this.dataSource = new MatTableDataSource(this.listaConsumos);
-    //   this.dataSource.paginator = this.paginator;
-    //   this.dataSource.sort = this.sort;
-    // }
-    this.spinnerService.hide();
+    this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+    this.bandejaGrp.get('anio').setValue(this.anios[0]);
+
+    this.buscar();
   }
 
   buscar() {
-    console.log('Buscar');
-    this.listaControl = CUADROCONTROL;
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+    let anio = this.bandejaGrp.get('anio').value.id;
+
+    this.listaControl = CUADROCONTROL.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
+    this.spinnerService.hide();
   }
 
   exportarExcel() {

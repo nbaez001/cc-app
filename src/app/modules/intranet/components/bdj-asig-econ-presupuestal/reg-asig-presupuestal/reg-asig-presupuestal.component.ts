@@ -5,6 +5,8 @@ import { UNIDADES, TAMBOS, TIPOASIGNACION, PARTIDAS } from 'src/app/common';
 import { Unidad } from 'src/app/model/unidad.model';
 import { Tambo } from 'src/app/model/tambo.model';
 import { DetalleAsignacion } from 'src/app/model/detalle-asignacion.model';
+import { AsignacionPresupuestal } from 'src/app/model/asignacion-presupuestal.model';
+import { ValidationService } from 'src/app/services/validation.service';
 
 @Component({
   selector: 'app-reg-asig-presupuestal',
@@ -13,6 +15,7 @@ import { DetalleAsignacion } from 'src/app/model/detalle-asignacion.model';
 })
 export class RegAsigPresupuestalComponent implements OnInit {
   asigPresupuestalGrp: FormGroup;
+  detAsigPresupuestalGrp: FormGroup;
 
   unidades: Unidad[] = UNIDADES;
   tambos: Tambo[] = TAMBOS;
@@ -46,26 +49,73 @@ export class RegAsigPresupuestalComponent implements OnInit {
       cell: (det: DetalleAsignacion) => `${det.monto}`
     }];
 
+  asigPresupuestal: AsignacionPresupuestal;
   listaDetAsignacion: DetalleAsignacion[] = [];
   displayedColumns: string[];
   dataSource: MatTableDataSource<DetalleAsignacion>;
 
+  messages = {
+    'unidad': {
+      'required': 'Campo obligatorio'
+    },
+    'tipoasignacion': {
+      'required': 'Campo obligatorio'
+    },
+    // 'nroOrdencompra': {
+    //   'required': 'Campo obligatorio'
+    // },
+    // 'nroResAdministracion': {
+    //   'required': 'Campo obligatorio'
+    // },
+    'monto': {
+      'required': 'Campo obligatorio'
+    },
+    'fecha': {
+      'required': 'Campo obligatorio'
+    },
+    'observacion': {
+      'required': 'Campo obligatorio'
+    }
+  };
+  formErrors = {
+    'unidad': '',
+    'tipoasignacion': '',
+    'monto': '',
+    'fecha': '',
+    'observacion': ''
+  };
+
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegAsigPresupuestalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(ValidationService) private validationService: ValidationService) { }
 
   ngOnInit() {
     this.asigPresupuestalGrp = this.fb.group({
-      tipoasignacion: ['', [Validators.required]]
+      unidad: ['', [Validators.required]],
+      tipoasignacion: ['', [Validators.required]],
+      nroOrdencompra: ['', []],
+      nroResAdministracion: ['', []],
+      monto: ['', [Validators.required]],
+      fecha: ['', [Validators.required]],
+      observacion: ['', [Validators.required]],
     });
 
-    this.asigPresupuestalGrp.get('tipoasignacion').setValue(this.tipoasignacion[0]);
+    this.detAsigPresupuestalGrp = this.fb.group({
+      ffRb: ['', [Validators.required]],
+      metaNmonico: ['', [Validators.required]],
+      clasificadorGasto: ['', [Validators.required]],
+      descripcion: ['', [Validators.required]],
+      monto: ['', [Validators.required]]
+    });
 
     this.definirTabla();
     this.inicializarVariables();
   }
 
   public inicializarVariables(): void {
-    this.dataSource = null;
+    this.asigPresupuestalGrp.get('tipoasignacion').setValue(this.tipoasignacion[0]);
+    this.asigPresupuestalGrp.get('unidad').setValue(this.unidades[0]);
+
     // this.banMonitoreoFrmGrp.get('estadoMonitoreoFrmCtrl').setValue(ESTADO_MONITOREO.pendienteInformacion);
     this.cargarDatosTabla();
   }
@@ -77,14 +127,36 @@ export class RegAsigPresupuestalComponent implements OnInit {
     });
   }
 
+  validateForm(): void {
+    this.validationService.getValidationErrors(this.asigPresupuestalGrp, this.messages, this.formErrors, true);
+  }
+
   public cargarDatosTabla(): void {
+    this.dataSource = null;
     if (this.listaDetAsignacion.length > 0) {
       this.dataSource = new MatTableDataSource(this.listaDetAsignacion);
     }
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  guardar(): void {
+    if (this.asigPresupuestalGrp.valid) {
+      let kil = new AsignacionPresupuestal();
+      kil.id = 0;
+      kil.idUnidad = this.asigPresupuestalGrp.get('unidad').value.id;
+      kil.nomUnidad = this.asigPresupuestalGrp.get('unidad').value.nombre;
+      kil.idTipoAsignacion = this.asigPresupuestalGrp.get('tipoasignacion').value.id;
+      kil.nomTipoAsignacion = this.asigPresupuestalGrp.get('tipoasignacion').value.nombre;
+      kil.nroOrdencompra = this.asigPresupuestalGrp.get('nroOrdencompra').value;
+      kil.nroResAdministracion = this.asigPresupuestalGrp.get('nroResAdministracion').value;
+      kil.monto = this.asigPresupuestalGrp.get('monto').value;
+      kil.fecha = this.asigPresupuestalGrp.get('fecha').value;
+      kil.observacion = this.asigPresupuestalGrp.get('observacion').value;
+      console.log(kil);
+      this.dialogRef.close(kil);
+    } else {
+      this.validateForm();
+    }
+
   }
 
 }

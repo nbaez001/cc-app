@@ -9,4 +9,5 @@ export class AsignacionPresupuestal {
     nroResAdministracion: string;
     monto: number;
     fecha: Date;
+    observacion: string;
 }

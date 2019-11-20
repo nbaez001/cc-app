@@ -6,13 +6,13 @@
         <mat-card-title class="box-section-title"> BUSQUEDA USO GENERADOR ELECTRICO </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="bdjCuadroControlGrp" class="example-container">
+        <form [formGroup]="bandejaGrp" class="example-container">
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
                 <mat-label>Unidad</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
+                <mat-select formControlName="unidad">
+                  <mat-option *ngFor="let unidad of unidades" [value]="unidad">
                     {{unidad.nombre}}
                   </mat-option>
                 </mat-select>
@@ -21,8 +21,8 @@
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
                 <mat-label>Año</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let anio of anios" [value]="anio.valor">
+                <mat-select formControlName="anio">
+                  <mat-option *ngFor="let anio of anios" [value]="anio">
                     {{anio.valor}}
                   </mat-option>
                 </mat-select>
@@ -101,26 +101,94 @@
             </thead>
             <tbody>
               <tr class="mat-row" *ngFor="let con of listaControl">
-                <td class="mat-cell">{{con.secFun}}</td>
-                <td class="mat-cell">{{con.nomUnidad}}</td>
-                <td class="mat-cell celda-center">{{con.partida}}</td>
+                <td class="mat-cell">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.secFun}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.nomUnidad}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-center">{{con.nomPartida}}</td>
                 <td class="mat-cell celda-right">{{con.total | number:'3.2-2'}}</td>
                 <td class="mat-cell celda-right">{{con.saldo | number:'3.2-2'}}</td>
-                <td class="mat-cell celda-right">{{con.dieselConsMensual}}</td>
-                <td class="mat-cell celda-right">{{con.dieselConsAnual}}</td>
-                <td class="mat-cell celda-right">{{con.dieselImpGalon}}</td>
-                <td class="mat-cell celda-right">{{con.dieselImpAnual}}</td>
-                <td class="mat-cell celda-right">{{con.cantTambos}}</td>
-                <td class="mat-cell celda-right">{{con.gasGalonPromedioMes}}</td>
-                <td class="mat-cell celda-right">{{con.gasConsMensual}}</td>
-                <td class="mat-cell celda-right">{{con.gasConsAnual}}</td>
-                <td class="mat-cell celda-right">{{con.gasImporteGalon}}</td>
-                <td class="mat-cell celda-right">{{con.gasImporteAnual}}</td>
-                <td class="mat-cell celda-center">{{con.lubricProd}}</td>
-                <td class="mat-cell celda-right">{{con.lubricCosto}}</td>
-                <td class="mat-cell celda-right">{{con.lubricCantidad}}</td>
-                <td class="mat-cell celda-right">{{con.lubricConsMensual}}</td>
-                <td class="mat-cell celda-right">{{con.lubricConsanual}}</td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.dieselConsumo}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.dieselPromCosto}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.dieselTotal}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasConsMotocicletas}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasPromCosto}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasMotocicletasTotal}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasConsGeneradores}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasPromCosto}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasGeneradoresTotal}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasConsDeslizadores}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasPromCosto}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.gasDeslizadoresTotal}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==2">
+                    {{con.lubricConsumo}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==2">
+                    {{con.lubricPromCosto}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==2">
+                    {{con.lubricantesTotal}}
+                  </ng-container>
+                </td>
               </tr>
             </tbody>
           </table>

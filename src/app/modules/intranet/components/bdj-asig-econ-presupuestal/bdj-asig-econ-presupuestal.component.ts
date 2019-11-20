@@ -16,57 +16,22 @@ import { DistAsigPresupuestalComponent } from './dist-asig-presupuestal/dist-asi
 export class BdjAsigEconPresupuestalComponent implements OnInit {
   unidades = UNIDADES;
   tambos = TAMBOS;
-  listaAsigPresupuestal: AsignacionPresupuestal[] = ASIGNACIONPRESUPUESTAL;
+  listaAsigPresupuestal: AsignacionPresupuestal[] = [];
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<AsignacionPresupuestal>;
 
-  bdjAsigPresupuestalGrp: FormGroup;
+  bandejaGrp: FormGroup;
   messages = {
     'name': {
       'required': 'Field is required',
       'minlength': 'Insert al least 2 characters',
       'maxlength': 'Max name size 20 characters'
-    },
-    'email': {
-      'required': 'Field is required',
-      'email': 'Insert a valid email',
-      'customEmail': 'Email domain should be dell.com'
-    },
-    'confirmEmail': {
-      'required': 'Field is required',
-      'email': 'Insert a valid email'
-    },
-    'phone': {
-      'required': 'Phone is required'
-    },
-    'skill': {
-      'name': {
-        'required': 'Field is required',
-        'minlength': 'Insert al least 5 characters',
-        'maxlength': 'max name size 20 characters'
-      },
-      'years': {
-        'required': 'Field is required',
-        'min': 'Min value is 1',
-        'max': 'Max value is 100'
-      },
-      'proficiency': {
-        'required': 'option is required'
-      }
     }
   };
 
   formErrors = {
-    'name': '',
-    'email': '',
-    'confirmEmail': '',
-    'phone': '',
-    'skill': {
-      'name': '',
-      'years': '',
-      'proficiency': ''
-    }
+    'name': ''
   };
 
   id: number;
@@ -110,8 +75,8 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
   ngOnInit() {
     this.spinnerService.show();
 
-    this.bdjAsigPresupuestalGrp = this.fb.group({
-      name: ['', [Validators.required]]
+    this.bandejaGrp = this.fb.group({
+      unidad: ['', [Validators.required]]
     });
 
     this.definirTabla();
@@ -119,9 +84,7 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.dataSource = null;
-    // this.banMonitoreoFrmGrp.get('estadoMonitoreoFrmCtrl').setValue(ESTADO_MONITOREO.pendienteInformacion);
-    this.cargarDatosTabla();
+    this.cargarUnidades();
   }
 
   definirTabla(): void {
@@ -132,17 +95,30 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
     this.displayedColumns.push('opt');
   }
 
+  public cargarUnidades() {
+    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
+    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+
+    this.buscar();
+  }
+
+  buscar() {
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+    this.listaAsigPresupuestal = ASIGNACIONPRESUPUESTAL.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
+
+    this.cargarDatosTabla();
+  }
+
   public cargarDatosTabla(): void {
+    this.dataSource = null;
     if (this.listaAsigPresupuestal.length > 0) {
       this.dataSource = new MatTableDataSource(this.listaAsigPresupuestal);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
     this.spinnerService.hide();
-  }
-
-  buscar() {
-    console.log('Buscar');
   }
 
   exportarExcel() {
