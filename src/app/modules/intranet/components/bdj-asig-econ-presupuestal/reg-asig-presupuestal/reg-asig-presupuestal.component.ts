@@ -61,12 +61,6 @@ export class RegAsigPresupuestalComponent implements OnInit {
     'tipoasignacion': {
       'required': 'Campo obligatorio'
     },
-    // 'nroOrdencompra': {
-    //   'required': 'Campo obligatorio'
-    // },
-    // 'nroResAdministracion': {
-    //   'required': 'Campo obligatorio'
-    // },
     'monto': {
       'required': 'Campo obligatorio'
     },
@@ -83,6 +77,32 @@ export class RegAsigPresupuestalComponent implements OnInit {
     'monto': '',
     'fecha': '',
     'observacion': ''
+  };
+
+  messages2 = {
+    'ffRb': {
+      'required': 'Campo obligatorio'
+    },
+    'metaNmonico': {
+      'required': 'Campo obligatorio'
+    },
+    'clasificadorGasto': {
+      'required': 'Campo obligatorio'
+    },
+    'descripcion': {
+      'required': 'Campo obligatorio'
+    },
+    'monto': {
+      'required': 'Campo obligatorio'
+    }
+  };
+
+  formErrors2 = {
+    'ffRb': '',
+    'metaNmonico': '',
+    'clasificadorGasto': '',
+    'descripcion': '',
+    'monto': ''
   };
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegAsigPresupuestalComponent>,
@@ -131,6 +151,10 @@ export class RegAsigPresupuestalComponent implements OnInit {
     this.validationService.getValidationErrors(this.asigPresupuestalGrp, this.messages, this.formErrors, true);
   }
 
+  validateForm2(): void {
+    this.validationService.getValidationErrors(this.detAsigPresupuestalGrp, this.messages2, this.formErrors2, true);
+  }
+
   public cargarDatosTabla(): void {
     this.dataSource = null;
     if (this.listaDetAsignacion.length > 0) {
@@ -156,7 +180,31 @@ export class RegAsigPresupuestalComponent implements OnInit {
     } else {
       this.validateForm();
     }
+  }
 
+  guardarDetalle() {
+    if (this.detAsigPresupuestalGrp.valid) {
+      let kil = new DetalleAsignacion();
+      kil.id = 0;
+      kil.ffRb = this.detAsigPresupuestalGrp.get('ffRb').value;
+      kil.metaNmonico = this.detAsigPresupuestalGrp.get('metaNmonico').value;
+      kil.clasificadorGasto = this.detAsigPresupuestalGrp.get('clasificadorGasto').value.nombre;
+      kil.descripcion = this.detAsigPresupuestalGrp.get('descripcion').value;
+      kil.monto = this.detAsigPresupuestalGrp.get('monto').value;
+      console.log(kil);
+      
+      this.listaDetAsignacion.push(kil);
+      this.detAsigPresupuestalGrp.get('ffRb').setValue('');
+      this.detAsigPresupuestalGrp.get('metaNmonico').setValue('');
+      this.detAsigPresupuestalGrp.get('clasificadorGasto').setValue(this.partidas[0]);
+      this.detAsigPresupuestalGrp.get('descripcion').setValue('');
+      this.detAsigPresupuestalGrp.get('monto').setValue('');
+      this.validationService.setAsUntoched(this.detAsigPresupuestalGrp);
+
+      this.cargarDatosTabla();
+    } else {
+      this.validateForm2();
+    }
   }
 
 }

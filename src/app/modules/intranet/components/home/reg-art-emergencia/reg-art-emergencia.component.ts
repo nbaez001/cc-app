@@ -56,6 +56,10 @@ export class RegArtEmergenciaComponent implements OnInit {
     ];
   }
 
+  get getUser(){
+    return this.user;
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }

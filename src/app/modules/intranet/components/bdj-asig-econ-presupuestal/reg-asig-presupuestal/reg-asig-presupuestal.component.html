@@ -73,13 +73,18 @@
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <input matInput placeholder="Meta/Nmonico">
+                <input matInput formControlName="ffRb" placeholder="ffRb">
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <input matInput formControlName="metaNmonico" placeholder="Meta/Nmonico">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
                 <mat-label>Clasificador de gasto</mat-label>
-                <mat-select>
+                <mat-select formControlName="clasificadorGasto">
                   <mat-option *ngFor="let partida of partidas" [value]="partida">
                     {{partida.nombre}}
                   </mat-option>
@@ -88,12 +93,12 @@
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <input matInput placeholder="Descripcion">
+                <input matInput formControlName="descripcion" placeholder="Descripcion">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <input matInput type="number" placeholder="monto">
+                <input matInput formControlName="monto" type="number" placeholder="monto">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">

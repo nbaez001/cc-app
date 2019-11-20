@@ -29,4 +29,15 @@ export class ValidationService {
       }
     });
   }
+
+  setAsUntoched(group: FormGroup): void {
+    Object.keys(group.controls).forEach((key: string) => {
+      let abstractControl = group.get(key);
+      if (abstractControl instanceof FormGroup) {
+        this.setAsUntoched(abstractControl);
+      } else {
+        abstractControl.markAsUntouched();
+      }
+    });
+  }
 }
