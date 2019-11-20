@@ -19,13 +19,14 @@ import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico
 import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
 import { RegArtEmergenciaComponent } from './components/home/reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './components/home/reg-conductor/reg-conductor.component';
-import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/bdj-asig-econ-presupuestal.component';
-import { RegAsigPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/reg-asig-presupuestal/reg-asig-presupuestal.component';
 import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/bandeja-orden-compra.component';
 import { ConfOrdenCompraComponent } from './components/bandeja-orden-compra/conf-orden-compra/conf-orden-compra.component';
-import { DistAsigPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/dist-asig-presupuestal/dist-asig-presupuestal.component';
 import { VerObservacionConsComponent } from './components/control-gen-electrico/ver-observacion-cons/ver-observacion-cons.component';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { BdjAsigPresupuestalComponent } from './components/bdj-asig-presupuestal/bdj-asig-presupuestal.component';
+import { BdjEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/bdj-ejec-presupuestal.component';
+import { RegEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/reg-ejec-presupuestal/reg-ejec-presupuestal.component';
+import { DistEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/dist-ejec-presupuestal/dist-ejec-presupuestal.component';
 
 @NgModule({
   entryComponents: [
@@ -38,8 +39,8 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     RegConsumoGeneradorComponent,
     RegArtEmergenciaComponent,
     RegConductorComponent,
-    RegAsigPresupuestalComponent,
-    DistAsigPresupuestalComponent,
+    RegEjecPresupuestalComponent,
+    DistEjecPresupuestalComponent,
     VerObservacionConsComponent
   ],
   declarations: [
@@ -58,12 +59,13 @@ import { MAT_DATE_LOCALE } from '@angular/material';
     CuadroControlComponent,
     RegArtEmergenciaComponent,
     RegConductorComponent,
-    BdjAsigEconPresupuestalComponent,
-    RegAsigPresupuestalComponent,
     BandejaOrdenCompraComponent,
     ConfOrdenCompraComponent,
-    DistAsigPresupuestalComponent,
-    VerObservacionConsComponent
+    VerObservacionConsComponent,
+    BdjAsigPresupuestalComponent,
+    BdjEjecPresupuestalComponent,
+    RegEjecPresupuestalComponent,
+    DistEjecPresupuestalComponent
   ],
   imports: [
     CommonModule,

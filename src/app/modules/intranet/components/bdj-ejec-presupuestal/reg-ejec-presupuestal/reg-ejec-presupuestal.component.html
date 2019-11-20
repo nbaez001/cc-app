@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Registrar asignacion presupuestal</h1>
+<h1 mat-dialog-title>Registrar ejecucion presupuestal</h1>
 <div mat-dialog-content>
-  <form [formGroup]="asigPresupuestalGrp">
+  <form [formGroup]="ejecPresupuestalGrp">
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
@@ -14,45 +14,45 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
-          <mat-label>Tipo asignacion presupuestal</mat-label>
-          <mat-select formControlName="tipoasignacion">
-            <mat-option *ngFor="let tipoasignacion of tipoasignacion" [value]="tipoasignacion">
-              {{tipoasignacion.nombre}}
+          <mat-label>Tipo ejecucion presupuestal</mat-label>
+          <mat-select formControlName="tipoejecucion">
+            <mat-option *ngFor="let tipoejecucion of tiposejecucion" [value]="tipoejecucion">
+              {{tipoejecucion.nombre}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestalGrp.get('tipoasignacion').value.id==1">
+        *ngIf="ejecPresupuestalGrp.get('tipoejecucion').value.id==1">
         <mat-form-field appearance="legacy">
           <input matInput formControlName="nroOrdencompra" type="number"
             placeholder="Codigo resolucion de administracion">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestalGrp.get('tipoasignacion').value.id==2">
+        *ngIf="ejecPresupuestalGrp.get('tipoejecucion').value.id==2">
         <mat-form-field appearance="legacy">
           <input matInput formControlName="nroResAdministracion" type="number" placeholder="Codigo orden servicio">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
-          <input matInput formControlName="monto" type="number" placeholder="Monto asignacion" [disabled]="true">
+          <input matInput formControlName="monto" type="number" placeholder="Monto ejecucion" [disabled]="true">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
-          <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="Fecha asignacion">
+          <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="Fecha ejecucion">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestalGrp.get('tipoasignacion').value.id==1">
+        *ngIf="ejecPresupuestalGrp.get('tipoejecucion').value.id==1">
         <button mat-raised-button type="button">Ver archivo</button>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestalGrp.get('tipoasignacion').value.id==2">
+        *ngIf="ejecPresupuestalGrp.get('tipoejecucion').value.id==2">
         <button mat-raised-button type="button">Subir archivo</button>
       </mat-grid-tile>
     </mat-grid-list>
@@ -66,10 +66,10 @@
 
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Detalle asignacion</mat-card-title>
+        <mat-card-title>Detalle ejecucion</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="detAsigPresupuestalGrp">
+        <form [formGroup]="detejecPresupuestalGrp">
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">

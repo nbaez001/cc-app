@@ -8,6 +8,7 @@ import { AsignacionPresupuestal } from './model/asignacion-presupuestal.model';
 import { Adquisicion } from './model/adquisicion.model';
 import { Generador } from './model/generador.model';
 import { CuadroControl } from './model/cuadro-control.model';
+import { EjecucionPresupuestal } from './model/ejecucion-presupuestal.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -66,7 +67,7 @@ export const KILOMETRAJES: Kilometraje[] = [
     { id: 8, idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 1, tambo: 'ANCARPATA', idVehiculo: 2, tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', horaSalida: '9:30 AM', horaLlegada: '9:40 AM', kilometrajeSalida: '5197', kilometrajeLlegada: '5199', kilometrosRecorrido: 2, lugarDestino: 'CP QUIÑASI', observaciones: 'VERIFICACION DE CHACRAS AFECTADAS POR LA SEQUIA', codComisionSISMONITOR: '051', fechaComision: '30/10/2019' }
 ];
 
-export const TIPOASIGNACION: Master[] = [
+export const TIPOEJECUCION: Master[] = [
     { id: 1, nombre: 'FONDO POR ENCARGO (F/E)' },
     { id: 2, nombre: 'ORDEN DE COMPRA (OC)' }
 ];
@@ -77,11 +78,11 @@ export const PARTIDAS: Master[] = [
     { id: 2, nombre: '2.3.13.13' }
 ];
 
-export const ASIGNACIONPRESUPUESTAL: AsignacionPresupuestal[] = [
-    { id: 1, idTipoAsignacion: 2, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '165-2018', monto: 10290.00, fecha: new Date('2018-07-20'), observacion: '' },
-    { id: 2, idTipoAsignacion: 2, nomTipoAsignacion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '102-2018', monto: 6945.00, fecha: new Date('2018-01-01'), observacion: '' },
-    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000060-2019', nroResAdministracion: '', monto: 10188.08, fecha: new Date('2019-06-15'), observacion: '' },
-    { id: 3, idTipoAsignacion: 1, nomTipoAsignacion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000019-2019', nroResAdministracion: '', monto: 7245.00, fecha: new Date('2019-01-01'), observacion: '' }
+export const EJECUCIONPRESUPUESTAL: EjecucionPresupuestal[] = [
+    { id: 1, idTipoejecucion: 2, nomTipoejecucion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '165-2018', monto: 10290.00, fecha: new Date('2018-07-20'), observacion: '' },
+    { id: 2, idTipoejecucion: 2, nomTipoejecucion: 'FONDO POR ENCARGO (F/E)', idUnidad: 20, nomUnidad: 'U.T. AYACUCHO SUR', idOrdencompra: 0, nroOrdencompra: '', nroResAdministracion: '102-2018', monto: 6945.00, fecha: new Date('2018-01-01'), observacion: '' },
+    { id: 3, idTipoejecucion: 1, nomTipoejecucion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000060-2019', nroResAdministracion: '', monto: 10188.08, fecha: new Date('2019-06-15'), observacion: '' },
+    { id: 3, idTipoejecucion: 1, nomTipoejecucion: 'ORDEN DE COMPRA (OC)', idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idOrdencompra: 1, nroOrdencompra: '0000019-2019', nroResAdministracion: '', monto: 7245.00, fecha: new Date('2019-01-01'), observacion: '' }
 ];
 
 export const ADQUISICION: Adquisicion[] = [

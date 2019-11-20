@@ -33,7 +33,7 @@ export class ControlKilometrajeComponent implements OnInit {
   };
 
   user: Usuario;
-  unidades = UNIDADES;
+  unidades = [];
   tambos = [];
   vehiculos = [];
   listaKilometrajes: Kilometraje[];
@@ -129,7 +129,7 @@ export class ControlKilometrajeComponent implements OnInit {
   }
 
   public cargarUnidades() {
-    this.unidades = JSON.parse(JSON.stringify(TAMBOS));
+    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
     this.unidades.unshift({ id: 0, nombre: 'TODOS' });
 
     this.bdjKilometrajeGrp.get('unidad').setValue(this.unidades[0]);

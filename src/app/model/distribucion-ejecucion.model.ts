@@ -1,4 +1,4 @@
-export class DistribucionAsignacion {
+export class DistribucionEjecucion {
     id: number;
     idUnidad: number;
     nomUnidad: string;

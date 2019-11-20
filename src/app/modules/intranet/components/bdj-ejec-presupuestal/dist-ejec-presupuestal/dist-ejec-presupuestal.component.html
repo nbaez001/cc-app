@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Distribucion asignacion presupuestal</h1>
+<h1 mat-dialog-title>Distribucion ejecucion presupuestal</h1>
 <div mat-dialog-content>
   <form [formGroup]="formularioGrp">
     <mat-grid-list cols="12" rowHeight="50px">
@@ -48,42 +48,42 @@
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestal.idTipoAsignacion==1">
+        *ngIf="ejecPresupuestal.idTipoejecucion==1">
         <mat-form-field appearance="legacy">
           <input matInput type="text" placeholder="Ciudad abastecimiento">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestal.idTipoAsignacion==1">
+        *ngIf="ejecPresupuestal.idTipoejecucion==1">
         <mat-form-field appearance="legacy">
           <input matInput type="number" placeholder="Distancia ciudad abastecimiento">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
-          <input matInput type="number" placeholder="Proveedor" [disabled]="asigPresupuestal.idTipoAsignacion==1">
+          <input matInput type="number" placeholder="Proveedor" [disabled]="ejecPresupuestal.idTipoejecucion==1">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestal.idTipoAsignacion==1">
+        *ngIf="ejecPresupuestal.idTipoejecucion==1">
         <mat-form-field appearance="legacy">
           <input matInput type="number" placeholder="RUC">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestal.idTipoAsignacion==2">
+        *ngIf="ejecPresupuestal.idTipoejecucion==2">
         <mat-form-field appearance="legacy">
           <input matInput type="text" placeholder="Nombre gestor">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestal.idTipoAsignacion==2">
+        *ngIf="ejecPresupuestal.idTipoejecucion==2">
         <mat-form-field appearance="legacy">
           <input matInput type="text" placeholder="Factura">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}"
-        *ngIf="asigPresupuestal.idTipoAsignacion==2">
+        *ngIf="ejecPresupuestal.idTipoejecucion==2">
         <mat-form-field appearance="legacy">
           <input matInput type="text" placeholder="Direccion grifo">
         </mat-form-field>

@@ -1,0 +1,32 @@
+@import "../../../../../assets/styles/scss/views/table";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomUnidad: (
+      width: 12rem
+    ),
+    nomTipoAsignacion: (
+      width: 14rem
+    ),
+    nroOrdencompra: (
+      width: 9rem
+    ),
+    fecha: (
+      width: 9rem
+    ),
+    opt: (
+      width: 5rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

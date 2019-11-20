@@ -4,9 +4,10 @@ import { HomeComponent } from './components/home/home.component';
 import { ControlKilometrajeComponent } from './components/control-kilometraje/control-kilometraje.component';
 import { ControlGenElectricoComponent } from './components/control-gen-electrico/control-gen-electrico.component';
 import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
-import { BdjAsigEconPresupuestalComponent } from './components/bdj-asig-econ-presupuestal/bdj-asig-econ-presupuestal.component';
 import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico/bandeja-gen-electrico.component';
 import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/bandeja-orden-compra.component';
+import { BdjAsigPresupuestalComponent } from './components/bdj-asig-presupuestal/bdj-asig-presupuestal.component';
+import { BdjEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/bdj-ejec-presupuestal.component';
 
 const intranetRoutes: Routes = [
   {
@@ -34,8 +35,12 @@ const intranetRoutes: Routes = [
         data: { title: 'Generador electrico' }
       }, {
         path: 'asignacion-econ-presupuestal',
-        component: BdjAsigEconPresupuestalComponent,
+        component: BdjAsigPresupuestalComponent,
         data: { title: 'Bandeja asignacion economico presupuestal' }
+      }, {
+        path: 'ejecucion-econ-presupuestal',
+        component: BdjEjecPresupuestalComponent,
+        data: { title: 'Bandeja ejecucion economico presupuestal' }
       }, {
         path: 'cuadro-control',
         component: CuadroControlComponent,

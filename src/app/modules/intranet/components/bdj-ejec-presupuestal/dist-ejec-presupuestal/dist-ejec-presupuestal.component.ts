@@ -1,21 +1,21 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { EjecucionPresupuestal } from 'src/app/model/ejecucion-presupuestal.model';
 import { Unidad } from 'src/app/model/unidad.model';
 import { Tambo } from 'src/app/model/tambo.model';
-import { DistribucionAsignacion } from 'src/app/model/distribucion-asignacion.model';
 import { UNIDADES, TAMBOS, TIPOSCOMBUSTIBLE } from 'src/app/common';
-import { MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA, MatPaginator } from '@angular/material';
-import { AsignacionPresupuestal } from 'src/app/model/asignacion-presupuestal.model';
+import { DistribucionEjecucion } from 'src/app/model/distribucion-ejecucion.model';
+import { MatTableDataSource, MatPaginator, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
-  selector: 'app-dist-asig-presupuestal',
-  templateUrl: './dist-asig-presupuestal.component.html',
-  styleUrls: ['./dist-asig-presupuestal.component.scss']
+  selector: 'app-dist-ejec-presupuestal',
+  templateUrl: './dist-ejec-presupuestal.component.html',
+  styleUrls: ['./dist-ejec-presupuestal.component.scss']
 })
-export class DistAsigPresupuestalComponent implements OnInit {
+export class DistEjecPresupuestalComponent implements OnInit {
   formularioGrp: FormGroup;
 
-  asigPresupuestal: AsignacionPresupuestal;
+  ejecPresupuestal: EjecucionPresupuestal;
 
   unidades: Unidad[] = UNIDADES;
   tambos: Tambo[] = TAMBOS;
@@ -26,81 +26,81 @@ export class DistAsigPresupuestalComponent implements OnInit {
       tipo: 0,
       columnDef: 'id',
       header: 'N°',
-      cell: (dist: DistribucionAsignacion) => `${dist.id}`
+      cell: (dist: DistribucionEjecucion) => `${dist.id}`
     }, {
       tipo: 0,
       columnDef: 'nomUnidad',
       header: 'Unidad territorial',
-      cell: (dist: DistribucionAsignacion) => `${dist.nomUnidad}`
+      cell: (dist: DistribucionEjecucion) => `${dist.nomUnidad}`
     }, {
       tipo: 0,
       columnDef: 'nomTambo',
       header: 'Tambo',
-      cell: (dist: DistribucionAsignacion) => `${dist.nomTambo}`
+      cell: (dist: DistribucionEjecucion) => `${dist.nomTambo}`
     }, {
       tipo: 0,
       columnDef: 'nomTipocombustible',
       header: 'Tipo combustible',
-      cell: (dist: DistribucionAsignacion) => `${dist.nomTipocombustible}`
+      cell: (dist: DistribucionEjecucion) => `${dist.nomTipocombustible}`
     }, {
       tipo: 0,
       columnDef: 'totalRequerimiento',
       header: 'Total requerimiento',
-      cell: (dist: DistribucionAsignacion) => `${dist.totalRequerimiento}`
+      cell: (dist: DistribucionEjecucion) => `${dist.totalRequerimiento}`
     }, {
       tipo: 0,
       columnDef: 'precio',
       header: 'Precio',
-      cell: (dist: DistribucionAsignacion) => `${dist.precio}`
+      cell: (dist: DistribucionEjecucion) => `${dist.precio}`
     }, {
       tipo: 0,
       columnDef: 'total',
       header: 'Total',
-      cell: (dist: DistribucionAsignacion) => `${dist.total}`
+      cell: (dist: DistribucionEjecucion) => `${dist.total}`
     }, {
       tipo: 1,
       columnDef: 'ciudadAbastecimiento',
       header: 'Ciudad abastecimiento',
-      cell: (dist: DistribucionAsignacion) => `${dist.ciudadAbastecimiento}`
+      cell: (dist: DistribucionEjecucion) => `${dist.ciudadAbastecimiento}`
     }, {
       tipo: 1,
       columnDef: 'distCiudadAbastecimiento',
       header: 'Dist. ciudad abastecimiento',
-      cell: (dist: DistribucionAsignacion) => `${dist.distCiudadAbastecimiento}`
+      cell: (dist: DistribucionEjecucion) => `${dist.distCiudadAbastecimiento}`
     }, {
       tipo: 0,
       columnDef: 'proveedor',
       header: 'Proveedor',
-      cell: (dist: DistribucionAsignacion) => `${dist.proveedor}`
+      cell: (dist: DistribucionEjecucion) => `${dist.proveedor}`
     }, {
       tipo: 1,
       columnDef: 'rucProveedor',
       header: 'RUC',
-      cell: (dist: DistribucionAsignacion) => `${dist.rucProveedor}`
+      cell: (dist: DistribucionEjecucion) => `${dist.rucProveedor}`
     }, {
       tipo: 2,
       columnDef: 'nombreGestor',
       header: 'Nombre gestor',
-      cell: (dist: DistribucionAsignacion) => `${dist.nombreGestor}`
+      cell: (dist: DistribucionEjecucion) => `${dist.nombreGestor}`
     }, {
       tipo: 2,
       columnDef: 'factura',
       header: 'Factura',
-      cell: (dist: DistribucionAsignacion) => `${dist.factura}`
+      cell: (dist: DistribucionEjecucion) => `${dist.factura}`
     }, {
       tipo: 2,
       columnDef: 'direccionGrifo',
       header: 'Direccion grifo',
-      cell: (dist: DistribucionAsignacion) => `${dist.direccionGrifo}`
+      cell: (dist: DistribucionEjecucion) => `${dist.direccionGrifo}`
     }];
 
-  listaDistAsignacion: DistribucionAsignacion[] = [];
+  listaDistAsignacion: DistribucionEjecucion[] = [];
   displayedColumns: string[];
-  dataSource: MatTableDataSource<DistribucionAsignacion>;
+  dataSource: MatTableDataSource<DistribucionEjecucion>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<DistAsigPresupuestalComponent>,
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<DistEjecPresupuestalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
@@ -110,7 +110,7 @@ export class DistAsigPresupuestalComponent implements OnInit {
 
     // this.formularioGrp.get('tipoasignacion').setValue(this.tipoasignacion[0]);
 
-    this.asigPresupuestal = JSON.parse(JSON.stringify(this.data.objeto));
+    this.ejecPresupuestal = JSON.parse(JSON.stringify(this.data.objeto));
 
     this.definirTabla();
     this.inicializarVariables();
@@ -125,7 +125,7 @@ export class DistAsigPresupuestalComponent implements OnInit {
   definirTabla(): void {
     this.displayedColumns = [];
     this.columnsGrilla.forEach(c => {
-      if (c.tipo == 0 || c.tipo == this.asigPresupuestal.idTipoAsignacion) {
+      if (c.tipo == 0 || c.tipo == this.ejecPresupuestal.idTipoejecucion) {
         this.displayedColumns.push(c.columnDef);
       }
     });

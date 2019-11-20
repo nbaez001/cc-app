@@ -1,25 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UNIDADES, TAMBOS, ASIGNACIONPRESUPUESTAL } from 'src/app/common';
-import { AsignacionPresupuestal } from 'src/app/model/asignacion-presupuestal.model';
+import { EjecucionPresupuestal } from 'src/app/model/ejecucion-presupuestal.model';
+import { UNIDADES, TAMBOS, EJECUCIONPRESUPUESTAL } from 'src/app/common';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatePipe } from '@angular/common';
-import { RegAsigPresupuestalComponent } from './reg-asig-presupuestal/reg-asig-presupuestal.component';
-import { DistAsigPresupuestalComponent } from './dist-asig-presupuestal/dist-asig-presupuestal.component';
+import { RegAsigPresupuestalComponent } from '../bdj-asig-presupuestal/reg-asig-presupuestal/reg-asig-presupuestal.component';
+import { RegEjecPresupuestalComponent } from './reg-ejec-presupuestal/reg-ejec-presupuestal.component';
+import { DistEjecPresupuestalComponent } from './dist-ejec-presupuestal/dist-ejec-presupuestal.component';
 
 @Component({
-  selector: 'app-bdj-asig-econ-presupuestal',
-  templateUrl: './bdj-asig-econ-presupuestal.component.html',
-  styleUrls: ['./bdj-asig-econ-presupuestal.component.scss']
+  selector: 'app-bdj-ejec-presupuestal',
+  templateUrl: './bdj-ejec-presupuestal.component.html',
+  styleUrls: ['./bdj-ejec-presupuestal.component.scss']
 })
-export class BdjAsigEconPresupuestalComponent implements OnInit {
+export class BdjEjecPresupuestalComponent implements OnInit {
   unidades = UNIDADES;
   tambos = TAMBOS;
-  listaAsigPresupuestal: AsignacionPresupuestal[] = [];
+  listaAsigPresupuestal: EjecucionPresupuestal[] = [];
 
   displayedColumns: string[];
-  dataSource: MatTableDataSource<AsignacionPresupuestal>;
+  dataSource: MatTableDataSource<EjecucionPresupuestal>;
 
   bandejaGrp: FormGroup;
   messages = {
@@ -46,23 +47,23 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
     {
       columnDef: 'id',
       header: 'N°',
-      cell: (asig: AsignacionPresupuestal) => `${asig.id}`
+      cell: (asig: EjecucionPresupuestal) => `${asig.id}`
     }, {
       columnDef: 'nomUnidad',
       header: 'Nombre unidad',
-      cell: (asig: AsignacionPresupuestal) => `${asig.nomUnidad}`
+      cell: (asig: EjecucionPresupuestal) => `${asig.nomUnidad}`
     }, {
       columnDef: 'nomTipoAsignacion',
       header: 'Tipo asignacion',
-      cell: (asig: AsignacionPresupuestal) => `${asig.nomTipoAsignacion}`
+      cell: (asig: EjecucionPresupuestal) => `${asig.nomTipoejecucion}`
     }, {
       columnDef: 'nroOrdencompra',
       header: 'Orden compra/Res. administracion',
-      cell: (asig: AsignacionPresupuestal) => (asig.idTipoAsignacion == 1) ? `${asig.nroOrdencompra}` : `${asig.nroResAdministracion}`
+      cell: (asig: EjecucionPresupuestal) => (asig.idTipoejecucion == 1) ? `${asig.nroOrdencompra}` : `${asig.nroResAdministracion}`
     }, {
       columnDef: 'fecha',
       header: 'Fecha',
-      cell: (asig: AsignacionPresupuestal) => this.datePipe.transform(asig.fecha, 'dd/MM/yyyy')
+      cell: (asig: EjecucionPresupuestal) => this.datePipe.transform(asig.fecha, 'dd/MM/yyyy')
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -106,7 +107,7 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
 
   buscar() {
     let idUnidad = this.bandejaGrp.get('unidad').value.id;
-    this.listaAsigPresupuestal = ASIGNACIONPRESUPUESTAL.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
+    this.listaAsigPresupuestal = EJECUCIONPRESUPUESTAL.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
 
     this.cargarDatosTabla();
   }
@@ -127,7 +128,7 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
 
   regAsigPresupuestal(obj): void {
     console.log(obj);
-    const dialogRef = this.dialog.open(RegAsigPresupuestalComponent, {
+    const dialogRef = this.dialog.open(RegEjecPresupuestalComponent, {
       width: '800px',
       data: { name: 'NERIO', animal: 'LEON' }
     });
@@ -139,7 +140,7 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
 
   regDistribucionAsignacion(obj): void {
     console.log(obj);
-    const dialogRef = this.dialog.open(DistAsigPresupuestalComponent, {
+    const dialogRef = this.dialog.open(DistEjecPresupuestalComponent, {
       width: '800px',
       data: { title: 'NERIO', objeto: obj }
     });
@@ -148,5 +149,4 @@ export class BdjAsigEconPresupuestalComponent implements OnInit {
       console.log(result);
     });
   }
-
 }
