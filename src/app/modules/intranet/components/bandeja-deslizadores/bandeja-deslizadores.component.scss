@@ -1,0 +1,57 @@
+@import "../../../../../assets/styles/scss/views/table";
+
+.page-vehiculo {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    codPatrimonio: (
+      width: 5rem
+    ),
+    nomUnidad: (
+      width: 12rem
+    ),
+    nomTambo: (
+      width: 12rem
+    ),
+    denominacion: (
+      width: 9rem
+    ),
+    estado: (
+      width: 6rem
+    ),
+    tieneSeguro: (
+      width: 6rem
+    ),
+    iniFechaVigencia: (
+      width: 7rem
+    ),
+    finFechaVigencia: (
+      width: 11rem
+    ),
+    isOperativo: (
+      width: 6rem
+    ),
+    ubicacionFisica: (
+      width: 6rem
+    ),
+    motor: (
+      width: 15rem
+    ),
+    potencia: (
+      width: 15rem
+    ),
+    opt: (
+      width: 3rem
+    )
+  )
+);

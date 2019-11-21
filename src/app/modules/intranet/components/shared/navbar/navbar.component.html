@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="!(isHandset$ | async)">
+    [opened]="true">
     <mat-toolbar>
       <img class="img-responsive" src="../../../../../../assets/images/logo/pais.png">
     </mat-toolbar>
@@ -13,22 +13,26 @@
       </span>
     </div>
     <mat-nav-list>
-      <a mat-list-item routerLinkActive="active-list-item" *ngIf="getUser.perfil.id==3"
-        (click)="showSubmenu1 = !showSubmenu1">
+      <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu1 = !showSubmenu1">
         <mat-icon>assignment</mat-icon> Bienes patrimoniales
         <span class="spacer"></span>
         <mat-icon>expand_more</mat-icon>
       </a>
       <div *ngIf="showSubmenu1">
         <a mat-list-item [routerLink]="['/intranet/home']" routerLinkActive="active-list-item"
-          *ngIf="getUser.perfil.id==3" [ngStyle]="{'padding-left': '20px'}">
+          [ngStyle]="{'padding-left': '20px'}">
           <span class="child-link"></span>
           Vehiculos
         </a>
         <a mat-list-item [routerLink]="['/intranet/generador']" routerLinkActive="active-list-item"
-          *ngIf="getUser.perfil.id==3" [ngStyle]="{'padding-left': '20px'}">
+          [ngStyle]="{'padding-left': '20px'}">
           <span class="child-link"></span>
           Generadores electricos
+        </a>
+        <a mat-list-item [routerLink]="['/intranet/deslizador']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '20px'}">
+          <span class="child-link"></span>
+          Deslizadores
         </a>
       </div>
 
@@ -41,7 +45,7 @@
         *ngIf="getUser.perfil.id==3">
         <mat-icon>assessment</mat-icon> Ejecucion presupuestal
       </a>
-      
+
 
 
       <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu2 = !showSubmenu2">

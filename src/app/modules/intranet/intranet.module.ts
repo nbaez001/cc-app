@@ -27,6 +27,8 @@ import { BdjAsigPresupuestalComponent } from './components/bdj-asig-presupuestal
 import { BdjEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/bdj-ejec-presupuestal.component';
 import { RegEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/reg-ejec-presupuestal/reg-ejec-presupuestal.component';
 import { DistEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/dist-ejec-presupuestal/dist-ejec-presupuestal.component';
+import { BandejaDeslizadoresComponent } from './components/bandeja-deslizadores/bandeja-deslizadores.component';
+import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizador/control-hrs-deslizador.component';
 
 @NgModule({
   entryComponents: [
@@ -65,7 +67,9 @@ import { DistEjecPresupuestalComponent } from './components/bdj-ejec-presupuesta
     BdjAsigPresupuestalComponent,
     BdjEjecPresupuestalComponent,
     RegEjecPresupuestalComponent,
-    DistEjecPresupuestalComponent
+    DistEjecPresupuestalComponent,
+    BandejaDeslizadoresComponent,
+    ControlHrsDeslizadorComponent
   ],
   imports: [
     CommonModule,

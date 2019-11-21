@@ -8,6 +8,7 @@ import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico
 import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/bandeja-orden-compra.component';
 import { BdjAsigPresupuestalComponent } from './components/bdj-asig-presupuestal/bdj-asig-presupuestal.component';
 import { BdjEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/bdj-ejec-presupuestal.component';
+import { BandejaDeslizadoresComponent } from './components/bandeja-deslizadores/bandeja-deslizadores.component';
 
 const intranetRoutes: Routes = [
   {
@@ -25,6 +26,10 @@ const intranetRoutes: Routes = [
         path: 'generador',
         component: BandejaGenElectricoComponent,
         data: { title: 'Generadores' }
+      }, {
+        path: 'deslizador',
+        component: BandejaDeslizadoresComponent,
+        data: { title: 'Deslizadores' }
       }, {
         path: 'kilometraje',
         component: ControlKilometrajeComponent,
