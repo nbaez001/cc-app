@@ -3,7 +3,7 @@ export class HorasDeslizador{
     unidad: string;
     tambo: string;
     deslizador: string;
-    potencia: string;
+    potencia: number;
     horaInicio: string;
     horaFin: string;
     horas: number;

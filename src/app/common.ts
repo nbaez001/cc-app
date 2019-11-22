@@ -10,6 +10,7 @@ import { Generador } from './model/generador.model';
 import { CuadroControl } from './model/cuadro-control.model';
 import { EjecucionPresupuestal } from './model/ejecucion-presupuestal.model';
 import { Deslizador } from './model/deslizador.model';
+import { HorasDeslizador } from './model/horas-deslizador.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -162,4 +163,12 @@ export const deslizadores: Deslizador[] = [
     { id: 14, codPatrimonio: '', idUnidad: 12, nomUnidad: 'U.T. SAN MARTIN', idTambo: 35, nomTambo: 'DOS DE MAYO', denominacion: 'DESLIZADOR', estado: 'NO RECEPCIONADO', tieneSeguro: 'SI', iniFechaVigencia: new Date('2019-05-28'), finFechaVigencia: new Date('2020-05-27'), isOperativo: 'NO', ubicacionFisica: 'EN CUSTODIA DEL PROVEEDOR', motor: 'VALOR: POR DEFINIR  MARCA: YAMAHA MODELO: E60HMHDL  POTENCIA: 60HP A 5,500 RPM TIPO DE MOTOR: DOS TIEMPOS  PAIS DE PROCEDENCIA: CHINA NUMERO DE MOTOR: 1053432', potencia: 60, detalle: 'MATERIAL: ALUMINIO DE ALEACION NAVAL  TIPO DE FABRICACION: SOLDADURA MIG  MODELO: C70  MANGA: 1.75 M  ESLORA: 8.40 M  PUNTAL: 0.70 M  PARABRISAS: NO PRESENTA TIPO DE TECHO:  ESTRUCTURA DE TUBO 1/2"" TOLDO COMPLETO DE LONA PLASTIFICADA.  N° DE ASIENTOS: 08 CANTIDAD DE OCUPANTES: 09  TIPO DEL PISO: ALUMINIO ESTRIADO DE 2.05 MM ' },
     { id: 15, codPatrimonio: '', idUnidad: 10, nomUnidad: 'U.T. LORETO', idTambo: 32, nomTambo: 'BRETAÑA', denominacion: 'DESLIZADOR', estado: 'NO RECEPCIONADO', tieneSeguro: 'SI', iniFechaVigencia: new Date('2019-05-28'), finFechaVigencia: new Date('2020-05-27'), isOperativo: 'NO', ubicacionFisica: 'EN CUSTODIA DEL PROVEEDOR', motor: 'MOTOR FUERA DE BORDA DE 60 HP 4 TIEMPOS. MARCA: ZUZUKI, MODELO: DF60A, SERIE:01.', potencia: 60, detalle: 'BOTE DESLIZADOR DE ALUMINIO, ESLORA:6.00M, MANGA:2.00M, PUNTAL:0.85M. CAP. 08 PERSONAS.' },
     { id: 16, codPatrimonio: '', idUnidad: 10, nomUnidad: 'U.T. LORETO', idTambo: 33, nomTambo: 'SANTA MERCEDES', denominacion: 'DESLIZADOR', estado: 'NO RECEPCIONADO', tieneSeguro: 'SI', iniFechaVigencia: new Date('2019-05-28'), finFechaVigencia: new Date('2020-05-27'), isOperativo: 'NO', ubicacionFisica: 'EN CUSTODIA CON EL PROVEEDOR ASTILLERO GRUPO CAM (SE TIENE UN SALDO PENDIENTE DE PAGO Y CUSTODIA) DENUNCIA AL RESIDENTE', motor: 'SUZUKI 60 HP MODELO DF 60. N° DE SERIE 06002F611581/ MATRICULA IQ-51603-BF', potencia: 60, detalle: 'ESCOLA :6.00 MANGA 2.00 PUNTAL 0.85. MATERIAL ALUMINO. CAPACIDAD 9 PERSONAS. PARABRISAS ' },
+];
+
+export const horasDeslizador: HorasDeslizador[] = [
+    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'VISTA ALEGRE', deslizador: 'DESLIZADOR 70HP', potencia: 70, horaInicio: '9:00 AM', horaFin: '9:30 AM', horas: 0.5, fecha: '10/10/2019', observacion: 'SE USO GENERADOR EN EL TAMBO POR CAUSA DE CORTE DE ENERGIA ELECTRICA' },
+    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'CCERAOCRO', deslizador: 'DESLIZADOR 70HP', potencia: 70, horaInicio: '10:00 AM', horaFin: '11:00 AM', horas: 1.0, fecha: '15/10/2019', observacion: 'SE USO GENERADOR PARA LA TENCION INTEGRAL EN SALUD' },
+    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'CHACHASPATA', deslizador: 'DESLIZADOR 70HP', potencia: 70, horaInicio: '11:00 AM', horaFin: '12:00 AM', horas: 1.0, fecha: '20/10/2019', observacion: 'SE USO GENERADOR PARA DESARROLLO DE ACTIVIDADES E ILUMINACION EN LA PLATAFORMA' },
+    { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'CHURUNMARCA', deslizador: 'DESLIZADOR 70HP', potencia: 70, horaInicio: '3:00 PM', horaFin: '4:00 PM', horas: 1.0, fecha: '25/10/2019', observacion: '' },
+    { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'COCHAPAMPA', deslizador: 'DESLIZADOR 70HP', potencia: 70, horaInicio: '9:30 AM', horaFin: '2:30 AM', horas: 5.0, fecha: '30/10/2019', observacion: '' }
 ];

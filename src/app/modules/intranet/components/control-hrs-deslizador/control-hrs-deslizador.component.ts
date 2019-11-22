@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HorasDeslizador } from 'src/app/model/horas-deslizador.model';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-control-hrs-deslizador',
@@ -10,54 +14,46 @@ export class ControlHrsDeslizadorComponent implements OnInit {
   bdjConsumoGenElectricoGrp: FormGroup;
   unidades = UNIDADES;
   tambos = TAMBOS;
-  listaConsumos: ConsumoGenerador[] = [
-    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'VISTA ALEGRE', marca: 'PERKINS', serie: 'EA-9263', horaInicio: '9:00 AM', horaFin: '9:30 AM', horas: 0.5, fecha: '10/10/2019', observacion: 'SE USO GENERADOR EN EL TAMBO POR CAUSA DE CORTE DE ENERGIA ELECTRICA' },
-    { id: 2, unidad: 'AYACUCHO NORTE', tambo: 'CCERAOCRO', marca: 'VOLVO PENTA', serie: 'EA-9263', horaInicio: '10:00 AM', horaFin: '11:00 AM', horas: 1.0, fecha: '15/10/2019', observacion: 'SE USO GENERADOR PARA LA TENCION INTEGRAL EN SALUD' },
-    { id: 3, unidad: 'AYACUCHO NORTE', tambo: 'CHACHASPATA', marca: 'JOHN DEERE', serie: 'EA-9263', horaInicio: '11:00 AM', horaFin: '12:00 AM', horas: 1.0, fecha: '20/10/2019', observacion: 'SE USO GENERADOR PARA DESARROLLO DE ACTIVIDADES E ILUMINACION EN LA PLATAFORMA' },
-    { id: 4, unidad: 'AYACUCHO NORTE', tambo: 'CHURUNMARCA', marca: 'DOOSAN', serie: 'EA-9263', horaInicio: '3:00 PM', horaFin: '4:00 PM', horas: 1.0, fecha: '25/10/2019', observacion: '' },
-    { id: 5, unidad: 'AYACUCHO NORTE', tambo: 'COCHAPAMPA', marca: 'MITSUBISHI', serie: 'EA-9263', horaInicio: '9:30 AM', horaFin: '2:30 AM', horas: 5.0, fecha: '30/10/2019', observacion: '' }
+  listaHorasDeslizador: HorasDeslizador[] = [
+    
   ];
 
   displayedColumns: string[];
-  dataSource: MatTableDataSource<ConsumoGenerador>;
+  dataSource: MatTableDataSource<HorasDeslizador>;
 
   columnsGrilla = [
     {
       columnDef: 'id',
       header: 'N°',
-      cell: (consumo: ConsumoGenerador) => `${consumo.id}`
+      cell: (consumo: HorasDeslizador) => `${consumo.id}`
     }, {
       columnDef: 'unidad',
       header: 'UNIDAD',
-      cell: (consumo: ConsumoGenerador) => `${consumo.unidad}`
+      cell: (consumo: HorasDeslizador) => `${consumo.unidad}`
     }, {
       columnDef: 'tambo',
       header: 'TAMBO',
-      cell: (consumo: ConsumoGenerador) => `${consumo.tambo}`
+      cell: (consumo: HorasDeslizador) => `${consumo.tambo}`
     }, {
-      columnDef: 'marca',
-      header: 'MARCA',
-      cell: (consumo: ConsumoGenerador) => `${consumo.marca}`
-    }, {
-      columnDef: 'serie',
-      header: 'SERIE',
-      cell: (consumo: ConsumoGenerador) => `${consumo.serie}`
+      columnDef: 'deslizador',
+      header: 'DESLIZADOR',
+      cell: (consumo: HorasDeslizador) => `${consumo.deslizador}`
     }, {
       columnDef: 'horaInicio',
       header: 'HORA INICIO',
-      cell: (consumo: ConsumoGenerador) => `${consumo.horaInicio}`
+      cell: (consumo: HorasDeslizador) => `${consumo.horaInicio}`
     }, {
       columnDef: 'horaFin',
       header: 'HORA FIN',
-      cell: (consumo: ConsumoGenerador) => `${consumo.horaFin}`
+      cell: (consumo: HorasDeslizador) => `${consumo.horaFin}`
     }, {
       columnDef: 'horas',
       header: 'TOTAL HORAS',
-      cell: (consumo: ConsumoGenerador) => `${consumo.horas}`
+      cell: (consumo: HorasDeslizador) => `${consumo.horas}`
     }, {
       columnDef: 'fecha',
       header: 'FECHA USO',
-      cell: (consumo: ConsumoGenerador) => `${consumo.fecha}`
+      cell: (consumo: HorasDeslizador) => `${consumo.fecha}`
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -91,8 +87,8 @@ export class ControlHrsDeslizadorComponent implements OnInit {
   }
 
   public cargarDatosTabla(): void {
-    if (this.listaConsumos.length > 0) {
-      this.dataSource = new MatTableDataSource(this.listaConsumos);
+    if (this.listaHorasDeslizador.length > 0) {
+      this.dataSource = new MatTableDataSource(this.listaHorasDeslizador);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
@@ -108,27 +104,27 @@ export class ControlHrsDeslizadorComponent implements OnInit {
   }
 
   regConsumo(obj): void {
-    console.log(obj);
-    const dialogRef = this.dialog.open(RegConsumoGeneradorComponent, {
-      width: '700px',
-      data: obj
-    });
+    // console.log(obj);
+    // const dialogRef = this.dialog.open(RegHorasDeslizadorComponent, {
+    //   width: '700px',
+    //   data: obj
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.listaConsumos.push(result);
-      this.cargarDatosTabla();
-    });
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log(result);
+    //   this.listaConsumos.push(result);
+    //   this.cargarDatosTabla();
+    // });
   }
 
   verObsConsumo(obj): void {
-    const dialogRef = this.dialog.open(VerObservacionConsComponent, {
-      width: '600px',
-      data: obj
-    });
+    // const dialogRef = this.dialog.open(VerObservacionConsComponent, {
+    //   width: '600px',
+    //   data: obj
+    // });
 
-    dialogRef.afterClosed().subscribe(result => {
+    // dialogRef.afterClosed().subscribe(result => {
       
-    });
+    // });
   }
 }
