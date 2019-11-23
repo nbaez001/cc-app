@@ -1,4 +1,4 @@
-<navbar>
+<navbar [showSubmenu3]="true">
   <div class="page-bandeja">
     <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
     <mat-card class="box-filtros">
@@ -10,10 +10,30 @@
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <mat-label>Unidad</mat-label>
-                <mat-select formControlName="unidad">
-                  <mat-option *ngFor="let unidad of unidades" [value]="unidad">
-                    {{unidad.nombre}}
+                <mat-label>Año presupuestal</mat-label>
+                <mat-select formControlName="anio">
+                  <mat-option *ngFor="let anio of anios" [value]="anio">
+                    {{anio.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Meta</mat-label>
+                <mat-select formControlName="meta">
+                  <mat-option *ngFor="let meta of metas" [value]="meta">
+                    {{meta.descripcion}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Partida</mat-label>
+                <mat-select formControlName="partida">
+                  <mat-option *ngFor="let partida of partidas" [value]="partida">
+                    {{partida.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -70,7 +90,8 @@
                 <button mat-icon-button matTooltip="Editar Asignacion" (click)="regAsigPresupuestal(element)">
                   <mat-icon>create</mat-icon>
                 </button>
-                <button mat-icon-button matTooltip="Distribucion Asignacion" (click)="regDistribucionAsignacion(element)">
+                <button mat-icon-button matTooltip="Distribucion Asignacion"
+                  (click)="regDistribucionAsignacion(element)">
                   <mat-icon>assignment</mat-icon>
                 </button>
               </td>

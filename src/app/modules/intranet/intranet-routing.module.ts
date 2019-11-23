@@ -9,6 +9,7 @@ import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/b
 import { BdjAsigPresupuestalComponent } from './components/bdj-asig-presupuestal/bdj-asig-presupuestal.component';
 import { BdjEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/bdj-ejec-presupuestal.component';
 import { BandejaDeslizadoresComponent } from './components/bandeja-deslizadores/bandeja-deslizadores.component';
+import { CuadroControlTamboComponent } from './components/cuadro-control-tambo/cuadro-control-tambo.component';
 
 const intranetRoutes: Routes = [
   {
@@ -39,18 +40,22 @@ const intranetRoutes: Routes = [
         component: ControlGenElectricoComponent,
         data: { title: 'Generador electrico' }
       }, {
-        path: 'asignacion-econ-presupuestal',
+        path: 'asignacion-presupuestal',
         component: BdjAsigPresupuestalComponent,
         data: { title: 'Bandeja asignacion economico presupuestal' }
       }, {
-        path: 'ejecucion-econ-presupuestal',
+        path: 'avance-econ-presupuestal',
         component: BdjEjecPresupuestalComponent,
         data: { title: 'Bandeja ejecucion economico presupuestal' }
       }, {
         path: 'cuadro-control',
         component: CuadroControlComponent,
-        data: { title: 'Cuadro control' }
+        data: { title: 'Cuadro control general' }
       }, {
+        path: 'cuadro-control-tambo',
+        component: CuadroControlTamboComponent,
+        data: { title: 'Cuadro control tambos' }
+      },{
         path: 'orden-compra',
         component: BandejaOrdenCompraComponent,
         data: { title: 'Ordenes de compra' }

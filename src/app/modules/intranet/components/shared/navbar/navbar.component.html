@@ -37,15 +37,25 @@
       </div>
 
 
-      <a mat-list-item [routerLink]="['/intranet/asignacion-econ-presupuestal']" routerLinkActive="active-list-item"
-        *ngIf="getUser.perfil.id==3">
-        <mat-icon>attach_money</mat-icon> Asignacion presupuestal
-      </a>
-      <a mat-list-item [routerLink]="['/intranet/ejecucion-econ-presupuestal']" routerLinkActive="active-list-item"
-        *ngIf="getUser.perfil.id==3">
-        <mat-icon>assessment</mat-icon> Ejecucion presupuestal
-      </a>
 
+      <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu3 = !showSubmenu3"
+        *ngIf="getUser.perfil.id==3">
+        <mat-icon>assessment</mat-icon> Control presupuesto
+        <span class="spacer"></span>
+        <mat-icon>expand_more</mat-icon>
+      </a>
+      <div *ngIf="showSubmenu3">
+        <a mat-list-item [routerLink]="['/intranet/asignacion-presupuestal']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '20px'}">
+          <span class="child-link"></span>
+          Asignacion presupuestal
+        </a>
+        <a mat-list-item [routerLink]="['/intranet/avance-econ-presupuestal']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '20px'}">
+          <span class="child-link"></span>
+          Avance presupuestal
+        </a>
+      </div>
 
 
       <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu2 = !showSubmenu2">
@@ -67,11 +77,27 @@
       </div>
 
 
-
-      <a mat-list-item [routerLink]="['/intranet/cuadro-control']" routerLinkActive="active-list-item"
+      <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu4 = !showSubmenu4"
         *ngIf="getUser.perfil.id==3">
         <mat-icon>airplay</mat-icon> Cuadro control
+        <span class="spacer"></span>
+        <mat-icon>expand_more</mat-icon>
       </a>
+      <div *ngIf="showSubmenu4">
+        <a mat-list-item [routerLink]="['/intranet/cuadro-control-tambo']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '20px'}">
+          <span class="child-link"></span>
+          Cuadro control tambos
+        </a>
+        <a mat-list-item [routerLink]="['/intranet/cuadro-control']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '20px'}">
+          <span class="child-link"></span>
+          Cuadro control general
+        </a>
+      </div>
+
+
+
       <a mat-list-item routerLinkActive="active-list-item" *ngIf="getUser.perfil.id==3"
         (click)="showSubmenu = !showSubmenu">
         <mat-icon>extension</mat-icon> Configuracion

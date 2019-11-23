@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HorasDeslizador } from 'src/app/model/horas-deslizador.model';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { Usuario } from 'src/app/model/usuario.model';
 
 @Component({
   selector: 'app-control-hrs-deslizador',
@@ -11,6 +12,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
   styleUrls: ['./control-hrs-deslizador.component.scss']
 })
 export class ControlHrsDeslizadorComponent implements OnInit {
+  user: Usuario;
   bdjConsumoGenElectricoGrp: FormGroup;
   unidades = UNIDADES;
   tambos = TAMBOS;
@@ -62,6 +64,7 @@ export class ControlHrsDeslizadorComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService) { }
 
   ngOnInit() {
+    this.user = JSON.parse(sessionStorage.getItem('user'));
     this.spinnerService.show();
 
     this.bdjConsumoGenElectricoGrp = this.fb.group({

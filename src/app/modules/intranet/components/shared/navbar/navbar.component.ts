@@ -15,6 +15,8 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class NavbarComponent {
   @Input() showSubmenu1: boolean;
   @Input() showSubmenu2: boolean;
+  @Input() showSubmenu3: boolean;
+  @Input() showSubmenu4: boolean;
   @Input() showSubmenu: boolean;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

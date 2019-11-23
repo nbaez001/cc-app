@@ -4,7 +4,8 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatePipe } from '@angular/common';
-import { UNIDADES, TAMBOS, EJECUCIONPRESUPUESTAL } from 'src/app/common';
+import { METAS, PARTIDAS, ASIGNACIONPRESUPUESTAL, ANIOPRESUPUESTAL } from 'src/app/common';
+import { RegAsigPresupuestalComponent } from './reg-asig-presupuestal/reg-asig-presupuestal.component';
 
 @Component({
   selector: 'app-bdj-asig-presupuestal',
@@ -12,8 +13,9 @@ import { UNIDADES, TAMBOS, EJECUCIONPRESUPUESTAL } from 'src/app/common';
   styleUrls: ['./bdj-asig-presupuestal.component.scss']
 })
 export class BdjAsigPresupuestalComponent implements OnInit {
-  unidades = UNIDADES;
-  tambos = TAMBOS;
+  anios = ANIOPRESUPUESTAL;
+  metas = [];
+  partidas = [];
   listaAsigPresupuestal: AsignacionPresupuestal[] = [];
 
   displayedColumns: string[];
@@ -46,21 +48,33 @@ export class BdjAsigPresupuestalComponent implements OnInit {
       header: 'N°',
       cell: (asig: AsignacionPresupuestal) => `${asig.id}`
     }, {
-      columnDef: 'nomUnidad',
-      header: 'Nombre unidad',
-      cell: (asig: AsignacionPresupuestal) => `${asig.nomUnidad}`
+      columnDef: 'codigoMeta',
+      header: 'Codigo meta',
+      cell: (asig: AsignacionPresupuestal) => `${asig.codigoMeta}`
     }, {
-      columnDef: 'nomTipoAsignacion',
-      header: 'Tipo asignacion',
-      cell: (asig: AsignacionPresupuestal) => `${asig.nomTipoAsignacion}`
+      columnDef: 'nomMeta',
+      header: 'Nombre meta',
+      cell: (asig: AsignacionPresupuestal) => `${asig.nomMeta}`
     }, {
-      columnDef: 'nroOrdencompra',
-      header: 'Orden compra/Res. administracion',
-      cell: (asig: AsignacionPresupuestal) => (asig.idTipoAsignacion == 1) ? `${asig.nroOrdencompra}` : `${asig.nroResAdministracion}`
+      columnDef: 'partida',
+      header: 'Partida',
+      cell: (asig: AsignacionPresupuestal) => `${asig.partida}`
     }, {
-      columnDef: 'fecha',
-      header: 'Fecha',
-      cell: (asig: AsignacionPresupuestal) => this.datePipe.transform(asig.fecha, 'dd/MM/yyyy')
+      columnDef: 'descripcion',
+      header: 'Descripcion',
+      cell: (asig: AsignacionPresupuestal) => `${asig.descripcion}`
+    }, {
+      columnDef: 'pim',
+      header: 'PIM',
+      cell: (asig: AsignacionPresupuestal) => `${asig.pim}`
+    }, {
+      columnDef: 'certificado',
+      header: 'Certificado',
+      cell: (asig: AsignacionPresupuestal) => `${asig.certificado}`
+    }, {
+      columnDef: 'saldo',
+      header: 'Saldo',
+      cell: (asig: AsignacionPresupuestal) => `${asig.saldo}`
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -74,7 +88,9 @@ export class BdjAsigPresupuestalComponent implements OnInit {
     this.spinnerService.show();
 
     this.bandejaGrp = this.fb.group({
-      unidad: ['', [Validators.required]]
+      anio: ['', [Validators.required]],
+      meta: ['', [Validators.required]],
+      partida: ['', [Validators.required]]
     });
 
     this.definirTabla();
@@ -82,7 +98,12 @@ export class BdjAsigPresupuestalComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.cargarUnidades();
+    this.bandejaGrp.get('anio').setValue(this.anios[0]);
+    this.cargarMetas();
+    this.cargarPartidas();
+    
+    this.spinnerService.hide();
+    this.buscar();
   }
 
   definirTabla(): void {
@@ -93,18 +114,22 @@ export class BdjAsigPresupuestalComponent implements OnInit {
     this.displayedColumns.push('opt');
   }
 
-  public cargarUnidades() {
-    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
-    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
+  public cargarMetas() {
+    this.metas = JSON.parse(JSON.stringify(METAS));
+    this.metas.unshift({ id: 0, descripcion: 'TODOS' });
 
-    this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+    this.bandejaGrp.get('meta').setValue(this.metas[0]);
+  }
 
-    this.buscar();
+  public cargarPartidas() {
+    this.partidas = JSON.parse(JSON.stringify(PARTIDAS));
+    this.partidas.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bandejaGrp.get('partida').setValue(this.partidas[0]);
   }
 
   buscar() {
-    let idUnidad = this.bandejaGrp.get('unidad').value.id;
-    this.listaAsigPresupuestal = [];//EJECUCIONPRESUPUESTAL.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
+    this.listaAsigPresupuestal = ASIGNACIONPRESUPUESTAL;
 
     this.cargarDatosTabla();
   }
@@ -124,15 +149,15 @@ export class BdjAsigPresupuestalComponent implements OnInit {
   }
 
   regAsigPresupuestal(obj): void {
-    // console.log(obj);
-    // const dialogRef = this.dialog.open(RegAsigPresupuestalComponent, {
-    //   width: '800px',
-    //   data: { name: 'NERIO', animal: 'LEON' }
-    // });
+    console.log(obj);
+    const dialogRef = this.dialog.open(RegAsigPresupuestalComponent, {
+      width: '500px',
+      data: { name: 'NERIO' }
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(result);
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
   }
 
   regDistribucionAsignacion(obj): void {

@@ -1,13 +1,10 @@
 export class AsignacionPresupuestal {
     id: number;
-    idUnidad: number;
-    nomUnidad: string;
-    idTipoAsignacion: number;
-    nomTipoAsignacion: string;
-    idOrdencompra: number;
-    nroOrdencompra: string;
-    nroResAdministracion: string;
-    monto: number;
-    fecha: Date;
-    observacion: string;
+    codigoMeta: string;
+    nomMeta: string;
+    partida: string;
+    descripcion: string;
+    pim: number;
+    certificado: number;
+    saldo: number;
 }

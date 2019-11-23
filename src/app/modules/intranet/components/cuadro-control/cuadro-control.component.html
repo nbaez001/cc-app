@@ -1,4 +1,4 @@
-<navbar>
+<navbar [showSubmenu4]="true">
   <div class="page-bandeja">
     <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
     <mat-card class="box-filtros">
@@ -62,45 +62,31 @@
           <table class="mat-table">
             <thead>
               <tr class="mat-header-row">
-                <th class="mat-header-cell" rowspan="3" style="width: 4rem;"> SEC. FUNC.</th>
-                <th class="mat-header-cell" rowspan="3" style="width: 12rem;"> REGIONES TERRITORIALES</th>
-                <th class="mat-header-cell" colspan="3" style="width: 18rem;"> ASIGNACION PRESUPUESTAL</th>
-                <th class="mat-header-cell" colspan="3" style="width: 18rem;"> DIESEL B5 - USO CAMIONETAS</th>
-                <th class="mat-header-cell" colspan="3" style="width: 18rem;"> GASOHOL 90 - MOTOCICLETAS</th>
-                <th class="mat-header-cell" colspan="3" style="width: 18rem;"> GASOHOL 90 - GENERADORES</th>
-                <th class="mat-header-cell" colspan="3" style="width: 18rem;"> GASOHOL 90 - DESLIZADORES</th>
-                <th class="mat-header-cell" colspan="3" style="width: 18rem;"> GRASAS LUBRICANTES - AFINES</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 4rem;"> N°</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 12rem;"> REGIONES TERRITORIALES</th>
+                <th class="mat-header-cell" style="width: 12rem;"> DIESEL B5 - USO CAMIONETAS</th>
+                <th class="mat-header-cell" style="width: 12rem;"> GASOHOL 90 - MOTOCICLETAS</th>
+                <th class="mat-header-cell" style="width: 12rem;"> GASOHOL 90 - GENERADORES</th>
+                <th class="mat-header-cell" style="width: 12rem;"> GASOHOL 90 - DESLIZADORES</th>
+                <th class="mat-header-cell" style="width: 12rem;"> GRASAS LUBRICANTES - AFINES</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 6rem;">PARTIDA</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 6rem;">TOTAL AVANCE PRESUPUESTAL</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 6rem;">TOTAL CONSUMO</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 6rem;">SALDO</th>
               </tr>
               <tr class="mat-header-row">
-                <th class="mat-header-cell" rowspan="2"> PARTIDA</th>
-                <th class="mat-header-cell" rowspan="2"> TOTAL</th>
-                <th class="mat-header-cell" rowspan="2"> SALDO</th>
-                <th class="mat-header-cell" rowspan="2"> CONSUMO</th>
-                <th class="mat-header-cell" colspan="2"> IMPORTE</th>
-                <th class="mat-header-cell" rowspan="2"> CONSUMO</th>
-                <th class="mat-header-cell" colspan="2"> IMPORTE</th>
-                <th class="mat-header-cell" rowspan="2"> CONSUMO</th>
-                <th class="mat-header-cell" colspan="2"> IMPORTE</th>
-                <th class="mat-header-cell" rowspan="2"> CONSUMO</th>
-                <th class="mat-header-cell" colspan="2"> IMPORTE</th>
-                <th class="mat-header-cell" rowspan="2"> CONSUMO</th>
-                <th class="mat-header-cell" colspan="2"> IMPORTE</th>
-              </tr>
-              <tr class="mat-header-row">
-                <th class="mat-header-cell"> GALON</th>
-                <th class="mat-header-cell"> TOTAL</th>
-                <th class="mat-header-cell"> GALON</th>
-                <th class="mat-header-cell"> TOTAL</th>
-                <th class="mat-header-cell"> GALON</th>
-                <th class="mat-header-cell"> TOTAL</th>
-                <th class="mat-header-cell"> GALON</th>
-                <th class="mat-header-cell"> TOTAL</th>
-                <th class="mat-header-cell"> UNIDAD</th>
-                <th class="mat-header-cell"> TOTAL</th>
+                <!-- <th class="mat-header-cell" rowspan="2"> PARTIDA</th>
+                    <th class="mat-header-cell" rowspan="2"> TOTAL</th>
+                    <th class="mat-header-cell" rowspan="2"> SALDO</th> -->
+                <th class="mat-header-cell"> CONSUMO</th>
+                <th class="mat-header-cell"> CONSUMO</th>
+                <th class="mat-header-cell"> CONSUMO</th>
+                <th class="mat-header-cell"> CONSUMO</th>
+                <th class="mat-header-cell"> CONSUMO</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="mat-row" *ngFor="let con of listaControl">
+              <tr class="mat-row" *ngFor="let con of listaControl; let i=index">
                 <td class="mat-cell">
                   <ng-container *ngIf="con.idPartida==1">
                     {{con.secFun}}
@@ -111,32 +97,9 @@
                     {{con.nomUnidad}}
                   </ng-container>
                 </td>
-                <td class="mat-cell celda-center">{{con.nomPartida}}</td>
-                <td class="mat-cell celda-right">{{con.total | number:'3.2-2'}}</td>
-                <td class="mat-cell celda-right">{{con.saldo | number:'3.2-2'}}</td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.dieselConsumo}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.dieselPromCosto}}
-                  </ng-container>
-                </td>
                 <td class="mat-cell celda-right">
                   <ng-container *ngIf="con.idPartida==1">
                     {{con.dieselTotal}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasConsMotocicletas}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasPromCosto}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
@@ -146,27 +109,7 @@
                 </td>
                 <td class="mat-cell celda-right">
                   <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasConsGeneradores}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasPromCosto}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
                     {{con.gasGeneradoresTotal}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasConsDeslizadores}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasPromCosto}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
@@ -176,19 +119,10 @@
                 </td>
                 <td class="mat-cell celda-right">
                   <ng-container *ngIf="con.idPartida==2">
-                    {{con.lubricConsumo}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==2">
-                    {{con.lubricPromCosto}}
-                  </ng-container>
-                </td>
-                <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==2">
                     {{con.lubricantesTotal}}
                   </ng-container>
                 </td>
+                <td class="mat-cell celda-right">{{con.totalAvancePresupuestal | number:'3.2-2'}}</td>
               </tr>
             </tbody>
           </table>

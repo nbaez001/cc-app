@@ -50,7 +50,7 @@
           <mat-icon>search</mat-icon>
           <strong> BUSCAR</strong>
         </button>
-        <button mat-raised-button (click)="regConsumo(null)" *ngIf="user.perfil.id==1">
+        <button mat-raised-button (click)="regConsumo(null)" *ngIf="user.perfil.id!=3">
           <mat-icon>add_box</mat-icon>
           <strong> REGISTRAR NUEVO</strong>
         </button>

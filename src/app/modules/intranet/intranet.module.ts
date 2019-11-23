@@ -29,6 +29,8 @@ import { RegEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal
 import { DistEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/dist-ejec-presupuestal/dist-ejec-presupuestal.component';
 import { BandejaDeslizadoresComponent } from './components/bandeja-deslizadores/bandeja-deslizadores.component';
 import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizador/control-hrs-deslizador.component';
+import { RegAsigPresupuestalComponent } from './components/bdj-asig-presupuestal/reg-asig-presupuestal/reg-asig-presupuestal.component';
+import { CuadroControlTamboComponent } from './components/cuadro-control-tambo/cuadro-control-tambo.component';
 
 @NgModule({
   entryComponents: [
@@ -43,7 +45,8 @@ import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizad
     RegConductorComponent,
     RegEjecPresupuestalComponent,
     DistEjecPresupuestalComponent,
-    VerObservacionConsComponent
+    VerObservacionConsComponent,
+    RegAsigPresupuestalComponent
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente
@@ -69,7 +72,9 @@ import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizad
     RegEjecPresupuestalComponent,
     DistEjecPresupuestalComponent,
     BandejaDeslizadoresComponent,
-    ControlHrsDeslizadorComponent
+    ControlHrsDeslizadorComponent,
+    RegAsigPresupuestalComponent,
+    CuadroControlTamboComponent
   ],
   imports: [
     CommonModule,
