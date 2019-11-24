@@ -17,8 +17,8 @@ import { CuadroControlTambo } from 'src/app/model/cuadro-control-tambo.model';
 export class CuadroControlTamboComponent implements OnInit {
   user: Usuario;
   bandejaGrp: FormGroup;
-  unidades = UNIDADES;
-  tambos = TAMBOS;
+  unidades = [];
+  tambos = [];
   anios: Object[] = [{ valor: 2019 }, { valor: 2018 }, { valor: 2017 }];
   meses: Object[] = [{ valor: 0, nombre: 'ENERO' }, { valor: 1, nombre: 'FEBRERO' }, { valor: 2, nombre: 'MARZO' }, { valor: 3, nombre: 'ABRIL' }, { valor: 4, nombre: 'MAYO' }, { valor: 5, nombre: 'JUNIO' }, { valor: 6, nombre: 'JULIO' }, { valor: 7, nombre: 'AGOSTO' }, { valor: 8, nombre: 'SETIEMBRE' }, { valor: 9, nombre: 'OCTUBRE' }, { valor: 10, nombre: 'NOVIEMBRE' }, { valor: 11, nombre: 'DICIEMBRE' }];
 
@@ -32,6 +32,7 @@ export class CuadroControlTamboComponent implements OnInit {
 
     this.bandejaGrp = this.fb.group({
       unidad: ['', [Validators.required]],
+      tambo: ['', [Validators.required]],
       anio: ['', [Validators.required]]
     });
 
@@ -48,6 +49,15 @@ export class CuadroControlTamboComponent implements OnInit {
     this.unidades.unshift({ id: 0, nombre: 'TODOS' });
 
     this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+
+    this.cargarTambos();
+  }
+
+  public cargarTambos() {
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS));
+    this.tambos.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
     this.bandejaGrp.get('anio').setValue(this.anios[0]);
 
     this.buscar();

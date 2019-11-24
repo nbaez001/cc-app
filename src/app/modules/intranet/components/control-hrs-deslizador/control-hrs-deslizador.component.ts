@@ -5,6 +5,8 @@ import { HorasDeslizador } from 'src/app/model/horas-deslizador.model';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Usuario } from 'src/app/model/usuario.model';
+import { RegHrsDeslizadorComponent } from './reg-hrs-deslizador/reg-hrs-deslizador.component';
+import { VerObsDeslizadorComponent } from './ver-obs-deslizador/ver-obs-deslizador.component';
 
 @Component({
   selector: 'app-control-hrs-deslizador',
@@ -17,7 +19,7 @@ export class ControlHrsDeslizadorComponent implements OnInit {
   unidades = UNIDADES;
   tambos = TAMBOS;
   listaHorasDeslizador: HorasDeslizador[] = [
-    
+
   ];
 
   displayedColumns: string[];
@@ -107,27 +109,28 @@ export class ControlHrsDeslizadorComponent implements OnInit {
   }
 
   regConsumo(obj): void {
-    // console.log(obj);
-    // const dialogRef = this.dialog.open(RegHorasDeslizadorComponent, {
-    //   width: '700px',
-    //   data: obj
-    // });
+    console.log(obj);
+    const dialogRef = this.dialog.open(RegHrsDeslizadorComponent, {
+      width: '700px',
+      data: obj
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(result);
-    //   this.listaConsumos.push(result);
-    //   this.cargarDatosTabla();
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.listaHorasDeslizador.push(result);
+        this.cargarDatosTabla();
+      }
+    });
   }
 
   verObsConsumo(obj): void {
-    // const dialogRef = this.dialog.open(VerObservacionConsComponent, {
-    //   width: '600px',
-    //   data: obj
-    // });
+    const dialogRef = this.dialog.open(VerObsDeslizadorComponent, {
+      width: '600px',
+      data: obj
+    });
 
-    // dialogRef.afterClosed().subscribe(result => {
-      
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
   }
 }

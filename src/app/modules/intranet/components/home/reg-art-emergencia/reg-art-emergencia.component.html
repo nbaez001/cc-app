@@ -4,74 +4,74 @@
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Triangulo de seguridad</label>
-        <mat-checkbox style="padding-right: 20px;" [checked]="true" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [checked]="true" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Rueda de repuesto (llanta)</label>
-        <mat-checkbox style="padding-right: 20px;" [checked]="true" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [checked]="true" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Rueda de repuesto (aro)</label>
-        <mat-checkbox style="padding-right: 20px;" [checked]="true" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [checked]="true" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Llave de rueda</label>
-        <mat-checkbox style="padding-right: 20px;" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3" [checked]="true">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3" [checked]="true">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Gata</label>
-        <mat-checkbox style="padding-right: 20px;" [checked]="true" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [checked]="true" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Extintor</label>
-        <mat-checkbox style="padding-right: 20px;" disabled="user.perfil.id != 3">VIGENTE</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3" [checked]="true">OPERATIVO</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO CTA.</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [disabled]="getUser.perfil.id == 3">VIGENTE</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3" [checked]="true">OPERATIVO</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO CTA.</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Botiquin</label>
-        <mat-checkbox style="padding-right: 20px;" [checked]="true" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [checked]="true" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Certificado (SOAT)</label>
-        <mat-checkbox style="padding-right: 20px;" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3" [checked]="true">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3" [checked]="true">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Certificado (REV. TEC.)</label>
-        <mat-checkbox style="padding-right: 20px;" [checked]="true" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [checked]="true" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Casco de proteccion</label>
-        <mat-checkbox style="padding-right: 20px;" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3" [checked]="true">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3" [checked]="true">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">guia de calles</label>
-        <mat-checkbox style="padding-right: 20px;" [checked]="true" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [checked]="true" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <label style="width: 50%;">Otros necesarios</label>
-        <mat-checkbox style="padding-right: 20px;" [checked]="true" disabled="user.perfil.id != 3">SI</mat-checkbox>
-        <mat-checkbox disabled="user.perfil.id != 3">NO</mat-checkbox>
+        <mat-checkbox style="padding-right: 20px;" [checked]="true" [disabled]="getUser.perfil.id == 3">SI</mat-checkbox>
+        <mat-checkbox [disabled]="getUser.perfil.id == 3">NO</mat-checkbox>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <mat-form-field appearance="legacy">
-          <textarea matInput type="text" placeholder="Observaciones" disabled="user.perfil.id != 3">OBSERVACIONES MUCHOS</textarea>
+          <textarea formControlName="observacion" matInput type="text" placeholder="Observaciones" [Uppercased]></textarea>
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
   </form>
 </div>
 <div mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" (click)="onNoClick()" *ngIf="getUser.perfil.id != 3">Guardar</button>
+  <button mat-raised-button color="primary" (click)="onNoClick()" *ngIf="getUser.perfil.id == 3">Guardar</button>
   <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Salir</button>
 </div>

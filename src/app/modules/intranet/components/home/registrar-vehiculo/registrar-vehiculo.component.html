@@ -4,7 +4,8 @@
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
-          <input matInput formControlName="fechaMantenimiento" [matDatepicker]="picker" placeholder="Fecha mantenimiento">
+          <input matInput formControlName="fechaMantenimiento" [matDatepicker]="picker"
+            placeholder="Fecha mantenimiento">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

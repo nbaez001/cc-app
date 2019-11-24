@@ -125,9 +125,10 @@ export class ControlGenElectricoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      this.listaConsumos.push(result);
-      this.cargarDatosTabla();
+      if (result) {
+        this.listaConsumos.push(result);
+        this.cargarDatosTabla();
+      }
     });
   }
 
@@ -138,7 +139,7 @@ export class ControlGenElectricoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      
+
     });
   }
 }

@@ -2,22 +2,22 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { UNIDADES, TAMBOS } from 'src/app/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ConsumoGenerador } from 'src/app/model/consumo-generador.model';
 import { ValidationService } from 'src/app/services/validation.service';
+import { ConsumoDeslizador } from 'src/app/model/consumo-deslizador.model';
 
 @Component({
-  selector: 'app-reg-consumo-generador',
-  templateUrl: './reg-consumo-generador.component.html',
-  styleUrls: ['./reg-consumo-generador.component.scss']
+  selector: 'app-reg-hrs-deslizador',
+  templateUrl: './reg-hrs-deslizador.component.html',
+  styleUrls: ['./reg-hrs-deslizador.component.scss']
 })
-export class RegConsumoGeneradorComponent implements OnInit {
+export class RegHrsDeslizadorComponent implements OnInit {
   unidades = UNIDADES;
   tambos = TAMBOS;
-  generadores: Object[] = [
-    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'VISTA ALEGRE', marca: 'PERKINS', serie: 'EA-9263' }
+  deslizadores: Object[] = [
+    { id: 1, unidad: 'U.T. LORETO', tambo: 'VISTA ALEGRE', descripcion: 'DESLIZADOR', marca: 'PERKINS', serie: 'EA-9263' }
   ];
 
-  consumoGeneradorGrp: FormGroup;
+  consumoDeslizadorGrp: FormGroup;
   messages = {
     'unidad': {
       'required': 'Campo obligatorio'
@@ -25,7 +25,7 @@ export class RegConsumoGeneradorComponent implements OnInit {
     'tambo': {
       'required': 'Campo obligatorio'
     },
-    'generador': {
+    'deslizador': {
       'required': 'Campo obligatorio'
     },
     'fecha': {
@@ -47,7 +47,7 @@ export class RegConsumoGeneradorComponent implements OnInit {
   formErrors = {
     'unidad': '',
     'tambo': '',
-    'generador': '',
+    'deslizador': '',
     'fecha': '',
     'horaInicio': '',
     'horaFin': '',
@@ -55,15 +55,15 @@ export class RegConsumoGeneradorComponent implements OnInit {
     'observacion': ''
   };
 
-  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegConsumoGeneradorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ConsumoGenerador,
+  constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegHrsDeslizadorComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ConsumoDeslizador,
     @Inject(ValidationService) private validationService: ValidationService) { }
 
   ngOnInit() {
-    this.consumoGeneradorGrp = this.fb.group({
+    this.consumoDeslizadorGrp = this.fb.group({
       unidad: [{ value: '', disabled: true }, [Validators.required]],
       tambo: [{ value: '', disabled: true }, [Validators.required]],
-      generador: ['', [Validators.required]],
+      deslizador: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
       horaInicio: ['', [Validators.required]],
       horaFin: ['', [Validators.required]],
@@ -75,17 +75,17 @@ export class RegConsumoGeneradorComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.consumoGeneradorGrp.get('unidad').setValue(this.unidades[0]);
-    this.consumoGeneradorGrp.get('tambo').setValue(this.tambos[0]);
+    this.consumoDeslizadorGrp.get('unidad').setValue(this.unidades[0]);
+    this.consumoDeslizadorGrp.get('tambo').setValue(this.tambos[0]);
   }
 
   calcular(): void {
-    this.consumoGeneradorGrp.get('totalHoras').setValue(this.timeCalc());
+    this.consumoDeslizadorGrp.get('totalHoras').setValue(this.timeCalc());
   }
 
   timeCalc() {
-    let start = this.consumoGeneradorGrp.get('horaInicio').value; //to update time value in each input bar
-    let end = this.consumoGeneradorGrp.get('horaFin').value; //to update time value in each input bar
+    let start = this.consumoDeslizadorGrp.get('horaInicio').value; //to update time value in each input bar
+    let end = this.consumoDeslizadorGrp.get('horaFin').value; //to update time value in each input bar
 
     start = start.split(":");
     end = end.split(":");
@@ -101,24 +101,23 @@ export class RegConsumoGeneradorComponent implements OnInit {
   }
 
   guardar(): void {
-    if (this.consumoGeneradorGrp.valid) {
-      let con = new ConsumoGenerador();
+    if (this.consumoDeslizadorGrp.valid) {
+      let con = new ConsumoDeslizador();
       con.id = 0;
-      con.unidad = this.consumoGeneradorGrp.get('unidad').value.nombre;
-      con.tambo = this.consumoGeneradorGrp.get('tambo').value.nombre;
-      con.marca = this.consumoGeneradorGrp.get('generador').value.marca;
-      con.serie = this.consumoGeneradorGrp.get('generador').value.serie;
-      con.horaInicio = this.consumoGeneradorGrp.get('horaInicio').value;
-      con.horaFin = this.consumoGeneradorGrp.get('horaFin').value;
-      con.horas = this.consumoGeneradorGrp.get('totalHoras').value;
-      con.fecha = this.consumoGeneradorGrp.get('fecha').value;
-      con.observacion = this.consumoGeneradorGrp.get('observacion').value;
+      con.unidad = this.consumoDeslizadorGrp.get('unidad').value.nombre;
+      con.tambo = this.consumoDeslizadorGrp.get('tambo').value.nombre;
+      con.marca = this.consumoDeslizadorGrp.get('deslizador').value.marca;
+      con.serie = this.consumoDeslizadorGrp.get('deslizador').value.serie;
+      con.horaInicio = this.consumoDeslizadorGrp.get('horaInicio').value;
+      con.horaFin = this.consumoDeslizadorGrp.get('horaFin').value;
+      con.horas = this.consumoDeslizadorGrp.get('totalHoras').value;
+      con.fecha = this.consumoDeslizadorGrp.get('fecha').value;
+      con.observacion = this.consumoDeslizadorGrp.get('observacion').value;
 
       this.dialogRef.close(con);
     } else {
-      this.validationService.getValidationErrors(this.consumoGeneradorGrp, this.messages, this.formErrors, true);
+      this.validationService.getValidationErrors(this.consumoDeslizadorGrp, this.messages, this.formErrors, true);
     }
-
   }
 
 }

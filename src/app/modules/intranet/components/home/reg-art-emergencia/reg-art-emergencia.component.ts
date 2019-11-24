@@ -11,52 +11,19 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class RegArtEmergenciaComponent implements OnInit {
   artEmergenciaGrp: FormGroup;
 
-  unidades: Object[];
-  tambos: Object[];
-  tiposvehiculo: Object[];
-  estadosvehiculo: Object[];
-  tiposcombustible: Object[];
-
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegArtEmergenciaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.artEmergenciaGrp = this.fb.group({
-      name: ['', [Validators.required]]
+      observacion: [{ value: 'OBSERVACIONES MUCHOS', disabled: this.user.perfil.id == 3 }, [Validators.required]]
     });
 
-    this.unidades = [
-      { id: 1, nombre: 'UNIDAD TERRITORIAL DE AYACUCHO NORTE' },
-      { id: 2, nombre: 'UNIDAD TERRITORIAL DE HUANCAVELICA' },
-      { id: 3, nombre: 'UNIDAD TERRITORIAL DE CUSCO' }
-    ];
-
-    this.tambos = [
-      { id: 1, nombre: 'ANCARPATA' },
-      { id: 2, nombre: 'BARRIO VISTA ALEGRE' },
-      { id: 3, nombre: 'CCERAOCRO' },
-      { id: 4, nombre: 'CHACHASPATA' }
-    ];
-
-    this.tiposvehiculo = [
-      { id: 1, nombre: 'CAMIONETA' },
-      { id: 2, nombre: 'MOTOCICLETA' }
-    ];
-
-    this.estadosvehiculo = [
-      { id: 1, nombre: 'OPERATIVO' },
-      { id: 2, nombre: 'NO OPERATIVO' },
-      { id: 3, nombre: 'CON LIMITACIONES' }
-    ];
-
-    this.tiposcombustible = [
-      { id: 1, nombre: 'DIESEL B5' },
-      { id: 2, nombre: 'GASOHOL 90' }
-    ];
+    console.log(this.user);
   }
 
-  get getUser(){
+  get getUser() {
     return this.user;
   }
 

@@ -10,6 +10,7 @@ import { BdjAsigPresupuestalComponent } from './components/bdj-asig-presupuestal
 import { BdjEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/bdj-ejec-presupuestal.component';
 import { BandejaDeslizadoresComponent } from './components/bandeja-deslizadores/bandeja-deslizadores.component';
 import { CuadroControlTamboComponent } from './components/cuadro-control-tambo/cuadro-control-tambo.component';
+import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizador/control-hrs-deslizador.component';
 
 const intranetRoutes: Routes = [
   {
@@ -36,10 +37,14 @@ const intranetRoutes: Routes = [
         component: ControlKilometrajeComponent,
         data: { title: 'Kilometraje' }
       }, {
-        path: 'generador-electrico',
+        path: 'horas-generador',
         component: ControlGenElectricoComponent,
-        data: { title: 'Generador electrico' }
-      }, {
+        data: { title: 'Horas Generador electrico' }
+      },{
+        path: 'horas-deslizador',
+        component: ControlHrsDeslizadorComponent,
+        data: { title: 'Hpras deslizador' }
+      },{
         path: 'asignacion-presupuestal',
         component: BdjAsigPresupuestalComponent,
         data: { title: 'Bandeja asignacion economico presupuestal' }
