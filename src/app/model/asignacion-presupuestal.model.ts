@@ -7,4 +7,5 @@ export class AsignacionPresupuestal {
     pim: number;
     certificado: number;
     saldo: number;
+    fecha: Date;
 }

@@ -1,4 +1,4 @@
-import { Component, Inject , Input} from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -30,7 +30,6 @@ export class NavbarComponent {
 
   ngOnInit() {
     this.consultarUsuario();
-    // this.user = JSON.parse(sessionStorage.getItem('user'));
     console.log(this.user);
   }
 
@@ -39,12 +38,17 @@ export class NavbarComponent {
   }
 
   public consultarUsuario() {
-    let usuario: Usuario = JSON.parse(sessionStorage.getItem('user'));
+    let usuario: Usuario = JSON.parse(localStorage.getItem('user'));
+
+    console.log('USUARIO');
+    console.log(usuario);
 
     this.user.setId = 1;
     this.user.setUsuario = usuario.usuario;
     this.user.setContrasenia = usuario.contrasenia;
     this.user.setPerfil = usuario.perfil;
+    this.user.idUnidad = usuario.idUnidad;
+    this.user.idTambo = usuario.idTambo;
   }
 
   salir() {

@@ -1,12 +1,13 @@
 export class HorasDeslizador{
     id: number;
-    unidad: string;
-    tambo: string;
-    deslizador: string;
+    idUnidad: number;
+    nomUnidad: string;
+    idTambo: number;
+    nomTambo: string;
     potencia: number;
     horaInicio: string;
     horaFin: string;
     horas: number;
-    fecha: string;
+    fecha: Date;
     observacion: string;
 }

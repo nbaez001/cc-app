@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialog, MatSort } from '@angular/material';
 import { Kilometraje } from 'src/app/model/kilometraje.model';
 import { RegKilometrajeComponent } from './reg-kilometraje/reg-kilometraje.component';
@@ -7,6 +7,7 @@ import { UNIDADES, TAMBOS, KILOMETRAJES, VEHICULOS } from 'src/app/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { Usuario } from 'src/app/model/usuario.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-control-kilometraje',
@@ -14,7 +15,7 @@ import { Usuario } from 'src/app/model/usuario.model';
   styleUrls: ['./control-kilometraje.component.scss']
 })
 export class ControlKilometrajeComponent implements OnInit {
-  bdjKilometrajeGrp: FormGroup;
+  bandejaGrp: FormGroup;
   messages = {
     'unidad': {
       'required': 'Campo obligatorio'
@@ -32,7 +33,6 @@ export class ControlKilometrajeComponent implements OnInit {
     'vehiculo': ''
   };
 
-  user: Usuario;
   unidades = [];
   tambos = [];
   vehiculos = [];
@@ -105,21 +105,24 @@ export class ControlKilometrajeComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
-
+    @Inject(UsuarioService) private user: UsuarioService
   ) { }
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
     this.spinnerService.show();
 
-    this.bdjKilometrajeGrp = this.fb.group({
-      unidad: ['', [Validators.required]],
-      tambo: ['', [Validators.required]],
+    this.bandejaGrp = this.fb.group({
+      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
       vehiculo: ['', [Validators.required]]
     });
 
     this.definirTabla();
     this.inicializarVariables();
+  }
+
+  get getUser() {
+    return this.user;
   }
 
   public inicializarVariables(): void {
@@ -132,32 +135,40 @@ export class ControlKilometrajeComponent implements OnInit {
     this.unidades = JSON.parse(JSON.stringify(UNIDADES));
     this.unidades.unshift({ id: 0, nombre: 'TODOS' });
 
-    this.bdjKilometrajeGrp.get('unidad').setValue(this.unidades[0]);
+    if (this.user.perfil.id != 3) {
+      this.bandejaGrp.get('unidad').setValue(this.unidades.filter(el => el.id == this.user.idUnidad)[0]);
+    } else {
+      this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+    }
 
     this.cargarTambos();
   }
 
   public cargarTambos() {
-    let idUnidad = this.bdjKilometrajeGrp.get('unidad').value.id;
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
 
-    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idunidad == idUnidad)));
-    this.tambos.unshift({ id: 0, nombre: 'TODOS', idunidad: 0 });
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idUnidad == idUnidad)));
+    this.tambos.unshift({ id: 0, nombre: 'TODOS', idUnidad: 0 });
 
-    this.bdjKilometrajeGrp.get('tambo').setValue(this.tambos[0]);
+    if (this.user.perfil.id != 3) {
+      this.bandejaGrp.get('tambo').setValue(this.tambos.filter(el => el.id == this.user.idTambo)[0]);
+    } else {
+      this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
+    }
 
     this.cargarVehiculos();
   }
 
   public cargarVehiculos() {
-    let idUnidad = this.bdjKilometrajeGrp.get('unidad').value.id;
-    let idTambo = this.bdjKilometrajeGrp.get('tambo').value.id;
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+    let idTambo = this.bandejaGrp.get('tambo').value.id;
 
     this.vehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad || 0 == idUnidad));
     this.vehiculos = this.vehiculos.filter(el => (el.idTambo == idTambo || 0 == idTambo));
 
     this.vehiculos.unshift({ id: 0, nombre: 'TODOS' });
 
-    this.bdjKilometrajeGrp.get('vehiculo').setValue(this.vehiculos[0]);
+    this.bandejaGrp.get('vehiculo').setValue(this.vehiculos[0]);
 
     this.buscar();
   }
@@ -205,16 +216,16 @@ export class ControlKilometrajeComponent implements OnInit {
 
   buscar() {
     console.log('Buscar');
-    let idUnidad = this.bdjKilometrajeGrp.get('unidad').value.id;
-    let idTambo = this.bdjKilometrajeGrp.get('tambo').value.id;
-    let idVehiculo = this.bdjKilometrajeGrp.get('vehiculo').value.id;
+    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+    let idTambo = this.bandejaGrp.get('tambo').value.id;
+    let idVehiculo = this.bandejaGrp.get('vehiculo').value.id;
 
     console.log(idUnidad + ' ' + idTambo + ' ' + idVehiculo);
 
     this.listaKilometrajes = KILOMETRAJES.filter(el => (el.idUnidad == idUnidad && el.idTambo == idTambo && el.idVehiculo == idVehiculo) || (el.idUnidad == idUnidad && el.idTambo == idTambo && 0 == idVehiculo) || (el.idUnidad == idUnidad && 0 == idTambo && 0 == idVehiculo) || (0 == idUnidad && 0 == idTambo && 0 == idVehiculo));
 
     if (idVehiculo != 0) {
-      this.calcularSumaKilomatrajes(this.bdjKilometrajeGrp.get('vehiculo').value);
+      this.calcularSumaKilomatrajes(this.bandejaGrp.get('vehiculo').value);
     }
     this.cargarDatosTabla();
   }

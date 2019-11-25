@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { AsignacionPresupuestal } from 'src/app/model/asignacion-presupuestal.model';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { METAS, PARTIDAS, ASIGNACIONPRESUPUESTAL, ANIOPRESUPUESTAL } from 'src/app/common';
 import { RegAsigPresupuestalComponent } from './reg-asig-presupuestal/reg-asig-presupuestal.component';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-bdj-asig-presupuestal',
@@ -66,15 +67,19 @@ export class BdjAsigPresupuestalComponent implements OnInit {
     }, {
       columnDef: 'pim',
       header: 'PIM',
-      cell: (asig: AsignacionPresupuestal) => `${asig.pim}`
+      cell: (asig: AsignacionPresupuestal) => `${this.decimalPipe.transform(asig.pim, '1.2-2')}`
     }, {
       columnDef: 'certificado',
       header: 'Certificado',
-      cell: (asig: AsignacionPresupuestal) => `${asig.certificado}`
+      cell: (asig: AsignacionPresupuestal) => `${this.decimalPipe.transform(asig.certificado, '1.2-2')}`
     }, {
       columnDef: 'saldo',
       header: 'Saldo',
-      cell: (asig: AsignacionPresupuestal) => `${asig.saldo}`
+      cell: (asig: AsignacionPresupuestal) => `${this.decimalPipe.transform(asig.saldo, '1.2-2')}`
+    }, {
+      columnDef: 'fecha',
+      header: 'Fecha',
+      cell: (asig: AsignacionPresupuestal) => `${this.datePipe.transform(asig.fecha, 'dd/MM/yyyy')}`
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -82,7 +87,9 @@ export class BdjAsigPresupuestalComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe,
+    private decimalPipe: DecimalPipe,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.spinnerService.show();
@@ -101,7 +108,7 @@ export class BdjAsigPresupuestalComponent implements OnInit {
     this.bandejaGrp.get('anio').setValue(this.anios[0]);
     this.cargarMetas();
     this.cargarPartidas();
-    
+
     this.spinnerService.hide();
     this.buscar();
   }
@@ -116,7 +123,7 @@ export class BdjAsigPresupuestalComponent implements OnInit {
 
   public cargarMetas() {
     this.metas = JSON.parse(JSON.stringify(METAS));
-    this.metas.unshift({ id: 0, descripcion: 'TODOS' });
+    this.metas.unshift({ id: 0, codigo: '', descripcion: 'TODOS' });
 
     this.bandejaGrp.get('meta').setValue(this.metas[0]);
   }
@@ -129,7 +136,11 @@ export class BdjAsigPresupuestalComponent implements OnInit {
   }
 
   buscar() {
-    this.listaAsigPresupuestal = ASIGNACIONPRESUPUESTAL;
+    let codigoMeta = this.bandejaGrp.get('meta').value.codigo;
+    let nombrePartida = this.bandejaGrp.get('partida').value.nombre;
+
+    this.listaAsigPresupuestal = ASIGNACIONPRESUPUESTAL.filter(el => (el.codigoMeta == codigoMeta) || ('' == codigoMeta));
+    this.listaAsigPresupuestal = this.listaAsigPresupuestal.filter(el => (el.partida == nombrePartida) || ('TODOS' == nombrePartida));
 
     this.cargarDatosTabla();
   }
@@ -156,19 +167,11 @@ export class BdjAsigPresupuestalComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result) {
+        this.listaAsigPresupuestal.unshift(result);
+        this.cargarDatosTabla();
+      }
     });
   }
 
-  regDistribucionAsignacion(obj): void {
-    // console.log(obj);
-    // const dialogRef = this.dialog.open(DistAsigPresupuestalComponent, {
-    //   width: '800px',
-    //   data: { title: 'NERIO', objeto: obj }
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(result);
-    // });
-  }
 }

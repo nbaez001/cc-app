@@ -64,30 +64,23 @@
               <tr class="mat-header-row">
                 <th class="mat-header-cell" rowspan="2" style="width: 4rem;"> N°</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 12rem;"> REGIONES TERRITORIALES</th>
-                <th class="mat-header-cell" style="width: 12rem;"> DIESEL B5 - USO CAMIONETAS</th>
-                <th class="mat-header-cell" style="width: 12rem;"> GASOHOL 90 - MOTOCICLETAS</th>
-                <th class="mat-header-cell" style="width: 12rem;"> GASOHOL 90 - GENERADORES</th>
-                <th class="mat-header-cell" style="width: 12rem;"> GASOHOL 90 - DESLIZADORES</th>
-                <th class="mat-header-cell" style="width: 12rem;"> GRASAS LUBRICANTES - AFINES</th>
+                <th class="mat-header-cell" colspan="5" style="width: 40rem;"> CONSUMOS</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 6rem;">PARTIDA</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 6rem;">TOTAL AVANCE PRESUPUESTAL</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 6rem;">TOTAL CONSUMO</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 6rem;">SALDO</th>
               </tr>
               <tr class="mat-header-row">
-                <!-- <th class="mat-header-cell" rowspan="2"> PARTIDA</th>
-                    <th class="mat-header-cell" rowspan="2"> TOTAL</th>
-                    <th class="mat-header-cell" rowspan="2"> SALDO</th> -->
-                <th class="mat-header-cell"> CONSUMO</th>
-                <th class="mat-header-cell"> CONSUMO</th>
-                <th class="mat-header-cell"> CONSUMO</th>
-                <th class="mat-header-cell"> CONSUMO</th>
-                <th class="mat-header-cell"> CONSUMO</th>
+                <th class="mat-header-cell"> DIESEL B5 - USO CAMIONETAS</th>
+                <th class="mat-header-cell"> GASOHOL 90 - MOTOCICLETAS</th>
+                <th class="mat-header-cell"> GASOHOL 90 - GENERADORES</th>
+                <th class="mat-header-cell"> GASOHOL 90 - DESLIZADORES</th>
+                <th class="mat-header-cell"> GRASAS LUBRICANTES - AFINES</th>
               </tr>
             </thead>
             <tbody>
               <tr class="mat-row" *ngFor="let con of listaControl; let i=index">
-                <td class="mat-cell">
+                <td class="mat-cell celda-center">
                   <ng-container *ngIf="con.idPartida==1">
                     {{con.secFun}}
                   </ng-container>
@@ -99,30 +92,49 @@
                 </td>
                 <td class="mat-cell celda-right">
                   <ng-container *ngIf="con.idPartida==1">
-                    {{con.dieselTotal}}
+                    {{con.dieselTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
                   <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasMotocicletasTotal}}
+                    {{con.gasMotocicletasTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
                   <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasGeneradoresTotal}}
+                    {{con.gasGeneradoresTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
                   <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasDeslizadoresTotal}}
+                    {{con.gasDeslizadoresTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
                   <ng-container *ngIf="con.idPartida==2">
-                    {{con.lubricantesTotal}}
+                    {{con.lubricantesTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
-                <td class="mat-cell celda-right">{{con.totalAvancePresupuestal | number:'3.2-2'}}</td>
+                <td class="mat-cell celda-right">
+                  {{con.nomPartida}}
+                </td>
+                <td class="mat-cell celda-right">{{con.totalAvancePresupuestal | number:'1.2-2'}}</td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{(con.dieselTotal + con.gasMotocicletasTotal + con.gasGeneradoresTotal + con.gasDeslizadoresTotal) | number:'1.2-2'}}
+                  </ng-container>
+                  <ng-container *ngIf="con.idPartida==2">
+                    {{con.lubricantesTotal | number:'1.2-2'}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{(con.totalAvancePresupuestal - (con.dieselTotal + con.gasMotocicletasTotal + con.gasGeneradoresTotal + con.gasDeslizadoresTotal)) | number:'1.2-2'}}
+                  </ng-container>
+                  <ng-container *ngIf="con.idPartida==2">
+                    {{(con.totalAvancePresupuestal -con.lubricantesTotal) | number:'1.2-2'}}
+                  </ng-container>
+                </td>
               </tr>
             </tbody>
           </table>

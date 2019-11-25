@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { EjecucionPresupuestal } from 'src/app/model/ejecucion-presupuestal.model';
 import { UNIDADES, TAMBOS, EJECUCIONPRESUPUESTAL } from 'src/app/common';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { RegAsigPresupuestalComponent } from '../bdj-asig-presupuestal/reg-asig-presupuestal/reg-asig-presupuestal.component';
 import { RegEjecPresupuestalComponent } from './reg-ejec-presupuestal/reg-ejec-presupuestal.component';
 import { DistEjecPresupuestalComponent } from './dist-ejec-presupuestal/dist-ejec-presupuestal.component';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-bdj-ejec-presupuestal',
@@ -61,6 +62,10 @@ export class BdjEjecPresupuestalComponent implements OnInit {
       header: 'Orden compra/Res. administracion',
       cell: (asig: EjecucionPresupuestal) => (asig.idTipoejecucion == 1) ? `${asig.nroOrdencompra}` : `${asig.nroResAdministracion}`
     }, {
+      columnDef: 'monto',
+      header: 'Monto',
+      cell: (asig: EjecucionPresupuestal) => `${this.decimalPipe.transform(asig.monto, '1.2-2')}`
+    }, {
       columnDef: 'fecha',
       header: 'Fecha',
       cell: (asig: EjecucionPresupuestal) => this.datePipe.transform(asig.fecha, 'dd/MM/yyyy')
@@ -71,7 +76,9 @@ export class BdjEjecPresupuestalComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe,
+    private decimalPipe: DecimalPipe,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.spinnerService.show();

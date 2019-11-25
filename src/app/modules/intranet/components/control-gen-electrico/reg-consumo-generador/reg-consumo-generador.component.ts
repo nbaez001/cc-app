@@ -1,9 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { UNIDADES, TAMBOS } from 'src/app/common';
+import { UNIDADES, TAMBOS, generadores } from 'src/app/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ConsumoGenerador } from 'src/app/model/consumo-generador.model';
 import { ValidationService } from 'src/app/services/validation.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Generador } from 'src/app/model/generador.model';
 
 @Component({
   selector: 'app-reg-consumo-generador',
@@ -11,11 +13,9 @@ import { ValidationService } from 'src/app/services/validation.service';
   styleUrls: ['./reg-consumo-generador.component.scss']
 })
 export class RegConsumoGeneradorComponent implements OnInit {
-  unidades = UNIDADES;
-  tambos = TAMBOS;
-  generadores: Object[] = [
-    { id: 1, unidad: 'AYACUCHO NORTE', tambo: 'VISTA ALEGRE', marca: 'PERKINS', serie: 'EA-9263' }
-  ];
+  unidades = [];
+  tambos = [];
+  generadores: Generador[] = [];
 
   consumoGeneradorGrp: FormGroup;
   messages = {
@@ -57,7 +57,8 @@ export class RegConsumoGeneradorComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegConsumoGeneradorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ConsumoGenerador,
-    @Inject(ValidationService) private validationService: ValidationService) { }
+    @Inject(ValidationService) private validationService: ValidationService,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.consumoGeneradorGrp = this.fb.group({
@@ -75,8 +76,7 @@ export class RegConsumoGeneradorComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.consumoGeneradorGrp.get('unidad').setValue(this.unidades[0]);
-    this.consumoGeneradorGrp.get('tambo').setValue(this.tambos[0]);
+    this.cargarUnidades();
   }
 
   calcular(): void {
@@ -100,12 +100,49 @@ export class RegConsumoGeneradorComponent implements OnInit {
     return (hours + minutes / 60).toFixed(1);
   }
 
+  public cargarUnidades() {
+    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
+    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
+
+    if (this.user.perfil.id != 3) {
+      this.consumoGeneradorGrp.get('unidad').setValue(this.unidades.filter(el => el.id == this.user.idUnidad)[0]);
+    } else {
+      this.consumoGeneradorGrp.get('unidad').setValue(this.unidades[0]);
+    }
+    this.cargarTambos();
+  }
+
+  public cargarTambos() {
+    let idUnidad = this.consumoGeneradorGrp.get('unidad').value.id;
+
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idUnidad == idUnidad)));
+    this.tambos.unshift({ id: 0, nombre: 'OFICINA DE UNIDAD TERRITORIAL', idunidad: 0 });
+
+    if (this.user.perfil.id != 3) {
+      this.consumoGeneradorGrp.get('tambo').setValue(this.tambos.filter(el => el.id == this.user.idTambo)[0]);
+    } else {
+      this.consumoGeneradorGrp.get('tambo').setValue(this.tambos[0]);
+    }
+
+    this.buscar();
+  }
+
+  buscar() {
+    let idUnidad = this.consumoGeneradorGrp.get('unidad').value.id;
+    let idTambo = this.consumoGeneradorGrp.get('tambo').value.id;
+
+    this.generadores = generadores.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
+    this.generadores = this.generadores.filter(el => (el.idTambo == idTambo));
+
+    this.consumoGeneradorGrp.get('generador').setValue(this.generadores[0]);
+  }
+
   guardar(): void {
     if (this.consumoGeneradorGrp.valid) {
       let con = new ConsumoGenerador();
       con.id = 0;
-      con.unidad = this.consumoGeneradorGrp.get('unidad').value.nombre;
-      con.tambo = this.consumoGeneradorGrp.get('tambo').value.nombre;
+      con.nomUnidad = this.consumoGeneradorGrp.get('unidad').value.nombre;
+      con.nomTambo = this.consumoGeneradorGrp.get('tambo').value.nombre;
       con.marca = this.consumoGeneradorGrp.get('generador').value.marca;
       con.serie = this.consumoGeneradorGrp.get('generador').value.serie;
       con.horaInicio = this.consumoGeneradorGrp.get('horaInicio').value;

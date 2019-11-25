@@ -6,13 +6,13 @@
         <mat-card-title class="box-section-title"> BUSQUEDA USO GENERADOR ELECTRICO </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="bdjConsumoGenElectricoGrp" class="example-container">
+        <form [formGroup]="bandejaGrp" class="example-container">
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
                 <mat-label>Unidad</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let unidad of unidades" [value]="unidad.id">
+                <mat-select formControlName="unidad" (selectionChange)="cargarTambos()">
+                  <mat-option *ngFor="let unidad of unidades" [value]="unidad">
                     {{unidad.nombre}}
                   </mat-option>
                 </mat-select>
@@ -21,8 +21,8 @@
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
                 <mat-label>Tambo</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let tambo of tambos" [value]="tambo.id">
+                <mat-select formControlName="tambo">
+                  <mat-option *ngFor="let tambo of tambos" [value]="tambo">
                     {{tambo.nombre}}
                   </mat-option>
                 </mat-select>
@@ -50,7 +50,7 @@
           <mat-icon>search</mat-icon>
           <strong> BUSCAR</strong>
         </button>
-        <button mat-raised-button (click)="regConsumo(null)" *ngIf="user.perfil.id==1">
+        <button mat-raised-button (click)="regConsumo(null)" *ngIf="getUser.perfil.id!=3">
           <mat-icon>add_box</mat-icon>
           <strong> REGISTRAR NUEVO</strong>
         </button>
@@ -80,7 +80,7 @@
                 <button mat-icon-button matTooltip="Ver observaciones" (click)="verObsConsumo(element)">
                   <mat-icon>comment</mat-icon>
                 </button>
-                <button mat-icon-button matTooltip="Editar Kilometraje" (click)="regConsumo(element)" *ngIf="user.perfil.id!=3">
+                <button mat-icon-button matTooltip="Editar Kilometraje" (click)="regConsumo(element)" *ngIf="getUser.perfil.id!=3">
                   <mat-icon>create</mat-icon>
                 </button>
               </td>

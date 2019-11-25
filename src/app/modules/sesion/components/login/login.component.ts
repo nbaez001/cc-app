@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
       this.usuario.idUnidad = 0;
     }
 
-    sessionStorage.setItem('user', JSON.stringify(this.usuario));
+    localStorage.setItem('user', JSON.stringify(this.usuario));
     this.user.setId = 1;
     this.user.setUsuario = this.usuario.usuario;
     this.user.setContrasenia = this.usuario.contrasenia;

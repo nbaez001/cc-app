@@ -1,12 +1,14 @@
 export class ConsumoGenerador {
     id: number;
-    unidad: string;
-    tambo: string;
+    idUnidad: number;
+    nomUnidad: string;
+    idTambo: number;
+    nomTambo: string;
     marca: string;
     serie: string;
     horaInicio: string;
     horaFin: string;
     horas: number;
-    fecha: string;
+    fecha: Date;
     observacion: string;
 }

@@ -1,9 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { UNIDADES, TAMBOS } from 'src/app/common';
+import { UNIDADES, TAMBOS, deslizadores } from 'src/app/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ValidationService } from 'src/app/services/validation.service';
-import { ConsumoDeslizador } from 'src/app/model/consumo-deslizador.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { HorasDeslizador } from 'src/app/model/horas-deslizador.model';
+import { Deslizador } from 'src/app/model/deslizador.model';
 
 @Component({
   selector: 'app-reg-hrs-deslizador',
@@ -13,9 +15,7 @@ import { ConsumoDeslizador } from 'src/app/model/consumo-deslizador.model';
 export class RegHrsDeslizadorComponent implements OnInit {
   unidades = UNIDADES;
   tambos = TAMBOS;
-  deslizadores: Object[] = [
-    { id: 1, unidad: 'U.T. LORETO', tambo: 'VISTA ALEGRE', descripcion: 'DESLIZADOR', marca: 'PERKINS', serie: 'EA-9263' }
-  ];
+  deslizadores: Deslizador[] = [];
 
   consumoDeslizadorGrp: FormGroup;
   messages = {
@@ -56,8 +56,9 @@ export class RegHrsDeslizadorComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegHrsDeslizadorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ConsumoDeslizador,
-    @Inject(ValidationService) private validationService: ValidationService) { }
+    @Inject(MAT_DIALOG_DATA) public data: HorasDeslizador,
+    @Inject(ValidationService) private validationService: ValidationService,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.consumoDeslizadorGrp = this.fb.group({
@@ -75,8 +76,46 @@ export class RegHrsDeslizadorComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.consumoDeslizadorGrp.get('unidad').setValue(this.unidades[0]);
-    this.consumoDeslizadorGrp.get('tambo').setValue(this.tambos[0]);
+    this.cargarUnidades();
+  }
+
+  public cargarUnidades() {
+    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
+    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
+
+    if (this.user.perfil.id != 3) {
+      this.consumoDeslizadorGrp.get('unidad').setValue(this.unidades.filter(el => el.id == 20)[0]);
+    } else {
+      this.consumoDeslizadorGrp.get('unidad').setValue(this.unidades[0]);
+    }
+    this.cargarTambos();
+  }
+
+  public cargarTambos() {
+    let idUnidad = this.consumoDeslizadorGrp.get('unidad').value.id;
+
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idUnidad == idUnidad)));
+    this.tambos.unshift({ id: 0, nombre: 'OFICINA DE UNIDAD TERRITORIAL', idUnidad: 0 });
+
+    if (this.user.perfil.id == 1) {
+      this.consumoDeslizadorGrp.get('tambo').setValue(this.tambos.filter(el => el.id == 90)[0]);
+    } else {
+      if (this.user.perfil.id == 2) {
+        this.consumoDeslizadorGrp.get('tambo').setValue(this.tambos.filter(el => el.id == 0)[0]);
+      } else {
+        this.consumoDeslizadorGrp.get('tambo').setValue(this.tambos[0]);
+      }
+    }
+
+    this.buscar();
+  }
+
+  buscar() {
+    let idUnidad = this.consumoDeslizadorGrp.get('unidad').value.id;
+    let idTambo = this.consumoDeslizadorGrp.get('tambo').value.id;
+
+    this.deslizadores = deslizadores.filter(el => (el.idUnidad == idUnidad) );
+    this.deslizadores = this.deslizadores.filter(el => (el.idTambo == idTambo));
   }
 
   calcular(): void {
@@ -102,12 +141,11 @@ export class RegHrsDeslizadorComponent implements OnInit {
 
   guardar(): void {
     if (this.consumoDeslizadorGrp.valid) {
-      let con = new ConsumoDeslizador();
+      let con = new HorasDeslizador();
       con.id = 0;
-      con.unidad = this.consumoDeslizadorGrp.get('unidad').value.nombre;
-      con.tambo = this.consumoDeslizadorGrp.get('tambo').value.nombre;
-      con.marca = this.consumoDeslizadorGrp.get('deslizador').value.marca;
-      con.serie = this.consumoDeslizadorGrp.get('deslizador').value.serie;
+      con.nomUnidad = this.consumoDeslizadorGrp.get('unidad').value.nombre;
+      con.nomTambo = this.consumoDeslizadorGrp.get('tambo').value.nombre;
+      con.potencia = this.consumoDeslizadorGrp.get('deslizador').value.potencia;
       con.horaInicio = this.consumoDeslizadorGrp.get('horaInicio').value;
       con.horaFin = this.consumoDeslizadorGrp.get('horaFin').value;
       con.horas = this.consumoDeslizadorGrp.get('totalHoras').value;

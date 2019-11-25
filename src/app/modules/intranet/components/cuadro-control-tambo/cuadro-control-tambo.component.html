@@ -131,78 +131,78 @@
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
+                  <ng-container *ngIf="con.dieselConsumo!=0">
                     {{con.dieselConsumo}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.dieselPromCosto}}
+                  <ng-container *ngIf="con.dieselConsumo!=0">
+                    {{con.dieselPromCosto | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.dieselTotal}}
+                  <ng-container *ngIf="con.dieselConsumo!=0">
+                    {{con.dieselTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
+                  <ng-container *ngIf="con.gasConsMotocicletas!=0">
                     {{con.gasConsMotocicletas}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasPromCosto}}
+                  <ng-container *ngIf="con.gasConsMotocicletas!=0">
+                    {{con.gasPromCosto | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasMotocicletasTotal}}
+                  <ng-container *ngIf="con.gasConsMotocicletas!=0">
+                    {{con.gasMotocicletasTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
+                  <ng-container *ngIf="con.gasConsGeneradores!=0">
                     {{con.gasConsGeneradores}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasPromCosto}}
+                  <ng-container *ngIf="con.gasConsGeneradores!=0">
+                    {{con.gasPromCosto | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasGeneradoresTotal}}
+                  <ng-container *ngIf="con.gasConsGeneradores!=0">
+                    {{con.gasGeneradoresTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
+                  <ng-container *ngIf="con.gasConsDeslizadores!=0">
                     {{con.gasConsDeslizadores}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasPromCosto}}
+                  <ng-container *ngIf="con.gasConsDeslizadores!=0">
+                    {{con.gasPromCosto | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==1">
-                    {{con.gasDeslizadoresTotal}}
+                  <ng-container *ngIf="con.gasConsDeslizadores!=0">
+                    {{con.gasDeslizadoresTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==2">
+                  <ng-container *ngIf="con.lubricConsumo!=0">
                     {{con.lubricConsumo}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==2">
-                    {{con.lubricPromCosto}}
+                  <ng-container *ngIf="con.lubricConsumo!=0">
+                    {{con.lubricPromCosto | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">
-                  <ng-container *ngIf="con.idPartida==2">
-                    {{con.lubricantesTotal}}
+                  <ng-container *ngIf="con.lubricConsumo!=0">
+                    {{con.lubricantesTotal | number:'1.2-2'}}
                   </ng-container>
                 </td>
                 <td class="mat-cell celda-right">{{con.total | number:'3.2-2'}}</td>

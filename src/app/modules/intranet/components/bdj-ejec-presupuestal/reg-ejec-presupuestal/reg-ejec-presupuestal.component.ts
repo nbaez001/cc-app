@@ -7,6 +7,7 @@ import { DetalleEjecucion } from 'src/app/model/detalle-ejecucion.model';
 import { EjecucionPresupuestal } from 'src/app/model/ejecucion-presupuestal.model';
 import { MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ValidationService } from 'src/app/services/validation.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-reg-ejec-presupuestal',
@@ -107,7 +108,8 @@ export class RegEjecPresupuestalComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegEjecPresupuestalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    @Inject(ValidationService) private validationService: ValidationService) { }
+    @Inject(ValidationService) private validationService: ValidationService,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.ejecPresupuestalGrp = this.fb.group({

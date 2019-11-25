@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OrdenCompra } from 'src/app/model/orden-compra.model';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatePipe } from '@angular/common';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-bandeja-orden-compra',
@@ -65,7 +66,8 @@ export class BandejaOrdenCompraComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.spinnerService.show();

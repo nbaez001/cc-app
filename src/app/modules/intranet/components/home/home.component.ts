@@ -7,10 +7,11 @@ import { RegistrarSoatComponent } from './registrar-soat/registrar-soat.componen
 import { RegistrarAsigCombustComponent } from './registrar-asig-combust/registrar-asig-combust.component';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common'; 
+import { UNIDADES, TAMBOS, TIPOSVEHICULO, VEHICULOS } from 'src/app/common';
 import { RegArtEmergenciaComponent } from './reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './reg-conductor/reg-conductor.component';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { RegLubricantesAfinesComponent } from './reg-lubricantes-afines/reg-lubricantes-afines.component';
 
 @Component({
   selector: 'app-home',
@@ -105,15 +106,16 @@ export class HomeComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
-    private spinnerService: Ng4LoadingSpinnerService) { }
+    private spinnerService: Ng4LoadingSpinnerService,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.spinnerService.show();
 
     this.bandejaGrp = this.fb.group({
-      unidad: ['unidad', [Validators.required]],
-      tambo: ['tambo', [Validators.required]],
-      tipovehiculo: ['tipovehiculo', [Validators.required]]
+      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+      tipovehiculo: ['', [Validators.required]]
     });
 
     this.definirTabla();
@@ -138,7 +140,12 @@ export class HomeComponent implements OnInit {
     this.unidades = JSON.parse(JSON.stringify(UNIDADES));
     this.unidades.unshift({ id: 0, nombre: 'TODOS' });
 
-    this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+    if (this.user.perfil.id != 3) {
+      this.bandejaGrp.get('unidad').setValue(this.unidades.filter(el => el.id == this.user.idUnidad)[0]);
+    } else {
+      this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
+    }
+
 
     this.cargarTambos();
   }
@@ -146,10 +153,15 @@ export class HomeComponent implements OnInit {
   public cargarTambos() {
     let idUnidad = this.bandejaGrp.get('unidad').value.id;
 
-    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idunidad == idUnidad)));
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idUnidad == idUnidad)));
     this.tambos.unshift({ id: 0, nombre: 'TODOS', idunidad: 0 });
 
-    this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
+
+    if (this.user.perfil.id != 3) {
+      this.bandejaGrp.get('tambo').setValue(this.tambos.filter(el => el.id == this.user.idTambo)[0]);
+    } else {
+      this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
+    }
 
     this.buscar();
   }
@@ -204,7 +216,7 @@ export class HomeComponent implements OnInit {
   regRevTecnica(obj): void {
     const dialogRef = this.dialog.open(RegistrarRevTecnicaComponent, {
       width: '500px',
-      data: { name: 'NERIO'}
+      data: { name: 'NERIO' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -216,7 +228,7 @@ export class HomeComponent implements OnInit {
     console.log(obj);
     const dialogRef = this.dialog.open(RegistrarSoatComponent, {
       width: '500px',
-      data: { name: 'NERIO'}
+      data: { name: 'NERIO' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -229,7 +241,7 @@ export class HomeComponent implements OnInit {
     console.log(obj);
     const dialogRef = this.dialog.open(RegArtEmergenciaComponent, {
       width: '500px',
-      data: { name: 'NERIO'}
+      data: { name: 'NERIO' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -241,6 +253,18 @@ export class HomeComponent implements OnInit {
     const dialogRef = this.dialog.open(RegConductorComponent, {
       width: '500px',
       data: { name: 'NERIO' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+
+  regLubricante(obj): void {
+    const dialogRef = this.dialog.open(RegLubricantesAfinesComponent, {
+      width: '600px',
+      data: obj
     });
 
     dialogRef.afterClosed().subscribe(result => {

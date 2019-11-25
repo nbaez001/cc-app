@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { UNIDADES, TAMBOS, TIPOSVEHICULO } from 'src/app/common';
+import { UNIDADES, TAMBOS, VEHICULOS } from 'src/app/common';
 import { Kilometraje } from 'src/app/model/kilometraje.model';
 import { ValidationService } from 'src/app/services/validation.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-reg-kilometraje',
@@ -11,12 +12,9 @@ import { ValidationService } from 'src/app/services/validation.service';
   styleUrls: ['./reg-kilometraje.component.scss']
 })
 export class RegKilometrajeComponent implements OnInit {
-  unidades = UNIDADES;
-  tambos = TAMBOS;
-  vehiculos: Object[] = [
-    { tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', ultMantenimiento: 'DIC 2018', estadoVehiculo: 'CON LIMITACIONES' },
-    { tipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', ultMantenimiento: 'DIC 2018', estadoVehiculo: 'OPERATIVO' }
-  ];
+  unidades = [];
+  tambos = [];
+  vehiculos = [];
 
   kilometrajeGrp: FormGroup;
   messages = {
@@ -67,18 +65,19 @@ export class RegKilometrajeComponent implements OnInit {
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegKilometrajeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    @Inject(ValidationService) private validationService: ValidationService) { }
+    @Inject(ValidationService) private validationService: ValidationService,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     this.kilometrajeGrp = this.fb.group({
-      unidad: ['', [Validators.required]],
-      tambo: ['', [Validators.required]],
+      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
       vehiculo: ['', [Validators.required]],
       horaSalida: ['', [Validators.required]],
       horaLlegada: ['', [Validators.required]],
       kilometrajeSalida: ['', [Validators.required]],
       kilometrajeLLegada: ['', [Validators.required]],
-      totalKilometraje: ['', [Validators.required]],
+      totalKilometraje: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
       lugarDestino: ['', [Validators.required]],
       codSismonitor: ['', [Validators.required]],
       observacion: ['', []]
@@ -91,9 +90,48 @@ export class RegKilometrajeComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.kilometrajeGrp.get('unidad').setValue(this.unidades[0]);
-    this.kilometrajeGrp.get('tambo').setValue(this.tambos[0]);
+    this.cargarUnidades();
   }
+
+
+  public cargarUnidades() {
+    this.unidades = JSON.parse(JSON.stringify(UNIDADES));
+    this.unidades.unshift({ id: 0, nombre: 'TODOS' });
+
+    if (this.user.perfil.id != 3) {
+      this.kilometrajeGrp.get('unidad').setValue(this.unidades.filter(el => el.id == this.user.idUnidad)[0]);
+    } else {
+      this.kilometrajeGrp.get('unidad').setValue(this.unidades[0]);
+    }
+    this.cargarTambos();
+  }
+
+  public cargarTambos() {
+    let idUnidad = this.kilometrajeGrp.get('unidad').value.id;
+
+    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idUnidad == idUnidad)));
+    this.tambos.unshift({ id: 0, nombre: 'OFICINA DE UNIDAD TERRITORIAL', idunidad: 0 });
+
+    if (this.user.perfil.id != 3) {
+      this.kilometrajeGrp.get('tambo').setValue(this.tambos.filter(el => el.id == this.user.idTambo)[0]);
+    } else {
+      this.kilometrajeGrp.get('tambo').setValue(this.tambos[0]);
+    }
+
+    this.buscar();
+  }
+
+  buscar() {
+    let idUnidad = this.kilometrajeGrp.get('unidad').value.id;
+    let idTambo = this.kilometrajeGrp.get('tambo').value.id;
+
+    this.vehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
+    this.vehiculos = this.vehiculos.filter(el => (el.idTambo == idTambo));
+
+    this.kilometrajeGrp.get('vehiculo').setValue(this.vehiculos[0]);
+  }
+
+
 
   calcular(): void {
     this.kilometrajeGrp.get('totalKilometraje').setValue(
@@ -107,7 +145,7 @@ export class RegKilometrajeComponent implements OnInit {
       kil.id = 0;
       kil.unidad = this.kilometrajeGrp.get('unidad').value.nombre;
       kil.tambo = this.kilometrajeGrp.get('tambo').value.nombre;
-      kil.tipo = this.kilometrajeGrp.get('vehiculo').value.tipo;
+      kil.tipo = this.kilometrajeGrp.get('vehiculo').value.nomTipo;
       kil.marca = this.kilometrajeGrp.get('vehiculo').value.marca;
       kil.placa = this.kilometrajeGrp.get('vehiculo').value.placa;
       kil.codComisionSISMONITOR = this.kilometrajeGrp.get('codSismonitor').value;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Usuario } from 'src/app/model/usuario.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CuadroControl } from 'src/app/model/cuadro-control.model';
@@ -6,6 +6,7 @@ import { UNIDADES, TAMBOS, CUADROCONTROL } from 'src/app/common';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LayoutStyleBuilder } from '@angular/flex-layout';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-cuadro-control',
@@ -13,7 +14,6 @@ import { LayoutStyleBuilder } from '@angular/flex-layout';
   styleUrls: ['./cuadro-control.component.scss']
 })
 export class CuadroControlComponent implements OnInit {
-  user: Usuario;
   bandejaGrp: FormGroup;
   unidades = UNIDADES;
   anios: Object[] = [{ valor: 2019 }, { valor: 2018 }, { valor: 2017 }];
@@ -21,10 +21,10 @@ export class CuadroControlComponent implements OnInit {
 
   listaControl: CuadroControl[] = [];
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
     this.spinnerService.show();
 
     this.bandejaGrp = this.fb.group({
@@ -34,6 +34,10 @@ export class CuadroControlComponent implements OnInit {
 
     // this.definirTabla();
     this.inicializarVariables();
+  }
+
+  get getUser() {
+    return this.user;
   }
 
   public inicializarVariables(): void {

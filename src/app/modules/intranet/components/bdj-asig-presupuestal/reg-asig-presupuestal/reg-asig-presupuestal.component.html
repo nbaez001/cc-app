@@ -30,23 +30,30 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
-          <input matInput placeholder="PIM" type="number">
+          <input matInput formControlName="pim" placeholder="PIM" type="number">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
-          <input matInput placeholder="Certificado" type="number">
+          <input matInput formControlName="certificado" placeholder="Certificado" type="number">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field appearance="legacy">
-          <input matInput placeholder="Saldo" type="number">
+          <input matInput formControlName="saldo" placeholder="Saldo" type="number">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <input matInput formControlName="fecha" [matDatepicker]="picker" placeholder="Fecha asignacion">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
   </form>
 </div>
 <div mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" (click)="onNoClick()">Guardar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Salir</button>
+  <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+  <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
 </div>

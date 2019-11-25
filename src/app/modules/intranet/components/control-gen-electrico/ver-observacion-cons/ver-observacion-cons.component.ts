@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ConsumoGenerador } from 'src/app/model/consumo-generador.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-ver-observacion-cons',
@@ -11,7 +12,8 @@ import { ConsumoGenerador } from 'src/app/model/consumo-generador.model';
 export class VerObservacionConsComponent implements OnInit {
   observacionGrp: FormGroup;
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<VerObservacionConsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: ConsumoGenerador) { }
+    @Inject(MAT_DIALOG_DATA) public data: ConsumoGenerador,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
     console.log('modal');

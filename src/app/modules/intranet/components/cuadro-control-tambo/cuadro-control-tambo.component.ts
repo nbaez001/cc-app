@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Usuario } from 'src/app/model/usuario.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CuadroControl } from 'src/app/model/cuadro-control.model';
@@ -7,6 +7,7 @@ import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { LayoutStyleBuilder } from '@angular/flex-layout';
 import { CuadroControlTambo } from 'src/app/model/cuadro-control-tambo.model';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 
 @Component({
@@ -15,7 +16,6 @@ import { CuadroControlTambo } from 'src/app/model/cuadro-control-tambo.model';
   styleUrls: ['./cuadro-control-tambo.component.scss']
 })
 export class CuadroControlTamboComponent implements OnInit {
-  user: Usuario;
   bandejaGrp: FormGroup;
   unidades = [];
   tambos = [];
@@ -24,10 +24,10 @@ export class CuadroControlTamboComponent implements OnInit {
 
   listaControl: CuadroControlTambo[] = [];
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService) { }
+  constructor(private fb: FormBuilder, public dialog: MatDialog, private spinnerService: Ng4LoadingSpinnerService,
+    @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
-    this.user = JSON.parse(sessionStorage.getItem('user'));
     this.spinnerService.show();
 
     this.bandejaGrp = this.fb.group({

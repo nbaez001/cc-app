@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 
 import { IntranetRoutingModule } from './intranet-routing.module';
 import { HomeComponent } from './components/home/home.component';
@@ -33,6 +33,9 @@ import { RegAsigPresupuestalComponent } from './components/bdj-asig-presupuestal
 import { CuadroControlTamboComponent } from './components/cuadro-control-tambo/cuadro-control-tambo.component';
 import { RegHrsDeslizadorComponent } from './components/control-hrs-deslizador/reg-hrs-deslizador/reg-hrs-deslizador.component';
 import { VerObsDeslizadorComponent } from './components/control-hrs-deslizador/ver-obs-deslizador/ver-obs-deslizador.component';
+import { RegLubricantesAfinesComponent } from './components/home/reg-lubricantes-afines/reg-lubricantes-afines.component';
+import { RegLubricantesAfines2Component } from './components/bandeja-gen-electrico/reg-lubricantes-afines2/reg-lubricantes-afines2.component';
+import { RegLubricantesAfines3Component } from './components/bandeja-deslizadores/reg-lubricantes-afines3/reg-lubricantes-afines3.component';
 
 @NgModule({
   entryComponents: [
@@ -50,7 +53,10 @@ import { VerObsDeslizadorComponent } from './components/control-hrs-deslizador/v
     VerObservacionConsComponent,
     RegAsigPresupuestalComponent,
     RegHrsDeslizadorComponent,
-    VerObsDeslizadorComponent
+    VerObsDeslizadorComponent,
+    RegLubricantesAfinesComponent,
+    RegLubricantesAfines2Component,
+    RegLubricantesAfines3Component
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente
@@ -80,7 +86,10 @@ import { VerObsDeslizadorComponent } from './components/control-hrs-deslizador/v
     RegAsigPresupuestalComponent,
     CuadroControlTamboComponent,
     RegHrsDeslizadorComponent,
-    VerObsDeslizadorComponent
+    VerObsDeslizadorComponent,
+    RegLubricantesAfinesComponent,
+    RegLubricantesAfines2Component,
+    RegLubricantesAfines3Component
   ],
   imports: [
     CommonModule,
@@ -90,6 +99,7 @@ import { VerObsDeslizadorComponent } from './components/control-hrs-deslizador/v
   ],
   providers: [
     DatePipe,
+    DecimalPipe,
     { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }//DATEPICKER MUESTRA LA FECHA EN FORMATO DD/MM/YYYY
   ]
 })
