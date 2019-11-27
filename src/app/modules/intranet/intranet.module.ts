@@ -36,6 +36,7 @@ import { VerObsDeslizadorComponent } from './components/control-hrs-deslizador/v
 import { RegLubricantesAfinesComponent } from './components/home/reg-lubricantes-afines/reg-lubricantes-afines.component';
 import { RegLubricantesAfines2Component } from './components/bandeja-gen-electrico/reg-lubricantes-afines2/reg-lubricantes-afines2.component';
 import { RegLubricantesAfines3Component } from './components/bandeja-deslizadores/reg-lubricantes-afines3/reg-lubricantes-afines3.component';
+import { ControlMantVehiculoComponent } from './components/control-mant-vehiculo/control-mant-vehiculo.component';
 
 @NgModule({
   entryComponents: [
@@ -89,7 +90,8 @@ import { RegLubricantesAfines3Component } from './components/bandeja-deslizadore
     VerObsDeslizadorComponent,
     RegLubricantesAfinesComponent,
     RegLubricantesAfines2Component,
-    RegLubricantesAfines3Component
+    RegLubricantesAfines3Component,
+    ControlMantVehiculoComponent
   ],
   imports: [
     CommonModule,
