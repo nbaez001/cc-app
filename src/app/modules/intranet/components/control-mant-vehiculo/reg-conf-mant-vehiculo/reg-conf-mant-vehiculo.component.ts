@@ -231,7 +231,7 @@ export class RegConfMantVehiculoComponent implements OnInit {
 
   }
 
-  public buscarActa(): void {
+  public buscarActa(evt): void {
     document.getElementById('fileInput').click();
   }
 
@@ -245,7 +245,7 @@ export class RegConfMantVehiculoComponent implements OnInit {
     }
   }
 
-  public buscarActa2(): void {
+  public buscarActa2(evt): void {
     document.getElementById('fileInput2').click();
   }
 
@@ -259,7 +259,7 @@ export class RegConfMantVehiculoComponent implements OnInit {
     }
   }
 
-  public buscarAct3a(): void {
+  public buscarActa3(evt): void {
     document.getElementById('fileInput3').click();
   }
 

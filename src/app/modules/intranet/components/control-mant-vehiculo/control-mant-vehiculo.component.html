@@ -11,7 +11,7 @@
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
                 <mat-label>Unidad</mat-label>
-                <mat-select formControlName="unidad" (selectionChange)="cargarTambos()">
+                <mat-select formControlName="unidad">
                   <mat-option *ngFor="let unidad of unidades" [value]="unidad">
                     {{unidad.nombre}}
                   </mat-option>

@@ -38,14 +38,14 @@
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}" *ngIf="getUser.perfil.id==3">
               <mat-form-field appearance="legacy">
                 <input matInput [matDatepicker]="picker" placeholder="Fecha inicio busqueda">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}" *ngIf="getUser.perfil.id==3">
               <mat-form-field appearance="legacy">
                 <input matInput [matDatepicker]="picker2" placeholder="Fecha fin busqueda">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -98,7 +98,7 @@
                 <button mat-icon-button matTooltip="Registrar SOAT" (click)="regSOAT(element)">
                   <mat-icon><img class="icono" src="../../../../../assets/images/icons/soat.png"></mat-icon>
                 </button>
-                <button mat-icon-button matTooltip="Articulos de emergencia y proteccion de unidades"
+                <button mat-icon-button matTooltip="Declaracion de articulos de emergencia"
                   (click)="regArticulosEmergencia(element)">
                   <mat-icon>work</mat-icon>
                 </button>

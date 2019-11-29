@@ -93,6 +93,8 @@ export class BandejaDeslizadoresComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  get getUser() { return this.user; }
+
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
     @Inject(UsuarioService) private user: UsuarioService,
