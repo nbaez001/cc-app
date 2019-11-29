@@ -40,6 +40,7 @@ import { ControlMantVehiculoComponent } from './components/control-mant-vehiculo
 import { VerObsMantComponent } from './components/control-mant-vehiculo/ver-obs-mant/ver-obs-mant.component';
 import { RegMantVehiculoComponent } from './components/control-mant-vehiculo/reg-mant-vehiculo/reg-mant-vehiculo.component';
 import { RegConfMantVehiculoComponent } from './components/control-mant-vehiculo/reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
+import { RegDetMatVehiculoComponent } from './components/control-mant-vehiculo/reg-det-mat-vehiculo/reg-det-mat-vehiculo.component';
 
 @NgModule({
   entryComponents: [
@@ -63,7 +64,8 @@ import { RegConfMantVehiculoComponent } from './components/control-mant-vehiculo
     RegLubricantesAfines3Component,
     VerObsMantComponent,
     RegMantVehiculoComponent,
-    RegConfMantVehiculoComponent
+    RegConfMantVehiculoComponent,
+    RegDetMatVehiculoComponent
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente
@@ -100,7 +102,8 @@ import { RegConfMantVehiculoComponent } from './components/control-mant-vehiculo
     ControlMantVehiculoComponent,
     VerObsMantComponent,
     RegMantVehiculoComponent,
-    RegConfMantVehiculoComponent
+    RegConfMantVehiculoComponent,
+    RegDetMatVehiculoComponent
   ],
   imports: [
     CommonModule,

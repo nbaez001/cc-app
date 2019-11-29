@@ -198,7 +198,7 @@ export class ControlMantVehiculoComponent implements OnInit {
   regMantenimientoVehicular(obj): void {
     let indice = this.listaMantenimientos.indexOf(obj);
     const dialogRef = this.dialog.open(RegMantVehiculoComponent, {
-      width: '700px',
+      width: '90%',
       data: { name: 'NERIO', animal: 'LEON' }
     });
 

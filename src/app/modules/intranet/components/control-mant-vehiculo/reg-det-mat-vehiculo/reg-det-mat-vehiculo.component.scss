@@ -1,0 +1,25 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomTipoServicio: (
+      width: 4rem
+    ),
+    descripcion: (
+      width: 10rem
+    ),
+    cantidad: (
+      width: 8rem
+    ),
+    unidadMedida: (
+      width: 5rem
+    )
+  )
+);

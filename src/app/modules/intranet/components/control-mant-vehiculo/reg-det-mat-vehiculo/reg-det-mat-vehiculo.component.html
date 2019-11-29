@@ -1,0 +1,70 @@
+<h1 mat-dialog-title>Registrar detalle servicio</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formularioGrp">
+    <mat-grid-list cols="12" rowHeight="50px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <mat-label>Tipo servicio</mat-label>
+          <mat-select formControlName="tipoServicio">
+            <mat-option *ngFor="let tipoServicio of listaTipoServicio" [value]="tipoServicio">
+              {{tipoServicio.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <input matInput formControlName="descripcion" placeholder="Descripcion" type="text" [Uppercased]>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <input matInput formControlName="cantidad" placeholder="Cantidad" type="number" [Uppercased]>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <input matInput formControlName="unidadMedida" placeholder="Unidad medida" type="text" [Uppercased]>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+        <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="opt" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button matTooltip="Quitar conductor" (click)="delConductor(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <div class="empty" *ngIf="!isLoading && dataSource === null">
+      No existe datos para mostrar en la tabla
+    </div>
+
+    <div *ngIf="isLoading" class="spinerTable">
+      <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
+
+    <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Salir</button>
+</div>
