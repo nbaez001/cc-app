@@ -1,8 +1,10 @@
 export class MantenimientoVehicular {
     id: number;
+    idUnidad: number;
+    nomUnidad: string;
     idTipomantenimiento: number;
     nomTipoMantenimiento: string;
-    
+
     idTipoAsigPresupuesto: number;
     nomTipoAsigPresupuesto: string;
     codAsigPresupuesto: string;
@@ -14,4 +16,7 @@ export class MantenimientoVehicular {
     cartaInformeProveedor: string;
     actaRecepccionUURR: string;
     obsRecepccionUURR: string;
+
+    idEstadoMantenimiento: number;
+    nomEstadoMantenimiento: string;
 }

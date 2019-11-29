@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MantenimientoVehicular } from 'src/app/model/mantenimiento-vehiculo.model';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { UNIDADES, TIPOSMANTENIMIENTO, TIPOEJECUCION, MANTENIMIENTOS } from 'src/app/common';
+import { VerObsMantComponent } from './ver-obs-mant/ver-obs-mant.component';
+import { RegMantVehiculoComponent } from './reg-mant-vehiculo/reg-mant-vehiculo.component';
+import { RegConfMantVehiculoComponent } from './reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
 
 @Component({
   selector: 'app-control-mant-vehiculo',
@@ -27,69 +35,58 @@ export class ControlMantVehiculoComponent implements OnInit {
 
   unidades = [];
   tambos = [];
-  vehiculos = [];
-  listaKilometrajes: Kilometraje[];
+  tiposMantenimiento = [];
+  tiposPresupuesto = [];
+  listaMantenimientos: MantenimientoVehicular[];
 
   displayedColumns: string[];
-  dataSource: MatTableDataSource<Kilometraje>;
+  dataSource: MatTableDataSource<MantenimientoVehicular>;
 
   columnsGrilla = [
     {
       columnDef: 'id',
       header: 'N°',
-      cell: (kilometraje: Kilometraje) => (kilometraje.id != null) ? `${kilometraje.id}` : ''
+      cell: (mant: MantenimientoVehicular) => (mant.id != null) ? `${mant.id}` : ''
     }, {
-      columnDef: 'unidad',
-      header: 'UNIDAD',
-      cell: (kilometraje: Kilometraje) => (kilometraje.unidad != null) ? `${kilometraje.unidad}` : ''
+      columnDef: 'nomTipoMantenimiento',
+      header: 'TIPO MANTENIMIENTO',
+      cell: (mant: MantenimientoVehicular) => (mant.nomTipoMantenimiento != null) ? `${mant.nomTipoMantenimiento}` : ''
     }, {
-      columnDef: 'tambo',
-      header: 'TAMBO',
-      cell: (kilometraje: Kilometraje) => (kilometraje.tambo != null) ? `${kilometraje.tambo}` : ''
+      columnDef: 'nomTipoAsigPresupuesto',
+      header: 'TIPO PRESUPUESTO',
+      cell: (mant: MantenimientoVehicular) => (mant.nomTipoAsigPresupuesto != null) ? `${mant.nomTipoAsigPresupuesto}` : ''
     }, {
-      columnDef: 'tipo',
-      header: 'TIPO',
-      cell: (kilometraje: Kilometraje) => (kilometraje.tipo != null) ? `${kilometraje.tipo}` : ''
+      columnDef: 'codAsigPresupuesto',
+      header: 'CODIGO PRESUPUESTO',
+      cell: (mant: MantenimientoVehicular) => (mant.codAsigPresupuesto != null) ? `${mant.codAsigPresupuesto}` : ''
     }, {
-      columnDef: 'marca',
-      header: 'MARCA',
-      cell: (kilometraje: Kilometraje) => (kilometraje.marca != null) ? `${kilometraje.marca}` : ''
+      columnDef: 'marcimporteAsigPresupuestoa',
+      header: 'MONTO PRESUPUESTO',
+      cell: (mant: MantenimientoVehicular) => (mant.importeAsigPresupuesto != null) ? `${mant.importeAsigPresupuesto}` : ''
     }, {
-      columnDef: 'placa',
-      header: 'PLACA',
-      cell: (kilometraje: Kilometraje) => (kilometraje.placa != null) ? `${kilometraje.placa}` : ''
+      columnDef: 'nroHojatramiteConf',
+      header: 'NRO HOJA TRAMITE',
+      cell: (mant: MantenimientoVehicular) => (mant.nroHojatramiteConf != null) ? `${mant.nroHojatramiteConf}` : ''
     }, {
-      columnDef: 'horaSalida',
-      header: 'HORA SALIDA',
-      cell: (kilometraje: Kilometraje) => (kilometraje.horaSalida != null) ? `${kilometraje.horaSalida}` : ''
+      columnDef: 'nroInformeConf',
+      header: 'NRO INFORME CONF.',
+      cell: (mant: MantenimientoVehicular) => (mant.nroInformeConf != null) ? `${mant.nroInformeConf}` : ''
     }, {
-      columnDef: 'horaLlegada',
-      header: 'HORA LLEGADA',
-      cell: (kilometraje: Kilometraje) => (kilometraje.horaLlegada != null) ? `${kilometraje.horaLlegada}` : ''
+      columnDef: 'actaRecepcionEmpresa',
+      header: 'NRO ACTA RECEPCION EMPRESA',
+      cell: (mant: MantenimientoVehicular) => (mant.actaRecepcionEmpresa != null) ? `${mant.actaRecepcionEmpresa}` : ''
     }, {
-      columnDef: 'kilometrajeSalida',
-      header: 'KILOMETRAJE SALIDA',
-      cell: (kilometraje: Kilometraje) => (kilometraje.kilometrajeSalida != null) ? `${kilometraje.kilometrajeSalida}` : ''
+      columnDef: 'cartaInformeProveedor',
+      header: 'CARTA INFORME PROVEEDOR',
+      cell: (mant: MantenimientoVehicular) => (mant.cartaInformeProveedor != null) ? `${mant.cartaInformeProveedor}` : ''
     }, {
-      columnDef: 'kilometrajeLlegada',
-      header: 'KILOMETRAJE LLEGADA',
-      cell: (kilometraje: Kilometraje) => (kilometraje.kilometrajeLlegada != null) ? `${kilometraje.kilometrajeLlegada}` : ''
+      columnDef: 'actaRecepccionUURR',
+      header: 'ACTA RECEPCCION UURR',
+      cell: (mant: MantenimientoVehicular) => (mant.actaRecepccionUURR != null) ? `${mant.actaRecepccionUURR}` : ''
     }, {
-      columnDef: 'kilometrosRecorrido',
-      header: 'KILOMETRAJE RECORRIDO',
-      cell: (kilometraje: Kilometraje) => (kilometraje.kilometrosRecorrido != null) ? `${kilometraje.kilometrosRecorrido}` : ''
-    }, {
-      columnDef: 'lugarDestino',
-      header: 'LUGAR DESTINO',
-      cell: (kilometraje: Kilometraje) => (kilometraje.lugarDestino != null) ? `${kilometraje.lugarDestino}` : ''
-    }, {
-      columnDef: 'codComisionSISMONITOR',
-      header: 'COD. COMISION SISMONITOR',
-      cell: (kilometraje: Kilometraje) => (kilometraje.codComisionSISMONITOR != null) ? `${kilometraje.codComisionSISMONITOR}` : ''
-    }, {
-      columnDef: 'fechaComision',
-      header: 'FECHA COMISION',
-      cell: (kilometraje: Kilometraje) => (kilometraje.fechaComision != null) ? `${kilometraje.fechaComision}` : ''
+      columnDef: 'nomEstadoMantenimiento',
+      header: 'ESTADO MANTENIMIENTO',
+      cell: (mant: MantenimientoVehicular) => (mant.nomEstadoMantenimiento != null) ? `${mant.nomEstadoMantenimiento}` : ''
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -105,8 +102,8 @@ export class ControlMantVehiculoComponent implements OnInit {
 
     this.bandejaGrp = this.fb.group({
       unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      vehiculo: ['', [Validators.required]]
+      tipoMantenimiento: ['', [Validators.required]],
+      tipoPresupuesto: ['', [Validators.required]]
     });
 
     this.definirTabla();
@@ -119,8 +116,11 @@ export class ControlMantVehiculoComponent implements OnInit {
 
   public inicializarVariables(): void {
     this.cargarUnidades();
+    this.cargarTipomantenimiento();
+    this.cargarTipopresupuesto();
 
     this.spinnerService.hide();
+    this.buscar();
   }
 
   public cargarUnidades() {
@@ -132,37 +132,20 @@ export class ControlMantVehiculoComponent implements OnInit {
     } else {
       this.bandejaGrp.get('unidad').setValue(this.unidades[0]);
     }
-
-    this.cargarTambos();
   }
 
-  public cargarTambos() {
-    let idUnidad = this.bandejaGrp.get('unidad').value.id;
+  public cargarTipomantenimiento() {
+    this.tiposMantenimiento = JSON.parse(JSON.stringify(TIPOSMANTENIMIENTO));
+    this.tiposMantenimiento.unshift({ id: 0, nombre: 'TODOS' });
 
-    this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idUnidad == idUnidad)));
-    this.tambos.unshift({ id: 0, nombre: 'TODOS', idUnidad: 0 });
-
-    if (this.user.perfil.id != 3) {
-      this.bandejaGrp.get('tambo').setValue(this.tambos.filter(el => el.id == this.user.idTambo)[0]);
-    } else {
-      this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
-    }
-
-    this.cargarVehiculos();
+    this.bandejaGrp.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
   }
 
-  public cargarVehiculos() {
-    let idUnidad = this.bandejaGrp.get('unidad').value.id;
-    let idTambo = this.bandejaGrp.get('tambo').value.id;
+  public cargarTipopresupuesto() {
+    this.tiposPresupuesto = JSON.parse(JSON.stringify(TIPOEJECUCION));
+    this.tiposPresupuesto.unshift({ id: 0, nombre: 'TODOS' });
 
-    this.vehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad || 0 == idUnidad));
-    this.vehiculos = this.vehiculos.filter(el => (el.idTambo == idTambo || 0 == idTambo));
-
-    this.vehiculos.unshift({ id: 0, nombre: 'TODOS' });
-
-    this.bandejaGrp.get('vehiculo').setValue(this.vehiculos[0]);
-
-    this.buscar();
+    this.bandejaGrp.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
   }
 
   definirTabla(): void {
@@ -175,50 +158,24 @@ export class ControlMantVehiculoComponent implements OnInit {
 
   public cargarDatosTabla(): void {
     this.dataSource = null;
-    if (this.listaKilometrajes.length > 0) {
-      this.dataSource = new MatTableDataSource(this.listaKilometrajes);
+    if (this.listaMantenimientos.length > 0) {
+      this.dataSource = new MatTableDataSource(this.listaMantenimientos);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
     this.spinnerService.hide();
   }
 
-  calcularSumaKilomatrajes(vehiculo): void {
-    if (this.user.perfil.id == 3) {
-      let suma = 0.0;
-      let galones = '';
-      this.listaKilometrajes.forEach(el => {
-        suma += el.kilometrosRecorrido;
-      });
-
-      if (vehiculo.tipo == 'CAMIONETA') {
-        galones = (suma / 35).toFixed(2);//EQUIVALENCIA CAMIONETAS
-      } else {
-        galones = (suma / 80).toFixed(2);;//EQUIVALENCIA MOTOCILCETAS
-      }
-      let total = new Kilometraje();
-      total.kilometrajeLlegada = 'TOTAL KILOMETROS';
-      total.kilometrosRecorrido = suma;
-      total.lugarDestino = 'TOTAL GALONES';
-      total.codComisionSISMONITOR = galones + '';
-
-      this.listaKilometrajes.push(total);
-    }
-  }
-
   buscar() {
     console.log('Buscar');
     let idUnidad = this.bandejaGrp.get('unidad').value.id;
-    let idTambo = this.bandejaGrp.get('tambo').value.id;
-    let idVehiculo = this.bandejaGrp.get('vehiculo').value.id;
+    let idTipomantenimiento = this.bandejaGrp.get('tipoMantenimiento').value.id;
+    let idTipopresupuesto = this.bandejaGrp.get('tipoPresupuesto').value.id;
 
-    console.log(idUnidad + ' ' + idTambo + ' ' + idVehiculo);
+    this.listaMantenimientos = MANTENIMIENTOS.filter(el => (el.idUnidad == idUnidad || 0 == idUnidad));
+    this.listaMantenimientos = this.listaMantenimientos.filter(el => (el.idTipomantenimiento == idTipomantenimiento || 0 == idTipomantenimiento));
+    this.listaMantenimientos = this.listaMantenimientos.filter(el => (el.idTipoAsigPresupuesto == idTipopresupuesto || 0 == idTipopresupuesto));
 
-    this.listaKilometrajes = KILOMETRAJES.filter(el => (el.idUnidad == idUnidad && el.idTambo == idTambo && el.idVehiculo == idVehiculo) || (el.idUnidad == idUnidad && el.idTambo == idTambo && 0 == idVehiculo) || (el.idUnidad == idUnidad && 0 == idTambo && 0 == idVehiculo) || (0 == idUnidad && 0 == idTambo && 0 == idVehiculo));
-
-    if (idVehiculo != 0) {
-      this.calcularSumaKilomatrajes(this.bandejaGrp.get('vehiculo').value);
-    }
     this.cargarDatosTabla();
   }
 
@@ -226,39 +183,35 @@ export class ControlMantVehiculoComponent implements OnInit {
     console.log('Exportar');
   }
 
-  regKilometraje(obj): void {
+  confMantenimiento(obj): void {
     console.log(obj);
-    const dialogRef = this.dialog.open(RegKilometrajeComponent, {
+    const dialogRef = this.dialog.open(RegConfMantVehiculoComponent, {
       width: '700px',
-      data: { name: 'NERIO', animal: 'LEON' }
+      data: obj
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.listaKilometrajes.unshift(result);
-        this.cargarDatosTabla();
-      }
+      
     });
   }
 
-  editKilometraje(obj): void {
-    let indice = this.listaKilometrajes.indexOf(obj);
-    const dialogRef = this.dialog.open(RegKilometrajeComponent, {
+  regMantenimientoVehicular(obj): void {
+    let indice = this.listaMantenimientos.indexOf(obj);
+    const dialogRef = this.dialog.open(RegMantVehiculoComponent, {
       width: '700px',
       data: { name: 'NERIO', animal: 'LEON' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      // this.listaKilometrajes.splice(indice,1);
-      // this.listaKilometrajes.push(result);
+      // this.listaMantenimientos.splice(indice,1);
+      // this.listaMantenimientos.push(result);
       // this.cargarDatosTabla();
     });
   }
 
-  verObsKilometraje(obj): void {
-    console.log(obj);
-    const dialogRef = this.dialog.open(VerObservacionComponent, {
+  verObsMantenimientoVehicular(obj): void {
+    const dialogRef = this.dialog.open(VerObsMantComponent, {
       width: '500px',
       data: obj
     });

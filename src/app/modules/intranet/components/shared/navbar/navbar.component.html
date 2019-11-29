@@ -81,6 +81,11 @@
         </a>
       </div>
 
+      
+      <a mat-list-item [routerLink]="['/intranet/control-mantenimiento']" routerLinkActive="active-list-item">
+        <mat-icon>commute</mat-icon> Control mantenimiento
+      </a>
+
 
       <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu4 = !showSubmenu4"
         *ngIf="getUser.perfil.id==3">

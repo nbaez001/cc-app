@@ -13,6 +13,7 @@ import { Deslizador } from './model/deslizador.model';
 import { HorasDeslizador } from './model/horas-deslizador.model';
 import { CuadroControlTambo } from './model/cuadro-control-tambo.model';
 import { ConsumoGenerador } from './model/consumo-generador.model';
+import { MantenimientoVehicular } from './model/mantenimiento-vehiculo.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -20,7 +21,7 @@ export const UNIDADES: Unidad[] = [
     { id: 3, nombre: 'U.T. HUANCAVELICA' },
     { id: 20, nombre: 'U.T. LORETO' },
     { id: 21, nombre: 'U.T. UCAYALI' },
-    { id: 22, nombre: 'U.T. SAN MARTIN' },
+    { id: 22, nombre: 'U.T. SAN MARTIN' }
 ];
 
 export const TAMBOS: Tambo[] = [
@@ -294,4 +295,28 @@ export const CUADROCONTROLTAMBO: CuadroControlTambo[] = [
 export const PRODUCTOSLUBRICANTE: Object[] = [
     { id: 1, nombre: 'LUBRICANTE' },
     { id: 2, nombre: 'ACEITE' },
+];
+
+export const TIPOSMANTENIMIENTO: Object[] = [
+    { id: 1, nombre: 'PREVENTIVO' },
+    { id: 2, nombre: 'CORRECTIVO' },
+];
+
+export const ESTADOSMANTENIMIENTO: Object[] = [
+    { id: 1, nombre: 'ASIGNADO' },
+    { id: 2, nombre: 'CONFORME' },
+];
+
+export const TIPOEPRESUPUESTO: Master[] = [
+    { id: 1, nombre: 'FONDO POR ENCARGO (F/E)' },
+    { id: 2, nombre: 'ORDEN DE SERVICIO (OS)' },
+    { id: 3, nombre: 'CAJA CHICA (CC)' }
+];
+
+export const MANTENIMIENTOS: MantenimientoVehicular[] = [
+    { id: 1, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTipomantenimiento: 2, nomTipoMantenimiento: 'CORRECTIVO', idTipoAsigPresupuesto: 2, nomTipoAsigPresupuesto: 'ORDEN DE SERVICIO (OS)', codAsigPresupuesto: '861-2019', importeAsigPresupuesto: 8140.00, nroHojatramiteConf: '8740-2019', nroInformeConf: 'S/N', actaRecepcionEmpresa: '', cartaInformeProveedor: 'S/N', actaRecepccionUURR: '', obsRecepccionUURR: 'EJECUTADO CONFORME', idEstadoMantenimiento: 2, nomEstadoMantenimiento: 'CONFORME' },
+    { id: 2, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTipomantenimiento: 1, nomTipoMantenimiento: 'PREVENTIVO', idTipoAsigPresupuesto: 1, nomTipoAsigPresupuesto: 'FONDO POR ENCARGO (F/E)', codAsigPresupuesto: '448-2019', importeAsigPresupuesto: 1600.00, nroHojatramiteConf: '29187-2019', nroInformeConf: '', actaRecepcionEmpresa: '', cartaInformeProveedor: '', actaRecepccionUURR: '', obsRecepccionUURR: 'EJECUTADO CONFORME', idEstadoMantenimiento: 1, nomEstadoMantenimiento: 'ASIGNADO' },
+    { id: 3, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idTipomantenimiento: 1, nomTipoMantenimiento: 'PREVENTIVO', idTipoAsigPresupuesto: 1, nomTipoAsigPresupuesto: 'FONDO POR ENCARGo (F/E)', codAsigPresupuesto: '052-2019', importeAsigPresupuesto: 3741.00, nroHojatramiteConf: '', nroInformeConf: '04-2019', actaRecepcionEmpresa: '', cartaInformeProveedor: '', actaRecepccionUURR: '', obsRecepccionUURR: 'EJECUTADO CONFORME', idEstadoMantenimiento: 2, nomEstadoMantenimiento: 'CONFORME' },
+    { id: 4, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idTipomantenimiento: 1, nomTipoMantenimiento: 'PREVENTIVO', idTipoAsigPresupuesto: 3, nomTipoAsigPresupuesto: 'CAJA CHICA (CC)', codAsigPresupuesto: '', importeAsigPresupuesto: 50.00, nroHojatramiteConf: '', nroInformeConf: '03-2019', actaRecepcionEmpresa: '', cartaInformeProveedor: '', actaRecepccionUURR: '', obsRecepccionUURR: 'EJECUTADO CONFORME', idEstadoMantenimiento: 2, nomEstadoMantenimiento: 'CONFORME' },
+    { id: 5, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idTipomantenimiento: 2, nomTipoMantenimiento: 'CORRECTIVO', idTipoAsigPresupuesto: 2, nomTipoAsigPresupuesto: 'ORDEN DE SERVICIO (OS)', codAsigPresupuesto: '1576-2019', importeAsigPresupuesto: 6086.00, nroHojatramiteConf: '24721-2019', nroInformeConf: '', actaRecepcionEmpresa: '', cartaInformeProveedor: '', actaRecepccionUURR: '', obsRecepccionUURR: 'EJECUTADO CONFORME', idEstadoMantenimiento: 2, nomEstadoMantenimiento: 'CONFORME' },
 ];

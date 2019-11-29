@@ -11,6 +11,7 @@ import { BdjEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal
 import { BandejaDeslizadoresComponent } from './components/bandeja-deslizadores/bandeja-deslizadores.component';
 import { CuadroControlTamboComponent } from './components/cuadro-control-tambo/cuadro-control-tambo.component';
 import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizador/control-hrs-deslizador.component';
+import { ControlMantVehiculoComponent } from './components/control-mant-vehiculo/control-mant-vehiculo.component';
 
 const intranetRoutes: Routes = [
   {
@@ -40,11 +41,11 @@ const intranetRoutes: Routes = [
         path: 'horas-generador',
         component: ControlGenElectricoComponent,
         data: { title: 'Horas Generador electrico' }
-      },{
+      }, {
         path: 'horas-deslizador',
         component: ControlHrsDeslizadorComponent,
         data: { title: 'Hpras deslizador' }
-      },{
+      }, {
         path: 'asignacion-presupuestal',
         component: BdjAsigPresupuestalComponent,
         data: { title: 'Bandeja asignacion economico presupuestal' }
@@ -60,10 +61,14 @@ const intranetRoutes: Routes = [
         path: 'cuadro-control-tambo',
         component: CuadroControlTamboComponent,
         data: { title: 'Cuadro control tambos' }
-      },{
+      }, {
         path: 'orden-compra',
         component: BandejaOrdenCompraComponent,
         data: { title: 'Ordenes de compra' }
+      }, {
+        path: 'control-mantenimiento',
+        component: ControlMantVehiculoComponent,
+        data: { title: 'Mantenimiento vehicular' }
       }
     ]
   }

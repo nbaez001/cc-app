@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>Registrar mantenimiento vehicular</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formularioGrp">
+    <mat-grid-list cols="12" rowHeight="50px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <mat-label>Unidad</mat-label>
+          <mat-select formControlName="unidad">
+            <mat-option *ngFor="let unid of unidades" [value]="unid">
+              {{unid.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <mat-label>Tipo mantenimiento</mat-label>
+          <mat-select formControlName="tipoMantenimiento">
+            <mat-option *ngFor="let tipoMantenimiento of tiposMantenimiento" [value]="tipoMantenimiento">
+              {{tipoMantenimiento.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <mat-label>Tipo presupuesto</mat-label>
+          <mat-select formControlName="tipoPresupuesto">
+            <mat-option *ngFor="let tipoPresupuesto of tiposPresupuesto" [value]="tipoPresupuesto">
+              {{tipoPresupuesto.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <input formControlName="codAsigPresupuesto" matInput type="text" placeholder="Nro OS/Nro RES.ADM.">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field>
+          <input formControlName="montoPresupuesto" matInput type="number" placeholder="Monto presupuesto">
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="guardar()">Guardar</button>
+  <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+</div>
