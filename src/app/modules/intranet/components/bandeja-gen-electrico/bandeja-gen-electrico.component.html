@@ -30,20 +30,20 @@
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <input matInput placeholder="Codigo patrimonio">
+                <input formControlName="codPatrimonio" matInput placeholder="Codigo patrimonio">
               </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}" *ngIf="getUser.perfil.id==3">
               <mat-form-field appearance="legacy">
-                <input matInput [matDatepicker]="picker" placeholder="Fecha inicio busqueda"
-                  *ngIf="getUser.perfil.id==3">
+                <input matInput formControlName="fecInicio" [matDatepicker]="picker"
+                  placeholder="Fecha inicio busqueda">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}" *ngIf="getUser.perfil.id==3">
               <mat-form-field appearance="legacy">
-                <input matInput [matDatepicker]="picker2" placeholder="Fecha fin busqueda" *ngIf="getUser.perfil.id==3">
+                <input matInput formControlName="fecFin" [matDatepicker]="picker2" placeholder="Fecha fin busqueda">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
