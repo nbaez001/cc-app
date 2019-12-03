@@ -108,7 +108,10 @@ export class RegConductorComponent implements OnInit {
     this.columnsGrilla.forEach(c => {
       this.displayedColumns.push(c.columnDef);
     });
-    this.displayedColumns.push('opt');
+
+    if (this.user.perfil.id != 3) {
+      this.displayedColumns.push('opt');
+    }
   }
 
   public cargarDatosTabla(): void {
