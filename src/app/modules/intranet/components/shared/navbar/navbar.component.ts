@@ -17,6 +17,7 @@ export class NavbarComponent {
   @Input() showSubmenu2: boolean;
   @Input() showSubmenu3: boolean;
   @Input() showSubmenu4: boolean;
+  @Input() showSubmenu5: boolean;
   @Input() showSubmenu: boolean;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

@@ -19,10 +19,8 @@ export class VerObservacionConsComponent implements OnInit {
     console.log('modal');
     console.log(this.data);
     this.observacionGrp = this.fb.group({
-      observacion: ['', Validators.required]
+      observacion: [{ value: this.data.observacion, disabled: true }, Validators.required]
     });
-
-    this.observacionGrp.get('observacion').setValue(this.data.observacion);
   }
 
 

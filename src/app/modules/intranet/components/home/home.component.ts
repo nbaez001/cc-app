@@ -62,7 +62,6 @@ export class HomeComponent implements OnInit {
       }
     }
   };
-
   formErrors = {
     'name': '',
     'email': '',
@@ -74,7 +73,6 @@ export class HomeComponent implements OnInit {
       'proficiency': ''
     }
   };
-
   columnsGrilla = [
     {
       columnDef: 'id',
@@ -113,15 +111,21 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
+    const validarIntervalo = setInterval(() => {
+      if (this.user.getId) {
+        console.log('USUARIO');
+        console.log(this.user);
+        this.bandejaGrp = this.fb.group({
+          unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          tipovehiculo: ['', [Validators.required]]
+        });
 
-    this.bandejaGrp = this.fb.group({
-      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tipovehiculo: ['', [Validators.required]]
-    });
-
-    this.definirTabla();
-    this.inicializarVariables();
+        this.definirTabla();
+        this.inicializarVariables();
+        clearInterval(validarIntervalo);
+      }
+    }, 100);
   }
 
   public inicializarVariables(): void {

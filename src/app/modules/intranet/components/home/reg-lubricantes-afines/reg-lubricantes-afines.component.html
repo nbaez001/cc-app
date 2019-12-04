@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Registrar lubricante</h1>
+<h1 mat-dialog-title>Registro preventivo de lubricante</h1>
 <div mat-dialog-content>
   <form [formGroup]="formularioGrp" *ngIf="getUser.perfil.id!=3">
     <mat-grid-list cols="12" rowHeight="50px">
@@ -50,7 +50,7 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
-          <input formControlName="cantidad" matInput type="number" placeholder="Cantidad" (keyup)="calcular()">
+          <input formControlName="cantidad" matInput type="number" placeholder="Cantidad lubricante" (keyup)="calcular()">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">

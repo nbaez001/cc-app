@@ -13,7 +13,8 @@
       </span>
     </div>
     <mat-nav-list>
-      <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu1 = !showSubmenu1">
+      <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu1}"
+        (click)="showSubmenu1 = !showSubmenu1">
         <mat-icon>assignment</mat-icon> Bienes patrimoniales
         <span class="spacer"></span>
         <mat-icon>expand_more</mat-icon>
@@ -38,8 +39,8 @@
 
 
 
-      <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu3 = !showSubmenu3"
-        *ngIf="getUser.perfil.id==3">
+      <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu3}"
+        (click)="showSubmenu3 = !showSubmenu3" *ngIf="getUser.perfil.id==3">
         <mat-icon>assessment</mat-icon> Control presupuesto
         <span class="spacer"></span>
         <mat-icon>expand_more</mat-icon>
@@ -58,7 +59,8 @@
       </div>
 
 
-      <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu2 = !showSubmenu2">
+      <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu2}"
+        (click)="showSubmenu2 = !showSubmenu2">
         <mat-icon>score</mat-icon> Control combustible
         <span class="spacer"></span>
         <mat-icon>expand_more</mat-icon>
@@ -81,14 +83,15 @@
         </a>
       </div>
 
-      
-      <a mat-list-item [routerLink]="['/intranet/control-mantenimiento']" routerLinkActive="active-list-item">
+
+      <a mat-list-item [routerLink]="['/intranet/control-mantenimiento']" [ngClass]="{'selected':showSubmenu5}"
+        routerLinkActive="active-list-item">
         <mat-icon>commute</mat-icon> Control mantenimiento
       </a>
 
 
-      <a mat-list-item routerLinkActive="active-list-item" (click)="showSubmenu4 = !showSubmenu4"
-        *ngIf="getUser.perfil.id==3">
+      <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu4}"
+        (click)="showSubmenu4 = !showSubmenu4" *ngIf="getUser.perfil.id==3">
         <mat-icon>airplay</mat-icon> Cuadro control
         <span class="spacer"></span>
         <mat-icon>expand_more</mat-icon>
@@ -108,8 +111,8 @@
 
 
 
-      <a mat-list-item routerLinkActive="active-list-item" *ngIf="getUser.perfil.id==3"
-        (click)="showSubmenu = !showSubmenu">
+      <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu}"
+        *ngIf="getUser.perfil.id==3" (click)="showSubmenu = !showSubmenu">
         <mat-icon>extension</mat-icon> Configuracion
         <span class="spacer"></span>
         <mat-icon>expand_more</mat-icon>
@@ -129,7 +132,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Control de combustible</span>
+      <!-- <span>Control de combustible</span> -->
       <span class="spacer"></span>
       <button mat-button [matMenuTriggerFor]="usuario">
         {{getUser.usuario}}

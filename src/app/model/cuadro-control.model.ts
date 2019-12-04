@@ -2,14 +2,18 @@ export class CuadroControl {
     secFun: number;
     idUnidad: number;
     nomUnidad: string;
-    
+
     idPartida: number;
     nomPartida: string;
     totalAvancePresupuestal: number;
 
-    dieselTotal: number;
-    gasMotocicletasTotal: number;
-    gasGeneradoresTotal: number;
-    gasDeslizadoresTotal: number;
-    lubricantesTotal: number;
+    combCamionetas: number;
+    combMotocicletas: number;
+    combGeneradores: number;
+    combDeslizadores: number;
+
+    lubCamionetas: number;
+    lubMotocicletas: number;
+    lubGeneradores: number;
+    lubDeslizadores: number;
 }

@@ -6,7 +6,7 @@
         <mat-card-title class="box-section-title"> BUSQUEDA VEHICULOS </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="bandejaGrp" class="example-container">
+        <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
@@ -107,7 +107,7 @@
                     <img style="height: 25px; width: auto;" src="../../../../../assets/images/icons/car-driver.png">
                   </mat-icon>
                 </button>
-                <button mat-icon-button matTooltip="Lubricantes y afines" (click)="regLubricante(element)">
+                <button mat-icon-button matTooltip="Alerta preventivo Lubricantes" (click)="regLubricante(element)">
                   <mat-icon class="icono" matBadge="1" matBadgeColor="warn">
                     party_mode
                   </mat-icon>

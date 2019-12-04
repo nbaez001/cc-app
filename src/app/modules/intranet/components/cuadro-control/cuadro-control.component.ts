@@ -26,14 +26,18 @@ export class CuadroControlComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
+    const validarIntervalo = setInterval(() => {
+      if (this.user.getId) {
+        this.bandejaGrp = this.fb.group({
+          unidad: ['', [Validators.required]],
+          anio: ['', [Validators.required]]
+        });
 
-    this.bandejaGrp = this.fb.group({
-      unidad: ['', [Validators.required]],
-      anio: ['', [Validators.required]]
-    });
-
-    // this.definirTabla();
-    this.inicializarVariables();
+        // this.definirTabla();
+        this.inicializarVariables();
+        clearInterval(validarIntervalo);
+      }
+    }, 100);
   }
 
   get getUser() {

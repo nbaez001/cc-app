@@ -93,15 +93,19 @@ export class BdjAsigPresupuestalComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
+    const validarIntervalo = setInterval(() => {
+      if (this.user.getId) {
+        this.bandejaGrp = this.fb.group({
+          anio: ['', [Validators.required]],
+          meta: ['', [Validators.required]],
+          partida: ['', [Validators.required]]
+        });
 
-    this.bandejaGrp = this.fb.group({
-      anio: ['', [Validators.required]],
-      meta: ['', [Validators.required]],
-      partida: ['', [Validators.required]]
-    });
-
-    this.definirTabla();
-    this.inicializarVariables();
+        this.definirTabla();
+        this.inicializarVariables();
+        clearInterval(validarIntervalo);
+      }
+    }, 100);
   }
 
   public inicializarVariables(): void {

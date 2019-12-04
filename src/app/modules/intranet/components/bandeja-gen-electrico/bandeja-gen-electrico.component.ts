@@ -94,17 +94,21 @@ export class BandejaGenElectricoComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
+    const validarIntervalo = setInterval(() => {
+      if (this.user.getId) {
+        this.bandejaGrp = this.fb.group({
+          unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          codPatrimonio: ['', []],
+          fecInicio: ['', []],
+          fecFin: ['', []],
+        });
 
-    this.bandejaGrp = this.fb.group({
-      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      codPatrimonio: ['', []],
-      fecInicio: ['', []],
-      fecFin: ['', []],
-    });
-
-    this.definirTabla();
-    this.inicializarVariables();
+        this.definirTabla();
+        this.inicializarVariables();
+        clearInterval(validarIntervalo);
+      }
+    }, 100);
   }
 
   get getUser() { return this.user; }

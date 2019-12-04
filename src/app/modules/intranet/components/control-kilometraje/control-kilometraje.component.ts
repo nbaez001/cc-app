@@ -110,15 +110,19 @@ export class ControlKilometrajeComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
-
-    this.bandejaGrp = this.fb.group({
-      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      vehiculo: ['', [Validators.required]]
-    });
-
-    this.definirTabla();
-    this.inicializarVariables();
+    const validarIntervalo = setInterval(() => {
+      if (this.user.getId) {
+        this.bandejaGrp = this.fb.group({
+          unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          vehiculo: ['', [Validators.required]]
+        });
+    
+        this.definirTabla();
+        this.inicializarVariables();
+        clearInterval(validarIntervalo);
+      }
+    }, 100);
   }
 
   get getUser() {

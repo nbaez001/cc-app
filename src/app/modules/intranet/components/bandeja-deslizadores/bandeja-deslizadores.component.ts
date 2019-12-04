@@ -102,14 +102,18 @@ export class BandejaDeslizadoresComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
+    const validarIntervalo = setInterval(() => {
+      if (this.user.getId) {
+        this.bandejaGrp = this.fb.group({
+          unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]]
+        });
 
-    this.bandejaGrp = this.fb.group({
-      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]]
-    });
-
-    this.definirTabla();
-    this.inicializarVariables();
+        this.definirTabla();
+        this.inicializarVariables();
+        clearInterval(validarIntervalo);
+      }
+    }, 100);
   }
 
   public inicializarVariables(): void {

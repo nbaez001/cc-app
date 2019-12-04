@@ -29,15 +29,19 @@ export class CuadroControlTamboComponent implements OnInit {
 
   ngOnInit() {
     this.spinnerService.show();
-
-    this.bandejaGrp = this.fb.group({
-      unidad: ['', [Validators.required]],
-      tambo: ['', [Validators.required]],
-      anio: ['', [Validators.required]]
-    });
-
-    // this.definirTabla();
-    this.inicializarVariables();
+    const validarIntervalo = setInterval(() => {
+      if (this.user.getId) {
+        this.bandejaGrp = this.fb.group({
+          unidad: ['', [Validators.required]],
+          tambo: ['', [Validators.required]],
+          anio: ['', [Validators.required]]
+        });
+    
+        // this.definirTabla();
+        this.inicializarVariables();
+        clearInterval(validarIntervalo);
+      }
+    }, 100);
   }
 
   public inicializarVariables(): void {

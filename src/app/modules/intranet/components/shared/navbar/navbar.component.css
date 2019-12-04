@@ -16,21 +16,24 @@
 }
 
 .sidenav > .mat-nav-list > a:hover {
-  background-color: rgb(53, 73, 93);
+  /* background-color: rgb(53, 73, 93); */
+  background-color: rgb(66, 86, 104);
 }
 
 .active-list-item {
-  background-color: rgb(53, 73, 93) !important; /* Note: You could also use a custom theme */
+  /* background-color: rgb(53, 73, 93) !important; Note: You could also use a custom theme */
+  background-color: rgb(66, 86, 104) !important;
 }
 
 .span-usuario {
   width: 220px;
   height: auto;
   color: white;
-  font-size: 18px;
+  font-size: 15px;
   text-align: center;
   padding: auto;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .mat-toolbar {
@@ -75,7 +78,8 @@ mat-icon {
 } */
 
 .child-link {
-  background: #425668;
+  /* background: #425668; */
+  background-color: #6f7f8e;
   content: "";
   height: 8px;
   width: 8px;
@@ -83,3 +87,11 @@ mat-icon {
   border-radius: 50%;
   margin-right: 10px;
 }
+
+.selected {
+  border-top: 1px solid #546371;
+  border-bottom: 1px solid #1f2f3f;
+}
+/* .selected div a{
+  border-right: 5px solid #1abb9c;
+} */
