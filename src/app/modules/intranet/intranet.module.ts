@@ -41,6 +41,7 @@ import { VerObsMantComponent } from './components/control-mant-vehiculo/ver-obs-
 import { RegMantVehiculoComponent } from './components/control-mant-vehiculo/reg-mant-vehiculo/reg-mant-vehiculo.component';
 import { RegConfMantVehiculoComponent } from './components/control-mant-vehiculo/reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
 import { RegDetMatVehiculoComponent } from './components/control-mant-vehiculo/reg-det-mat-vehiculo/reg-det-mat-vehiculo.component';
+import { SolMantVehiculoComponent } from './components/control-mant-vehiculo/sol-mant-vehiculo/sol-mant-vehiculo.component';
 
 @NgModule({
   entryComponents: [
@@ -65,7 +66,8 @@ import { RegDetMatVehiculoComponent } from './components/control-mant-vehiculo/r
     VerObsMantComponent,
     RegMantVehiculoComponent,
     RegConfMantVehiculoComponent,
-    RegDetMatVehiculoComponent
+    RegDetMatVehiculoComponent,
+    SolMantVehiculoComponent
   ],
   declarations: [
     HomeComponent, //Declaracion de nuestro componente
@@ -103,7 +105,8 @@ import { RegDetMatVehiculoComponent } from './components/control-mant-vehiculo/r
     VerObsMantComponent,
     RegMantVehiculoComponent,
     RegConfMantVehiculoComponent,
-    RegDetMatVehiculoComponent
+    RegDetMatVehiculoComponent,
+    SolMantVehiculoComponent
   ],
   imports: [
     CommonModule,

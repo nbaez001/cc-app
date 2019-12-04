@@ -31,7 +31,6 @@ export class NavbarComponent {
 
   ngOnInit() {
     this.consultarUsuario();
-    console.log(this.user);
   }
 
   get getUser(): UsuarioService {
@@ -40,10 +39,6 @@ export class NavbarComponent {
 
   public consultarUsuario() {
     let usuario: Usuario = JSON.parse(localStorage.getItem('user'));
-
-    console.log('USUARIO');
-    console.log(usuario);
-
     this.user.setId = 1;
     this.user.setUsuario = usuario.usuario;
     this.user.setContrasenia = usuario.contrasenia;

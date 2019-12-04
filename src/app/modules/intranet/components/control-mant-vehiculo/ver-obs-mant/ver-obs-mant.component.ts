@@ -19,7 +19,7 @@ export class VerObsMantComponent implements OnInit {
     console.log('modal');
     console.log(this.data);
     this.observacionGrp = this.fb.group({
-      observacion: ['', Validators.required]
+      observacion: [{ value: '', disabled: true }, Validators.required]
     });
 
     this.observacionGrp.get('observacion').setValue(this.data.obsRecepccionUURR);

@@ -5,6 +5,7 @@ import { UNIDADES, TAMBOS, VEHICULOS } from 'src/app/common';
 import { Kilometraje } from 'src/app/model/kilometraje.model';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-reg-kilometraje',
@@ -42,6 +43,9 @@ export class RegKilometrajeComponent implements OnInit {
     'totalKilometraje': {
       'required': 'Campo obligatorio'
     },
+    'fecha': {
+      'required': 'Campo obligatorio'
+    },
     'lugarDestino': {
       'required': 'Campo obligatorio'
     },
@@ -58,6 +62,7 @@ export class RegKilometrajeComponent implements OnInit {
     'kilometrajeSalida': '',
     'kilometrajeLLegada': '',
     'totalKilometraje': '',
+    'fecha': '',
     'lugarDestino': '',
     'codSismonitor': ''
   };
@@ -66,7 +71,8 @@ export class RegKilometrajeComponent implements OnInit {
     public dialogRef: MatDialogRef<RegKilometrajeComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     @Inject(ValidationService) private validationService: ValidationService,
-    @Inject(UsuarioService) private user: UsuarioService) { }
+    @Inject(UsuarioService) private user: UsuarioService,
+    private datePipe:DatePipe) { }
 
   ngOnInit() {
     this.kilometrajeGrp = this.fb.group({
@@ -78,6 +84,7 @@ export class RegKilometrajeComponent implements OnInit {
       kilometrajeSalida: ['', [Validators.required]],
       kilometrajeLLegada: ['', [Validators.required]],
       totalKilometraje: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+      fecha: ['', [Validators.required]],
       lugarDestino: ['', [Validators.required]],
       codSismonitor: ['', [Validators.required]],
       observacion: ['', []]
@@ -90,6 +97,7 @@ export class RegKilometrajeComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
+    this.kilometrajeGrp.get('fecha').setValue(new Date(this.datePipe.transform(new Date(), 'MM/dd/yyyy')));
     this.cargarUnidades();
   }
 

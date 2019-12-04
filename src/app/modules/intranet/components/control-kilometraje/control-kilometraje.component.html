@@ -6,7 +6,7 @@
         <mat-card-title class="box-section-title"> BUSQUEDA KILOMETRAJES </mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <form [formGroup]="bandejaGrp" class="example-container">
+        <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">

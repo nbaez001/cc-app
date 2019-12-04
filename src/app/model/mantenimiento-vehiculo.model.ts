@@ -19,4 +19,7 @@ export class MantenimientoVehicular {
 
     idEstadoMantenimiento: number;
     nomEstadoMantenimiento: string;
+
+    asuntoSolicitud: string;
+    detalleSolicitud: string;
 }

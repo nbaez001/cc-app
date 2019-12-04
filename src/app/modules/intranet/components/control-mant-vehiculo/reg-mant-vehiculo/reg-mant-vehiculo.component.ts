@@ -51,8 +51,8 @@ export class RegMantVehiculoComponent implements OnInit {
 
   ngOnInit() {
     this.formularioGrp = this.fb.group({
-      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tipoMantenimiento: ['', [Validators.required]],
+      unidad: [{ value: '', disabled: true }, [Validators.required]],
+      tipoMantenimiento: [{ value: '', disabled: true }, [Validators.required]],
       tipoPresupuesto: ['', [Validators.required]],
       codAsigPresupuesto: ['', [Validators.required]],
       montoPresupuesto: ['', [Validators.required]]

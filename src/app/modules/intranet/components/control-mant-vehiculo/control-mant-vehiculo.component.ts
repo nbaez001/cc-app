@@ -8,6 +8,7 @@ import { UNIDADES, TIPOSMANTENIMIENTO, TIPOEJECUCION, MANTENIMIENTOS } from 'src
 import { VerObsMantComponent } from './ver-obs-mant/ver-obs-mant.component';
 import { RegMantVehiculoComponent } from './reg-mant-vehiculo/reg-mant-vehiculo.component';
 import { RegConfMantVehiculoComponent } from './reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
+import { SolMantVehiculoComponent } from './sol-mant-vehiculo/sol-mant-vehiculo.component';
 
 @Component({
   selector: 'app-control-mant-vehiculo',
@@ -106,7 +107,7 @@ export class ControlMantVehiculoComponent implements OnInit {
           tipoMantenimiento: ['', [Validators.required]],
           tipoPresupuesto: ['', [Validators.required]]
         });
-    
+
         this.definirTabla();
         this.inicializarVariables();
         clearInterval(validarIntervalo);
@@ -195,14 +196,29 @@ export class ControlMantVehiculoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      
+
+    });
+  }
+
+  solMantenimientoVehicular(obj): void {
+    const dialogRef = this.dialog.open(SolMantVehiculoComponent, {
+      width: '800px',
+      data: obj
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      if (result) {
+        this.listaMantenimientos.unshift(result);
+        this.cargarDatosTabla();
+      }
     });
   }
 
   regMantenimientoVehicular(obj): void {
     let indice = this.listaMantenimientos.indexOf(obj);
     const dialogRef = this.dialog.open(RegMantVehiculoComponent, {
-      width: '90%',
+      width: '800px',
       data: { name: 'NERIO', animal: 'LEON' }
     });
 

@@ -40,6 +40,12 @@ export class RegHrsDeslizadorComponent implements OnInit {
     'totalHoras': {
       'required': 'Campo obligatorio'
     },
+    'lugarDestino': {
+      'required': 'Campo obligatorio'
+    },
+    'codSismonitor': {
+      'required': 'Campo obligatorio'
+    },
     'observacion': {
       'required': 'Campo obligatorio'
     }
@@ -52,6 +58,8 @@ export class RegHrsDeslizadorComponent implements OnInit {
     'horaInicio': '',
     'horaFin': '',
     'totalHoras': '',
+    'lugarDestino':'',
+    'codSismonitor':'',
     'observacion': ''
   };
 
@@ -69,6 +77,8 @@ export class RegHrsDeslizadorComponent implements OnInit {
       horaInicio: ['', [Validators.required]],
       horaFin: ['', [Validators.required]],
       totalHoras: [{ value: '', disabled: true }, [Validators.required]],
+      lugarDestino: ['', [Validators.required]],
+      codSismonitor: ['', [Validators.required]],
       observacion: ['', [Validators.required]]
     });
 
