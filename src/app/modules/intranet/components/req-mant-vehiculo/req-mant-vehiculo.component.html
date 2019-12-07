@@ -1,0 +1,51 @@
+<navbar [showSubmenu5]="true">
+  <div class="page-bandeja">
+    <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
+    <mat-card class="box-filtros">
+      <mat-card-header class="box-section-header">
+        <mat-card-title class="box-section-title"> REQUERIMIENTO MANTENIMIENTO VEHICULAR </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-horizontal-stepper [linear]="true" #stepper>
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Fill out your name</ng-template>
+              <mat-form-field>
+                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Fill out your address</ng-template>
+              <mat-form-field>
+                <input matInput placeholder="Address" formControlName="secondCtrl" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            You are now done.
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </mat-card-content>
+      <!-- <mat-card-actions class="btnRigth" align="end">
+        <button mat-raised-button color="primary" (click)="buscar()">
+          <mat-icon>search</mat-icon>
+          <strong> BUSCAR</strong>
+        </button>
+      </mat-card-actions> -->
+    </mat-card>
+  </div>
+</navbar>

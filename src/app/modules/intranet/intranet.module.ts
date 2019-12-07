@@ -42,6 +42,8 @@ import { RegMantVehiculoComponent } from './components/control-mant-vehiculo/reg
 import { RegConfMantVehiculoComponent } from './components/control-mant-vehiculo/reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
 import { RegDetMatVehiculoComponent } from './components/control-mant-vehiculo/reg-det-mat-vehiculo/reg-det-mat-vehiculo.component';
 import { SolMantVehiculoComponent } from './components/control-mant-vehiculo/sol-mant-vehiculo/sol-mant-vehiculo.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ReqMantVehiculoComponent } from './components/req-mant-vehiculo/req-mant-vehiculo.component';
 
 @NgModule({
   entryComponents: [
@@ -106,13 +108,15 @@ import { SolMantVehiculoComponent } from './components/control-mant-vehiculo/sol
     RegMantVehiculoComponent,
     RegConfMantVehiculoComponent,
     RegDetMatVehiculoComponent,
-    SolMantVehiculoComponent
+    SolMantVehiculoComponent,
+    ReqMantVehiculoComponent
   ],
   imports: [
     CommonModule,
     IntranetRoutingModule, //Routing del modulo separado
     MaterialModule,
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    CKEditorModule,
   ],
   providers: [
     DatePipe,

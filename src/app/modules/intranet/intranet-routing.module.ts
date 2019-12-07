@@ -12,6 +12,7 @@ import { BandejaDeslizadoresComponent } from './components/bandeja-deslizadores/
 import { CuadroControlTamboComponent } from './components/cuadro-control-tambo/cuadro-control-tambo.component';
 import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizador/control-hrs-deslizador.component';
 import { ControlMantVehiculoComponent } from './components/control-mant-vehiculo/control-mant-vehiculo.component';
+import { ReqMantVehiculoComponent } from './components/req-mant-vehiculo/req-mant-vehiculo.component';
 
 const intranetRoutes: Routes = [
   {
@@ -69,6 +70,10 @@ const intranetRoutes: Routes = [
         path: 'control-mantenimiento',
         component: ControlMantVehiculoComponent,
         data: { title: 'Mantenimiento vehicular' }
+      }, {
+        path: 'req-mantenimiento',
+        component: ReqMantVehiculoComponent,
+        data: { title: 'Requerimiento mantenimiento vehicular' }
       }
     ]
   }

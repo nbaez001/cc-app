@@ -9,6 +9,7 @@ import { VerObsMantComponent } from './ver-obs-mant/ver-obs-mant.component';
 import { RegMantVehiculoComponent } from './reg-mant-vehiculo/reg-mant-vehiculo.component';
 import { RegConfMantVehiculoComponent } from './reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
 import { SolMantVehiculoComponent } from './sol-mant-vehiculo/sol-mant-vehiculo.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-control-mant-vehiculo',
@@ -95,7 +96,8 @@ export class ControlMantVehiculoComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
-    @Inject(UsuarioService) private user: UsuarioService
+    @Inject(UsuarioService) private user: UsuarioService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -201,18 +203,7 @@ export class ControlMantVehiculoComponent implements OnInit {
   }
 
   solMantenimientoVehicular(obj): void {
-    const dialogRef = this.dialog.open(SolMantVehiculoComponent, {
-      width: '800px',
-      data: obj
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
-      if (result) {
-        this.listaMantenimientos.unshift(result);
-        this.cargarDatosTabla();
-      }
-    });
+    this.router.navigate(['/intranet/req-mantenimiento']);
   }
 
   regMantenimientoVehicular(obj): void {
