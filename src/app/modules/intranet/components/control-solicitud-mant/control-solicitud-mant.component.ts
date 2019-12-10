@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatTableDataSource, MatPaginator, MatDialog, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog, MatSort, MatSnackBar } from '@angular/material';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UNIDADES, TIPOSMANTENIMIENTO, TIPOEJECUCION, _solicitudesMant, TAMBOS } from 'src/app/common';
@@ -55,6 +55,10 @@ export class ControlSolicitudMantComponent implements OnInit {
       header: 'TAMBO',
       cell: (mant: SolicitudMant) => (mant.nomTambo != null) ? `${mant.nomTambo}` : ''
     }, {
+      columnDef: 'nomTipoMantenimiento',
+      header: 'TIPO MANTENIMIENTO',
+      cell: (mant: SolicitudMant) => (mant.nomTipoMantenimiento != null) ? `${mant.nomTipoMantenimiento}` : ''
+    }, {
       columnDef: 'nomTipoVehiculo',
       header: 'TIPO VEHICULO',
       cell: (mant: SolicitudMant) => (mant.nomTipoVehiculo != null) ? `${mant.nomTipoVehiculo}` : ''
@@ -98,7 +102,8 @@ export class ControlSolicitudMantComponent implements OnInit {
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
     @Inject(UsuarioService) private user: UsuarioService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private _snackbar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -119,7 +124,7 @@ export class ControlSolicitudMantComponent implements OnInit {
   public inicializarVariables(): void {
     this.bandejaGrp = this.fb.group({
       unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+      tambo: [{ value: '' }, [Validators.required]],
       tipoMantenimiento: ['', [Validators.required]],
     });
 
@@ -148,10 +153,15 @@ export class ControlSolicitudMantComponent implements OnInit {
     this.tambos = JSON.parse(JSON.stringify(TAMBOS.filter(tb => tb.idUnidad == idUnidad)));
     this.tambos.unshift({ id: 0, nombre: 'TODOS', idUnidad: 0 });
 
-    if (this.user.perfil.id != 3) {
+    if (this.user.perfil.id == 1) {
       this.bandejaGrp.get('tambo').setValue(this.tambos.filter(el => el.id == this.user.idTambo)[0]);
+      this.bandejaGrp.get('tambo').disable();
     } else {
-      this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
+      if (this.user.perfil.id == 2) {
+        this.bandejaGrp.get('tambo').setValue(this.tambos.filter(el => el.id == 0)[0]);
+      } else {
+        this.bandejaGrp.get('tambo').setValue(this.tambos[0]);
+      }
     }
 
     this.buscar();
@@ -221,11 +231,14 @@ export class ControlSolicitudMantComponent implements OnInit {
     let indice = this.listaSolicitudes.indexOf(obj);
     const dialogRef = this.dialog.open(RegSolicitudMantComponent, {
       width: '800px',
-      data: obj
+      data: { title: 'Registrar solicitud mantenimiento', objeto: obj }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      if (result) {
+        this.listaSolicitudes.push(result);
+        this.cargarDatosTabla();
+      }
     });
   }
 

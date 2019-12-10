@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>Registrar mantenimiento vehicular</h1>
 <div mat-dialog-content>
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="formularioGrp1">
+    <mat-step [stepControl]="mantenimiento.idEstadoMantenimiento>1">
       <ng-template matStepLabel>Requerimiento</ng-template>
       <div>
         <form [formGroup]="formularioGrp1">
@@ -28,72 +28,102 @@
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
               <mat-form-field>
-                <input formControlName="presupuesto" matInput type="text" placeholder="Presupuesto">
+                <input formControlName="cotizacion" matInput type="number" placeholder="Cotizacion requerimiento">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
               <mat-form-field>
-                <input formControlName="carta" matInput type="text" placeholder="Carta">
-                <button mat-icon-button matTooltip="Buscar carta requerimiento" type="button" class="btn-action"
-                  color="primary" (click)="buscarArchivoA1($event)">
-                  <mat-icon>cloud_upload</mat-icon>
-                </button>
-                <input id="fileInputA1" class="none" type="file" accept="application/pdf"
-                  (change)="cargarArchivoA1($event)">
+                <input formControlName="nroHt" matInput type="text" placeholder="Nro Hoja tramite">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
               <mat-form-field>
-                <input formControlName="informe" matInput type="text" placeholder="Informe">
-                <button mat-icon-button matTooltip="Buscar informe" type="button" class="btn-action" color="primary"
-                  (click)="buscarArchivoA2($event)">
-                  <mat-icon>cloud_upload</mat-icon>
-                </button>
-                <input id="fileInputA2" class="none" type="file" accept="application/pdf"
-                  (change)="cargarArchivoA2($event)">
+                <input formControlName="nroInforme" matInput type="text" placeholder="Nro Informe">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
               <mat-form-field>
-                <input formControlName="requerimiento" matInput type="text" placeholder="Requerimiento">
-                <button mat-icon-button matTooltip="Buscar requerimiento" type="button" class="btn-action"
-                  color="primary" (click)="buscarArchivoA3($event)">
+                <input formControlName="documentacion" matInput type="text"
+                  placeholder="Documentacion de requerimiento">
+                <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-action" color="primary"
+                  (click)="buscarRequerimiento($event)">
                   <mat-icon>cloud_upload</mat-icon>
                 </button>
-                <input id="fileInputA3" class="none" type="file" accept="application/pdf"
-                  (change)="cargarArchivoA3($event)">
+                <input id="fileRequerimiento" class="none" type="file" accept="application/pdf"
+                  (change)="cargarRequerimiento($event)">
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
         </form>
+        <h4 style="margin-bottom: 5px;">Lista de solicitudes de mantenimiento</h4>
+        <button mat-raised-button color="primary" type="button" (click)="buscarSolicitudesMant()">
+          <mat-icon>search</mat-icon>
+          Agregar solicitudes
+        </button>
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource1" matSort>
+            <ng-container *ngFor="let column of columnsGrilla1" [matColumnDef]="column.columnDef">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+              <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="opt" stickyEnd>
+              <th mat-header-cell *matHeaderCellDef>OPT.</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-icon-button style="color: red;" matTooltip="Quitar solicitud"
+                  (click)="quitarSolicitudMant(element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          </table>
+
+          <div class="empty" *ngIf="dataSource1 === null">
+            No existe datos para mostrar en la tabla
+          </div>
+
+          <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+          </mat-paginator>
+        </div>
       </div>
-      <div>
+      <div align="center" class="button-separate">
         <button mat-raised-button type="button" (click)="salir()">Salir</button>
-        <button mat-raised-button matStepperNext>Siguiente</button>
+        <button mat-raised-button type="button" (click)="siguiente(stepper)">Siguiente</button>
       </div>
     </mat-step>
-    <mat-step [stepControl]="formularioGrp2">
+    <mat-step [stepControl]="mantenimiento.idEstadoMantenimiento>2">
       <ng-template matStepLabel>Orden de Servicio</ng-template>
       <div>
         <form [formGroup]="formularioGrp2">
           <mat-grid-list cols="12" rowHeight="50px">
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+              <mat-form-field>
+                <mat-label>Tipo presupuesto</mat-label>
+                <mat-select formControlName="tiposPresupuesto">
+                  <mat-option *ngFor="let tipoPresupuesto of tiposPresupuesto" [value]="tipoPresupuesto">
+                    {{tipoPresupuesto.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
               <mat-form-field>
                 <input formControlName="ordenServicio" matInput type="text" placeholder="Orden de servicio">
                 <button mat-icon-button matTooltip="Buscar orden servicio" type="button" class="btn-action"
-                  color="primary" (click)="buscarArchivoB1($event)">
-                  <mat-icon>cloud_upload</mat-icon>
+                  color="primary" (click)="buscarOrdenServicio($event)">
+                  <mat-icon>search</mat-icon>
                 </button>
-                <input id="fileInputB1" class="none" type="file" accept="application/pdf"
-                  (change)="cargarArchivoB1($event)">
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
         </form>
       </div>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+      <div align="center" class="button-separate">
+        <button mat-raised-button type="button" (click)="salir()">Salir</button>
+        <button mat-raised-button type="button" (click)="siguiente(stepper)">Siguiente</button>
       </div>
     </mat-step>
     <mat-step>

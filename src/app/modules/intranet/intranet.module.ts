@@ -46,6 +46,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ControlSolicitudMantComponent } from './components/control-solicitud-mant/control-solicitud-mant.component';
 import { RegSolicitudMantComponent } from './components/control-solicitud-mant/reg-solicitud-mant/reg-solicitud-mant.component';
 import { SnackBarComponent } from './components/shared/snack-bar/snack-bar.component';
+import { BuscarSolicitudMantComponent } from './components/control-mant-vehiculo/reg-mant-vehiculo/buscar-solicitud-mant/buscar-solicitud-mant.component';
 
 @NgModule({
   entryComponents: [
@@ -72,7 +73,8 @@ import { SnackBarComponent } from './components/shared/snack-bar/snack-bar.compo
     RegConfMantVehiculoComponent,
     RegDetMatVehiculoComponent,
     SolMantVehiculoComponent,
-    RegSolicitudMantComponent
+    RegSolicitudMantComponent,
+    BuscarSolicitudMantComponent,
   ],
   declarations: [
     RegistrarVehiculoComponent,
@@ -99,6 +101,7 @@ import { SnackBarComponent } from './components/shared/snack-bar/snack-bar.compo
     RegDetMatVehiculoComponent,
     SolMantVehiculoComponent,
     RegSolicitudMantComponent,
+    BuscarSolicitudMantComponent,
 
 
     HomeComponent, //Declaracion de nuestro componente

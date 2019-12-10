@@ -8,6 +8,7 @@ import { EjecucionPresupuestal } from 'src/app/model/ejecucion-presupuestal.mode
 import { MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { DataDialog } from 'src/app/model/data-dialog.model';
 
 @Component({
   selector: 'app-reg-ejec-presupuestal',
@@ -107,7 +108,7 @@ export class RegEjecPresupuestalComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegEjecPresupuestalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService) { }
 
@@ -201,7 +202,7 @@ export class RegEjecPresupuestalComponent implements OnInit {
       this.detEjecPresupuestalGrp.get('clasificadorGasto').setValue(this.partidas[0]);
       this.detEjecPresupuestalGrp.get('descripcion').setValue('');
       this.detEjecPresupuestalGrp.get('monto').setValue('');
-      this.validationService.setAsUntoched(this.detEjecPresupuestalGrp);
+      this.validationService.setAsUntoched(this.detEjecPresupuestalGrp, this.formErrors2);
 
       this.cargarDatosTabla();
     } else {
@@ -209,10 +210,4 @@ export class RegEjecPresupuestalComponent implements OnInit {
     }
   }
 
-}
-
-
-export interface DialogData {
-  animal: string;
-  name: string;
 }

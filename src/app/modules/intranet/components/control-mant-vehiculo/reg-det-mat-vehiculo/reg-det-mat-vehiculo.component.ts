@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource, MatPaginator, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ServRepMantenimiento } from 'src/app/model/serv-rep-mantenimiento.model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
-import { DialogData } from '../../home/registrar-rev-tecnica/registrar-rev-tecnica.component';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { DatePipe } from '@angular/common';
+import { DataDialog } from 'src/app/model/data-dialog.model';
 
 @Component({
   selector: 'app-reg-det-mat-vehiculo',
@@ -77,7 +77,7 @@ export class RegDetMatVehiculoComponent implements OnInit {
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegDetMatVehiculoComponent>,
     private spinnerService: Ng4LoadingSpinnerService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService,
     private datePipe: DatePipe) { }

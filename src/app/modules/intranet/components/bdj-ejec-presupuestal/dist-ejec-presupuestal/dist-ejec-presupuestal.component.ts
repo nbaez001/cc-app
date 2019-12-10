@@ -7,6 +7,7 @@ import { UNIDADES, TAMBOS, TIPOSCOMBUSTIBLE } from 'src/app/common';
 import { DistribucionEjecucion } from 'src/app/model/distribucion-ejecucion.model';
 import { MatTableDataSource, MatPaginator, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { DataDialog } from 'src/app/model/data-dialog.model';
 
 @Component({
   selector: 'app-dist-ejec-presupuestal',
@@ -102,7 +103,7 @@ export class DistEjecPresupuestalComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<DistEjecPresupuestalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
@@ -148,10 +149,4 @@ export class DistEjecPresupuestalComponent implements OnInit {
 
   }
 
-}
-
-
-export interface DialogData {
-  title: string;
-  objeto: Object;
 }

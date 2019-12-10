@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UNIDADES, TIPOSMANTENIMIENTO, TAMBOS, VEHICULOS, _tiposProducto, _tiposDocumento } from 'src/app/common';
+import { UNIDADES, TIPOSMANTENIMIENTO, TAMBOS, VEHICULOS, _tiposProducto, _tiposDocumento, _estadosSolicitudMant } from 'src/app/common';
 import { Unidad } from 'src/app/model/unidad.model';
 import { Tambo } from 'src/app/model/tambo.model';
 import { SolicitudMant } from 'src/app/model/solicitud-mant.model';
@@ -8,6 +8,7 @@ import { MatTableDataSource, MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '
 import { DetalleSolicitudMant } from 'src/app/model/detalle-solicitud-mant.model';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { DataDialog } from 'src/app/model/data-dialog.model';
 
 @Component({
   selector: 'app-reg-solicitud-mant',
@@ -24,6 +25,7 @@ export class RegSolicitudMantComponent implements OnInit {
   vehiculos = [];
   tiposProducto = [];
   tiposDocumento = [];
+  estadoSolicitud = _estadosSolicitudMant;
   fileupload: any;
 
   listaDetSolicitud: DetalleSolicitudMant[] = [];
@@ -131,7 +133,7 @@ export class RegSolicitudMantComponent implements OnInit {
   };
 
   constructor(private fb: FormBuilder, public dialogRef: MatDialogRef<RegSolicitudMantComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Object,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService,
     private _snackBar: MatSnackBar) { }
@@ -165,6 +167,7 @@ export class RegSolicitudMantComponent implements OnInit {
     });
 
     console.log(this.detFormularioGrp);
+    // console.log(this.detFormularioGrp.nativeElement);
 
     this.cargarTipoMantenimiento();
     this.cargarTipoProducto();
@@ -236,6 +239,7 @@ export class RegSolicitudMantComponent implements OnInit {
       this.displayedColumns.push(c.columnDef);
     });
     this.displayedColumns.push('opt');
+    console.log(this.displayedColumns);
   }
 
   public cargarDatosTabla(): void {
@@ -253,19 +257,27 @@ export class RegSolicitudMantComponent implements OnInit {
         kil.idUnidad = this.formularioGrp.get('unidad').value.id;
         kil.nomUnidad = this.formularioGrp.get('unidad').value.nombre;
         kil.idTambo = this.formularioGrp.get('tambo').value.id;
-        kil.idTambo = this.formularioGrp.get('tambo').value.nombre;
-
+        kil.nomTambo = this.formularioGrp.get('tambo').value.nombre;
+        kil.idTipoMantenimiento = this.formularioGrp.get('tipoMantenimiento').value.id;
         kil.nomTipoMantenimiento = this.formularioGrp.get('tipoMantenimiento').value.nombre;
-
+        kil.idVehiculo = this.formularioGrp.get('vehiculo').value.id;
+        kil.idTipoVehiculo = this.formularioGrp.get('vehiculo').value.idTipo;
+        kil.nomTipoVehiculo = this.formularioGrp.get('vehiculo').value.nomTipo;
         kil.marcaVehiculo = this.formularioGrp.get('vehiculo').value.marca;
+        kil.placaVehiculo = this.formularioGrp.get('vehiculo').value.placa;
+        // kil.idProveedor = this.formularioGrp.get('nomProveedor').value;
         kil.nomProveedor = this.formularioGrp.get('nomProveedor').value;
+        kil.idTipoDocumento = this.formularioGrp.get('tipoDocumento').value.id;
         kil.nomTipoDocumento = this.formularioGrp.get('tipoDocumento').value.nombre;
         kil.nroDocumento = this.formularioGrp.get('nroDocumento').value;
         kil.fecha = this.formularioGrp.get('fecha').value;
         kil.monto = this.formularioGrp.get('monto').value;
         kil.proforma = null;
         kil.observacion = this.formularioGrp.get('observacion').value;
+        kil.idEstado = this.estadoSolicitud[0].id;
+        kil.nomEstado = this.estadoSolicitud[0].nombre;
 
+        this._snackBar.open('Registrado correctamente', 'OK', { duration: 5000, horizontalPosition: 'right', verticalPosition: 'top', panelClass: ['success-snackbar'] });
         this.dialogRef.close(kil);
       } else {
         this._snackBar.open('Inserte al menos un detalle de solicitud', 'OK', { duration: 5000, horizontalPosition: 'right', verticalPosition: 'top', panelClass: ['warning-snackbar'] });
@@ -287,15 +299,20 @@ export class RegSolicitudMantComponent implements OnInit {
       kil.unidadMedida = this.detFormularioGrp.get('unidadMedida').value;
 
       this.listaDetSolicitud.push(kil);
-      this.validationService.setAsUntoched(this.detFormularioGrp, this.formErrors2);
-      console.log('STATUS FORM');
-      console.log(this.detFormularioGrp);
-
-
+      this.validationService.setAsUntoched(this.detFormularioGrp, this.formErrors2, ['tipoProducto']);
       this.cargarDatosTabla();
+      this.actualizarMontoTotal();
     } else {
       this.validationService.getValidationErrors(this.detFormularioGrp, this.messages2, this.formErrors2, true);
     }
+  }
+
+  actualizarMontoTotal(): void {
+    let sum = 0;
+    this.listaDetSolicitud.forEach(el => {
+      sum += el.monto;
+    })
+    this.formularioGrp.get('monto').setValue(sum);
   }
 
   delDetalleMant(obj) {

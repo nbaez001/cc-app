@@ -6,6 +6,7 @@ import { Kilometraje } from 'src/app/model/kilometraje.model';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { DatePipe } from '@angular/common';
+import { DataDialog } from 'src/app/model/data-dialog.model';
 
 @Component({
   selector: 'app-reg-kilometraje',
@@ -69,7 +70,7 @@ export class RegKilometrajeComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegKilometrajeComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService,
     private datePipe:DatePipe) { }
@@ -173,12 +174,4 @@ export class RegKilometrajeComponent implements OnInit {
     }
 
   }
-
-
-}
-
-
-export interface DialogData {
-  animal: string;
-  name: string;
 }

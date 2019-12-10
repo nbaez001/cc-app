@@ -6,6 +6,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DatePipe } from '@angular/common';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { DataDialog } from 'src/app/model/data-dialog.model';
 
 @Component({
   selector: 'app-reg-conductor',
@@ -80,7 +81,7 @@ export class RegConductorComponent implements OnInit {
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegConductorComponent>,
     private spinnerService: Ng4LoadingSpinnerService,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService,
     private datePipe: DatePipe) { }
@@ -177,9 +178,4 @@ export class RegConductorComponent implements OnInit {
     this.cargarDatosTabla();
   }
 
-}
-
-
-export interface DialogData {
-  animal: string;
 }

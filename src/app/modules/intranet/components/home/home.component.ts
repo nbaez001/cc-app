@@ -222,7 +222,7 @@ export class HomeComponent implements OnInit {
   regRevTecnica(obj): void {
     const dialogRef = this.dialog.open(RegistrarRevTecnicaComponent, {
       width: '500px',
-      data: { name: 'NERIO' }
+      data: null
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -234,7 +234,7 @@ export class HomeComponent implements OnInit {
     console.log(obj);
     const dialogRef = this.dialog.open(RegistrarSoatComponent, {
       width: '500px',
-      data: { name: 'NERIO' }
+      data: null
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -247,7 +247,7 @@ export class HomeComponent implements OnInit {
     console.log(obj);
     const dialogRef = this.dialog.open(RegArtEmergenciaComponent, {
       width: '500px',
-      data: { name: 'NERIO' }
+      data: null
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -258,7 +258,7 @@ export class HomeComponent implements OnInit {
   regConductor(): void {
     const dialogRef = this.dialog.open(RegConductorComponent, {
       width: '500px',
-      data: { name: 'NERIO' }
+      data: null
     });
 
     dialogRef.afterClosed().subscribe(result => {

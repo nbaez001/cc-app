@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { DataDialog } from 'src/app/model/data-dialog.model';
 
 @Component({
   selector: 'app-registrar-asig-combust',
@@ -18,7 +19,7 @@ export class RegistrarAsigCombustComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private fb: FormBuilder,public dialogRef: MatDialogRef<RegistrarAsigCombustComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(UsuarioService) private user: UsuarioService) { }
 
   ngOnInit() {
@@ -50,10 +51,3 @@ export class RegistrarAsigCombustComponent implements OnInit {
   }
 
 }
-
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-

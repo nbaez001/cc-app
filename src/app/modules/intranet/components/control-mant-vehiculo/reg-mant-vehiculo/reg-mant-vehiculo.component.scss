@@ -29,6 +29,35 @@
   )
 );
 
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomTambo: (
+      width: 12rem
+    ),
+    nomTipoMantenimiento: (
+      width: 8rem
+    ),
+    nomTipoVehiculo: (
+      width: 12rem
+    ),
+    nomProveedor: (
+      width: 12rem
+    ),
+    monto: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 6rem
+    ),
+    opt: (
+      width: 2.5rem
+    )
+  )
+);
+
 .table-container {
   max-height: 400px;
 }
@@ -43,4 +72,13 @@
 
 .none {
   display: none;
+}
+
+.button-separate > button {
+  margin-left: 10px !important;
+  margin-top: 10px;
+}
+
+.mat-horizontal-content-container {
+  padding-bottom: 0px !important;
 }

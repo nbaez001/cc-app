@@ -1,14 +1,16 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
-import { DialogData } from '../../home/registrar-rev-tecnica/registrar-rev-tecnica.component';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatDialog, MatStepper, MatSnackBar } from '@angular/material';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { MantenimientoVehicular } from 'src/app/model/mantenimiento-vehiculo.model';
-import { UNIDADES, TIPOSMANTENIMIENTO, TIPOEJECUCION } from 'src/app/common';
+import { UNIDADES, TIPOSMANTENIMIENTO, TIPOSPRESUPUESTO } from 'src/app/common';
 import { DetalleMantenimiento } from 'src/app/model/detalle-mantenimiento.mode';
 import { DecimalPipe, DatePipe } from '@angular/common';
 import { RegDetMatVehiculoComponent } from '../reg-det-mat-vehiculo/reg-det-mat-vehiculo.component';
+import { SolicitudMant } from 'src/app/model/solicitud-mant.model';
+import { BuscarSolicitudMantComponent } from './buscar-solicitud-mant/buscar-solicitud-mant.component';
+import { DataDialog } from 'src/app/model/data-dialog.model';
 
 @Component({
   selector: 'app-reg-mant-vehiculo',
@@ -18,8 +20,9 @@ import { RegDetMatVehiculoComponent } from '../reg-det-mat-vehiculo/reg-det-mat-
 export class RegMantVehiculoComponent implements OnInit {
   unidades = [];
   tiposMantenimiento = [];
-  tiposPresupuesto = [];
+  tiposPresupuesto = TIPOSPRESUPUESTO;
 
+  mantenimiento: MantenimientoVehicular;
   fileupload: any;
 
   subformularioGrp: FormGroup;
@@ -66,7 +69,70 @@ export class RegMantVehiculoComponent implements OnInit {
   };
 
   formularioGrp1: FormGroup;
+  messages1 = {
+    'unidad': {
+      'required': 'Campo obligatorio'
+    },
+    'tipoMantenimiento': {
+      'required': 'Campo obligatorio'
+    },
+    'cotizacion': {
+      'required': 'Campo obligatorio'
+    },
+    'nroHt': {
+      'required': 'Campo obligatorio'
+    },
+    'nroInforme': {
+      'required': 'Campo obligatorio'
+    },
+    'documentacion': {
+      'required': 'Campo obligatorio'
+    }
+  };
+  formErrors1 = {
+    'unidad': '',
+    'tipoMantenimiento': '',
+    'cotizacion': '',
+    'nroHt': '',
+    'nroInforme': '',
+    'documentacion': '',
+  };
+
   formularioGrp2: FormGroup;
+
+  listaSolicitudesMant: SolicitudMant[] = [];
+  dataSource1: MatTableDataSource<SolicitudMant> = null;
+  displayedColumns1: string[];
+  columnsGrilla1 = [
+    {
+      columnDef: 'id',
+      header: 'N°',
+      cell: (cond: SolicitudMant) => `${cond.id}`
+    }, {
+      columnDef: 'nomTambo',
+      header: 'TAMBO',
+      cell: (cond: SolicitudMant) => `${cond.nomTambo}`
+    }, {
+      columnDef: 'nomTipoMantenimiento',
+      header: 'TIPO MANTENIMIENTO',
+      cell: (cond: SolicitudMant) => `${cond.nomTipoMantenimiento}`
+    }, {
+      columnDef: 'nomTipoVehiculo',
+      header: 'VEHICULO',
+      cell: (cond: SolicitudMant) => `${cond.nomTipoVehiculo} ${cond.marcaVehiculo} ${cond.placaVehiculo}`
+    }, {
+      columnDef: 'nomProveedor',
+      header: 'PROVEEDOR',
+      cell: (cond: SolicitudMant) => `${cond.nomProveedor} - ${cond.nomTipoDocumento}: ${cond.nroDocumento}`
+    }, {
+      columnDef: 'monto',
+      header: 'MONTO',
+      cell: (cond: SolicitudMant) => `S/.${this.decimalPipe.transform(cond.monto, '1.2-2')}`
+    }, {
+      columnDef: 'fecha',
+      header: 'FECHA',
+      cell: (cond: SolicitudMant) => this.datePipe.transform(cond.fecha, 'dd/MM/yyyy')
+    }];
 
 
   listaDetalleMantenimiento: DetalleMantenimiento[] = [];
@@ -103,8 +169,8 @@ export class RegMantVehiculoComponent implements OnInit {
       header: 'Kilometraje inicio',
       cell: (cond: DetalleMantenimiento) => `${cond.kilometrajeInicio}`
     }];
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator1: MatPaginator;
 
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegMantVehiculoComponent>,
@@ -112,32 +178,11 @@ export class RegMantVehiculoComponent implements OnInit {
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService,
     private decimalPipe: DecimalPipe,
-    private datePipe: DatePipe, ) { }
+    private datePipe: DatePipe,
+    private _snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: DataDialog) { }
 
   ngOnInit() {
-    this.formularioGrp = this.fb.group({
-      unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      presupuesto: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-      nroHojatramiteConf: ['', [Validators.required]],
-      nroInformeConf: ['', [Validators.required]],
-      actaRecepcionEmpresa: [{ value: '', disabled: true }, [Validators.required]],
-      cartaInformeProveedor: [{ value: '', disabled: true }, [Validators.required]],
-      actaRecepccionUURR: [{ value: '', disabled: true }, [Validators.required]],
-      cantVehiculos: ['', [Validators.required]],
-      obsRecepccionUURR: ['', []]
-    });
-    this.formularioGrp1 = this.fb.group({
-      unidad: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      presupuesto: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      carta: [{ value: '', disabled: true }, [Validators.required]],
-      informe: [{ value: '', disabled: true }, [Validators.required]],
-      requerimiento: [{ value: '', disabled: true }, [Validators.required]]
-    });
-    this.formularioGrp2 = this.fb.group({
-      ordenServicio: [{ value: '', disabled: true }, [Validators.required]]
-    });
     this.inicializarVariables();
   }
 
@@ -151,15 +196,57 @@ export class RegMantVehiculoComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    this.formularioGrp.get('presupuesto').setValue('PRESUPUESTO');//this.data.nomTipoAsigPresupuesto + ' N°' + this.data.codAsigPresupuesto + ' - S/.' + this.decimalPipe.transform(this.data.importeAsigPresupuesto, '1.2-2'));
+    if (this.data != null) {
+      this.mantenimiento = new MantenimientoVehicular();
+      this.mantenimiento.idTipomantenimiento = 1;
+    } else {
+      this.mantenimiento = JSON.parse(JSON.stringify(this.data));
+    }
+
+    this.formularioGrp1 = this.fb.group({
+      unidad: [{ value: '', disabled: true }, [Validators.required]],
+      tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
+      cotizacion: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
+      nroHt: ['', [Validators.required]],
+      nroInforme: ['', [Validators.required]],
+      documentacion: [{ value: '', disabled: true }, [Validators.required]],
+    });
+
+    this.formularioGrp = this.fb.group({
+      unidad: [{ value: '', disabled: true }, [Validators.required]],
+      tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+      presupuesto: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+      nroHojatramiteConf: ['', [Validators.required]],
+      nroInformeConf: ['', [Validators.required]],
+      actaRecepcionEmpresa: [{ value: '', disabled: true }, [Validators.required]],
+      cartaInformeProveedor: [{ value: '', disabled: true }, [Validators.required]],
+      actaRecepccionUURR: [{ value: '', disabled: true }, [Validators.required]],
+      cantVehiculos: ['', [Validators.required]],
+      obsRecepccionUURR: ['', []]
+    });
+
+    this.formularioGrp2 = this.fb.group({
+      ordenServicio: ['', [Validators.required]],
+      tipoPresupuesto: ['', [Validators.required]]
+    });
+
     this.cargarUnidades();
     this.cargarTipomantenimiento();
+
+    this.calcularCotizacion();
 
     this.definirTabla();
     this.listarDetalleMantenimiento();
   }
 
   definirTabla(): void {
+    this.displayedColumns1 = [];
+    this.columnsGrilla1.forEach(c => {
+      this.displayedColumns1.push(c.columnDef);
+    });
+    this.displayedColumns1.push('opt');
+
+    //TABLA SECUNDARIA
     this.displayedColumns = [];
     this.columnsGrilla.forEach(c => {
       this.displayedColumns.push(c.columnDef);
@@ -177,6 +264,14 @@ export class RegMantVehiculoComponent implements OnInit {
     }
 
     this.cargarDatosTabla();
+  }
+
+  public cargarDatosTabla1(): void {
+    this.dataSource1 = null;
+    if (this.listaSolicitudesMant.length > 0) {
+      this.dataSource1 = new MatTableDataSource(this.listaSolicitudesMant);
+      this.dataSource1.paginator = this.paginator1;
+    }
   }
 
   public cargarDatosTabla(): void {
@@ -206,19 +301,50 @@ export class RegMantVehiculoComponent implements OnInit {
 
   public cargarTipomantenimiento() {
     this.tiposMantenimiento = JSON.parse(JSON.stringify(TIPOSMANTENIMIENTO));
+    this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
+
     this.formularioGrp.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
     this.formularioGrp.get('cantVehiculos').setValue(1);
   }
 
-
   public cargarUnidades() {
     this.unidades = JSON.parse(JSON.stringify(UNIDADES));
-
     if (this.user.perfil.id != 3) {
       this.formularioGrp.get('unidad').setValue(this.unidades.filter(el => el.id == this.user.idUnidad)[0]);
+      this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => el.id == this.user.idUnidad)[0]);
     } else {
       this.formularioGrp.get('unidad').setValue(this.unidades[0]);
+      this.formularioGrp1.get('unidad').setValue(this.unidades[0]);
     }
+  }
+
+  calcularCotizacion(): void {
+    if (this.listaSolicitudesMant.length > 0) {
+      let cal = 0;
+      this.listaSolicitudesMant.forEach(el => {
+        cal += el.monto;
+      });
+      this.formularioGrp1.get('cotizacion').setValue(cal);
+    } else {
+      this.formularioGrp1.get('cotizacion').setValue(0);
+    }
+  }
+
+  buscarSolicitudesMant(): void {
+    const dialogRef3 = this.dialog.open(BuscarSolicitudMantComponent, {
+      width: '800px',
+      data: { title: 'Buscar solicitudes mantenimiento', objeto: null }
+    });
+
+    dialogRef3.afterClosed().subscribe(result => {
+      if (result) {
+        result.forEach(el => {
+          this.listaSolicitudesMant.push(el);
+        });
+        this.cargarDatosTabla1();
+        this.calcularCotizacion();
+      }
+    });
   }
 
   generarFormulario(): void {
@@ -308,45 +434,17 @@ export class RegMantVehiculoComponent implements OnInit {
 
 
 
-  public buscarArchivoA1(evt): void {
-    document.getElementById('fileInputA1').click();
+  public buscarRequerimiento(evt): void {
+    document.getElementById('fileRequerimiento').click();
   }
 
-  public cargarArchivoA1(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
+  public cargarRequerimiento(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
     this.fileupload = event.target.files[0];
     if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
-      this.formularioGrp1.get('carta').setValue(null);
+      this.formularioGrp1.get('documentacion').setValue(null);
     } else {
       const nombreArchivo = this.fileupload.name;
-      this.formularioGrp1.get('carta').setValue(nombreArchivo);
-    }
-  }
-
-  public buscarArchivoA2(evt): void {
-    document.getElementById('fileInputA2').click();
-  }
-
-  public cargarArchivoA2(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
-    this.fileupload = event.target.files[0];
-    if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
-      this.formularioGrp1.get('informe').setValue(null);
-    } else {
-      const nombreArchivo = this.fileupload.name;
-      this.formularioGrp1.get('informe').setValue(nombreArchivo);
-    }
-  }
-
-  public buscarArchivoA3(evt): void {
-    document.getElementById('fileInputA3').click();
-  }
-
-  public cargarArchivoA3(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
-    this.fileupload = event.target.files[0];
-    if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
-      this.formularioGrp1.get('requerimiento').setValue(null);
-    } else {
-      const nombreArchivo = this.fileupload.name;
-      this.formularioGrp1.get('requerimiento').setValue(nombreArchivo);
+      this.formularioGrp1.get('documentacion').setValue(nombreArchivo);
     }
   }
 
@@ -361,6 +459,49 @@ export class RegMantVehiculoComponent implements OnInit {
     } else {
       const nombreArchivo = this.fileupload.name;
       this.formularioGrp2.get('ordenServicio').setValue(nombreArchivo);
+    }
+  }
+
+  anterior(stepper: MatStepper) {
+    stepper.previous();
+  }
+
+  siguiente(stepper: MatStepper) {
+    if (stepper.selectedIndex == 0) {
+      //VALIDAR FORM 1
+      if (this.formularioGrp1.valid) {
+        if (this.listaSolicitudesMant.length > 0) {
+          let kil = new MantenimientoVehicular();
+          kil.id = 0;
+          kil.idUnidad = this.formularioGrp1.get('unidad').value.id;
+          kil.nomUnidad = this.formularioGrp1.get('unidad').value.nombre;
+          kil.idTipomantenimiento = this.formularioGrp1.get('tipoMantenimiento').value.id;
+          kil.nomTipoMantenimiento = this.formularioGrp1.get('tipoMantenimiento').value.nombre;
+
+          console.log(kil);
+          stepper.next();
+        } else {
+          this._snackBar.open('Agregue al menos una solicitud de mantenimiento', 'OK', { duration: 5000, horizontalPosition: 'right', verticalPosition: 'top', panelClass: ['warning-snackbar'] });
+        }
+      } else {
+        this.validationService.getValidationErrors(this.formularioGrp1, this.messages1, this.formErrors1, true);
+      }
+    } else {
+      if (stepper.selectedIndex == 1) {
+        //VALIDAR FORM 2
+        if (this.formularioGrp2.valid) {
+          let kil = new MantenimientoVehicular();
+          kil.id = 0;
+          kil.codAsigPresupuesto = this.formularioGrp2.get('ordenServicio').value;
+
+          console.log(kil);
+          stepper.next();
+        } else {
+          this.validationService.getValidationErrors(this.formularioGrp1, this.messages1, this.formErrors1, true);
+        }
+      } else {
+        //VALIDAR FORM 3
+      }
     }
   }
 

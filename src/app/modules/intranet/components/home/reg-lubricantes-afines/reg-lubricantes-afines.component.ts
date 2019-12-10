@@ -224,7 +224,7 @@ export class RegLubricantesAfinesComponent implements OnInit {
       con.fecha = this.formularioGrp.get('fecha').value;
 
       this.listaLubricantes.unshift(con);
-      this.validationService.setAsUntoched(this.formularioGrp);
+      this.validationService.setAsUntoched(this.formularioGrp, this.formErrors);
       this.cargarDatosTabla();
     } else {
       this.validationService.getValidationErrors(this.formularioGrp, this.messages, this.formErrors, true);
