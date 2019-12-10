@@ -30,13 +30,23 @@ export class ValidationService {
     });
   }
 
-  setAsUntoched(group: FormGroup): void {
+  setAsUntoched(group: FormGroup, formErrors: any): void {
+    group.markAsUntouched();
+    group.markAsDirty({ onlySelf: false });
+    group.markAsPristine();
+    group.updateValueAndValidity();
+
     Object.keys(group.controls).forEach((key: string) => {
       let abstractControl = group.get(key);
       if (abstractControl instanceof FormGroup) {
-        this.setAsUntoched(abstractControl);
+        this.setAsUntoched(abstractControl, formErrors[key]);
       } else {
+        abstractControl.setValue('');
         abstractControl.markAsUntouched();
+        abstractControl.markAsDirty({ onlySelf: false });
+        abstractControl.markAsPristine();
+        abstractControl.updateValueAndValidity();
+        formErrors[key] = '';
       }
     });
   }

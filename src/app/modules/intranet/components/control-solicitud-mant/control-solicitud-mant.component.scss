@@ -1,0 +1,54 @@
+@import "../../../../../assets/styles/scss/views/table";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomUnidad: (
+      width: 12rem
+    ),
+    nomTambo: (
+      width: 12rem
+    ),
+    nomTipoVehiculo: (
+      width: 9rem
+    ),
+    marcaVehiculo: (
+      width: 9rem
+    ),
+    placaVehiculo: (
+      width: 6rem
+    ),
+    nomProveedor: (
+      width: 6rem
+    ),
+    nomTipoDocumento: (
+      width: 8rem
+    ),
+    nroDocumento: (
+      width: 7rem
+    ),
+    fecha: (
+      width: 7rem
+    ),
+    monto: (
+      width: 6rem
+    ),
+    nomEstado: (
+      width: 6rem
+    ),
+    opt: (
+      width: 7.5rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

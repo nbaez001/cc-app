@@ -43,7 +43,9 @@ import { RegConfMantVehiculoComponent } from './components/control-mant-vehiculo
 import { RegDetMatVehiculoComponent } from './components/control-mant-vehiculo/reg-det-mat-vehiculo/reg-det-mat-vehiculo.component';
 import { SolMantVehiculoComponent } from './components/control-mant-vehiculo/sol-mant-vehiculo/sol-mant-vehiculo.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { ReqMantVehiculoComponent } from './components/req-mant-vehiculo/req-mant-vehiculo.component';
+import { ControlSolicitudMantComponent } from './components/control-solicitud-mant/control-solicitud-mant.component';
+import { RegSolicitudMantComponent } from './components/control-solicitud-mant/reg-solicitud-mant/reg-solicitud-mant.component';
+import { SnackBarComponent } from './components/shared/snack-bar/snack-bar.component';
 
 @NgModule({
   entryComponents: [
@@ -69,47 +71,53 @@ import { ReqMantVehiculoComponent } from './components/req-mant-vehiculo/req-man
     RegMantVehiculoComponent,
     RegConfMantVehiculoComponent,
     RegDetMatVehiculoComponent,
-    SolMantVehiculoComponent
+    SolMantVehiculoComponent,
+    RegSolicitudMantComponent
   ],
   declarations: [
-    HomeComponent, //Declaracion de nuestro componente
-    NavbarComponent,
     RegistrarVehiculoComponent,
     RegistrarRevTecnicaComponent,
     RegistrarSoatComponent,
     RegistrarAsigCombustComponent,
-    ControlKilometrajeComponent,
     RegKilometrajeComponent,
     VerObservacionComponent,
-    ControlGenElectricoComponent,
     RegConsumoGeneradorComponent,
-    BandejaGenElectricoComponent,
-    CuadroControlComponent,
     RegArtEmergenciaComponent,
     RegConductorComponent,
-    BandejaOrdenCompraComponent,
-    ConfOrdenCompraComponent,
-    VerObservacionConsComponent,
-    BdjAsigPresupuestalComponent,
-    BdjEjecPresupuestalComponent,
     RegEjecPresupuestalComponent,
     DistEjecPresupuestalComponent,
-    BandejaDeslizadoresComponent,
-    ControlHrsDeslizadorComponent,
+    VerObservacionConsComponent,
     RegAsigPresupuestalComponent,
-    CuadroControlTamboComponent,
     RegHrsDeslizadorComponent,
     VerObsDeslizadorComponent,
     RegLubricantesAfinesComponent,
     RegLubricantesAfines2Component,
     RegLubricantesAfines3Component,
-    ControlMantVehiculoComponent,
     VerObsMantComponent,
     RegMantVehiculoComponent,
     RegConfMantVehiculoComponent,
     RegDetMatVehiculoComponent,
     SolMantVehiculoComponent,
-    ReqMantVehiculoComponent
+    RegSolicitudMantComponent,
+
+
+    HomeComponent, //Declaracion de nuestro componente
+    NavbarComponent,
+    RegistrarRevTecnicaComponent,
+    ControlKilometrajeComponent,
+    ControlGenElectricoComponent,
+    BandejaGenElectricoComponent,
+    CuadroControlComponent,
+    BandejaOrdenCompraComponent,
+    ConfOrdenCompraComponent,
+    BdjAsigPresupuestalComponent,
+    BdjEjecPresupuestalComponent,
+    BandejaDeslizadoresComponent,
+    ControlHrsDeslizadorComponent,
+    CuadroControlTamboComponent,
+    ControlMantVehiculoComponent,
+    ControlSolicitudMantComponent,
+    SnackBarComponent,
   ],
   imports: [
     CommonModule,

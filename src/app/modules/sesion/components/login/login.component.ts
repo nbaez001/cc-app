@@ -42,6 +42,10 @@ export class LoginComponent implements OnInit {
       contrasenia: ['', [Validators.required]],
       perfil: ['', [Validators.required]]
     });
+
+    this.loginForm.get('usuario').setValue('USUARIO01');
+    this.loginForm.get('contrasenia').setValue('1234');
+    this.loginForm.get('perfil').setValue(this.perfiles[0]);
   }
 
   autenticar() {

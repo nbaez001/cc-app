@@ -5,32 +5,35 @@
     id: (
       width: 2rem
     ),
-    nomUnidad: (
-      width: 12rem
+    nomTipoProducto: (
+      width: 8rem
     ),
-    nomTambo: (
-      width: 12rem
+    producto: (
+      width: 10rem
     ),
-    nomVehiculo: (
-      width: 9rem
-    ),
-    fecha: (
-      width: 9rem
-    ),
-    empresa: (
+    cantidad: (
       width: 6rem
     ),
-    kilometrajeInicio: (
+    monto: (
       width: 6rem
+    ),
+    unidadMedida: (
+      width: 7rem
     ),
     opt: (
-      width: 7.5rem
+      width: 2.5rem
     )
   )
 );
 
-.table-container {
-  max-height: 400px;
+.empty {
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  bottom: 0px;
+  left: 0px;
+  font-size: 0.8em;
+  font-weight: 500;
 }
 
 .btn-action {

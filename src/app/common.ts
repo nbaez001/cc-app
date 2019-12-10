@@ -14,6 +14,7 @@ import { HorasDeslizador } from './model/horas-deslizador.model';
 import { CuadroControlTambo } from './model/cuadro-control-tambo.model';
 import { ConsumoGenerador } from './model/consumo-generador.model';
 import { MantenimientoVehicular } from './model/mantenimiento-vehiculo.model';
+import { SolicitudMant } from './model/solicitud-mant.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -322,4 +323,23 @@ export const MANTENIMIENTOS: MantenimientoVehicular[] = [
     { id: 3, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTipomantenimiento: 1, nomTipoMantenimiento: 'PREVENTIVO', idTipoAsigPresupuesto: 1, nomTipoAsigPresupuesto: 'FONDO POR ENCARGo (F/E)', codAsigPresupuesto: '052-2019', importeAsigPresupuesto: 3741.00, nroHojatramiteConf: '', nroInformeConf: '04-2019', actaRecepcionEmpresa: '', cartaInformeProveedor: '', actaRecepccionUURR: '', obsRecepccionUURR: 'EJECUTADO CONFORME', idEstadoMantenimiento: 3, nomEstadoMantenimiento: 'PEND. ASIGNACION', asuntoSolicitud: 'SOLICITUD MANTENIMIENTO PREVENTIVO', detalleSolicitud: 'Estimado Sr. Angel:\n Mediante el presente;  solicito a Usted autorización para proceder el cambio de aceite por los 5,000 km de recorrido de la camioneta EGA-125; el mismo que asciende a un monto de S/. 313.00 el cual se estaría cubriendo con fondos de caja chica.\nAgradezco su atención.' },
     { id: 4, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTipomantenimiento: 1, nomTipoMantenimiento: 'PREVENTIVO', idTipoAsigPresupuesto: 3, nomTipoAsigPresupuesto: 'CAJA CHICA (CC)', codAsigPresupuesto: '', importeAsigPresupuesto: 50.00, nroHojatramiteConf: '', nroInformeConf: '03-2019', actaRecepcionEmpresa: '', cartaInformeProveedor: '', actaRecepccionUURR: '', obsRecepccionUURR: 'EJECUTADO CONFORME', idEstadoMantenimiento: 4, nomEstadoMantenimiento: 'PEND. CONFORMIDAD', asuntoSolicitud: 'SOLICITUD MANTENIMIENTO PREVENTIVO', detalleSolicitud: 'Estimado Sr. Angel:\n Mediante el presente;  solicito a Usted autorización para proceder el cambio de aceite por los 5,000 km de recorrido de la camioneta EGA-125; el mismo que asciende a un monto de S/. 313.00 el cual se estaría cubriendo con fondos de caja chica.\nAgradezco su atención.' },
     { id: 5, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTipomantenimiento: 2, nomTipoMantenimiento: 'CORRECTIVO', idTipoAsigPresupuesto: 2, nomTipoAsigPresupuesto: 'ORDEN DE SERVICIO (OS)', codAsigPresupuesto: '1576-2019', importeAsigPresupuesto: 6086.00, nroHojatramiteConf: '24721-2019', nroInformeConf: '', actaRecepcionEmpresa: '', cartaInformeProveedor: '', actaRecepccionUURR: '', obsRecepccionUURR: 'EJECUTADO CONFORME', idEstadoMantenimiento: 5, nomEstadoMantenimiento: 'CONFORME', asuntoSolicitud: 'SOLICITUD MANTENIMIENTO PREVENTIVO', detalleSolicitud: 'Estimado Sr. Angel:\n Mediante el presente;  solicito a Usted autorización para proceder el cambio de aceite por los 5,000 km de recorrido de la camioneta EGA-125; el mismo que asciende a un monto de S/. 313.00 el cual se estaría cubriendo con fondos de caja chica.\nAgradezco su atención.' },
+];
+
+export const _estadosSolicitudMant = [
+    { id: 1, nombre: 'REGISTRADO' },
+    { id: 2, nombre: 'PEND. ASIGNACION' },
+];
+
+export const _tiposProducto = [
+    { id: 1, nombre: 'REPUESTOS' },
+    { id: 2, nombre: 'SERVICIOS' },
+];
+
+export const _tiposDocumento = [
+    { id: 1, nombre: 'RUC' },
+    { id: 2, nombre: 'DNI' },
+];
+
+export const _solicitudesMant: SolicitudMant[] = [
+    { id: 1, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTambo: 1, nomTambo: 'ANCARPATA', idTipoMantenimiento: 2, nomTipoMantenimiento: 'CORRECTIVO', idVehiculo: 0, idTipoVehiculo: 2, nomTipoVehiculo: 'MOTOCICLETA', marcaVehiculo: 'ZONGSHEN', placaVehiculo: 'EA-9256', idProveedor: 0, nomProveedor: 'ZEA SILVA VLADIMIR', idTipoDocumento: 1, nomTipoDocumento: 'RUC', nroDocumento: '10411143932', fecha: new Date('2019-12-09'), monto: 634.00, proforma: null, observacion: '', idEstado: 1, nomEstado: 'REGISTRADO', detalleSolicitudMant: null },
 ];

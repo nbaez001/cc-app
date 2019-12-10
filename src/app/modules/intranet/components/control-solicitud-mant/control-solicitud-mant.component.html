@@ -3,7 +3,7 @@
     <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
     <mat-card class="box-filtros">
       <mat-card-header class="box-section-header">
-        <mat-card-title class="box-section-title"> BUSQUEDA MANTENIMIENTOS VEHICULARES </mat-card-title>
+        <mat-card-title class="box-section-title"> BUSQUEDA SOLICITUDES DE MANTENIMIENTO VEHICULARE </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
@@ -20,20 +20,20 @@
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <mat-label>Tipo mantenimiento</mat-label>
-                <mat-select formControlName="tipoMantenimiento">
-                  <mat-option *ngFor="let tipoMantenimiento of tiposMantenimiento" [value]="tipoMantenimiento">
-                    {{tipoMantenimiento.nombre}}
+                <mat-label>Tambo</mat-label>
+                <mat-select formControlName="tambo">
+                  <mat-option *ngFor="let tambo of tambos" [value]="tambo">
+                    {{tambo.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <mat-label>Tipos presupuesto</mat-label>
-                <mat-select formControlName="tipoPresupuesto">
-                  <mat-option *ngFor="let tipoPresupuesto of tiposPresupuesto" [value]="tipoPresupuesto">
-                    {{tipoPresupuesto.nombre}}
+                <mat-label>Tipo mantenimiento</mat-label>
+                <mat-select formControlName="tipoMantenimiento">
+                  <mat-option *ngFor="let tipoMantenimiento of tiposMantenimiento" [value]="tipoMantenimiento">
+                    {{tipoMantenimiento.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -60,9 +60,9 @@
           <mat-icon>search</mat-icon>
           <strong> BUSCAR</strong>
         </button>
-        <button mat-raised-button (click)="regMantenimientoVehicular(null)" *ngIf="getUser.perfil.id!=3">
+        <button mat-raised-button (click)="regSolicitudMant(null)" *ngIf="getUser.perfil.id!=3">
           <mat-icon>add_box</mat-icon>
-          <strong> REGISTRAR REQUERIMIENTO</strong>
+          <strong> NUEVO</strong>
         </button>
         <button mat-raised-button (click)="exportarExcel()">
           <mat-icon>file_copy</mat-icon>
@@ -73,7 +73,7 @@
 
     <mat-card class="table-resultados">
       <mat-card-header>
-        <mat-card-title> LISTA DE MANTENIMIENTOS VEHICULARES: </mat-card-title>
+        <mat-card-title> LISTA DE SOLICITUDES DE MANTENIMIENTO VEHICULAR </mat-card-title>
       </mat-card-header>
       <mat-card-content class="card-container">
         <div class="table-container clear-both">
@@ -117,9 +117,9 @@
           </div>
 
           <!-- <mat-card *ngIf="isLoading" class="spinerTable">
-            <mat-progress-spinner color="primary" mode="indeterminate">
-            </mat-progress-spinner>
-          </mat-card> -->
+              <mat-progress-spinner color="primary" mode="indeterminate">
+              </mat-progress-spinner>
+            </mat-card> -->
 
           <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
           </mat-paginator>
