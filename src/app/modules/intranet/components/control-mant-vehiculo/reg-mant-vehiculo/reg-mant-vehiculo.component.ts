@@ -505,4 +505,8 @@ export class RegMantVehiculoComponent implements OnInit {
     }
   }
 
+  buscarOrdenServicio(evt): void {
+
+  }
+
 }
