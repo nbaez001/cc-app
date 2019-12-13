@@ -5,6 +5,9 @@ export class MantenimientoVehicular {
     idTipomantenimiento: number;
     nomTipoMantenimiento: string;
 
+    nroHojatramiteReq: string;
+    nroInformeReq: string;
+
     idTipoAsigPresupuesto: number;
     nomTipoAsigPresupuesto: string;
     codAsigPresupuesto: string;
@@ -22,4 +25,8 @@ export class MantenimientoVehicular {
 
     asuntoSolicitud: string;
     detalleSolicitud: string;
+
+    cotizacion: number;
+
+    conBadge: boolean;
 }

@@ -13,6 +13,7 @@ import { CuadroControlTamboComponent } from './components/cuadro-control-tambo/c
 import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizador/control-hrs-deslizador.component';
 import { ControlMantVehiculoComponent } from './components/control-mant-vehiculo/control-mant-vehiculo.component';
 import { ControlSolicitudMantComponent } from './components/control-solicitud-mant/control-solicitud-mant.component';
+import { BdjBancosComponent } from './components/config/bdj-bancos/bdj-bancos.component';
 
 const intranetRoutes: Routes = [
   {
@@ -74,6 +75,10 @@ const intranetRoutes: Routes = [
         path: 'control-solicitud-mant',
         component: ControlSolicitudMantComponent,
         data: { title: 'Solicitud de mantenimiento' }
+      }, {
+        path: 'bancos',
+        component: BdjBancosComponent,
+        data: { title: 'Bandeja bancos' }
       }
     ]
   }

@@ -46,8 +46,9 @@
                 <input formControlName="documentacion" matInput type="text"
                   placeholder="Documentacion de requerimiento">
                 <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-action" color="primary"
-                  (click)="buscarRequerimiento($event)">
-                  <mat-icon>cloud_upload</mat-icon>
+                  (click)="buscarRequerimiento($event)"
+                  [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1">
+                  <mat-icon>attach_file</mat-icon>
                 </button>
                 <input id="fileRequerimiento" class="none" type="file" accept="application/pdf"
                   (change)="cargarRequerimiento($event)">
@@ -56,7 +57,8 @@
           </mat-grid-list>
         </form>
         <h4 style="margin-bottom: 5px;">Lista de solicitudes de mantenimiento</h4>
-        <button mat-raised-button color="primary" type="button" (click)="buscarSolicitudesMant()">
+        <button mat-raised-button color="primary" type="button" (click)="buscarSolicitudesMant()"
+          [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1">
           <mat-icon>search</mat-icon>
           Agregar solicitudes
         </button>
@@ -71,8 +73,9 @@
               <th mat-header-cell *matHeaderCellDef>OPT.</th>
               <td mat-cell *matCellDef="let element">
                 <button mat-icon-button style="color: red;" matTooltip="Quitar solicitud"
-                  (click)="quitarSolicitudMant(element)">
-                  <mat-icon>delete</mat-icon>
+                  (click)="quitarSolicitudMant(element)"
+                  [disabled]="getUser.perfil.id == 3 || mantenimiento.idEstadoMantenimiento!=1">
+                  <mat-icon>delete_outline</mat-icon>
                 </button>
               </td>
             </ng-container>
@@ -91,43 +94,76 @@
       </div>
       <div align="center" class="button-separate">
         <button mat-raised-button type="button" (click)="salir()">Salir</button>
+        <button mat-raised-button type="button" (click)="guardar()">Guardar</button>
         <button mat-raised-button type="button" (click)="siguiente(stepper)">Siguiente</button>
       </div>
     </mat-step>
     <mat-step [stepControl]="mantenimiento.idEstadoMantenimiento>2">
-      <ng-template matStepLabel>Orden de Servicio</ng-template>
+      <ng-template matStepLabel>Orden Servicio/Res. Administracion</ng-template>
       <div>
         <form [formGroup]="formularioGrp2">
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
               <mat-form-field>
+                <input formControlName="ordenServicio" matInput type="text"
+                  placeholder="Orden servicio/Res. Administracion">
+                <button mat-icon-button matTooltip="Buscar doc. asignacion presupuestal" type="button"
+                  class="btn-action" color="primary" (click)="buscarOrdenServicio($event)">
+                  <mat-icon>search</mat-icon>
+                </button>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+              <mat-form-field>
                 <mat-label>Tipo presupuesto</mat-label>
-                <mat-select formControlName="tiposPresupuesto">
+                <mat-select formControlName="tipoPresupuesto">
                   <mat-option *ngFor="let tipoPresupuesto of tiposPresupuesto" [value]="tipoPresupuesto">
                     {{tipoPresupuesto.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
               <mat-form-field>
-                <input formControlName="ordenServicio" matInput type="text" placeholder="Orden de servicio">
-                <button mat-icon-button matTooltip="Buscar orden servicio" type="button" class="btn-action"
-                  color="primary" (click)="buscarOrdenServicio($event)">
-                  <mat-icon>search</mat-icon>
-                </button>
+                <input formControlName="monto" matInput type="number" placeholder="Monto asignacion">
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
         </form>
+        <h4 style="margin-bottom: 5px;">Detalle afectacion presupuestal</h4>
+        <div class="table-container">
+          <table mat-table [dataSource]="dataSource2" matSort>
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>N°</th>
+              <td mat-cell *matCellDef="let row; let i=index"> {{ i+1 }} </td>
+            </ng-container>
+
+            <ng-container *ngFor="let column of columnsGrilla2" [matColumnDef]="column.columnDef">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+              <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+          </table>
+
+          <div class="empty" *ngIf="dataSource2 === null">
+            No existe datos para mostrar en la tabla
+          </div>
+
+          <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
+          </mat-paginator>
+        </div>
       </div>
       <div align="center" class="button-separate">
         <button mat-raised-button type="button" (click)="salir()">Salir</button>
+        <button mat-raised-button type="button" (click)="guardar()">Guardar</button>
+        <button mat-raised-button type="button" (click)="anterior(stepper)">Anterior</button>
         <button mat-raised-button type="button" (click)="siguiente(stepper)">Siguiente</button>
       </div>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Rendicion de cuenta</ng-template>
+      <ng-template matStepLabel>Conformidad servicio</ng-template>
       <div>
         <form [formGroup]="formularioGrp">
           <mat-grid-list cols="12" rowHeight="50px">
@@ -171,7 +207,7 @@
                 <input formControlName="actaRecepcionEmpresa" matInput type="text" placeholder="Acta recepcion empresa">
                 <button mat-icon-button matTooltip="Buscar acta recepcion" type="button" class="btn-action"
                   color="primary" (click)="buscarActa($event)">
-                  <mat-icon>cloud_upload</mat-icon>
+                  <mat-icon>attach_file</mat-icon>
                 </button>
                 <input id="fileInput" class="none" type="file" accept="application/pdf"
                   (change)="cargarArchivo($event)">
@@ -183,7 +219,7 @@
                   placeholder="Carta informe proveedor">
                 <button mat-icon-button matTooltip="Buscar carta informe proveedor" type="button" class="btn-action"
                   color="primary" (click)="buscarActa2($event)">
-                  <mat-icon>cloud_upload</mat-icon>
+                  <mat-icon>attach_file</mat-icon>
                 </button>
                 <input id="fileInput2" class="none" type="file" accept="application/pdf"
                   (change)="cargarArchivo2($event)">
@@ -194,7 +230,7 @@
                 <input formControlName="actaRecepccionUURR" matInput type="text" placeholder="Acta recepcion UURR">
                 <button mat-icon-button matTooltip="Buscar acta recepcion UURR" type="button" class="btn-action"
                   color="primary" (click)="buscarActa3($event)">
-                  <mat-icon>cloud_upload</mat-icon>
+                  <mat-icon>attach_file</mat-icon>
                 </button>
                 <input id="fileInput3" class="none" type="file" accept="application/pdf"
                   (change)="cargarArchivo3($event)">
@@ -202,8 +238,7 @@
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
               <mat-form-field>
-                <input formControlName="cantVehiculos" matInput type="number" placeholder="Cantidad vehiculos"
-                  (keyup)="generarFormulario()">
+                <input formControlName="cantVehiculos" matInput type="number" placeholder="Cantidad vehiculos">
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
@@ -226,47 +261,13 @@
                 </td>
               </ng-container>
 
-              <ng-container matColumnDef="nomUnidad">
-                <th mat-header-cell *matHeaderCellDef> Unidad </th>
-                <td mat-cell *matCellDef="let row">
-                  <mat-form-field appearance="fill">
-                    <mat-select [formControlName]="'u'+row.id">
-                      <mat-option *ngFor="let unidad of unidades" [value]="unidad">
-                        {{unidad.nombre}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </td>
+              <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+                <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
               </ng-container>
 
-              <ng-container matColumnDef="nomTambo">
-                <th mat-header-cell *matHeaderCellDef> Tambo </th>
-                <td mat-cell *matCellDef="let row">
-                  <mat-form-field appearance="fill">
-                    <mat-select [formControlName]="'t'+row.id">
-                      <mat-option *ngFor="let tambo of tambos" [value]="tambo">
-                        {{tambo.nombre}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="nomVehiculo">
-                <th mat-header-cell *matHeaderCellDef> Vehiculo </th>
-                <td mat-cell *matCellDef="let row">
-                  <mat-form-field appearance="fill">
-                    <mat-select [formControlName]="'vh'+row.id">
-                      <mat-option *ngFor="let vehiculo of vehiculos" [value]="vehiculo">
-                        {{vehiculo.nombre}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </td>
-              </ng-container>
-
-              <ng-container matColumnDef="fecha">
-                <th mat-header-cell *matHeaderCellDef> Fecha </th>
+              <ng-container matColumnDef="fechaMant">
+                <th mat-header-cell *matHeaderCellDef>FECHA </th>
                 <td mat-cell *matCellDef="let row">
                   <mat-form-field appearance="legacy">
                     <input matInput [formControlName]="'f'+row.id" [matDatepicker]="picker1" placeholder="Fecha">
@@ -276,17 +277,8 @@
                 </td>
               </ng-container>
 
-              <ng-container matColumnDef="empresa">
-                <th mat-header-cell *matHeaderCellDef> Empresa </th>
-                <td mat-cell *matCellDef="let row">
-                  <mat-form-field appearance="legacy">
-                    <input matInput [formControlName]="'e'+row.id" type="text" placeholder="Empresa">
-                  </mat-form-field>
-                </td>
-              </ng-container>
-
               <ng-container matColumnDef="kilometrajeInicio">
-                <th mat-header-cell *matHeaderCellDef> Kilometraje inicio </th>
+                <th mat-header-cell *matHeaderCellDef>KILOMETRAJE INICIO </th>
                 <td mat-cell *matCellDef="let row">
                   <mat-form-field appearance="legacy">
                     <input matInput [formControlName]="'k'+row.id" type="number" placeholder="Kilometraje inicio">
@@ -295,7 +287,7 @@
               </ng-container>
 
               <ng-container matColumnDef="opt" stickyEnd>
-                <th mat-header-cell *matHeaderCellDef>Opciones</th>
+                <th mat-header-cell *matHeaderCellDef>OPT-</th>
                 <td mat-cell *matCellDef="let element">
                   <button mat-icon-button matTooltip="Detalle servicio" (click)="regDetalleServicio(element)">
                     <mat-icon>create</mat-icon>
@@ -307,7 +299,7 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
             <div class="empty" *ngIf="dataSource === null">
-              No existe marcadores para mostrar en la tabla
+              No existe detalle mantenimiento para mostrar en la tabla
             </div>
             <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
             </mat-paginator>
@@ -315,9 +307,11 @@
           </div>
         </form>
       </div>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+      <div align="center" class="button-separate">
+        <button mat-raised-button type="button" (click)="salir()">Salir</button>
+        <button mat-raised-button type="button" (click)="guardar()">Guardar</button>
+        <button mat-raised-button type="button" (click)="anterior(stepper)">Anterior</button>
+        <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
       </div>
     </mat-step>
   </mat-horizontal-stepper>

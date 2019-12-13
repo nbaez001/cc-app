@@ -31,5 +31,9 @@ export class SolicitudMant {
     idEstado: number;
     nomEstado: string;//REGISTRADO,PENDIENTE ASIGNACION,ATENDIDO, CONFORME
 
+
+    fechaMant: Date;
+    kilometrajeInicio: number;
+
     detalleSolicitudMant: DetalleSolicitudMant[];
 }

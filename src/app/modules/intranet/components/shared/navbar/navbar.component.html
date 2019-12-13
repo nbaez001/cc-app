@@ -91,12 +91,12 @@
       </a>
       <div *ngIf="showSubmenu5">
         <a mat-list-item [routerLink]="['/intranet/control-solicitud-mant']" routerLinkActive="active-list-item"
-          [ngStyle]="{'padding-left': '20px'}">
+          [ngStyle]="{'padding-left': '20px'}" *ngIf="getUser.perfil.id!=3">
           <span class="child-link"></span>
           Control solicitudes mantenimiento
         </a>
         <a mat-list-item [routerLink]="['/intranet/control-mantenimiento']" routerLinkActive="active-list-item"
-          [ngStyle]="{'padding-left': '20px'}">
+          [ngStyle]="{'padding-left': '20px'}" *ngIf="getUser.perfil.id!=1">
           <span class="child-link"></span>
           Control mantenimiento
         </a>
@@ -131,6 +131,11 @@
         <mat-icon>expand_more</mat-icon>
       </a>
       <div *ngIf="showSubmenu">
+        <a mat-list-item [routerLink]="['/intranet/bancos']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '20px'}">
+          <span class="child-link"></span>
+          Bancos
+        </a>
         <a mat-list-item [routerLink]="['/intranet/orden-compra']" routerLinkActive="active-list-item"
           [ngStyle]="{'padding-left': '20px'}">
           <span class="child-link"></span>

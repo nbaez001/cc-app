@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { MatTableDataSource, MatPaginator, MatDialog, MatSort, MatSnackBar } from '@angular/material';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { UNIDADES, TIPOSMANTENIMIENTO, TIPOEJECUCION, _solicitudesMant, TAMBOS } from 'src/app/common';
+import { UNIDADES, TIPOSMANTENIMIENTO, _solicitudesMant, TAMBOS } from 'src/app/common';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { SolicitudMant } from 'src/app/model/solicitud-mant.model';
 import { RegSolicitudMantComponent } from './reg-solicitud-mant/reg-solicitud-mant.component';

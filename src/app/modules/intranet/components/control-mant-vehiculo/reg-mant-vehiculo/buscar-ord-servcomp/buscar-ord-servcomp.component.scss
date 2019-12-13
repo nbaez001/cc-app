@@ -1,0 +1,29 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    nomTipoejecucion: (
+      width: 12rem
+    ),
+    nroOrdencompra: (
+      width: 8rem
+    ),
+    monto: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 6rem
+    )
+  )
+);
+
+.mat-row:hover {
+  cursor: pointer;
+}

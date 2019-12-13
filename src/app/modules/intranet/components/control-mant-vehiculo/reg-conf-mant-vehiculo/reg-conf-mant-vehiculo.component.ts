@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatDia
 import { MantenimientoVehicular } from 'src/app/model/mantenimiento-vehiculo.model';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { UNIDADES, TIPOSMANTENIMIENTO, TIPOEJECUCION } from 'src/app/common';
+import { UNIDADES, TIPOSMANTENIMIENTO } from 'src/app/common';
 import { DecimalPipe, DatePipe } from '@angular/common';
 import { DetalleMantenimiento } from 'src/app/model/detalle-mantenimiento.mode';
 import { ServRepMantenimiento } from 'src/app/model/serv-rep-mantenimiento.model';

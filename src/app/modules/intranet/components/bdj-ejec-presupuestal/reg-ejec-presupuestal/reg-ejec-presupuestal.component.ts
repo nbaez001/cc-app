@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Unidad } from 'src/app/model/unidad.model';
 import { Tambo } from 'src/app/model/tambo.model';
-import { UNIDADES, TAMBOS, TIPOEJECUCION, PARTIDAS } from 'src/app/common';
+import { UNIDADES, TAMBOS, TIPOSPRESUPUESTO, PARTIDAS } from 'src/app/common';
 import { DetalleEjecucion } from 'src/app/model/detalle-ejecucion.model';
 import { EjecucionPresupuestal } from 'src/app/model/ejecucion-presupuestal.model';
 import { MatTableDataSource, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -21,7 +21,7 @@ export class RegEjecPresupuestalComponent implements OnInit {
 
   unidades: Unidad[] = UNIDADES;
   tambos: Tambo[] = TAMBOS;
-  tiposejecucion: Object[] = TIPOEJECUCION;
+  tiposejecucion: Object[] = TIPOSPRESUPUESTO;
   partidas: Object[] = PARTIDAS;
 
   columnsGrilla = [

@@ -47,6 +47,9 @@ import { ControlSolicitudMantComponent } from './components/control-solicitud-ma
 import { RegSolicitudMantComponent } from './components/control-solicitud-mant/reg-solicitud-mant/reg-solicitud-mant.component';
 import { SnackBarComponent } from './components/shared/snack-bar/snack-bar.component';
 import { BuscarSolicitudMantComponent } from './components/control-mant-vehiculo/reg-mant-vehiculo/buscar-solicitud-mant/buscar-solicitud-mant.component';
+import { BuscarOrdServcompComponent } from './components/control-mant-vehiculo/reg-mant-vehiculo/buscar-ord-servcomp/buscar-ord-servcomp.component';
+import { BdjBancosComponent } from './components/config/bdj-bancos/bdj-bancos.component';
+import { RegBancoComponent } from './components/config/bdj-bancos/reg-banco/reg-banco.component';
 
 @NgModule({
   entryComponents: [
@@ -75,6 +78,8 @@ import { BuscarSolicitudMantComponent } from './components/control-mant-vehiculo
     SolMantVehiculoComponent,
     RegSolicitudMantComponent,
     BuscarSolicitudMantComponent,
+    BuscarOrdServcompComponent,
+    RegBancoComponent,
   ],
   declarations: [
     RegistrarVehiculoComponent,
@@ -102,6 +107,8 @@ import { BuscarSolicitudMantComponent } from './components/control-mant-vehiculo
     SolMantVehiculoComponent,
     RegSolicitudMantComponent,
     BuscarSolicitudMantComponent,
+    BuscarOrdServcompComponent,
+    RegBancoComponent,
 
 
     HomeComponent, //Declaracion de nuestro componente
@@ -121,6 +128,7 @@ import { BuscarSolicitudMantComponent } from './components/control-mant-vehiculo
     ControlMantVehiculoComponent,
     ControlSolicitudMantComponent,
     SnackBarComponent,
+    BdjBancosComponent,
   ],
   imports: [
     CommonModule,

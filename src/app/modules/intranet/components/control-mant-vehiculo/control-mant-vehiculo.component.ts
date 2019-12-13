@@ -4,7 +4,7 @@ import { MantenimientoVehicular } from 'src/app/model/mantenimiento-vehiculo.mod
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { UNIDADES, TIPOSMANTENIMIENTO, TIPOEJECUCION, MANTENIMIENTOS } from 'src/app/common';
+import { UNIDADES, TIPOSMANTENIMIENTO, TIPOSPRESUPUESTO, MANTENIMIENTOS } from 'src/app/common';
 import { VerObsMantComponent } from './ver-obs-mant/ver-obs-mant.component';
 import { RegMantVehiculoComponent } from './reg-mant-vehiculo/reg-mant-vehiculo.component';
 import { RegConfMantVehiculoComponent } from './reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
@@ -91,6 +91,8 @@ export class ControlMantVehiculoComponent implements OnInit {
       cell: (mant: MantenimientoVehicular) => (mant.nomEstadoMantenimiento != null) ? `${mant.nomEstadoMantenimiento}` : ''
     }];
 
+  conBadge: boolean = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -149,7 +151,7 @@ export class ControlMantVehiculoComponent implements OnInit {
   }
 
   public cargarTipopresupuesto() {
-    this.tiposPresupuesto = JSON.parse(JSON.stringify(TIPOEJECUCION));
+    this.tiposPresupuesto = JSON.parse(JSON.stringify(TIPOSPRESUPUESTO));
     this.tiposPresupuesto.unshift({ id: 0, nombre: 'TODOS' });
 
     this.bandejaGrp.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
@@ -164,6 +166,7 @@ export class ControlMantVehiculoComponent implements OnInit {
   }
 
   public cargarDatosTabla(): void {
+    this.determinarAlerta();
     this.dataSource = null;
     if (this.listaMantenimientos.length > 0) {
       this.dataSource = new MatTableDataSource(this.listaMantenimientos);
@@ -171,6 +174,24 @@ export class ControlMantVehiculoComponent implements OnInit {
       this.dataSource.sort = this.sort;
     }
     this.spinnerService.hide();
+  }
+
+  determinarAlerta(): void {
+    this.listaMantenimientos.forEach(el => {
+      if (this.user.perfil.id == 3) {
+        if (el.idEstadoMantenimiento == 2) {
+          el.conBadge = true;
+        } else {
+          el.conBadge = false;
+        }
+      } else {
+        if (el.idEstadoMantenimiento == 3) {
+          el.conBadge = true;
+        } else {
+          el.conBadge = false;
+        }
+      }
+    });
   }
 
   buscar() {
@@ -210,7 +231,7 @@ export class ControlMantVehiculoComponent implements OnInit {
     let indice = this.listaMantenimientos.indexOf(obj);
     const dialogRef = this.dialog.open(RegMantVehiculoComponent, {
       width: '900px',
-      data: { name: 'NERIO', animal: 'LEON' }
+      data: { title: 'Mantenimiento vehicular', objeto: obj }
     });
 
     dialogRef.afterClosed().subscribe(result => {
