@@ -14,6 +14,7 @@ import { ControlHrsDeslizadorComponent } from './components/control-hrs-deslizad
 import { ControlMantVehiculoComponent } from './components/control-mant-vehiculo/control-mant-vehiculo.component';
 import { ControlSolicitudMantComponent } from './components/control-solicitud-mant/control-solicitud-mant.component';
 import { BdjBancosComponent } from './components/config/bdj-bancos/bdj-bancos.component';
+import { BdjProveedoresComponent } from './components/config/bdj-proveedores/bdj-proveedores.component';
 
 const intranetRoutes: Routes = [
   {
@@ -79,6 +80,10 @@ const intranetRoutes: Routes = [
         path: 'bancos',
         component: BdjBancosComponent,
         data: { title: 'Bandeja bancos' }
+      }, {
+        path: 'proveedores',
+        component: BdjProveedoresComponent,
+        data: { title: 'Bandeja proveedores' }
       }
     ]
   }

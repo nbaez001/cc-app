@@ -16,6 +16,8 @@ import { ConsumoGenerador } from './model/consumo-generador.model';
 import { MantenimientoVehicular } from './model/mantenimiento-vehiculo.model';
 import { SolicitudMant } from './model/solicitud-mant.model';
 import { Banco } from './model/config/banco.model';
+import { Proveedor } from './model/config/proveedor.model';
+import { Orden } from './model/config/orden.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -357,4 +359,40 @@ export const _bancos: Banco[] = [
     { id: 1, nombre: 'INTERBANK', idTipoDocumento: 1, nomTipoDocumento: 'RUC', nroDocumento: '20478876653', fecha: new Date('2019-12-09'), idEstado: 1, nomEstado: 'ACTIVO' },
     { id: 2, nombre: 'SCOTIABANK', idTipoDocumento: 1, nomTipoDocumento: 'RUC', nroDocumento: '20244433435', fecha: new Date('2019-12-09'), idEstado: 1, nomEstado: 'ACTIVO' },
     { id: 3, nombre: 'BANCO DE LA NACION', idTipoDocumento: 1, nomTipoDocumento: 'RUC', nroDocumento: '20354422242', fecha: new Date('2019-12-09'), idEstado: 2, nomEstado: 'INACTIVO' },
+];
+
+export const _departamentos = [
+    { id: 1, nombre: 'AYACUCHO' },
+    { id: 2, nombre: 'LIMA' }
+];
+
+export const _provincias = [
+    { id: 1, nombre: 'HUAMANGA', idDepartamento: 1 },
+    { id: 2, nombre: 'LIMA', idDepartamento: 2 }
+];
+
+export const _distritos = [
+    { id: 1, nombre: 'JESUS NAZARENO', idProvincia: 1 },
+    { id: 2, nombre: 'LIMA', idProvincia: 2 }
+];
+
+export const _proveedores: Proveedor[] = [
+    { id: 1, nombre: 'SERVICENTRO MODA S.A.C', idTipoDocumento: 1, nomTipoDocumento: 'RUC', nroDocumento: '20452629284', idDepartamento: 1, nomDepartamento: 'AYACUCHO', idProvincia: 1, nomProvincia: 'HUAMANGA', idDistrito: 1, nomDistrito: 'JESUS NAZARENO', direccion: 'PROLONGACION KENNDY NRO. SN (SALIDA HACIA CUSCO)', telefono: '', fecha: new Date('2019-12-09'), idBanco: 0, nomBanco: '', nroCuenta: '', cciCuenta: '' },
+    { id: 2, nombre: 'ESCOBAL JULCAMORO ROSA ELVIRA', idTipoDocumento: 1, nomTipoDocumento: 'RUC', nroDocumento: '10419147601', idDepartamento: 2, nomDepartamento: 'LIMA', idProvincia: 2, nomProvincia: 'LIMA', idDistrito: 2, nomDistrito: 'LIMA', direccion: 'AVENIDA MARTINES DE UCHURACAY 250 BR SAN MARTIN', telefono: '', fecha: new Date('2019-12-09'), idBanco: 0, nomBanco: '', nroCuenta: '', cciCuenta: '' },
+];
+
+export const _estadosCuentaBanco = [
+    { id: 1, nombre: 'PRINCIPAL' },
+    { id: 2, nombre: 'SECUNDARIO' },
+];
+
+export const _tiposOrden: any[] = [
+    { id: 1, nombre: '' },
+    { id: 2, nombre: 'ORDEN DE COMPRA (OC)' },
+];
+
+export const _ordenes: Orden[] = [
+    { id: 1, nroOrdenCompra: '0000060', nroExpSIAF: '0000002811', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452629284', idProveedor: 1, nomProveedor: 'SERVICENTRO MODA S.A.C', monto: 10188.08, idEstado: 1, nomEstado: 'IMPORTADO', idTipoOrden: 1, nomTipoOrden: 'ORDEN DE SERVICIO (OS)' },
+    { id: 2, nroOrdenCompra: '0000045', nroExpSIAF: '0000002412', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452631858', idProveedor: 2, nomProveedor: 'COORPORACION SANTA BERTHA S.A.C', monto: 6945.00, idEstado: 2, nomEstado: 'ACTIVO', idTipoOrden: 2, nomTipoOrden: 'ORDEN DE COMPRA (OC)' },
+    { id: 3, nroOrdenCompra: '0000036', nroExpSIAF: '0000002345', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452629284', idProveedor: 1, nomProveedor: 'SERVICENTRO MODA S.A.C', monto: 9188.00, idEstado: 3, nomEstado: 'INACTIVO', idTipoOrden: 1, nomTipoOrden: 'ORDEN DE SERVICIO (OS)' }
 ];
