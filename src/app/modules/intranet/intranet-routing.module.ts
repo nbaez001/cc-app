@@ -5,7 +5,6 @@ import { ControlKilometrajeComponent } from './components/control-kilometraje/co
 import { ControlGenElectricoComponent } from './components/control-gen-electrico/control-gen-electrico.component';
 import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
 import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico/bandeja-gen-electrico.component';
-import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/bandeja-orden-compra.component';
 import { BdjAsigPresupuestalComponent } from './components/bdj-asig-presupuestal/bdj-asig-presupuestal.component';
 import { BdjEjecPresupuestalComponent } from './components/bdj-ejec-presupuestal/bdj-ejec-presupuestal.component';
 import { BandejaDeslizadoresComponent } from './components/bandeja-deslizadores/bandeja-deslizadores.component';
@@ -15,6 +14,7 @@ import { ControlMantVehiculoComponent } from './components/control-mant-vehiculo
 import { ControlSolicitudMantComponent } from './components/control-solicitud-mant/control-solicitud-mant.component';
 import { BdjBancosComponent } from './components/config/bdj-bancos/bdj-bancos.component';
 import { BdjProveedoresComponent } from './components/config/bdj-proveedores/bdj-proveedores.component';
+import { BdjOrdCompraComponent } from './components/config/bdj-ord-compra/bdj-ord-compra.component';
 
 const intranetRoutes: Routes = [
   {
@@ -65,10 +65,6 @@ const intranetRoutes: Routes = [
         component: CuadroControlTamboComponent,
         data: { title: 'Cuadro control tambos' }
       }, {
-        path: 'orden-compra',
-        component: BandejaOrdenCompraComponent,
-        data: { title: 'Ordenes de compra' }
-      }, {
         path: 'control-mantenimiento',
         component: ControlMantVehiculoComponent,
         data: { title: 'Mantenimiento vehicular' }
@@ -77,13 +73,17 @@ const intranetRoutes: Routes = [
         component: ControlSolicitudMantComponent,
         data: { title: 'Solicitud de mantenimiento' }
       }, {
-        path: 'bancos',
+        path: 'config/bancos',
         component: BdjBancosComponent,
         data: { title: 'Bandeja bancos' }
       }, {
-        path: 'proveedores',
+        path: 'config/proveedores',
         component: BdjProveedoresComponent,
         data: { title: 'Bandeja proveedores' }
+      }, {
+        path: 'config/orden-compra',
+        component: BdjOrdCompraComponent,
+        data: { title: 'Bandeja orden compra' }
       }
     ]
   }

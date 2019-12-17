@@ -26,6 +26,10 @@
           <mat-icon>search</mat-icon>
           <strong> BUSCAR</strong>
         </button>
+        <button mat-raised-button (click)="importar($event)">
+          <mat-icon>save_alt</mat-icon>
+          <strong> IMPORTAR</strong>
+        </button>
       </mat-card-actions>
     </mat-card>
 
@@ -45,11 +49,11 @@
             <ng-container matColumnDef="opt" stickyEnd>
               <th mat-header-cell *matHeaderCellDef>OPCIONES</th>
               <td mat-cell *matCellDef="let element">
-                <button mat-icon-button matTooltip="Configurar O.C." (click)="configurarOS(element)"
+                <button mat-icon-button matTooltip="Configurar O.C." (click)="configurar(element)"
                   *ngIf="element.idEstado==1">
                   <mat-icon>settings</mat-icon>
                 </button>
-                <button mat-icon-button matTooltip="Ver O.C." (click)="verOS(element)">
+                <button mat-icon-button matTooltip="Ver O.C." (click)="ver(element)">
                   <mat-icon>picture_as_pdf</mat-icon>
                 </button>
               </td>

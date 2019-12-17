@@ -19,8 +19,6 @@ import { BandejaGenElectricoComponent } from './components/bandeja-gen-electrico
 import { CuadroControlComponent } from './components/cuadro-control/cuadro-control.component';
 import { RegArtEmergenciaComponent } from './components/home/reg-art-emergencia/reg-art-emergencia.component';
 import { RegConductorComponent } from './components/home/reg-conductor/reg-conductor.component';
-import { BandejaOrdenCompraComponent } from './components/bandeja-orden-compra/bandeja-orden-compra.component';
-import { ConfOrdenCompraComponent } from './components/bandeja-orden-compra/conf-orden-compra/conf-orden-compra.component';
 import { VerObservacionConsComponent } from './components/control-gen-electrico/ver-observacion-cons/ver-observacion-cons.component';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { BdjAsigPresupuestalComponent } from './components/bdj-asig-presupuestal/bdj-asig-presupuestal.component';
@@ -52,7 +50,13 @@ import { BdjBancosComponent } from './components/config/bdj-bancos/bdj-bancos.co
 import { RegBancoComponent } from './components/config/bdj-bancos/reg-banco/reg-banco.component';
 import { BdjProveedoresComponent } from './components/config/bdj-proveedores/bdj-proveedores.component';
 import { RegProveedorComponent } from './components/config/bdj-proveedores/reg-proveedor/reg-proveedor.component';
-import { BdjOrdenComponent } from './components/config/bdj-orden/bdj-orden.component';
+import { BdjOrdCompraComponent } from './components/config/bdj-ord-compra/bdj-ord-compra.component';
+import { IptOrdCompraComponent } from './components/config/bdj-ord-compra/ipt-ord-compra/ipt-ord-compra.component';
+import { CfgOrdCompraComponent } from './components/config/bdj-ord-compra/cfg-ord-compra/cfg-ord-compra.component';
+import { BdjOrdServicioComponent } from './components/config/bdj-ord-servicio/bdj-ord-servicio.component';
+import { CfgOrdServComponent } from './components/config/bdj-ord-servicio/cfg-ord-serv/cfg-ord-serv.component';
+import { IptOrdServComponent } from './components/config/bdj-ord-servicio/ipt-ord-serv/ipt-ord-serv.component';
+import { BuscProveedorComponent } from './components/config/bdj-ord-compra/cfg-ord-compra/busc-proveedor/busc-proveedor.component';
 
 @NgModule({
   entryComponents: [
@@ -84,6 +88,11 @@ import { BdjOrdenComponent } from './components/config/bdj-orden/bdj-orden.compo
     BuscarOrdServcompComponent,
     RegBancoComponent,
     RegProveedorComponent,
+    IptOrdCompraComponent,
+    CfgOrdCompraComponent,
+    IptOrdServComponent,
+    CfgOrdServComponent,
+    BuscProveedorComponent,
   ],
   declarations: [
     RegistrarVehiculoComponent,
@@ -114,6 +123,11 @@ import { BdjOrdenComponent } from './components/config/bdj-orden/bdj-orden.compo
     BuscarOrdServcompComponent,
     RegBancoComponent,
     RegProveedorComponent,
+    IptOrdCompraComponent,
+    CfgOrdCompraComponent,
+    IptOrdServComponent,
+    CfgOrdServComponent,
+    BuscProveedorComponent,
 
 
     HomeComponent, //Declaracion de nuestro componente
@@ -123,8 +137,6 @@ import { BdjOrdenComponent } from './components/config/bdj-orden/bdj-orden.compo
     ControlGenElectricoComponent,
     BandejaGenElectricoComponent,
     CuadroControlComponent,
-    BandejaOrdenCompraComponent,
-    ConfOrdenCompraComponent,
     BdjAsigPresupuestalComponent,
     BdjEjecPresupuestalComponent,
     BandejaDeslizadoresComponent,
@@ -135,7 +147,8 @@ import { BdjOrdenComponent } from './components/config/bdj-orden/bdj-orden.compo
     SnackBarComponent,
     BdjBancosComponent,
     BdjProveedoresComponent,
-    BdjOrdenComponent,
+    BdjOrdCompraComponent,
+    BdjOrdServicioComponent,
   ],
   imports: [
     CommonModule,
