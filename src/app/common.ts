@@ -425,3 +425,8 @@ export const _requerimientosBien: RequerimientoBien[] = [
     { id: 4, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24767-2019', nroInformeReq: '543-2019', idTipoAsigPresupuesto: 3, nomTipoAsigPresupuesto: 'FONDO POR ENCARGO (F/E)', codAsigPresupuesto: '052-2019', importeAsigPresupuesto: 3741.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
     { id: 5, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24791-2019', nroInformeReq: '765-2019', idTipoAsigPresupuesto: 4, nomTipoAsigPresupuesto: 'CAJA CHICA (CC)', codAsigPresupuesto: '', importeAsigPresupuesto: 50.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false }
 ];
+
+export const _monedas: any = [
+    { id: 1, nombre: 'S/.' },
+    { id: 2, nombre: '$.' },
+];

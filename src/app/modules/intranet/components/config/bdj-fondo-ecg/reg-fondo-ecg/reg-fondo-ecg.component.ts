@@ -30,9 +30,9 @@ export class RegFondoEcgComponent implements OnInit {
       header: 'FF/Rb',
       cell: (det: AfectacionPresFE) => `${det.ffRb}`
     }, {
-      columnDef: 'metaMnemonico',
+      columnDef: 'mNemonico',
       header: 'Meta/Nmonico',
-      cell: (det: AfectacionPresFE) => `${det.metaMnemonico}`
+      cell: (det: AfectacionPresFE) => `${det.mNemonico}`
     }, {
       columnDef: 'clasificadorGasto',
       header: 'Clasif. Gasto',
@@ -181,7 +181,7 @@ export class RegFondoEcgComponent implements OnInit {
       let kil = new AfectacionPresFE();
       kil.id = 0;
       kil.ffRb = this.detFormularioGrp.get('ffRb').value;
-      kil.metaMnemonico = this.detFormularioGrp.get('metaMnemonico').value;
+      kil.mNemonico = this.detFormularioGrp.get('mNemonico').value;
       kil.clasificadorGasto = this.detFormularioGrp.get('clasificadorGasto').value.nombre;
       kil.descripcion = this.detFormularioGrp.get('descripcion').value;
       kil.monto = this.detFormularioGrp.get('monto').value;

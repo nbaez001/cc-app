@@ -14,6 +14,7 @@ import { DataDialog } from 'src/app/model/data-dialog.model';
 import { DetalleEjecucion } from 'src/app/model/detalle-ejecucion.model';
 import { BuscarOrdServcompComponent } from './buscar-ord-servcomp/buscar-ord-servcomp.component';
 import { EjecucionPresupuestal } from 'src/app/model/ejecucion-presupuestal.model';
+import { RegSolFondecgComponent } from './reg-sol-fondecg/reg-sol-fondecg.component';
 
 @Component({
   selector: 'app-reg-mant-vehiculo',
@@ -215,10 +216,13 @@ export class RegMantVehiculoComponent implements OnInit {
     this.formularioGrp1 = this.fb.group({
       unidad: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
+      tipoPresupuesto: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       cotizacion: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroHt: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroInforme: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       documentacion: [{ value: '', disabled: true }, [Validators.required]],
+      nomTdrEett: [{ value: '', disabled: true }, [Validators.required]],
+      nroFondoEncargo: [{ value: '', disabled: true }, [Validators.required]],
     });
 
     this.formularioGrp2 = this.fb.group({
@@ -254,14 +258,18 @@ export class RegMantVehiculoComponent implements OnInit {
   }
 
   public inicializarVariables(): void {
-    if (this.data.objeto == null) {
+    if (this.data.objeto == null) {//NUEVO MANTENIMIENTO
       this.mantenimiento = new MantenimientoVehicular();
       this.mantenimiento.idEstadoMantenimiento = 1;
       this.mantenimiento.idTipomantenimiento = 1;
+      this.formularioGrp1.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
+      this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
       this.cargarDatosTabla();
-    } else {
+    } else {//MANTENIMIENTO EXISTENTE
       this.mantenimiento = JSON.parse(JSON.stringify(this.data.objeto));
       this.listaSolicitudesMant = _solicitudesMant;
+      this.formularioGrp1.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => { el.id == this.mantenimiento.idTipoAsigPresupuesto })[0]);
+      this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => { el.id == this.mantenimiento.idTipoAsigPresupuesto })[0]);
       this.cargarDatosTabla1();
       this.cargarDatosTabla();
       if (this.user.perfil.id == 3) {
@@ -286,9 +294,6 @@ export class RegMantVehiculoComponent implements OnInit {
     }
 
     this.deshabilitarCampos(this.mantenimiento);
-
-    this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
-
     this.cargarUnidades();
     this.cargarTipomantenimiento();
 
@@ -635,5 +640,37 @@ export class RegMantVehiculoComponent implements OnInit {
   move(index: number) {
     this.myStepper.selectedIndex = index;
   }
+
+  //FORMULARIO 1
+
+  public buscarTdrEett(evt): void {
+    document.getElementById('fileTdrEett').click();
+  }
+
+  public cargarTdrEett(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
+    this.fileupload = event.target.files[0];
+    if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
+      this.formularioGrp1.get('nomTdrEett').setValue(null);
+    } else {
+      const nombreArchivo = this.fileupload.name;
+      this.formularioGrp1.get('nomTdrEett').setValue(nombreArchivo);
+    }
+  }
+
+  solFondoEncargo(): void {
+    console.log('INGRESO A FONDO ENCARGO');
+    const dialogRef3 = this.dialog.open(RegSolFondecgComponent, {
+      width: '800px',
+      data: { title: 'FORMATO N° 01: SOLICITUD DE OTORGAMIENTO DE ENCARGO', objeto: { tipo: 1 } }//TIPO: 1(BIENES), 2(SERVICIOS)
+    });
+
+    dialogRef3.afterClosed().subscribe(result => {
+      console.log(result);
+      // this.listaMantenimientos.splice(indice,1);
+      // this.listaMantenimientos.push(result);
+      // this.cargarDatosTabla();
+    });
+  }
+
 
 }

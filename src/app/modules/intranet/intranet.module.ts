@@ -61,6 +61,7 @@ import { BdjFondoEcgComponent } from './components/config/bdj-fondo-ecg/bdj-fond
 import { RegFondoEcgComponent } from './components/config/bdj-fondo-ecg/reg-fondo-ecg/reg-fondo-ecg.component';
 import { ReqCombustibleComponent } from './components/req-combustible/req-combustible.component';
 import { RegReqCombustibleComponent } from './components/req-combustible/reg-req-combustible/reg-req-combustible.component';
+import { RegSolFondecgComponent } from './components/control-mant-vehiculo/reg-mant-vehiculo/reg-sol-fondecg/reg-sol-fondecg.component';
 
 @NgModule({
   entryComponents: [
@@ -99,6 +100,7 @@ import { RegReqCombustibleComponent } from './components/req-combustible/reg-req
     BuscProveedorComponent,
     RegFondoEcgComponent,
     RegReqCombustibleComponent,
+    RegSolFondecgComponent,
   ],
   declarations: [
     RegistrarVehiculoComponent,
@@ -136,6 +138,7 @@ import { RegReqCombustibleComponent } from './components/req-combustible/reg-req
     BuscProveedorComponent,
     RegFondoEcgComponent,
     RegReqCombustibleComponent,
+    RegSolFondecgComponent,
 
 
     HomeComponent, //Declaracion de nuestro componente

@@ -9,6 +9,7 @@ import { DecimalPipe, DatePipe } from '@angular/common';
 import { DataDialog } from 'src/app/model/data-dialog.model';
 import { OrdenCompra } from 'src/app/model/config/orden-compra.model';
 import { BuscProveedorComponent } from './busc-proveedor/busc-proveedor.component';
+import { _monedas } from 'src/app/common';
 
 @Component({
   selector: 'app-cfg-ord-compra',
@@ -18,6 +19,8 @@ import { BuscProveedorComponent } from './busc-proveedor/busc-proveedor.componen
 export class CfgOrdCompraComponent implements OnInit {
   fileupload: any;
   ordenCompra: OrdenCompra;
+
+  monedas = _monedas;
 
   formularioGrp: FormGroup;
   messages = {
@@ -423,6 +426,10 @@ export class CfgOrdCompraComponent implements OnInit {
 
   stepChanged(event, stepper) {
     stepper.selected.interacted = false;
+  }
+
+  limpiar(): void {
+
   }
 
 }

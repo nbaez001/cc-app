@@ -1,0 +1,34 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+  max-height: 400px;
+}
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    mNemonico: (
+      width: 12rem
+    ),
+    clasificadorGasto: (
+      width: 8rem
+    ),
+    descripcion: (
+      width: 12rem
+    ),
+    unidadMedida: (
+      width: 12rem
+    ),
+    cantidad: (
+      width: 6rem
+    ),
+    precioUnitario: (
+      width: 6rem
+    ),
+    monto: (
+      width: 6rem
+    )
+  )
+);
