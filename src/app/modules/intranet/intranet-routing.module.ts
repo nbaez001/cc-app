@@ -15,6 +15,8 @@ import { ControlSolicitudMantComponent } from './components/control-solicitud-ma
 import { BdjBancosComponent } from './components/config/bdj-bancos/bdj-bancos.component';
 import { BdjProveedoresComponent } from './components/config/bdj-proveedores/bdj-proveedores.component';
 import { BdjOrdCompraComponent } from './components/config/bdj-ord-compra/bdj-ord-compra.component';
+import { BdjOrdServicioComponent } from './components/config/bdj-ord-servicio/bdj-ord-servicio.component';
+import { BdjFondoEcgComponent } from './components/config/bdj-fondo-ecg/bdj-fondo-ecg.component';
 
 const intranetRoutes: Routes = [
   {
@@ -84,6 +86,14 @@ const intranetRoutes: Routes = [
         path: 'config/orden-compra',
         component: BdjOrdCompraComponent,
         data: { title: 'Bandeja orden compra' }
+      }, {
+        path: 'config/orden-servicio',
+        component: BdjOrdServicioComponent,
+        data: { title: 'Bandeja orden servicio' }
+      }, {
+        path: 'config/fondo-encargo',
+        component: BdjFondoEcgComponent,
+        data: { title: 'Bandeja fondo encargo' }
       }
     ]
   }

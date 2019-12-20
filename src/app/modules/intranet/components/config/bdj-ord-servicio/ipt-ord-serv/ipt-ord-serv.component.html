@@ -1,3 +1,21 @@
-<p>
-  ipt-ord-serv works!
-</p>
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formularioGrp">
+    <mat-grid-list cols="12" rowHeight="50px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <input matInput formControlName="nroOrdenServicio" type="text" placeholder="Nro Orden servicio" [Uppercased]>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+        <mat-form-field appearance="legacy">
+          <input matInput formControlName="anioOrdenServicio" type="number" placeholder="Año orden servicio">
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="guardar()">Importar</button>
+  <button mat-button [mat-dialog-close]="null" cdkFocusInitial>Salir</button>
+</div>

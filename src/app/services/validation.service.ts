@@ -76,4 +76,22 @@ export class ValidationService {
       }
     });
   }
+
+  removeErrors(group: FormGroup, exclusions?: [string]): void {
+    Object.keys(group.controls).forEach((key: string) => {
+      let abstractControl = group.get(key);
+      if (abstractControl instanceof FormGroup) {
+        this.removeErrors(abstractControl, exclusions);
+      } else {
+        if (typeof exclusions != 'undefined') {
+          let ex = exclusions.find(el => el == key);
+          if (!ex) {
+            abstractControl.setErrors(null)
+          }
+        } else {
+          abstractControl.setErrors(null);
+        }
+      }
+    });
+  }
 }

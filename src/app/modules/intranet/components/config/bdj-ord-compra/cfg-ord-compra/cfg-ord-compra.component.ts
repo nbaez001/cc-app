@@ -393,6 +393,7 @@ export class CfgOrdCompraComponent implements OnInit {
   }
 
   siguiente(stepper: MatStepper) {
+    console.log('INDICE: ' + stepper.selectedIndex);
     if (stepper.selectedIndex == 0) {
       if (this.formularioGrp.valid) {
         stepper.next();
@@ -403,8 +404,7 @@ export class CfgOrdCompraComponent implements OnInit {
       if (stepper.selectedIndex == 1) {
         //VALIDAR FORM 2
         if (this.listaDetalleOC.length > 0) {
-          console.log(this.listaDetalleOC.length);
-          this.move(2);
+          stepper.next();
         } else {
           this._snackBar.open('Ingrese al menos un detalle de la Orden', 'OK', { duration: 1000, horizontalPosition: 'right', verticalPosition: 'top', panelClass: ['warning-snackbar'] })
         }

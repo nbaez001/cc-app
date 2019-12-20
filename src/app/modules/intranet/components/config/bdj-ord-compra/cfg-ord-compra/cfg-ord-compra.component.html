@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>{{data.title}}</h1>
 <div mat-dialog-content>
-  <mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="stepChanged($event, stepper);">
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <!-- (selectionChange)="stepChanged($event, stepper)"> -->
     <mat-step [stepControl]="formularioGrp">
       <ng-template matStepLabel>Datos principales</ng-template>
       <div>
@@ -147,7 +148,8 @@
             <ng-container matColumnDef="opt" stickyEnd>
               <th mat-header-cell *matHeaderCellDef>OPT.</th>
               <td mat-cell *matCellDef="let element">
-                <button mat-icon-button matTooltip="Quitar detalle O.C." (click)="quitarDetalleOC(element)">
+                <button mat-icon-button type="button" matTooltip="Quitar detalle O.C."
+                  (click)="quitarDetalleOC(element)">
                   <mat-icon>delete_outline</mat-icon>
                 </button>
               </td>

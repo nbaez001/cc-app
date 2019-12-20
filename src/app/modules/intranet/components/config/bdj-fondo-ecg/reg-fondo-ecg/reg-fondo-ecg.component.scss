@@ -1,0 +1,41 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    ffRb: (
+      width: 18rem
+    ),
+    metaNmonico: (
+      width: 8rem
+    ),
+    clasificadorGasto: (
+      width: 9rem
+    ),
+    descripcion: (
+      width: 9rem
+    ),
+    monto: (
+      width: 9rem
+    ),
+    opt: (
+      width: 3rem
+    )
+  )
+);
+
+.empty {
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  bottom: 0px;
+  left: 0px;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+
+.none {
+  display: none;
+}

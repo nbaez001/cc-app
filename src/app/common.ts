@@ -18,6 +18,8 @@ import { SolicitudMant } from './model/solicitud-mant.model';
 import { Banco } from './model/config/banco.model';
 import { Proveedor } from './model/config/proveedor.model';
 import { OrdenCompra } from './model/config/orden-compra.model';
+import { OrdenServicio } from './model/config/orden-servicio.model';
+import { FondoEncargo } from './model/config/fondo-encargo.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -401,4 +403,15 @@ export const _ordenesCompra: OrdenCompra[] = [
     { id: 1, nroOrdenCompra: '0000060', nroExpSIAF: '0000002811', fecha: new Date('12/06/2019'), idTipoDocumento: 0, nomTipoDocumento: '', nroDocumento: '', idProveedor: 0, nomProveedor: '', monto: 10188.08, idEstado: 1, nomEstado: 'IMPORTADO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' },
     { id: 2, nroOrdenCompra: '0000045', nroExpSIAF: '0000002412', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452631858', idProveedor: 2, nomProveedor: 'COORPORACION SANTA BERTHA S.A.C', monto: 6945.00, idEstado: 2, nomEstado: 'ACTIVO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' },
     { id: 3, nroOrdenCompra: '0000036', nroExpSIAF: '0000002345', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452629284', idProveedor: 1, nomProveedor: 'SERVICENTRO MODA S.A.C', monto: 9188.00, idEstado: 3, nomEstado: 'INACTIVO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' }
+];
+
+export const _ordenesServicio: OrdenServicio[] = [
+    { id: 1, nroOrdenServicio: '0000060', nroExpSIAF: '0000002811', fecha: new Date('12/06/2019'), idTipoDocumento: 0, nomTipoDocumento: '', nroDocumento: '', idProveedor: 0, nomProveedor: '', monto: 10188.08, idEstado: 1, nomEstado: 'IMPORTADO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' },
+    { id: 2, nroOrdenServicio: '0000045', nroExpSIAF: '0000002412', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452631858', idProveedor: 2, nomProveedor: 'COORPORACION SANTA BERTHA S.A.C', monto: 6945.00, idEstado: 2, nomEstado: 'ACTIVO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' },
+    { id: 3, nroOrdenServicio: '0000036', nroExpSIAF: '0000002345', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452629284', idProveedor: 1, nomProveedor: 'SERVICENTRO MODA S.A.C', monto: 9188.00, idEstado: 3, nomEstado: 'INACTIVO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' }
+];
+
+export const _fondosEncargo: FondoEncargo[] = [
+    { id: 1, nroResAdministracion: '165', fecha: new Date('2018-07-20'), concepto: 'ADQUISICION DE BIENES A FIN DE GARANTIZAR LA OPERATIVIDAD DE LOS VEHICULOS', monto: 10290.00, observacion: '' },
+    { id: 2, nroResAdministracion: '19', fecha: new Date('2019-06-12'), concepto: 'ADQUISICION DE COMBUSTIBLE PARA EL TAMBO SANABAMBA Y LUBRICANTES - UT AYACUCHO NORTE', monto: 3685.50, observacion: '' },
 ];
