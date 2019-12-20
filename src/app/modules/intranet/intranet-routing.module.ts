@@ -15,6 +15,7 @@ import { ControlSolicitudMantComponent } from './components/control-solicitud-ma
 import { BdjBancosComponent } from './components/config/bdj-bancos/bdj-bancos.component';
 import { BdjProveedoresComponent } from './components/config/bdj-proveedores/bdj-proveedores.component';
 import { BdjOrdCompraComponent } from './components/config/bdj-ord-compra/bdj-ord-compra.component';
+import { ReqCombustibleComponent } from './components/req-combustible/req-combustible.component';
 
 const intranetRoutes: Routes = [
   {
@@ -49,14 +50,10 @@ const intranetRoutes: Routes = [
         component: ControlHrsDeslizadorComponent,
         data: { title: 'Hpras deslizador' }
       }, {
-        path: 'asignacion-presupuestal',
-        component: BdjAsigPresupuestalComponent,
-        data: { title: 'Bandeja asignacion economico presupuestal' }
-      }, {
-        path: 'avance-econ-presupuestal',
-        component: BdjEjecPresupuestalComponent,
-        data: { title: 'Bandeja ejecucion economico presupuestal' }
-      }, {
+        //   path: 'avance-econ-presupuestal',
+        //   component: BdjEjecPresupuestalComponent,
+        //   data: { title: 'Bandeja ejecucion economico presupuestal' }
+        // }, {
         path: 'cuadro-control',
         component: CuadroControlComponent,
         data: { title: 'Cuadro control general' }
@@ -84,6 +81,14 @@ const intranetRoutes: Routes = [
         path: 'config/orden-compra',
         component: BdjOrdCompraComponent,
         data: { title: 'Bandeja orden compra' }
+      }, {
+        path: 'config/asignacion-presupuestal',
+        component: BdjAsigPresupuestalComponent,
+        data: { title: 'Bandeja asignacion economico presupuestal' }
+      }, {
+        path: 'req-combustible',
+        component: ReqCombustibleComponent,
+        data: { title: 'Bandeja requerimiento combustible' }
       }
     ]
   }

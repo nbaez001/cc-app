@@ -57,6 +57,8 @@ import { BdjOrdServicioComponent } from './components/config/bdj-ord-servicio/bd
 import { CfgOrdServComponent } from './components/config/bdj-ord-servicio/cfg-ord-serv/cfg-ord-serv.component';
 import { IptOrdServComponent } from './components/config/bdj-ord-servicio/ipt-ord-serv/ipt-ord-serv.component';
 import { BuscProveedorComponent } from './components/config/bdj-ord-compra/cfg-ord-compra/busc-proveedor/busc-proveedor.component';
+import { ReqCombustibleComponent } from './components/req-combustible/req-combustible.component';
+import { RegReqCombustibleComponent } from './components/req-combustible/reg-req-combustible/reg-req-combustible.component';
 
 @NgModule({
   entryComponents: [
@@ -93,6 +95,7 @@ import { BuscProveedorComponent } from './components/config/bdj-ord-compra/cfg-o
     IptOrdServComponent,
     CfgOrdServComponent,
     BuscProveedorComponent,
+    RegReqCombustibleComponent,
   ],
   declarations: [
     RegistrarVehiculoComponent,
@@ -128,6 +131,7 @@ import { BuscProveedorComponent } from './components/config/bdj-ord-compra/cfg-o
     IptOrdServComponent,
     CfgOrdServComponent,
     BuscProveedorComponent,
+    RegReqCombustibleComponent,
 
 
     HomeComponent, //Declaracion de nuestro componente
@@ -149,6 +153,7 @@ import { BuscProveedorComponent } from './components/config/bdj-ord-compra/cfg-o
     BdjProveedoresComponent,
     BdjOrdCompraComponent,
     BdjOrdServicioComponent,
+    ReqCombustibleComponent,
   ],
   imports: [
     CommonModule,

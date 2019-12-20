@@ -18,6 +18,7 @@ import { SolicitudMant } from './model/solicitud-mant.model';
 import { Banco } from './model/config/banco.model';
 import { Proveedor } from './model/config/proveedor.model';
 import { OrdenCompra } from './model/config/orden-compra.model';
+import { RequerimientoBien } from './model/requerimiento-bien.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -401,4 +402,13 @@ export const _ordenesCompra: OrdenCompra[] = [
     { id: 1, nroOrdenCompra: '0000060', nroExpSIAF: '0000002811', fecha: new Date('12/06/2019'), idTipoDocumento: 0, nomTipoDocumento: '', nroDocumento: '', idProveedor: 0, nomProveedor: '', monto: 10188.08, idEstado: 1, nomEstado: 'IMPORTADO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' },
     { id: 2, nroOrdenCompra: '0000045', nroExpSIAF: '0000002412', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452631858', idProveedor: 2, nomProveedor: 'COORPORACION SANTA BERTHA S.A.C', monto: 6945.00, idEstado: 2, nomEstado: 'ACTIVO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' },
     { id: 3, nroOrdenCompra: '0000036', nroExpSIAF: '0000002345', fecha: new Date('12/06/2019'), idTipoDocumento: 2, nomTipoDocumento: 'RUC', nroDocumento: '20452629284', idProveedor: 1, nomProveedor: 'SERVICENTRO MODA S.A.C', monto: 9188.00, idEstado: 3, nomEstado: 'INACTIVO', nroCuadroAdquisicion: '', tipoProceso: '', nroContrato: '', idMoneda: 1, nomMoneda: 'S/', tc: 0, concepto: 'ADQUISICION DE COMBUSTIBLE PARA LA U.T. AYACUCHO SUR' }
+];
+
+
+export const _requerimientosBien: RequerimientoBien[] = [
+    { id: 1, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24721-2019', nroInformeReq: '211-2019', idTipoAsigPresupuesto: 1, nomTipoAsigPresupuesto: 'ORDEN DE SERVICIO (OS)', codAsigPresupuesto: '1576-2019', importeAsigPresupuesto: 6086.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
+    { id: 2, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24734-2019', nroInformeReq: '456-2019', idTipoAsigPresupuesto: 3, nomTipoAsigPresupuesto: 'FONDO POR ENCARGO (F/E)', codAsigPresupuesto: '448-2019', importeAsigPresupuesto: 1600.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
+    { id: 3, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24755-2019', nroInformeReq: '234-2019', idTipoAsigPresupuesto: 0, nomTipoAsigPresupuesto: '', codAsigPresupuesto: '', importeAsigPresupuesto: 0, idEstadoRequerimiento: 1, nomEstadoRequerimiento: 'SOLICITADO', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
+    { id: 4, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24767-2019', nroInformeReq: '543-2019', idTipoAsigPresupuesto: 3, nomTipoAsigPresupuesto: 'FONDO POR ENCARGO (F/E)', codAsigPresupuesto: '052-2019', importeAsigPresupuesto: 3741.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
+    { id: 5, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24791-2019', nroInformeReq: '765-2019', idTipoAsigPresupuesto: 4, nomTipoAsigPresupuesto: 'CAJA CHICA (CC)', codAsigPresupuesto: '', importeAsigPresupuesto: 50.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false }
 ];
