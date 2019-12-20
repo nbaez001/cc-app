@@ -38,7 +38,7 @@
       </div>
 
 
-
+<!-- 
       <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu3}"
         (click)="showSubmenu3 = !showSubmenu3" *ngIf="getUser.perfil.id==3">
         <mat-icon>assessment</mat-icon> Control presupuesto
@@ -56,7 +56,7 @@
           <span class="child-link"></span>
           Avance presupuestal
         </a>
-      </div>
+      </div> -->
 
 
       <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu2}"
@@ -85,7 +85,7 @@
 
       <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu5}"
         (click)="showSubmenu5 = !showSubmenu5">
-        <mat-icon>commute</mat-icon> Mantenimiento vehiculo
+        <mat-icon>commute</mat-icon> Requerimientos BS/SS
         <span class="spacer"></span>
         <mat-icon>expand_more</mat-icon>
       </a>
@@ -93,12 +93,17 @@
         <a mat-list-item [routerLink]="['/intranet/control-solicitud-mant']" routerLinkActive="active-list-item"
           [ngStyle]="{'padding-left': '20px'}" *ngIf="getUser.perfil.id!=3">
           <span class="child-link"></span>
-          Control solicitudes mantenimiento
+          Solicitudes mantenimiento
         </a>
         <a mat-list-item [routerLink]="['/intranet/control-mantenimiento']" routerLinkActive="active-list-item"
           [ngStyle]="{'padding-left': '20px'}" *ngIf="getUser.perfil.id!=1">
           <span class="child-link"></span>
-          Control mantenimiento
+          Requerimiento mantenimiento
+        </a>
+        <a mat-list-item [routerLink]="['/intranet/req-combustible']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '20px'}" *ngIf="getUser.perfil.id!=1">
+          <span class="child-link"></span>
+          Requerimiento Combustible/afines
         </a>
       </div>
 
@@ -131,6 +136,11 @@
         <mat-icon>expand_more</mat-icon>
       </a>
       <div *ngIf="showSubmenu">
+        <a mat-list-item [routerLink]="['/intranet/config/asignacion-presupuestal']" routerLinkActive="active-list-item"
+          [ngStyle]="{'padding-left': '20px'}">
+          <span class="child-link"></span>
+          Asignacion presupuestal
+        </a>
         <a mat-list-item [routerLink]="['/intranet/config/bancos']" routerLinkActive="active-list-item"
           [ngStyle]="{'padding-left': '20px'}">
           <span class="child-link"></span>

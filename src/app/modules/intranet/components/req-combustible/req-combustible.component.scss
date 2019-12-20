@@ -1,0 +1,33 @@
+@import "../../../../../assets/styles/scss/views/table";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    detalleRequerimiento: (
+      width: 20rem
+    ),
+    nomTipoAsigPresupuesto: (
+      width: 12rem
+    ),
+    codAsigPresupuesto: (
+      width: 10rem
+    ),
+    importeAsigPresupuesto: (
+      width: 9rem
+    ),
+    opt: (
+      width: 5rem
+    )
+  )
+);
+
+.page-bandeja {
+  .table-resultados {
+    // margin-bottom: 0px;
+    .table-container {
+      max-height: 400px;
+    }
+  }
+}

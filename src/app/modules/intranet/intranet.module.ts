@@ -59,6 +59,8 @@ import { IptOrdServComponent } from './components/config/bdj-ord-servicio/ipt-or
 import { BuscProveedorComponent } from './components/config/bdj-ord-compra/cfg-ord-compra/busc-proveedor/busc-proveedor.component';
 import { BdjFondoEcgComponent } from './components/config/bdj-fondo-ecg/bdj-fondo-ecg.component';
 import { RegFondoEcgComponent } from './components/config/bdj-fondo-ecg/reg-fondo-ecg/reg-fondo-ecg.component';
+import { ReqCombustibleComponent } from './components/req-combustible/req-combustible.component';
+import { RegReqCombustibleComponent } from './components/req-combustible/reg-req-combustible/reg-req-combustible.component';
 
 @NgModule({
   entryComponents: [
@@ -96,6 +98,7 @@ import { RegFondoEcgComponent } from './components/config/bdj-fondo-ecg/reg-fond
     CfgOrdServComponent,
     BuscProveedorComponent,
     RegFondoEcgComponent,
+    RegReqCombustibleComponent,
   ],
   declarations: [
     RegistrarVehiculoComponent,
@@ -132,6 +135,7 @@ import { RegFondoEcgComponent } from './components/config/bdj-fondo-ecg/reg-fond
     CfgOrdServComponent,
     BuscProveedorComponent,
     RegFondoEcgComponent,
+    RegReqCombustibleComponent,
 
 
     HomeComponent, //Declaracion de nuestro componente
@@ -154,6 +158,7 @@ import { RegFondoEcgComponent } from './components/config/bdj-fondo-ecg/reg-fond
     BdjOrdCompraComponent,
     BdjOrdServicioComponent,
     BdjFondoEcgComponent,
+    ReqCombustibleComponent,
   ],
   imports: [
     CommonModule,

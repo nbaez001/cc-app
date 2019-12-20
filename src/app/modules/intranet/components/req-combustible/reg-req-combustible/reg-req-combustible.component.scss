@@ -1,0 +1,50 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+@include mat-table-columns(
+  (
+    id: (
+      width: 2rem
+    ),
+    ffRb: (
+      width: 4rem
+    ),
+    metaNmonico: (
+      width: 6rem
+    ),
+    clasificadorGasto: (
+      width: 7rem
+    ),
+    descripcion: (
+      width: 12rem
+    ),
+    monto: (
+      width: 6rem
+    )
+  )
+);
+
+.table-container {
+  max-height: 400px;
+}
+
+.btn-action {
+  background-color: #ffffff;
+  position: absolute;
+  right: -2px;
+  margin: -11px 0;
+  padding: 0;
+  min-width: 25px;
+}
+
+.none {
+  display: none;
+}
+
+.button-separate > button {
+  margin-left: 10px !important;
+  margin-top: 10px;
+}
+
+.mat-horizontal-content-container {
+  padding-bottom: 0px !important;
+}

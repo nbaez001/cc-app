@@ -20,6 +20,7 @@ import { Proveedor } from './model/config/proveedor.model';
 import { OrdenCompra } from './model/config/orden-compra.model';
 import { OrdenServicio } from './model/config/orden-servicio.model';
 import { FondoEncargo } from './model/config/fondo-encargo.model';
+import { RequerimientoBien } from './model/requerimiento-bien.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -414,4 +415,13 @@ export const _ordenesServicio: OrdenServicio[] = [
 export const _fondosEncargo: FondoEncargo[] = [
     { id: 1, nroResAdministracion: '165', fecha: new Date('2018-07-20'), concepto: 'ADQUISICION DE BIENES A FIN DE GARANTIZAR LA OPERATIVIDAD DE LOS VEHICULOS', monto: 10290.00, observacion: '' },
     { id: 2, nroResAdministracion: '19', fecha: new Date('2019-06-12'), concepto: 'ADQUISICION DE COMBUSTIBLE PARA EL TAMBO SANABAMBA Y LUBRICANTES - UT AYACUCHO NORTE', monto: 3685.50, observacion: '' },
+];
+
+
+export const _requerimientosBien: RequerimientoBien[] = [
+    { id: 1, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24721-2019', nroInformeReq: '211-2019', idTipoAsigPresupuesto: 1, nomTipoAsigPresupuesto: 'ORDEN DE SERVICIO (OS)', codAsigPresupuesto: '1576-2019', importeAsigPresupuesto: 6086.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
+    { id: 2, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24734-2019', nroInformeReq: '456-2019', idTipoAsigPresupuesto: 3, nomTipoAsigPresupuesto: 'FONDO POR ENCARGO (F/E)', codAsigPresupuesto: '448-2019', importeAsigPresupuesto: 1600.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
+    { id: 3, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24755-2019', nroInformeReq: '234-2019', idTipoAsigPresupuesto: 0, nomTipoAsigPresupuesto: '', codAsigPresupuesto: '', importeAsigPresupuesto: 0, idEstadoRequerimiento: 1, nomEstadoRequerimiento: 'SOLICITADO', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
+    { id: 4, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24767-2019', nroInformeReq: '543-2019', idTipoAsigPresupuesto: 3, nomTipoAsigPresupuesto: 'FONDO POR ENCARGO (F/E)', codAsigPresupuesto: '052-2019', importeAsigPresupuesto: 3741.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false },
+    { id: 5, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', nroHojatramiteReq: '24791-2019', nroInformeReq: '765-2019', idTipoAsigPresupuesto: 4, nomTipoAsigPresupuesto: 'CAJA CHICA (CC)', codAsigPresupuesto: '', importeAsigPresupuesto: 50.00, idEstadoRequerimiento: 2, nomEstadoRequerimiento: 'PEND. AUTORIZACION', cotizacion: 2000, detalleRequerimiento: 'SOLICITUD COMBUSTIBLE Y LUBRICANTES', conBadge: false }
 ];

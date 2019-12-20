@@ -1,39 +1,29 @@
-<navbar [showSubmenu]="true">
+<navbar [showSubmenu5]="true">
   <div class="page-bandeja">
     <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
     <mat-card class="box-filtros">
-      <mat-card-header class="box-section-header colorroca">
-        <mat-card-title class="box-section-title"> BUSQUEDA ASIGNACION PRESUPUESTAL </mat-card-title>
+      <mat-card-header class="box-section-header">
+        <mat-card-title class="box-section-title"> BUSQUEDA REQUERIMIENTO COMBUSTIBLE </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <mat-label>Año presupuestal</mat-label>
-                <mat-select formControlName="anio">
-                  <mat-option *ngFor="let anio of anios" [value]="anio">
-                    {{anio.nombre}}
+                <mat-label>Unidad</mat-label>
+                <mat-select formControlName="unidad">
+                  <mat-option *ngFor="let unidad of unidades" [value]="unidad">
+                    {{unidad.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <mat-label>Meta</mat-label>
-                <mat-select formControlName="meta">
-                  <mat-option *ngFor="let meta of metas" [value]="meta">
-                    {{meta.descripcion}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
-              <mat-form-field appearance="legacy">
-                <mat-label>Partida</mat-label>
-                <mat-select formControlName="partida">
-                  <mat-option *ngFor="let partida of partidas" [value]="partida">
-                    {{partida.nombre}}
+                <mat-label>Tipos presupuesto</mat-label>
+                <mat-select formControlName="tipoPresupuesto">
+                  <mat-option *ngFor="let tipoPresupuesto of tiposPresupuesto" [value]="tipoPresupuesto">
+                    {{tipoPresupuesto.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -60,9 +50,9 @@
           <mat-icon>search</mat-icon>
           <strong> BUSCAR</strong>
         </button>
-        <button mat-raised-button (click)="regAsigPresupuestal(null)">
+        <button mat-raised-button (click)="regRequerimientoBien(null)" *ngIf="getUser.perfil.id!=3">
           <mat-icon>add_box</mat-icon>
-          <strong> NUEVA ASIGNACION</strong>
+          <strong> NUEVO</strong>
         </button>
         <button mat-raised-button (click)="exportarExcel()">
           <mat-icon>file_copy</mat-icon>
@@ -73,7 +63,7 @@
 
     <mat-card class="table-resultados">
       <mat-card-header>
-        <mat-card-title> LISTA DE ASIGNACIONES: </mat-card-title>
+        <mat-card-title> LISTA DE REQUERIMIENTOS: </mat-card-title>
       </mat-card-header>
       <mat-card-content class="card-container">
         <div class="table-container clear-both">
@@ -87,15 +77,19 @@
             <ng-container matColumnDef="opt" stickyEnd>
               <th mat-header-cell *matHeaderCellDef>OPCIONES</th>
               <td mat-cell *matCellDef="let element">
-                <button mat-icon-button matTooltip="Editar Asignacion" (click)="regAsigPresupuestal(element)">
-                  <mat-icon>create</mat-icon>
+                <!-- <button mat-icon-button matTooltip="Ver observaciones" (click)="verObsRequerimientoBien(element)">
+                  <mat-icon>comment</mat-icon>
+                </button> -->
+                <button mat-icon-button matTooltip="revisar mantenimiento" (click)="regRequerimientoBien(element)">
+                  <mat-icon matBadge="1" matBadgeColor="warn" *ngIf="element.conBadge">search</mat-icon>
+                  <mat-icon *ngIf="!element.conBadge">search</mat-icon>
                 </button>
               </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              [ngClass]="{'sobresaltarUltimo' : row.id==null}"></tr>
           </table>
 
           <div class="empty" *ngIf="dataSource === null">
@@ -107,9 +101,8 @@
             </mat-progress-spinner>
           </mat-card> -->
 
-          <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+          <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 100]" showFirstLastButtons>
           </mat-paginator>
-
         </div>
       </mat-card-content>
     </mat-card>
