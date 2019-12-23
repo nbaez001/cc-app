@@ -273,17 +273,7 @@ export class RegSolFondecgComponent implements OnInit {
     }
   }
 
-  // buscar(): void {
-  //   let idUnidad = this.formularioGrp.get('unidad').value.id;
-  //   let idTambo = this.formularioGrp.get('tambo').value.id;
-  //   let idTipoMantenimiento = this.formularioGrp.get('tipoMantenimiento').value.id;
+  limpiar(): void {
 
-  //   this.listaAfectacionPresFE = JSON.parse(JSON.stringify(_solicitudesMant));
-  //   this.listaAfectacionPresFE = this.listaAfectacionPresFE.filter(el => (el.idUnidad == idUnidad));
-  //   this.listaAfectacionPresFE = this.listaAfectacionPresFE.filter(el => (el.idTambo == idTambo || 0 == idTambo));
-  //   this.listaAfectacionPresFE = this.listaAfectacionPresFE.filter(el => (el.idTipoMantenimiento == idTipoMantenimiento || 0 == idTipoMantenimiento));
-
-  //   this.cargarDatosTabla();
-  // }
-
+  }
 }
