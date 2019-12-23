@@ -16,6 +16,16 @@
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+              <mat-form-field>
+                <mat-label>Tipo presupuesto</mat-label>
+                <mat-select formControlName="tipoPresupuesto">
+                  <mat-option *ngFor="let tipoPresupuesto of tiposPresupuesto" [value]="tipoPresupuesto">
+                    {{tipoPresupuesto.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
               <mat-form-field>
                 <input formControlName="cotizacion" matInput type="number" placeholder="Cotizacion requerimiento">
@@ -42,6 +52,30 @@
                 </button>
                 <input id="fileRequerimiento" class="none" type="file" accept="application/pdf"
                   (change)="cargarRequerimiento($event)">
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}"
+              *ngIf="formularioGrp1.get('tipoPresupuesto').value.id==1 || formularioGrp1.get('tipoPresupuesto').value.id==2">
+              <mat-form-field>
+                <input formControlName="nomTdrEett" matInput type="text" placeholder="Documento TDR o EETT">
+                <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-action" color="primary"
+                  (click)="buscarTdrEett($event)"
+                  [disabled]="getUser.perfil.id == 3 || requerimiento.idEstadoRequerimiento!=1">
+                  <mat-icon>attach_file</mat-icon>
+                </button>
+                <input id="fileTdrEett" class="none" type="file" accept="application/pdf"
+                  (change)="cargarTdrEett($event)">
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}"
+              *ngIf="formularioGrp1.get('tipoPresupuesto').value.id==3">
+              <mat-form-field>
+                <input formControlName="nroFondoEncargo" matInput type="text" placeholder="Nro solicitud fondo encargo">
+                <button mat-icon-button matTooltip="Elaborar solicitud fondo encargo" type="button" class="btn-action"
+                  color="primary" (click)="solFondoEncargo()"
+                  [disabled]="getUser.perfil.id == 3 || requerimiento.idEstadoRequerimiento!=1">
+                  <mat-icon>add_box</mat-icon>
+                </button>
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>

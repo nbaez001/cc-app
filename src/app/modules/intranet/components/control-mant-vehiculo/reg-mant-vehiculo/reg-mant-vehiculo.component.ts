@@ -658,9 +658,8 @@ export class RegMantVehiculoComponent implements OnInit {
   }
 
   solFondoEncargo(): void {
-    console.log('INGRESO A FONDO ENCARGO');
     const dialogRef3 = this.dialog.open(RegSolFondecgComponent, {
-      width: '800px',
+      width: '900px',
       data: { title: 'FORMATO N° 01: SOLICITUD DE OTORGAMIENTO DE ENCARGO', objeto: { tipo: 1 } }//TIPO: 1(BIENES), 2(SERVICIOS)
     });
 

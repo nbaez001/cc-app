@@ -430,3 +430,7 @@ export const _monedas: any = [
     { id: 1, nombre: 'S/.' },
     { id: 2, nombre: '$.' },
 ];
+
+export const _mNemonico: any[] = [
+    { id: 22, nombre: '22' }
+];

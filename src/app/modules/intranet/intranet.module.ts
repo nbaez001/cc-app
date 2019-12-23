@@ -62,6 +62,8 @@ import { RegFondoEcgComponent } from './components/config/bdj-fondo-ecg/reg-fond
 import { ReqCombustibleComponent } from './components/req-combustible/req-combustible.component';
 import { RegReqCombustibleComponent } from './components/req-combustible/reg-req-combustible/reg-req-combustible.component';
 import { RegSolFondecgComponent } from './components/control-mant-vehiculo/reg-mant-vehiculo/reg-sol-fondecg/reg-sol-fondecg.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { VisorPdfComponent } from './components/shared/visor-pdf/visor-pdf.component';
 
 @NgModule({
   entryComponents: [
@@ -101,6 +103,7 @@ import { RegSolFondecgComponent } from './components/control-mant-vehiculo/reg-m
     RegFondoEcgComponent,
     RegReqCombustibleComponent,
     RegSolFondecgComponent,
+    VisorPdfComponent,
   ],
   declarations: [
     RegistrarVehiculoComponent,
@@ -139,6 +142,7 @@ import { RegSolFondecgComponent } from './components/control-mant-vehiculo/reg-m
     RegFondoEcgComponent,
     RegReqCombustibleComponent,
     RegSolFondecgComponent,
+    VisorPdfComponent,
 
 
     HomeComponent, //Declaracion de nuestro componente
@@ -169,6 +173,7 @@ import { RegSolFondecgComponent } from './components/control-mant-vehiculo/reg-m
     MaterialModule,
     Ng4LoadingSpinnerModule.forRoot(),
     CKEditorModule,
+    PdfViewerModule,
   ],
   providers: [
     DatePipe,

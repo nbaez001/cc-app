@@ -6,12 +6,12 @@
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
-          <input matInput formControlName="nombresResponsable" placeholder="Nombres del responsable">
+          <input matInput formControlName="nombresResponsable" placeholder="Nombres del responsable" [Uppercased]>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 8, lg: 8, xl: 8}">
         <mat-form-field appearance="legacy">
-          <input matInput formControlName="apellidosResponsable" placeholder="Apellidos del responsable">
+          <input matInput formControlName="apellidosResponsable" placeholder="Apellidos del responsable" [Uppercased]>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
@@ -31,7 +31,7 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
-          <input matInput formControlName="cargoResponsable" placeholder="Cargo responsable">
+          <input matInput formControlName="cargoResponsable" placeholder="Cargo responsable" [Uppercased]>
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
@@ -71,7 +71,7 @@
     <mat-grid-list cols="12" rowHeight="50px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
-          <input matInput formControlName="nombreBanco" placeholder="Nombre del banco">
+          <input matInput formControlName="nombreBanco" placeholder="Nombre del banco" [Uppercased]>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 8, lg: 8, xl: 8}">
@@ -80,83 +80,104 @@
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
-  </form>
-  <form [formGroup]="detFormularioGrp">
-    <h4 style="margin-bottom: 5px;">Detalles de bienes y/o servicios objeto del fondo por encargo</h4>
-    <mat-grid-list cols="12" rowHeight="50px">
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+    <mat-grid-list cols="12" rowHeight="75px">
+      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <mat-form-field appearance="legacy">
-          <mat-label>Mnemonico</mat-label>
-          <mat-select formControlName="mnemonico">
-            <mat-option *ngFor="let mnemonico of mnemonicos" [value]="mnemonico">
-              {{mnemonico.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <mat-label>Clasificador gasto</mat-label>
-          <mat-select formControlName="clasificadorGasto">
-            <mat-option *ngFor="let clasificadorGasto of clasificadoresGasto" [value]="clasificadorGasto">
-              {{clasificadorGasto.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <input matInput formControlName="nombrebnss" type="text" placeholder="Nombre bien o servicio">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <input matInput formControlName="unidadMedida" type="text" placeholder="Unidad ">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <input matInput formControlName="cantidad" placeholder="Cantidad">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <input matInput formControlName="precioUnitario" placeholder="Precio unitario">
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
-        <mat-form-field appearance="legacy">
-          <input matInput formControlName="monto" placeholder="Monto">
+          <textarea matInput formControlName="declaracionResponsable"
+            placeholder="Declaracion del responsable"></textarea>
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
   </form>
 
-  <div class="table-container">
-    <table mat-table [dataSource]="dataSource" matSort>
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
-        <td mat-cell *matCellDef="let row; let i =index"> {{ i+1 }} </td>
-      </ng-container>
+  <mat-card class="box-filtros">
+    <mat-card-header class="box-section-header">
+      <mat-card-title class="box-section-title"> Detalles de bienes y/o servicios objeto del fondo por encargo
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="detFormularioGrp">
+        <mat-grid-list cols="12" rowHeight="50px">
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+            <mat-form-field appearance="legacy">
+              <mat-label>Mnemonico</mat-label>
+              <mat-select formControlName="mnemonico">
+                <mat-option *ngFor="let mnemonico of mnemonicos" [value]="mnemonico">
+                  {{mnemonico.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+            <mat-form-field appearance="legacy">
+              <mat-label>Clasificador gasto</mat-label>
+              <mat-select formControlName="clasificadorGasto">
+                <mat-option *ngFor="let clasificadorGasto of clasificadoresGasto" [value]="clasificadorGasto">
+                  {{clasificadorGasto.nombre}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+            <mat-form-field appearance="legacy">
+              <input matInput formControlName="nombrebnss" type="text" placeholder="Nombre bien o servicio" [Uppercased]>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+            <mat-form-field appearance="legacy">
+              <input matInput formControlName="unidadMedida" type="text" placeholder="Unidad medida" [Uppercased]>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+            <mat-form-field appearance="legacy">
+              <input matInput formControlName="cantidad" placeholder="Cantidad">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+            <mat-form-field appearance="legacy">
+              <input matInput formControlName="precioUnitario" placeholder="Precio unitario">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+            <mat-form-field appearance="legacy">
+              <input matInput formControlName="monto" placeholder="Monto">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+            <button mat-raised-button color="primary" type="button" (click)="agregar()">Agregar</button>
+            <button mat-raised-button type="button" (click)="limpiar()">Limpiar</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
 
-      <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
-        <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
-      </ng-container>
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+            <td mat-cell *matCellDef="let row; let i =index"> {{ i+1 }} </td>
+          </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+          <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+            <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+          </ng-container>
 
-    <div class="empty" *ngIf="dataSource === null">
-      No existe datos para mostrar en la tabla
-    </div>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
 
-    <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
-    </mat-paginator>
-  </div>
+        <div class="empty" *ngIf="dataSource === null">
+          No existe datos para mostrar en la tabla
+        </div>
+
+        <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
 <div mat-dialog-actions align="center">
-  <button mat-raised-button color="primary" type="button" (click)="agregar()">Agregar</button>
+  <button mat-raised-button color="primary" type="button" (click)="vista()">Vista previa</button>
+  <button mat-raised-button color="primary" type="button" (click)="guardar()">Guardar</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Salir</button>
 </div>

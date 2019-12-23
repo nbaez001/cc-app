@@ -1,13 +1,15 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { AfectacionPresFE } from 'src/app/model/config/afectacion-pres-fe.model';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { DataDialog } from 'src/app/model/data-dialog.model';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { UNIDADES, TAMBOS } from 'src/app/common';
+import { UNIDADES, TAMBOS, _mNemonico, PARTIDAS } from 'src/app/common';
+import { VisorPdfComponent } from '../../../shared/visor-pdf/visor-pdf.component';
+import { FondoEncargo } from 'src/app/model/config/fondo-encargo.model';
 
 @Component({
   selector: 'app-reg-sol-fondecg',
@@ -20,44 +22,98 @@ export class RegSolFondecgComponent implements OnInit {
   abrevGIT: string = 'GIT';
   abrevNombre: string = 'YGH';
   unidades = [];
+  mnemonicos: any = _mNemonico;
+  clasificadoresGasto: any = PARTIDAS;
 
   formularioGrp: FormGroup;
   messages = {
+    'nombresResponsable': {
+      'required': 'Campo obligatorio'
+    },
+    'apellidosResponsable': {
+      'required': 'Campo obligatorio'
+    },
+    'dniResponsable': {
+      'required': 'Campo obligatorio'
+    },
     'unidad': {
       'required': 'Campo obligatorio'
     },
-    'tambo': {
+    'cargoResponsable': {
       'required': 'Campo obligatorio'
     },
-    'tipoMantenimiento': {
+    'justificacion': {
+      'required': 'Campo obligatorio'
+    },
+    'fechaSolicitud': {
+      'required': 'Campo obligatorio'
+    },
+    'fecInicioEjecucion': {
+      'required': 'Campo obligatorio'
+    },
+    'fecFinEjecucion': {
+      'required': 'Campo obligatorio'
+    },
+    'nombreBanco': {
+      'required': 'Campo obligatorio'
+    },
+    'cciCuenta': {
+      'required': 'Campo obligatorio'
+    },
+    'declaracionResponsable': {
       'required': 'Campo obligatorio'
     }
   };
   formErrors = {
+    'nombresResponsable': '',
+    'apellidosResponsable': '',
+    'dniResponsable': '',
     'unidad': '',
-    'tambo': '',
-    'tipoMantenimiento': ''
+    'cargoResponsable': '',
+    'justificacion': '',
+    'fechaSolicitud': '',
+    'fecInicioEjecucion': '',
+    'fecFinEjecucion': '',
+    'nombreBanco': '',
+    'cciCuenta': '',
+    'declaracionResponsable': '',
   };
 
   detFormularioGrp: FormGroup;
   messages2 = {
-    'unidad': {
+    'mnemonico': {
       'required': 'Campo obligatorio'
     },
-    'tambo': {
+    'clasificadorGasto': {
       'required': 'Campo obligatorio'
     },
-    'tipoMantenimiento': {
+    'nombrebnss': {
+      'required': 'Campo obligatorio'
+    },
+    'unidadMedida': {
+      'required': 'Campo obligatorio'
+    },
+    'cantidad': {
+      'required': 'Campo obligatorio'
+    },
+    'precioUnitario': {
+      'required': 'Campo obligatorio'
+    },
+    'monto': {
       'required': 'Campo obligatorio'
     }
   };
   formErrors2 = {
-    'unidad': '',
-    'tambo': '',
-    'tipoMantenimiento': ''
+    'mnemonico': '',
+    'clasificadorGasto': '',
+    'nombrebnss': '',
+    'unidadMedida': '',
+    'cantidad': '',
+    'precioUnitario': '',
+    'monto': '',
   };
-  listaAfectacionPresFE: AfectacionPresFE[];
-  dataSource: MatTableDataSource<AfectacionPresFE>;
+  listaAfectacionPresFE: AfectacionPresFE[] = [];
+  dataSource: MatTableDataSource<AfectacionPresFE> = null;
   displayedColumns: string[];
   columnsGrilla = [
     {
@@ -95,12 +151,14 @@ export class RegSolFondecgComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegSolFondecgComponent>,
+    public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
     @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService,
     private datePipe: DatePipe,
-    private decimalPipe: DecimalPipe) { }
+    private decimalPipe: DecimalPipe,
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.formularioGrp = this.fb.group({
@@ -115,6 +173,7 @@ export class RegSolFondecgComponent implements OnInit {
       fecFinEjecucion: ['', [Validators.required]],
       nombreBanco: ['', [Validators.required]],
       cciCuenta: ['', [Validators.required]],
+      declaracionResponsable: ['Yo, {{el Responsable del fondo por Encargo}}, me comprometo a rendir cuenta documentada del fondo recibido, en el plazo señalado en la Resolución de Administración que me asigna el mismo, caso contrario autorizo de manera expresa el descuento del monto otorgado de mis haberes u honorarios profesionales, según  corresponda. De conformidad con lo establecido en la Directiva N°................................., aprobada por Resolución Directoral N°..............................., la cual declaro conocer y aceptar.', [Validators.required]],
     });
 
     this.detFormularioGrp = this.fb.group({
@@ -166,7 +225,53 @@ export class RegSolFondecgComponent implements OnInit {
     }
   }
 
+  vista() {
+    const dialogRef = this.dialog.open(VisorPdfComponent, {
+      width: '900px',
+      data: { title: 'PDF VIEWER', objeto: { url: "/assets/files/formato01-fondoEncargo.pdf" } }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+    });
+  }
+
+  agregar(): void {
+    if (this.detFormularioGrp.valid) {
+      let ap = new AfectacionPresFE();
+      ap.id = 0;
+      ap.mNemonico = this.detFormularioGrp.get('mnemonico').value.nombre;
+      ap.clasificadorGasto = this.detFormularioGrp.get('clasificadorGasto').value.nombre;
+      ap.descripcion = this.detFormularioGrp.get('nombrebnss').value;
+      ap.unidadMedida = this.detFormularioGrp.get('unidadMedida').value;
+      ap.cantidad = this.detFormularioGrp.get('cantidad').value;
+      ap.precioUnitario = this.detFormularioGrp.get('precioUnitario').value;
+      ap.monto = this.detFormularioGrp.get('monto').value;
+
+      this.listaAfectacionPresFE.push(ap);
+      this.validationService.setAsUntoched(this.detFormularioGrp, this.formErrors2, ["mnemonico", "clasificadorGasto"])
+
+      this.cargarDatosTabla();
+    } else {
+      this.validationService.getValidationErrors(this.detFormularioGrp, this.messages2, this.formErrors2, true);
+    }
+  }
+
+  guardar(): void {
+    if (this.formularioGrp.valid) {
+      if (this.listaAfectacionPresFE.length > 0) {
+        let kil = new FondoEncargo();
+        kil.id = 0;
+        console.log(kil);
+
+        this.dialogRef.close(kil);
+      } else {
+        this._snackBar.open('Agregue al menos un detalle de afectacion presupuestal', 'OK', { duration: 5000, horizontalPosition: 'right', verticalPosition: 'top', panelClass: ['warning-snackbar'] });
+      }
+    } else {
+      this.validationService.getValidationErrors(this.formularioGrp, this.messages, this.formErrors, true);
+    }
+  }
 
   // buscar(): void {
   //   let idUnidad = this.formularioGrp.get('unidad').value.id;

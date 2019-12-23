@@ -10,6 +10,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { DecimalPipe, DatePipe } from '@angular/common';
 import { DataDialog } from 'src/app/model/data-dialog.model';
 import { BuscarOrdServcompComponent } from '../../control-mant-vehiculo/reg-mant-vehiculo/buscar-ord-servcomp/buscar-ord-servcomp.component';
+import { RegSolFondecgComponent } from '../../control-mant-vehiculo/reg-mant-vehiculo/reg-sol-fondecg/reg-sol-fondecg.component';
 
 @Component({
   selector: 'app-reg-req-combustible',
@@ -28,9 +29,9 @@ export class RegReqCombustibleComponent implements OnInit {
     'unidad': {
       'required': 'Campo obligatorio'
     },
-    // 'tipoMantenimiento': {
-    //   'required': 'Campo obligatorio'
-    // },
+    'tipoPresupuesto': {
+      'required': 'Campo obligatorio'
+    },
     'cotizacion': {
       'required': 'Campo obligatorio'
     },
@@ -46,7 +47,7 @@ export class RegReqCombustibleComponent implements OnInit {
   };
   formErrors1 = {
     'unidad': '',
-    // 'tipoMantenimiento': '',
+    'tipoPresupuesto': '',
     'cotizacion': '',
     'nroHt': '',
     'nroInforme': '',
@@ -116,11 +117,13 @@ export class RegReqCombustibleComponent implements OnInit {
   ngOnInit() {
     this.formularioGrp1 = this.fb.group({
       unidad: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      // tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
+      tipoPresupuesto: [{ value: '', disabled: false }, [Validators.required]],
       cotizacion: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroHt: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroInforme: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       documentacion: [{ value: '', disabled: true }, [Validators.required]],
+      nomTdrEett: [{ value: '', disabled: true }, []],
+      nroFondoEncargo: [{ value: '', disabled: true }, []],
     });
 
     this.formularioGrp2 = this.fb.group({
@@ -328,6 +331,20 @@ export class RegReqCombustibleComponent implements OnInit {
 
   move(index: number) {
     this.myStepper.selectedIndex = index;
+  }
+
+  solFondoEncargo(): void {
+    const dialogRef3 = this.dialog.open(RegSolFondecgComponent, {
+      width: '900px',
+      data: { title: 'FORMATO N° 01: SOLICITUD DE OTORGAMIENTO DE ENCARGO', objeto: { tipo: 1 } }//TIPO: 1(BIENES), 2(SERVICIOS)
+    });
+
+    dialogRef3.afterClosed().subscribe(result => {
+      console.log(result);
+      // this.listaMantenimientos.splice(indice,1);
+      // this.listaMantenimientos.push(result);
+      // this.cargarDatosTabla();
+    });
   }
 
 }

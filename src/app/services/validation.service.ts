@@ -30,7 +30,7 @@ export class ValidationService {
     });
   }
 
-  setAsUntoched(group: FormGroup, formErrors: any, exclusions?: [string]): void {
+  setAsUntoched(group: FormGroup, formErrors: any, exclusions?: string[]): void {
     group.markAsUntouched();
     // group.markAsDirty({ onlySelf: false });
     // group.markAsPristine();
