@@ -11,6 +11,8 @@ export class UsuarioService {
   perfil: Perfil;
   idUnidad: number;
   idTambo: number;
+  nomUnidad: string;
+  nomTambo: string;
 
   constructor() { }
 

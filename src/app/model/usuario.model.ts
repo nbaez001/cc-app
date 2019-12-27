@@ -5,5 +5,7 @@ export class Usuario {
     contrasenia: string;
     perfil: Perfil;
     idUnidad: number;
+    nomUnidad: string;
     idTambo: number;
+    nomTambo: string;
 }

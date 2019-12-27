@@ -9,7 +9,7 @@
       <span>
         {{getUser.perfil.nombre}}
         <br>
-        (U.T. AYACUCHO NORTE)
+        ({{(getUser.idTambo==0)?getUser.nomUnidad:getUser.nomTambo}})
       </span>
     </div>
     <mat-nav-list>
@@ -38,7 +38,7 @@
       </div>
 
 
-<!-- 
+      <!-- 
       <a mat-list-item routerLinkActive="active-list-item" [ngClass]="{'selected':showSubmenu3}"
         (click)="showSubmenu3 = !showSubmenu3" *ngIf="getUser.perfil.id==3">
         <mat-icon>assessment</mat-icon> Control presupuesto

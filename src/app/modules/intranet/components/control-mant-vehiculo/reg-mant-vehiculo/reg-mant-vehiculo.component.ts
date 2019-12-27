@@ -293,8 +293,6 @@ export class RegMantVehiculoComponent implements OnInit {
       }
     }
 
-    this.buildFormularioGrp1 = true;
-
     this.deshabilitarCampos(this.mantenimiento);
     this.cargarUnidades();
     this.cargarTipomantenimiento();

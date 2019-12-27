@@ -98,7 +98,7 @@ export class BandejaGenElectricoComponent implements OnInit {
       if (this.user.getId) {
         this.bandejaGrp = this.fb.group({
           unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-          tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          tambo: [{ value: '', disabled: this.user.perfil.id == 1 }, [Validators.required]],
           codPatrimonio: ['', []],
           fecInicio: ['', []],
           fecFin: ['', []],

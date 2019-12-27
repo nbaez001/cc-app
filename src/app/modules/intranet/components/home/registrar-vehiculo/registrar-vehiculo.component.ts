@@ -23,12 +23,10 @@ export class RegistrarVehiculoComponent implements OnInit {
 
   ngOnInit() {
     this.vehiculoGrp = this.fb.group({
-      fechaMantenimiento: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
       estadovehiculo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
       tipocombustible: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]]
     });
 
-    this.vehiculoGrp.get('fechaMantenimiento').setValue(this.data.fechaMantenimiento);
     this.vehiculoGrp.get('estadovehiculo').setValue((this.estadosvehiculo.filter(el => el.id == this.data.idEstado))[0]);
     this.vehiculoGrp.get('tipocombustible').setValue((this.tiposcombustible.filter(el => el.id == this.data.idTipocombustible))[0]);
 

@@ -56,12 +56,15 @@ export class LoginComponent implements OnInit {
       this.usuario.idUnidad = 1;
       if (this.usuario.perfil.id == 1) {//GESTOR PLATAFORMA
         this.usuario.idTambo = 1;
+        this.usuario.nomTambo = 'TAMBO ARCARPATA';
       } else {
         this.usuario.idTambo = 0;
+        this.usuario.nomUnidad = 'U.T. AYACUCHO NORTE';
       }
     } else {
       this.usuario.idTambo = 0;
       this.usuario.idUnidad = 0;
+      this.usuario.nomUnidad = 'U. ADMINISTRACION';
     }
 
     localStorage.setItem('user', JSON.stringify(this.usuario));

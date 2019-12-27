@@ -70,9 +70,9 @@ export const TAMBOS: Tambo[] = [
     { id: 105, nombre: 'SANTA MERCEDES', idUnidad: 20 }
 ];
 
-export const TIPOSVEHICULO: Master[] = [
-    { id: 1, nombre: 'CAMIONETA' },
-    { id: 2, nombre: 'MOTOCICLETA' }
+export const TIPOSVEHICULO: any[] = [
+    { id: 1, codigo: '67825000', nombre: 'CAMIONETA' },
+    { id: 2, codigo: '67826800', nombre: 'MOTOCICLETA' }
 ];
 
 export const ESTADOVEHICULO: Master[] = [
@@ -87,19 +87,19 @@ export const TIPOSCOMBUSTIBLE: Master[] = [
 ];
 
 export const PERFILES: Perfil[] = [
-    { id: 1, nombre: "GESTOR PLATAFORMA", abreviacion: 'GP' },
+    { id: 1, nombre: "GESTOR INSTITUCIONAL", abreviacion: 'GP' },
     { id: 2, nombre: "JEFE UNIDAD TERRITORIAL", abreviacion: 'JUT' },
     { id: 3, nombre: "ENCARGADO DE TRANSPORTES", abreviacion: 'ET' }
 ];
 
 export const VEHICULOS: Vehiculo[] = [
-    { id: 1, codPatrimonio: '01212', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 0, tambo: 'OFICINA DE UNIDAD TERRITORIAL', idTipo: 1, nomTipo: 'CAMIONETA', marca: 'NISSAN', placa: 'EGT-079', idTipocombustible: 1, nomTipocombustible: 'DIESEL B-5', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'CAMIONETA NISSAN EGT-079' },
-    { id: 2, codPatrimonio: '01216', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 1, tambo: 'ANCARPATA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9256', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA ZONGSHEN EA-9256' },
-    { id: 3, codPatrimonio: '01342', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 2, tambo: 'BARRIO VISTA ALEGRE', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9263', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA ZONGSHEN EA-9263' },
-    { id: 4, codPatrimonio: '01565', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 3, tambo: 'CCERAOCRO', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0715', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA HONDA EW-0715' },
-    { id: 5, codPatrimonio: '01652', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 4, tambo: 'CHACHASPATA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EB-7316', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA HONDA EB-7316' },
-    { id: 6, codPatrimonio: '01664', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 5, tambo: 'CHURUNMARCA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'HONDA', placa: 'EW-0724', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA HONDA EW-0724' },
-    { id: 7, codPatrimonio: '01733', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 6, tambo: 'COCHAPAMPA', idTipo: 2, nomTipo: 'MOTOCICLETA', marca: 'ZONGSHEN', placa: 'EA-9316', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA ZONGSHEN EA-9316' }
+    { id: 1, codPatrimonio: '678250000001', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 0, tambo: 'OFICINA DE UNIDAD TERRITORIAL', denominacion: 'CAMIONETA', marca: 'NISSAN', modelo: '', tipo: '', serie: '', placa: 'EGT-079', color: 'NEGRO', estado: 'R', idTipocombustible: 1, nomTipocombustible: 'DIESEL B-5', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'CAMIONETA NISSAN EGT-079' },
+    { id: 2, codPatrimonio: '678268000001', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 1, tambo: 'ANCARPATA', denominacion: 'MOTOCICLETA', marca: 'ZONGSHEN', modelo: 'XR150L', tipo: 'S/T', serie: 'LWBPCK101H1001038', placa: 'EA-9256', color: 'NEGRO', estado: 'R', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA ZONGSHEN EA-9256' },
+    { id: 3, codPatrimonio: '678268000002', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 2, tambo: 'BARRIO VISTA ALEGRE', denominacion: 'MOTOCICLETA', marca: 'ZONGSHEN', modelo: 'GL-125', tipo: 'LINEAL', serie: 'LALIA2593H3101468', placa: 'EA-9263', color: 'NEGRO', estado: 'R', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA ZONGSHEN EA-9263' },
+    { id: 4, codPatrimonio: '678268000003', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 3, tambo: 'CCERAOCRO', denominacion: 'MOTOCICLETA', marca: 'HONDA', modelo: 'XR150L', tipo: 'S/T', serie: 'LALJA2592J3100609', placa: 'EW-0715', color: 'NEGRO', estado: 'B', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA HONDA EW-0715' },
+    { id: 5, codPatrimonio: '678268000004', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 4, tambo: 'CHACHASPATA', denominacion: 'MOTOCICLETA', marca: 'HONDA', modelo: 'XR150L', tipo: 'S/T', serie: 'KD07E3002862', placa: 'EB-7316', color: 'NEGRO', estado: 'B', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA HONDA EB-7316' },
+    { id: 6, codPatrimonio: '678268000005', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 5, tambo: 'CHURUNMARCA', denominacion: 'MOTOCICLETA', marca: 'HONDA', modelo: 'XR150L', tipo: 'S/T', serie: 'S/S', placa: 'EW-0724', color: 'NEGRO', estado: 'R', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA HONDA EW-0724' },
+    { id: 7, codPatrimonio: '678268000006', idUnidad: 1, unidad: 'U.T. AYACUCHO NORTE', idTambo: 6, tambo: 'COCHAPAMPA', denominacion: 'MOTOCICLETA', marca: 'ZONGSHEN', modelo: 'GL-125', tipo: 'LINEAL', serie: 'LTMKD0798H5200516', placa: 'EA-9316', color: 'NEGRO', estado: 'B', idTipocombustible: 2, nomTipocombustible: 'GASOHOL', idEstado: 1, nomEstado: 'OPERATIVO', fechaMantenimiento: new Date('2019-10-10'), nombre: 'MOTOCICLETA ZONGSHEN EA-9316' }
 ];
 
 export const generadores: Generador[] = [

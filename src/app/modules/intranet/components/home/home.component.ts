@@ -21,7 +21,7 @@ import { RegLubricantesAfinesComponent } from './reg-lubricantes-afines/reg-lubr
 export class HomeComponent implements OnInit {
   unidades = [];
   tambos = [];
-  tiposvehiculo = [];
+  tiposvehiculo: any[] = [];
   listaVehiculos: Vehiculo[] = [];
 
   displayedColumns: string[];
@@ -75,10 +75,6 @@ export class HomeComponent implements OnInit {
   };
   columnsGrilla = [
     {
-      columnDef: 'id',
-      header: 'N°',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.id}`
-    }, {
       columnDef: 'unidad',
       header: 'UNIDAD',
       cell: (vehiculo: Vehiculo) => `${vehiculo.unidad}`
@@ -87,17 +83,41 @@ export class HomeComponent implements OnInit {
       header: 'TAMBO',
       cell: (vehiculo: Vehiculo) => `${vehiculo.tambo}`
     }, {
-      columnDef: 'tipo',
-      header: 'TIPO',
-      cell: (vehiculo: Vehiculo) => `${vehiculo.nomTipo}`
+      columnDef: 'codPatrimonio',
+      header: 'COD. PATRIMONIAL',
+      cell: (vehiculo: Vehiculo) => `${vehiculo.codPatrimonio}`
+    }, {
+      columnDef: 'denominacion',
+      header: 'DENOMINACION',
+      cell: (vehiculo: Vehiculo) => `${vehiculo.denominacion}`
     }, {
       columnDef: 'marca',
       header: 'MARCA',
       cell: (vehiculo: Vehiculo) => `${vehiculo.marca}`
     }, {
+      columnDef: 'modelo',
+      header: 'MODELO',
+      cell: (vehiculo: Vehiculo) => `${vehiculo.modelo}`
+    }, {
+      columnDef: 'tipo',
+      header: 'TIPO',
+      cell: (vehiculo: Vehiculo) => `${vehiculo.tipo}`
+    }, {
+      columnDef: 'serie',
+      header: 'SERIE',
+      cell: (vehiculo: Vehiculo) => `${vehiculo.serie}`
+    }, {
       columnDef: 'placa',
       header: 'PLACA',
       cell: (vehiculo: Vehiculo) => `${vehiculo.placa}`
+    }, {
+      columnDef: 'color',
+      header: 'COLOR',
+      cell: (vehiculo: Vehiculo) => `${vehiculo.color}`
+    }, {
+      columnDef: 'estado',
+      header: 'ESTADO',
+      cell: (vehiculo: Vehiculo) => `${vehiculo.estado}`
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -117,7 +137,7 @@ export class HomeComponent implements OnInit {
         console.log(this.user);
         this.bandejaGrp = this.fb.group({
           unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-          tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          tambo: [{ value: '', disabled: (this.user.perfil.id == 1) }, [Validators.required]],
           tipovehiculo: ['', [Validators.required]]
         });
 
@@ -137,7 +157,7 @@ export class HomeComponent implements OnInit {
 
   public cargarTiposvehiculo() {
     this.tiposvehiculo = JSON.parse(JSON.stringify(TIPOSVEHICULO));
-    this.tiposvehiculo.unshift({ id: 0, nombre: 'TODOS' });
+    this.tiposvehiculo.unshift({ id: 0, codigo: '00', nombre: 'TODOS' });
 
     this.bandejaGrp.get('tipovehiculo').setValue(this.tiposvehiculo[0]);
   }
@@ -175,11 +195,12 @@ export class HomeComponent implements OnInit {
   buscar() {
     let idUnidad = this.bandejaGrp.get('unidad').value.id;
     let idTambo = this.bandejaGrp.get('tambo').value.id;
-    let idTipovehiculo = this.bandejaGrp.get('tipovehiculo').value.id;
+    let codTipovehiculo = this.bandejaGrp.get('tipovehiculo').value.codigo;
+    const regex = new RegExp(`${codTipovehiculo}.*`);
 
     this.listaVehiculos = VEHICULOS.filter(el => (el.idUnidad == idUnidad) || (0 == idUnidad));
     this.listaVehiculos = this.listaVehiculos.filter(el => (el.idTambo == idTambo) || (0 == idTambo));
-    this.listaVehiculos = this.listaVehiculos.filter(el => (el.idTipo == idTipovehiculo) || (0 == idTipovehiculo));
+    this.listaVehiculos = this.listaVehiculos.filter(el => (el.codPatrimonio.match(regex)) || ('00' == codTipovehiculo));
 
     this.cargarDatosTabla();
   }
@@ -189,6 +210,7 @@ export class HomeComponent implements OnInit {
     this.columnsGrilla.forEach(c => {
       this.displayedColumns.push(c.columnDef);
     });
+    this.displayedColumns.unshift('id');
     this.displayedColumns.push('opt');
   }
 
@@ -204,7 +226,63 @@ export class HomeComponent implements OnInit {
   }
 
   exportarExcel() {
-    console.log('Exportar');
+    let url = "/assets/files/reportes/vehiculos.xlsx";
+
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = () => {
+      blob = xhr.response;//xhr.response is now a blob object
+      let file = new File([blob], 'vehiculos.xlsx', { type: 'application/xlsx', lastModified: Date.now() });
+
+      var a = document.createElement("a");
+      var fileURL = window.URL.createObjectURL(file);
+      a.href = fileURL;
+      a.download = file.name;
+      a.click();
+    }
+    xhr.send();
+  }
+
+  exportarArtEmerg() {
+    let url = "/assets/files/reportes/vehiculos-articulos-emergencia.xlsx";
+
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = () => {
+      blob = xhr.response;//xhr.response is now a blob object
+      let file = new File([blob], 'art-emergencia-vehiculos.xlsx', { type: 'application/xlsx', lastModified: Date.now() });
+
+      var a = document.createElement("a");
+      var fileURL = window.URL.createObjectURL(file);
+      a.href = fileURL;
+      a.download = file.name;
+      a.click();
+    }
+    xhr.send();
+  }
+
+  exportarConductores() {
+    let url = "/assets/files/reportes/vehiculos-conductores.xlsx";
+
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = () => {
+      blob = xhr.response;//xhr.response is now a blob object
+      let file = new File([blob], 'conductores-vehiculos.xlsx', { type: 'application/xlsx', lastModified: Date.now() });
+
+      var a = document.createElement("a");
+      var fileURL = window.URL.createObjectURL(file);
+      a.href = fileURL;
+      a.download = file.name;
+      a.click();
+    }
+    xhr.send();
   }
 
   regVehiculo(obj): void {

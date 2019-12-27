@@ -31,6 +31,7 @@ export class NavbarComponent {
 
   ngOnInit() {
     this.consultarUsuario();
+    console.log(this.user);
   }
 
   get getUser(): UsuarioService {
@@ -45,6 +46,8 @@ export class NavbarComponent {
     this.user.setPerfil = usuario.perfil;
     this.user.idUnidad = usuario.idUnidad;
     this.user.idTambo = usuario.idTambo;
+    this.user.nomUnidad = usuario.nomUnidad;
+    this.user.nomTambo = usuario.nomTambo;
   }
 
   salir() {

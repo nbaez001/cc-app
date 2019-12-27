@@ -11,16 +11,22 @@ export class Vehiculo {
     unidad: string;
     idTambo: number;
     tambo: string;
-    idTipo: number;
-    nomTipo: string;
-    marca: string;
-    placa: string;
+
     codPatrimonio: string;
-    nombre: string;
+    denominacion: string;
+    marca: string;
+    modelo: string;
+    tipo: string;
+    serie: string;
+    placa: string;
+    color: string;
+    estado: string;
 
     idTipocombustible: number;
     nomTipocombustible: string;
     idEstado: number;
     nomEstado: string;
     fechaMantenimiento: Date;
+
+    nombre: string;
 }
