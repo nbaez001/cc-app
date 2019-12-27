@@ -268,20 +268,20 @@ export class RegMantVehiculoComponent implements OnInit {
     } else {//MANTENIMIENTO EXISTENTE
       this.mantenimiento = JSON.parse(JSON.stringify(this.data.objeto));
       this.listaSolicitudesMant = _solicitudesMant;
-      this.formularioGrp1.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => { el.id == this.mantenimiento.idTipoAsigPresupuesto })[0]);
-      this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => { el.id == this.mantenimiento.idTipoAsigPresupuesto })[0]);
+      this.formularioGrp1.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => el.id == this.mantenimiento.idTipoAsigPresupuesto)[0]);
+      this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => el.id == this.mantenimiento.idTipoAsigPresupuesto)[0]);
       this.cargarDatosTabla1();
       this.cargarDatosTabla();
       if (this.user.perfil.id == 3) {
-        this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => { el.id == this.mantenimiento.idUnidad })[0]);
-        this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => { el.id == this.mantenimiento.idTipomantenimiento })[0]);
+        this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => el.id == this.mantenimiento.idUnidad )[0]);
+        this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => el.id == this.mantenimiento.idTipomantenimiento )[0]);
         this.formularioGrp1.get('cotizacion').setValue(this.mantenimiento.cotizacion);
         this.formularioGrp1.get('nroHt').setValue(this.mantenimiento.nroHojatramiteReq);
         this.formularioGrp1.get('nroInforme').setValue(this.mantenimiento.nroInformeReq);
         this.move(1);//IR A 2 TAB
       } else {
-        this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => { el.id == this.mantenimiento.idUnidad })[0]);
-        this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => { el.id == this.mantenimiento.idTipomantenimiento })[0]);
+        this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => el.id == this.mantenimiento.idUnidad )[0]);
+        this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => el.id == this.mantenimiento.idTipomantenimiento )[0]);
         this.formularioGrp1.get('cotizacion').setValue(this.mantenimiento.cotizacion);
         this.formularioGrp1.get('nroHt').setValue(this.mantenimiento.nroHojatramiteReq);
         this.formularioGrp1.get('nroInforme').setValue(this.mantenimiento.nroInformeReq);
@@ -293,6 +293,8 @@ export class RegMantVehiculoComponent implements OnInit {
       }
     }
 
+    this.buildFormularioGrp1 = true;
+
     this.deshabilitarCampos(this.mantenimiento);
     this.cargarUnidades();
     this.cargarTipomantenimiento();
@@ -302,6 +304,18 @@ export class RegMantVehiculoComponent implements OnInit {
     this.definirTabla();
     // this.listarDetalleMantenimiento();
   }
+
+  // tipoSustento() {
+  //   if (this.formularioGrp1.get('tipoPresupuesto').value.id == 1 || this.formularioGrp1.get('tipoPresupuesto').value.id == 2) {
+  //     this.tipoOrden = true;
+  //   } else {
+  //     if (this.formularioGrp1.get('tipoPresupuesto').value.id == 3) {
+
+  //     } else {
+
+  //     }
+  //   }
+  // }
 
   definirTabla(): void {
     this.displayedColumns1 = [];
@@ -385,7 +399,7 @@ export class RegMantVehiculoComponent implements OnInit {
 
   cargarControles(): void {
     const frmCtrl = {};
-    for (let i = 0; i < this.listaSolicitudesMant.length; i++) {
+    for (let i = 1; i <= this.listaSolicitudesMant.length; i++) {
       // frmCtrl[`u${i}`] = new FormControl(null);
       // frmCtrl[`t${i}`] = new FormControl(null);
       // frmCtrl[`vh${i}`] = new FormControl(null);
