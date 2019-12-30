@@ -35,12 +35,12 @@ export class RegLubricantesAfinesComponent implements OnInit {
     'cantidad': {
       'required': 'Campo obligatorio'
     },
-    'precio': {
-      'required': 'Campo obligatorio'
-    },
-    'total': {
-      'required': 'Campo obligatorio'
-    },
+    // 'precio': {
+    //   'required': 'Campo obligatorio'
+    // },
+    // 'total': {
+    //   'required': 'Campo obligatorio'
+    // },
     'fecha': {
       'required': 'Campo obligatorio'
     }
@@ -51,8 +51,8 @@ export class RegLubricantesAfinesComponent implements OnInit {
     'vehiculo': '',
     'producto': '',
     'score': '',
-    'precio': '',
-    'total': '',
+    // 'precio': '',
+    // 'total': '',
     'fecha': '',
   };
 
@@ -82,14 +82,14 @@ export class RegLubricantesAfinesComponent implements OnInit {
       columnDef: 'cantidad',
       header: 'Cantidad producto',
       cell: (cond: Lubricante) => this.decimalPipe.transform(cond.cantidad, '1.2-2')
-    }, {
-      columnDef: 'precio',
-      header: 'Precio',
-      cell: (cond: Lubricante) => this.decimalPipe.transform(cond.precio, '1.2-2')
-    }, {
-      columnDef: 'total',
-      header: 'Total',
-      cell: (cond: Lubricante) => this.decimalPipe.transform(cond.total, '1.2-2')
+    // }, {
+    //   columnDef: 'precio',
+    //   header: 'Precio',
+    //   cell: (cond: Lubricante) => this.decimalPipe.transform(cond.precio, '1.2-2')
+    // }, {
+    //   columnDef: 'total',
+    //   header: 'Total',
+    //   cell: (cond: Lubricante) => this.decimalPipe.transform(cond.total, '1.2-2')
     }, {
       columnDef: 'fecha',
       header: 'Fecha',
@@ -121,8 +121,8 @@ export class RegLubricantesAfinesComponent implements OnInit {
       producto: ['', [Validators.required]],
       score: [{ value: 2000, disabled: true }, , [Validators.required]],
       cantidad: ['', [Validators.required]],
-      precio: ['', [Validators.required]],
-      total: [{ value: '', disabled: true }, [Validators.required]],
+      // precio: ['', [Validators.required]],
+      // total: [{ value: '', disabled: true }, [Validators.required]],
       fecha: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), [Validators.required]],
     });
 
@@ -200,9 +200,9 @@ export class RegLubricantesAfinesComponent implements OnInit {
     this.validationService.getValidationErrors(this.formularioGrp, this.messages, this.formErrors, true);
   }
 
-  calcular(): void {
-    this.formularioGrp.get('total').setValue(this.formularioGrp.get('cantidad').value * this.formularioGrp.get('precio').value);
-  }
+  // calcular(): void {
+  //   this.formularioGrp.get('total').setValue(this.formularioGrp.get('cantidad').value * this.formularioGrp.get('precio').value);
+  // }
 
   guardar(): void {
     if (this.formularioGrp.valid) {
@@ -219,8 +219,8 @@ export class RegLubricantesAfinesComponent implements OnInit {
       con.idTipoProducto = this.formularioGrp.get('producto').value.id;
       con.nomTipoProducto = this.formularioGrp.get('producto').value.nombre;
       con.cantidad = this.formularioGrp.get('cantidad').value;
-      con.precio = this.formularioGrp.get('precio').value;
-      con.total = this.formularioGrp.get('total').value;
+      // con.precio = this.formularioGrp.get('precio').value;
+      // con.total = this.formularioGrp.get('total').value;
       con.fecha = this.formularioGrp.get('fecha').value;
 
       this.listaLubricantes.unshift(con);

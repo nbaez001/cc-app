@@ -13,5 +13,4 @@ export class Generador {
     color: string;
     estado: string;
     observacion: string;
-    usuario: string;
 }

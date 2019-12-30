@@ -35,12 +35,12 @@ export class RegLubricantesAfines3Component implements OnInit {
     'cantidad': {
       'required': 'Campo obligatorio'
     },
-    'precio': {
-      'required': 'Campo obligatorio'
-    },
-    'total': {
-      'required': 'Campo obligatorio'
-    },
+    // 'precio': {
+    //   'required': 'Campo obligatorio'
+    // },
+    // 'total': {
+    //   'required': 'Campo obligatorio'
+    // },
     'fecha': {
       'required': 'Campo obligatorio'
     }
@@ -51,8 +51,8 @@ export class RegLubricantesAfines3Component implements OnInit {
     'deslizador': '',
     'producto': '',
     'score': '',
-    'precio': '',
-    'total': '',
+    // 'precio': '',
+    // 'total': '',
     'fecha': '',
   };
 
@@ -83,14 +83,14 @@ export class RegLubricantesAfines3Component implements OnInit {
       header: 'Cantidad producto',
       cell: (cond: Lubricante) => this.decimalPipe.transform(cond.cantidad, '1.2-2')
     }, {
-      columnDef: 'precio',
-      header: 'Precio',
-      cell: (cond: Lubricante) => this.decimalPipe.transform(cond.precio, '1.2-2')
-    }, {
-      columnDef: 'total',
-      header: 'Total',
-      cell: (cond: Lubricante) => this.decimalPipe.transform(cond.total, '1.2-2')
-    }, {
+    //   columnDef: 'precio',
+    //   header: 'Precio',
+    //   cell: (cond: Lubricante) => this.decimalPipe.transform(cond.precio, '1.2-2')
+    // }, {
+    //   columnDef: 'total',
+    //   header: 'Total',
+    //   cell: (cond: Lubricante) => this.decimalPipe.transform(cond.total, '1.2-2')
+    // }, {
       columnDef: 'fecha',
       header: 'Fecha',
       cell: (cond: Lubricante) => this.datePipe.transform(cond.fecha, 'dd/MM/yyyy')
@@ -98,7 +98,7 @@ export class RegLubricantesAfines3Component implements OnInit {
 
 
   listaLubricantes: Lubricante[] = [
-    { id: 1, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTambo: 1, nomTambo: 'ANCARPATA', idVehiculo: 1, nomVehiculo: 'MOTOCICLETA', score: 2000, idTipoProducto: 1, nomTipoProducto: 'LUBRICANTE', cantidad: 1, precio: 35, total: 35, fecha: new Date('2019-10-10') }
+    { id: 1, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTambo: 1, nomTambo: 'ANCARPATA', idVehiculo: 1, nomVehiculo: 'MOTOCICLETA', score: 60, idTipoProducto: 1, nomTipoProducto: 'LUBRICANTE', cantidad: 1, precio: 35, total: 35, fecha: new Date('2019-10-10') }
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -119,10 +119,10 @@ export class RegLubricantesAfines3Component implements OnInit {
       tambo: [{ value: '', disabled: true }, [Validators.required]],
       deslizador: ['', [Validators.required]],
       producto: ['', [Validators.required]],
-      score: [{ value: 2000, disabled: true }, , [Validators.required]],
+      score: [{ value: 60, disabled: true }, , [Validators.required]],
       cantidad: ['', [Validators.required]],
-      precio: ['', [Validators.required]],
-      total: [{ value: '', disabled: true }, [Validators.required]],
+      // precio: ['', [Validators.required]],
+      // total: [{ value: '', disabled: true }, [Validators.required]],
       fecha: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), [Validators.required]],
     });
 
@@ -204,9 +204,9 @@ export class RegLubricantesAfines3Component implements OnInit {
     this.validationService.getValidationErrors(this.formularioGrp, this.messages, this.formErrors, true);
   }
 
-  calcular(): void {
-    this.formularioGrp.get('total').setValue(this.formularioGrp.get('cantidad').value * this.formularioGrp.get('precio').value);
-  }
+  // calcular(): void {
+  //   this.formularioGrp.get('total').setValue(this.formularioGrp.get('cantidad').value * this.formularioGrp.get('precio').value);
+  // }
 
   guardar(): void {
     if (this.formularioGrp.valid) {
@@ -223,8 +223,8 @@ export class RegLubricantesAfines3Component implements OnInit {
       con.idTipoProducto = this.formularioGrp.get('producto').value.id;
       con.nomTipoProducto = this.formularioGrp.get('producto').value.nombre;
       con.cantidad = this.formularioGrp.get('cantidad').value;
-      con.precio = this.formularioGrp.get('precio').value;
-      con.total = this.formularioGrp.get('total').value;
+      // con.precio = this.formularioGrp.get('precio').value;
+      // con.total = this.formularioGrp.get('total').value;
       con.fecha = this.formularioGrp.get('fecha').value;
 
       this.listaLubricantes.unshift(con);

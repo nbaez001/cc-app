@@ -36,14 +36,6 @@ export class BandejaDeslizadoresComponent implements OnInit {
 
   columnsGrilla = [
     {
-      columnDef: 'id',
-      header: 'N°',
-      cell: (gen: Deslizador) => `${gen.id}`
-    }, {
-      columnDef: 'codPatrimonio',
-      header: 'Cod patrimonio',
-      cell: (gen: Deslizador) => `${gen.codPatrimonio}`
-    }, {
       columnDef: 'nomUnidad',
       header: 'Unidad',
       cell: (gen: Deslizador) => `${gen.nomUnidad}`
@@ -52,43 +44,44 @@ export class BandejaDeslizadoresComponent implements OnInit {
       header: 'Tambo',
       cell: (gen: Deslizador) => `${gen.nomTambo}`
     }, {
+      columnDef: 'codPatrimonio',
+      header: 'Cod patrimonio',
+      cell: (gen: Deslizador) => `${gen.codPatrimonio}`
+    }, {
       columnDef: 'denominacion',
       header: 'Denominacion',
       cell: (gen: Deslizador) => `${gen.denominacion}`
     }, {
+      columnDef: 'marca',
+      header: 'Marca',
+      cell: (gen: Deslizador) => `${gen.marca}`
+    }, {
+      columnDef: 'modelo',
+      header: 'Modelo',
+      cell: (gen: Deslizador) => `${gen.modelo}`
+    }, {
+      columnDef: 'tipo',
+      header: 'Tipo',
+      cell: (gen: Deslizador) => `${gen.tipo}`
+    }, {
+      columnDef: 'serie',
+      header: 'Serie',
+      cell: (gen: Deslizador) => `${gen.serie}`
+    }, {
+      columnDef: 'color',
+      header: 'Color',
+      cell: (gen: Deslizador) => `${gen.color}`
+    }, {
       columnDef: 'estado',
       header: 'Estado',
       cell: (gen: Deslizador) => `${gen.estado}`
-    }, {
-      columnDef: 'tieneSeguro',
-      header: 'Tiene seguro',
-      cell: (gen: Deslizador) => `${gen.tieneSeguro}`
-    }, {
-      columnDef: 'iniFechaVigencia',
-      header: 'Inicio fecha vigencia',
-      cell: (gen: Deslizador) => `${this.datePipe.transform(gen.iniFechaVigencia, 'dd/MM/yyyy')}`
-    }, {
-      columnDef: 'finFechaVigencia',
-      header: 'Fin fecha vigencia',
-      cell: (gen: Deslizador) => `${this.datePipe.transform(gen.finFechaVigencia, 'dd/MM/yyyy')}`
-    }, {
-      columnDef: 'isOperativo',
-      header: 'Se encuentra operativo',
-      cell: (gen: Deslizador) => `${gen.isOperativo}`
-    }, {
-      columnDef: 'ubicacionFisica',
-      header: 'Ubicacion fisica',
-      cell: (gen: Deslizador) => `${gen.ubicacionFisica}`
-    }, {
-      columnDef: 'motor',
-      header: 'Motor',
-      cell: (gen: Deslizador) => `${gen.motor}`
     }, {
       columnDef: 'potencia',
       header: 'Potencia',
       cell: (gen: Deslizador) => `${gen.potencia}`
     }
   ];
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -127,6 +120,7 @@ export class BandejaDeslizadoresComponent implements OnInit {
     this.columnsGrilla.forEach(c => {
       this.displayedColumns.push(c.columnDef);
     });
+    this.displayedColumns.unshift('id');
     this.displayedColumns.push('opt');
   }
 

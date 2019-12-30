@@ -50,10 +50,10 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
-          <input formControlName="cantidad" matInput type="number" placeholder="Cantidad lubricante" (keyup)="calcular()">
+          <input formControlName="cantidad" matInput type="number" placeholder="Cantidad lubricante">
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+      <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
           <input formControlName="precio" matInput type="number" placeholder="Precio" (keyup)="calcular()">
         </mat-form-field>
@@ -62,7 +62,7 @@
         <mat-form-field>
           <input formControlName="total" matInput type="number" placeholder="Total">
         </mat-form-field>
-      </mat-grid-tile>
+      </mat-grid-tile> -->
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
           <input matInput formControlName="fecha" [matDatepicker]="picker2" placeholder="Fecha">

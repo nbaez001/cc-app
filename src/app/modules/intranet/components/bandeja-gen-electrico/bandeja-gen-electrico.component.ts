@@ -35,14 +35,6 @@ export class BandejaGenElectricoComponent implements OnInit {
 
   columnsGrilla = [
     {
-      columnDef: 'id',
-      header: 'N°',
-      cell: (gen: Generador) => `${gen.id}`
-    }, {
-      columnDef: 'codPatrimonio',
-      header: 'Cod patrimonio',
-      cell: (gen: Generador) => `${gen.codPatrimonio}`
-    }, {
       columnDef: 'nomUnidad',
       header: 'Unidad',
       cell: (gen: Generador) => `${gen.nomUnidad}`
@@ -50,6 +42,10 @@ export class BandejaGenElectricoComponent implements OnInit {
       columnDef: 'nomTambo',
       header: 'Tambo',
       cell: (gen: Generador) => `${gen.nomTambo}`
+    }, {
+      columnDef: 'codPatrimonio',
+      header: 'Cod patrimonio',
+      cell: (gen: Generador) => `${gen.codPatrimonio}`
     }, {
       columnDef: 'denominacion',
       header: 'Denominacion',
@@ -78,10 +74,6 @@ export class BandejaGenElectricoComponent implements OnInit {
       columnDef: 'estado',
       header: 'Estado',
       cell: (gen: Generador) => `${gen.estado}`
-    }, {
-      columnDef: 'usuario',
-      header: 'Usuario',
-      cell: (gen: Generador) => `${gen.usuario}`
     }
   ];
 
@@ -124,6 +116,7 @@ export class BandejaGenElectricoComponent implements OnInit {
     this.columnsGrilla.forEach(c => {
       this.displayedColumns.push(c.columnDef);
     });
+    this.displayedColumns.unshift('id');
     this.displayedColumns.push('opt');
   }
 

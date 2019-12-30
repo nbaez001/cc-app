@@ -24,7 +24,7 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <mat-form-field>
-          <mat-label>Vehiculo</mat-label>
+          <mat-label>Deslizador</mat-label>
           <mat-select formControlName="deslizador">
             <mat-option *ngFor="let deslizador of deslizadores" [value]="deslizador">
               DESLIZADOR {{deslizador.potencia}}HP
@@ -50,10 +50,10 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
-          <input formControlName="cantidad" matInput type="number" placeholder="Cantidad" (keyup)="calcular()">
+          <input formControlName="cantidad" matInput type="number" placeholder="Cantidad">
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+      <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
           <input formControlName="precio" matInput type="number" placeholder="Precio" (keyup)="calcular()">
         </mat-form-field>
@@ -62,7 +62,7 @@
         <mat-form-field>
           <input formControlName="total" matInput type="number" placeholder="Total">
         </mat-form-field>
-      </mat-grid-tile>
+      </mat-grid-tile> -->
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
         <mat-form-field>
           <input matInput formControlName="fecha" [matDatepicker]="picker2" placeholder="Fecha">

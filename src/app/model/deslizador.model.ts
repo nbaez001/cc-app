@@ -6,13 +6,16 @@ export class Deslizador {
     idTambo: number;
     nomTambo: string;
     denominacion: string;
+    
+    marca: string;
+    modelo: string;
+    tipo: string;
+    serie: string;
+    color: string;
+
+
     estado: string;
-    tieneSeguro: string;
-    iniFechaVigencia: Date;
-    finFechaVigencia: Date;
-    isOperativo: string;
-    ubicacionFisica: string;
-    motor: string;
+    observacion: string;
+    
     potencia: number;
-    detalle: string;
 }
