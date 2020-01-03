@@ -177,7 +177,23 @@ export class BandejaDeslizadoresComponent implements OnInit {
   }
 
   exportarExcel() {
-    console.log('Exportar');
+    let url = "/assets/files/reportes/deslizadores.xlsx";
+
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = () => {
+      blob = xhr.response;//xhr.response is now a blob object
+      let file = new File([blob], 'deslizadores.xlsx', { type: 'application/xlsx', lastModified: Date.now() });
+
+      var a = document.createElement("a");
+      var fileURL = window.URL.createObjectURL(file);
+      a.href = fileURL;
+      a.download = file.name;
+      a.click();
+    }
+    xhr.send();
   }
 
   regVehiculo(obj): void {

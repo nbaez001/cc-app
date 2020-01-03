@@ -38,6 +38,10 @@ export class ControlGenElectricoComponent implements OnInit {
       header: 'TAMBO',
       cell: (consumo: ConsumoGenerador) => `${consumo.nomTambo}`
     }, {
+      columnDef: 'descripcionBien',
+      header: 'DESCRIPCION BIEN',
+      cell: (consumo: ConsumoGenerador) => `${consumo.descripcionBien}`
+    }, {
       columnDef: 'marca',
       header: 'MARCA',
       cell: (consumo: ConsumoGenerador) => `${consumo.marca}`
@@ -78,7 +82,7 @@ export class ControlGenElectricoComponent implements OnInit {
           unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
           tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
         });
-    
+
         this.definirTabla();
         this.inicializarVariables();
         clearInterval(validarIntervalo);
@@ -151,7 +155,23 @@ export class ControlGenElectricoComponent implements OnInit {
   }
 
   exportarExcel() {
-    console.log('Exportar');
+    let url = "/assets/files/reportes/control-generadores.xlsx";
+
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = () => {
+      blob = xhr.response;//xhr.response is now a blob object
+      let file = new File([blob], 'control-generadores.xlsx', { type: 'application/xlsx', lastModified: Date.now() });
+
+      var a = document.createElement("a");
+      var fileURL = window.URL.createObjectURL(file);
+      a.href = fileURL;
+      a.download = file.name;
+      a.click();
+    }
+    xhr.send();
   }
 
   regConsumo(obj): void {

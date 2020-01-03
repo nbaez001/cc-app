@@ -3,7 +3,7 @@
     <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
     <mat-card class="box-filtros">
       <mat-card-header class="box-section-header">
-        <mat-card-title class="box-section-title"> BUSQUEDA USO GENERADOR ELECTRICO </mat-card-title>
+        <mat-card-title class="box-section-title"> BUSQUEDA USO DESLIZADOR </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
@@ -63,7 +63,7 @@
 
     <mat-card class="table-resultados">
       <mat-card-header>
-        <mat-card-title> LISTA USO DE GENERADOR ELECTRICO: </mat-card-title>
+        <mat-card-title> LISTA USO DESLIZADOR: </mat-card-title>
       </mat-card-header>
       <mat-card-content class="card-container">
         <div class="table-container clear-both">
@@ -80,7 +80,7 @@
                 <button mat-icon-button matTooltip="Ver motivo uso" (click)="verObsConsumo(element)">
                   <mat-icon>comment</mat-icon>
                 </button>
-                <button mat-icon-button matTooltip="Editar Kilometraje" (click)="regConsumo(element)" *ngIf="getUser.perfil.id!=3">
+                <button mat-icon-button matTooltip="Editar uso deslizador" (click)="regConsumo(element)" *ngIf="getUser.perfil.id!=3">
                   <mat-icon>create</mat-icon>
                 </button>
               </td>

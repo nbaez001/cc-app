@@ -4,6 +4,7 @@ export class ConsumoGenerador {
     nomUnidad: string;
     idTambo: number;
     nomTambo: string;
+    descripcionBien: string;
     marca: string;
     serie: string;
     horaInicio: string;

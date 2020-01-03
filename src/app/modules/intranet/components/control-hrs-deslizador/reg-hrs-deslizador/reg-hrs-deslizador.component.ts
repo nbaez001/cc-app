@@ -58,8 +58,8 @@ export class RegHrsDeslizadorComponent implements OnInit {
     'horaInicio': '',
     'horaFin': '',
     'totalHoras': '',
-    'lugarDestino':'',
-    'codSismonitor':'',
+    'lugarDestino': '',
+    'codSismonitor': '',
     'observacion': ''
   };
 
@@ -124,7 +124,7 @@ export class RegHrsDeslizadorComponent implements OnInit {
     let idUnidad = this.consumoDeslizadorGrp.get('unidad').value.id;
     let idTambo = this.consumoDeslizadorGrp.get('tambo').value.id;
 
-    this.deslizadores = deslizadores.filter(el => (el.idUnidad == idUnidad) );
+    this.deslizadores = deslizadores.filter(el => (el.idUnidad == idUnidad));
     this.deslizadores = this.deslizadores.filter(el => (el.idTambo == idTambo));
   }
 
@@ -159,7 +159,9 @@ export class RegHrsDeslizadorComponent implements OnInit {
       con.horaInicio = this.consumoDeslizadorGrp.get('horaInicio').value;
       con.horaFin = this.consumoDeslizadorGrp.get('horaFin').value;
       con.horas = this.consumoDeslizadorGrp.get('totalHoras').value;
-      con.fecha = this.consumoDeslizadorGrp.get('fecha').value;
+      con.fechaComision = this.consumoDeslizadorGrp.get('fecha').value;
+      con.lugarDestino = this.consumoDeslizadorGrp.get('lugarDestino').value;
+      con.codComisionSISMONITOR = this.consumoDeslizadorGrp.get('codSismonitor').value;
       con.observacion = this.consumoDeslizadorGrp.get('observacion').value;
 
       this.dialogRef.close(con);

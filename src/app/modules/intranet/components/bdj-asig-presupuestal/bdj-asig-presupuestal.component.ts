@@ -62,7 +62,7 @@ export class BdjAsigPresupuestalComponent implements OnInit {
       cell: (asig: AsignacionPresupuestal) => `${asig.partida}`
     }, {
       columnDef: 'descripcion',
-      header: 'Descripcion',
+      header: 'Descripcion partida',
       cell: (asig: AsignacionPresupuestal) => `${asig.descripcion}`
     }, {
       columnDef: 'pim',

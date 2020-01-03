@@ -38,9 +38,17 @@ export class ControlHrsDeslizadorComponent implements OnInit {
       header: 'TAMBO',
       cell: (consumo: HorasDeslizador) => `${consumo.nomTambo}`
     }, {
-      columnDef: 'deslizador',
-      header: 'DESLIZADOR',
-      cell: (consumo: HorasDeslizador) => `DESLIZADOR ${consumo.potencia}HP`
+      columnDef: 'descripcionBien',
+      header: 'DESCRIPCION BIEN',
+      cell: (consumo: HorasDeslizador) => `${consumo.descripcionBien}`
+    }, {
+      columnDef: 'marca',
+      header: 'MARCA',
+      cell: (consumo: HorasDeslizador) => `${consumo.marca}`
+    }, {
+      columnDef: 'serie',
+      header: 'SERIE',
+      cell: (consumo: HorasDeslizador) => `${consumo.serie}`
     }, {
       columnDef: 'horaInicio',
       header: 'HORA INICIO',
@@ -54,9 +62,17 @@ export class ControlHrsDeslizadorComponent implements OnInit {
       header: 'TOTAL HORAS',
       cell: (consumo: HorasDeslizador) => `${this.decimalPipe.transform(consumo.horas, '1.2-2')}`
     }, {
-      columnDef: 'fecha',
-      header: 'FECHA USO',
-      cell: (consumo: HorasDeslizador) => `${this.datePipe.transform(consumo.fecha, 'dd/MM/yyyy')}`
+      columnDef: 'lugarDestino',
+      header: 'LUGAR DESTINO',
+      cell: (consumo: HorasDeslizador) => (consumo.lugarDestino != null) ? `${consumo.lugarDestino}` : ''
+    }, {
+      columnDef: 'codComisionSISMONITOR',
+      header: 'COD. COMISION SISMONITOR',
+      cell: (consumo: HorasDeslizador) => (consumo.codComisionSISMONITOR != null) ? `${consumo.codComisionSISMONITOR}` : ''
+    }, {
+      columnDef: 'fechaComision',
+      header: 'FECHA COMISION',
+      cell: (consumo: HorasDeslizador) => (consumo.fechaComision != null) ? `${this.datePipe.transform(consumo.fechaComision, 'dd/MM/yyyy')}` : ''
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -74,9 +90,9 @@ export class ControlHrsDeslizadorComponent implements OnInit {
       if (this.user.getId) {
         this.bandejaGrp = this.fb.group({
           unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-          tambo: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
+          tambo: [{ value: '', disabled: this.user.perfil.id == 1 }, [Validators.required]],
         });
-    
+
         this.definirTabla();
         this.inicializarVariables();
         clearInterval(validarIntervalo);
@@ -102,7 +118,7 @@ export class ControlHrsDeslizadorComponent implements OnInit {
   }
 
   public cargarDatosTabla(): void {
-    this.dataSource=null;
+    this.dataSource = null;
     if (this.listaHorasDeslizador.length > 0) {
       this.dataSource = new MatTableDataSource(this.listaHorasDeslizador);
       this.dataSource.paginator = this.paginator;
@@ -153,7 +169,23 @@ export class ControlHrsDeslizadorComponent implements OnInit {
   }
 
   exportarExcel() {
-    console.log('Exportar');
+    let url = "/assets/files/reportes/control-deslizadores.xlsx";
+
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = () => {
+      blob = xhr.response;//xhr.response is now a blob object
+      let file = new File([blob], 'control-deslizadores.xlsx', { type: 'application/xlsx', lastModified: Date.now() });
+
+      var a = document.createElement("a");
+      var fileURL = window.URL.createObjectURL(file);
+      a.href = fileURL;
+      a.download = file.name;
+      a.click();
+    }
+    xhr.send();
   }
 
   regConsumo(obj): void {

@@ -8,7 +8,7 @@
       <mat-card-content>
         <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
           <mat-grid-list cols="12" rowHeight="50px">
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+            <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
                 <mat-label>Estado</mat-label>
                 <mat-select formControlName="estado">
@@ -17,7 +17,7 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </mat-grid-tile>
+            </mat-grid-tile> -->
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
                 <input matInput formControlName="fecInicio" [matDatepicker]="picker"

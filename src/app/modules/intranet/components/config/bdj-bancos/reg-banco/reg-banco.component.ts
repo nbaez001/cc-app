@@ -26,9 +26,9 @@ export class RegBancoComponent implements OnInit {
     },
     'fecha': {
       'required': 'Campo obligatorio'
-    },
-    'estado': {
-      'required': 'Campo obligatorio'
+    // },
+    // 'estado': {
+    //   'required': 'Campo obligatorio'
     }
   };
   formErrors = {
@@ -36,7 +36,7 @@ export class RegBancoComponent implements OnInit {
     'tipoDocumento': '',
     'nroDocumento': '',
     'fecha': '',
-    'estado': ''
+    // 'estado': ''
   };
 
   estadosBanco = [];
@@ -54,7 +54,7 @@ export class RegBancoComponent implements OnInit {
       nombre: ['', [Validators.required]],
       tipoDocumento: ['', [Validators.required]],
       nroDocumento: ['', [Validators.required]],
-      estado: ['', [Validators.required]],
+      // estado: ['', [Validators.required]],
     });
 
     this.inicializarVariables();
@@ -83,8 +83,8 @@ export class RegBancoComponent implements OnInit {
       kil.idTipoDocumento = this.formularioGrp.get('tipoDocumento').value.id;
       kil.nomTipoDocumento = this.formularioGrp.get('tipoDocumento').value.nombre;
       kil.nroDocumento = this.formularioGrp.get('nroDocumento').value;
-      kil.idEstado = this.formularioGrp.get('estado').value.id;
-      kil.nomEstado = this.formularioGrp.get('estado').value.nombre;
+      // kil.idEstado = this.formularioGrp.get('estado').value.id;
+      // kil.nomEstado = this.formularioGrp.get('estado').value.nombre;
       kil.fecha = new Date();
 
       this.dialogRef.close(kil);

@@ -59,10 +59,10 @@ export class BdjBancosComponent implements OnInit {
       columnDef: 'fecha',
       header: 'FECHA',
       cell: (obj: Banco) => `${this.datePipe.transform(obj.fecha, 'dd/MM/yyyy')}`
-    }, {
-      columnDef: 'nomEstado',
-      header: 'ESTADO',
-      cell: (obj: Banco) => `${obj.nomEstado}`
+    // }, {
+    //   columnDef: 'nomEstado',
+    //   header: 'ESTADO',
+    //   cell: (obj: Banco) => `${obj.nomEstado}`
     }];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
