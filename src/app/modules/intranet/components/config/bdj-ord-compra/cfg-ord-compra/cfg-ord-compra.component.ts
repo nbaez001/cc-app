@@ -116,7 +116,7 @@ export class CfgOrdCompraComponent implements OnInit {
     }, {
       columnDef: 'cantidad',
       header: 'CANTIDAD',
-      cell: (obj: DetalleOrdenCompra) => `${obj.cantidad}`
+      cell: (obj: DetalleOrdenCompra) => `${this.decimalPipe.transform(obj.cantidad, '1.1-1')}`
     }, {
       columnDef: 'unidadMedida',
       header: 'UNIDAD MEDIDA',
@@ -128,11 +128,11 @@ export class CfgOrdCompraComponent implements OnInit {
     }, {
       columnDef: 'precioUnitario',
       header: 'UNITARIO',
-      cell: (obj: DetalleOrdenCompra) => `${obj.precioUnitario}`
+      cell: (obj: DetalleOrdenCompra) => `${this.decimalPipe.transform(obj.precioUnitario, '1.2-2')}`
     }, {
       columnDef: 'precioTotal',
       header: 'TOTAL',
-      cell: (obj: DetalleOrdenCompra) => `${obj.precioTotal}`
+      cell: (obj: DetalleOrdenCompra) => `${this.decimalPipe.transform(obj.precioTotal, '1.2-2')}`
     }];
 
 
@@ -184,7 +184,7 @@ export class CfgOrdCompraComponent implements OnInit {
     }, {
       columnDef: 'monto',
       header: 'MONTO',
-      cell: (obj: AfectacionPresOC) => `${obj.monto}`
+      cell: (obj: AfectacionPresOC) => `${this.decimalPipe.transform(obj.monto, '1.2-2')}`
     }];
 
   @ViewChild(MatPaginator) paginator2: MatPaginator;

@@ -115,7 +115,7 @@ export class CfgOrdServComponent implements OnInit {
     }, {
       columnDef: 'precioTotal',
       header: 'TOTAL',
-      cell: (obj: DetalleOrdenServicio) => `${obj.precioTotal}`
+      cell: (obj: DetalleOrdenServicio) => `${this.decimalPipe.transform(obj.precioTotal, '1.2-2')}`
     }];
 
 
@@ -167,7 +167,7 @@ export class CfgOrdServComponent implements OnInit {
     }, {
       columnDef: 'monto',
       header: 'MONTO',
-      cell: (obj: AfectacionPresOS) => `${obj.monto}`
+      cell: (obj: AfectacionPresOS) => `${this.decimalPipe.transform(obj.monto, '1.2-2')}`
     }];
 
   @ViewChild(MatPaginator) paginator2: MatPaginator;

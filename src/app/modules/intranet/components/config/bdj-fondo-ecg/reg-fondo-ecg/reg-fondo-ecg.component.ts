@@ -22,10 +22,6 @@ export class RegFondoEcgComponent implements OnInit {
 
   columnsGrilla = [
     {
-      columnDef: 'id',
-      header: 'N°',
-      cell: (det: AfectacionPresFE) => `${det.id}`
-    }, {
       columnDef: 'ffRb',
       header: 'FF/Rb',
       cell: (det: AfectacionPresFE) => `${det.ffRb}`
@@ -72,8 +68,6 @@ export class RegFondoEcgComponent implements OnInit {
     'observacion': ''
   };
 
-  clasificadoresGasto: Object[] = PARTIDAS;
-
   listaAfectacionPresFE: AfectacionPresFE[] = [];
   displayedColumns: string[];
   dataSource: MatTableDataSource<AfectacionPresFE>;
@@ -114,6 +108,7 @@ export class RegFondoEcgComponent implements OnInit {
       monto: ['', [Validators.required]],
       fecha: ['', [Validators.required]],
       observacion: ['', [Validators.required]],
+      archResAdministracion: [{ value: '', disabled: true }, [Validators.required]],
     });
 
     this.detFormularioGrp = this.fb.group({
@@ -137,6 +132,8 @@ export class RegFondoEcgComponent implements OnInit {
     this.columnsGrilla.forEach(c => {
       this.displayedColumns.push(c.columnDef);
     });
+    this.displayedColumns.unshift('id');
+    this.displayedColumns.push('opt');
   }
 
   public cargarDatosTabla(): void {
@@ -153,10 +150,10 @@ export class RegFondoEcgComponent implements OnInit {
   public cargarResAdm(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
     this.fileupload = event.target.files[0];
     if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
-      this.formularioGrp.get('nroResAdministracion').setValue(null);
+      this.formularioGrp.get('archResAdministracion').setValue(null);
     } else {
       const nombreArchivo = this.fileupload.name;
-      this.formularioGrp.get('nroResAdministracion').setValue(nombreArchivo);
+      this.formularioGrp.get('archResAdministracion').setValue(nombreArchivo);
     }
   }
 
@@ -181,8 +178,8 @@ export class RegFondoEcgComponent implements OnInit {
       let kil = new AfectacionPresFE();
       kil.id = 0;
       kil.ffRb = this.detFormularioGrp.get('ffRb').value;
-      kil.mNemonico = this.detFormularioGrp.get('mNemonico').value;
-      kil.clasificadorGasto = this.detFormularioGrp.get('clasificadorGasto').value.nombre;
+      kil.mNemonico = this.detFormularioGrp.get('metaMnemonico').value;
+      kil.clasificadorGasto = this.detFormularioGrp.get('clasificadorGasto').value;
       kil.descripcion = this.detFormularioGrp.get('descripcion').value;
       kil.monto = this.detFormularioGrp.get('monto').value;
       console.log(kil);

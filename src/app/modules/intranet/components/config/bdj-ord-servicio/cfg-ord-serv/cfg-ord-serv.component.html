@@ -3,7 +3,7 @@
   <mat-horizontal-stepper [linear]="true" #stepper>
     <!-- (selectionChange)="stepChanged($event, stepper)"> -->
     <mat-step [stepControl]="formularioGrp">
-      <ng-template matStepLabel>Datos principales</ng-template>
+      <ng-template matStepLabel>Datos generales</ng-template>
       <div>
         <form [formGroup]="formularioGrp">
           <mat-grid-list cols="12" rowHeight="50px">
@@ -171,7 +171,7 @@
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
               <mat-form-field>
-                <input formControlName="metaMnemonico" matInput type="text" placeholder="Meta/Nnemonico" [Uppercased]>
+                <input formControlName="metaMnemonico" matInput type="text" placeholder="Meta/Mnemonico" [Uppercased]>
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
@@ -185,7 +185,7 @@
                 <input formControlName="ffRb" matInput type="text" placeholder="FF/Rb" [Uppercased]>
               </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
               <mat-form-field>
                 <input formControlName="clasificadorGasto" matInput type="text" placeholder="Clasificador gasto"
                   [Uppercased]>

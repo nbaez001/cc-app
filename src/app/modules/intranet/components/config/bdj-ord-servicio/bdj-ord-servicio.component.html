@@ -10,7 +10,7 @@
           <mat-grid-list cols="12" rowHeight="50px">
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <input matInput placeholder="N° Orden compra">
+                <input matInput placeholder="N° Orden servicio">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
@@ -49,6 +49,10 @@
           <mat-icon>save_alt</mat-icon>
           <strong> IMPORTAR</strong>
         </button>
+        <button mat-raised-button (click)="exportar()">
+          <mat-icon>file_copy</mat-icon>
+          <strong>EXPORTAR A EXCEL</strong>
+        </button>
       </mat-card-actions>
     </mat-card>
 
@@ -68,11 +72,11 @@
             <ng-container matColumnDef="opt" stickyEnd>
               <th mat-header-cell *matHeaderCellDef>OPCIONES</th>
               <td mat-cell *matCellDef="let element">
-                <button mat-icon-button matTooltip="Configurar O.C." (click)="configurar(element)"
+                <button mat-icon-button matTooltip="Configurar O.S." (click)="configurar(element)"
                   *ngIf="element.idEstado==1">
                   <mat-icon>settings</mat-icon>
                 </button>
-                <button mat-icon-button matTooltip="Ver O.C." (click)="ver(element)">
+                <button mat-icon-button matTooltip="Ver O.S." (click)="ver(element)">
                   <mat-icon>picture_as_pdf</mat-icon>
                 </button>
               </td>
