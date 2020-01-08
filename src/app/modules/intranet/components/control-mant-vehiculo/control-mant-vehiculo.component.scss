@@ -5,17 +5,29 @@
     id: (
       width: 2rem
     ),
+    nomUnidad: (
+      width: 8rem
+    ),
     nomTipoMantenimiento: (
-      width: 12rem
+      width: 8rem
     ),
     nomTipoAsigPresupuesto: (
       width: 12rem
     ),
+    nroHojatramiteReq: (
+      width: 6rem
+    ),
+    nroInformeReq: (
+      width: 6rem
+    ),
+    fecha: (
+      width: 7rem
+    ),
     codAsigPresupuesto: (
-      width: 9rem
+      width: 7rem
     ),
     marcimporteAsigPresupuestoa: (
-      width: 9rem
+      width: 7rem
     ),
     nroHojatramiteConf: (
       width: 6rem
@@ -40,7 +52,6 @@
     )
   )
 );
-
 
 .page-bandeja {
   .table-resultados {

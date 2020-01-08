@@ -3,7 +3,7 @@
     <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
     <mat-card class="box-filtros">
       <mat-card-header class="box-section-header">
-        <mat-card-title class="box-section-title"> BUSQUEDA SOLICITUDES DE MANTENIMIENTO VEHICULARE </mat-card-title>
+        <mat-card-title class="box-section-title"> BUSQUEDA SOLICITUDES MANTENIMIENTO VEHICULAR </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
@@ -34,6 +34,16 @@
                 <mat-select formControlName="tipoMantenimiento">
                   <mat-option *ngFor="let tipoMantenimiento of tiposMantenimiento" [value]="tipoMantenimiento">
                     {{tipoMantenimiento.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <mat-label>Estado solicitud</mat-label>
+                <mat-select formControlName="estadoSolicitud">
+                  <mat-option *ngFor="let estadoSolicitud of estadosSolicitud" [value]="estadoSolicitud">
+                    {{estadoSolicitud.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -73,7 +83,7 @@
 
     <mat-card class="table-resultados">
       <mat-card-header>
-        <mat-card-title> LISTA DE SOLICITUDES DE MANTENIMIENTO VEHICULAR </mat-card-title>
+        <mat-card-title> LISTA DE SOLICITUDES MANTENIMIENTO VEHICULAR </mat-card-title>
       </mat-card-header>
       <mat-card-content class="card-container">
         <div class="table-container clear-both">

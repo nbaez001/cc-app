@@ -44,7 +44,7 @@
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
         <mat-form-field appearance="legacy">
-          <input matInput formControlName="nomProveedor" type="text" placeholder="Proveedor">
+          <input matInput formControlName="nomProveedor" type="text" placeholder="Proveedor" [Uppercased]>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
@@ -88,14 +88,14 @@
     <mat-grid-list cols="12" rowHeight="70px">
       <mat-grid-tile [responsiveRows]="{xs: 12, sm: 12, md: 12, lg: 12, xl: 12}">
         <mat-form-field>
-          <textarea matInput formControlName="observacion" placeholder="Observaciones"></textarea>
+          <textarea matInput formControlName="observacion" placeholder="Observaciones" [Uppercased]></textarea>
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
 
     <mat-card>
       <mat-card-header>
-        <mat-card-title>Detalle ejecucion</mat-card-title>
+        <mat-card-title>Detalle solicitud mantenimiento</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form [formGroup]="detFormularioGrp">
@@ -138,6 +138,13 @@
         <div class="table-container">
 
           <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> N° </th>
+              <td mat-cell *matCellDef="let row; let i=index">
+                {{ i + 1}}
+              </td>
+            </ng-container>
+
             <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
               <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>

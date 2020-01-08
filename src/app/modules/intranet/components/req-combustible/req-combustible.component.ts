@@ -47,6 +47,10 @@ export class ReqCombustibleComponent implements OnInit {
       header: 'N°',
       cell: (mant: RequerimientoBien) => (mant.id != null) ? `${mant.id}` : ''
     }, {
+      columnDef: 'nomUnidad',
+      header: 'UNIDAD',
+      cell: (mant: RequerimientoBien) => (mant.nomUnidad != null) ? `${mant.nomUnidad}` : ''
+    }, {
       columnDef: 'detalleRequerimiento',
       header: 'DET. REQUERIMIENTO',
       cell: (mant: RequerimientoBien) => (mant.detalleRequerimiento != null) ? `${mant.detalleRequerimiento}` : ''

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { MatTableDataSource, MatPaginator, MatDialog, MatSort, MatSnackBar } from '@angular/material';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { UNIDADES, TIPOSMANTENIMIENTO, _solicitudesMant, TAMBOS } from 'src/app/common';
+import { UNIDADES, TIPOSMANTENIMIENTO, _solicitudesMant, TAMBOS, ESTADOSOLICITUD } from 'src/app/common';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { SolicitudMant } from 'src/app/model/solicitud-mant.model';
 import { RegSolicitudMantComponent } from './reg-solicitud-mant/reg-solicitud-mant.component';
@@ -36,6 +36,7 @@ export class ControlSolicitudMantComponent implements OnInit {
   tambos = [];
   tiposMantenimiento = [];
   tiposPresupuesto = [];
+  estadosSolicitud = [];
   listaSolicitudes: SolicitudMant[];
 
   displayedColumns: string[];
@@ -60,7 +61,7 @@ export class ControlSolicitudMantComponent implements OnInit {
       cell: (mant: SolicitudMant) => (mant.nomTipoMantenimiento != null) ? `${mant.nomTipoMantenimiento}` : ''
     }, {
       columnDef: 'nomTipoVehiculo',
-      header: 'TIPO VEHICULO',
+      header: 'DESCRIPCION BIEN',
       cell: (mant: SolicitudMant) => (mant.nomTipoVehiculo != null) ? `${mant.nomTipoVehiculo}` : ''
     }, {
       columnDef: 'marcaVehiculo',
@@ -126,9 +127,11 @@ export class ControlSolicitudMantComponent implements OnInit {
       unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
       tambo: [{ value: '' }, [Validators.required]],
       tipoMantenimiento: ['', [Validators.required]],
+      estadoSolicitud: ['', [Validators.required]],
     });
 
     this.cargarTipomantenimiento();
+    this.cargarEstadosSolicitud();
     this.cargarUnidades();
 
     this.spinnerService.hide();
@@ -174,6 +177,13 @@ export class ControlSolicitudMantComponent implements OnInit {
     this.bandejaGrp.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
   }
 
+  public cargarEstadosSolicitud() {
+    this.estadosSolicitud = JSON.parse(JSON.stringify(ESTADOSOLICITUD));
+    this.estadosSolicitud.unshift({ id: 0, nombre: 'TODOS' });
+
+    this.bandejaGrp.get('estadoSolicitud').setValue(this.estadosSolicitud[0]);
+  }
+
   definirTabla(): void {
     this.displayedColumns = [];
     this.columnsGrilla.forEach(c => {
@@ -197,12 +207,14 @@ export class ControlSolicitudMantComponent implements OnInit {
     let idUnidad = this.bandejaGrp.get('unidad').value.id;
     let idTambo = this.bandejaGrp.get('tambo').value.id;
     let idTipoMantenimiento = this.bandejaGrp.get('tipoMantenimiento').value.id;
+    let idEstadoSolicitud = this.bandejaGrp.get('estadoSolicitud').value.id;
 
     console.log('Unidad: ' + idUnidad + ' - ' + idTambo + ' - ' + idTipoMantenimiento);
 
     this.listaSolicitudes = _solicitudesMant.filter(el => (el.idUnidad == idUnidad || 0 == idUnidad));
     this.listaSolicitudes = this.listaSolicitudes.filter(el => (el.idTambo == idTambo || 0 == idTambo));
     this.listaSolicitudes = this.listaSolicitudes.filter(el => (el.idTipoMantenimiento == idTipoMantenimiento || 0 == idTipoMantenimiento));
+    this.listaSolicitudes = this.listaSolicitudes.filter(el => (el.idEstado == idEstadoSolicitud || 0 == idEstadoSolicitud));
 
     this.cargarDatosTabla();
   }
@@ -236,7 +248,7 @@ export class ControlSolicitudMantComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.listaSolicitudes.push(result);
+        this.listaSolicitudes.unshift(result);
         this.cargarDatosTabla();
       }
     });

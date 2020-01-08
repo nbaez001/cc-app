@@ -114,4 +114,8 @@ export class BdjFondoEcgComponent implements OnInit {
     });
   }
 
+  exportar() {
+
+  }
+
 }

@@ -9,6 +9,7 @@ import { DetalleSolicitudMant } from 'src/app/model/detalle-solicitud-mant.model
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { DataDialog } from 'src/app/model/data-dialog.model';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-reg-solicitud-mant',
@@ -33,10 +34,6 @@ export class RegSolicitudMantComponent implements OnInit {
   dataSource: MatTableDataSource<DetalleSolicitudMant>;
   columnsGrilla = [
     {
-      columnDef: 'id',
-      header: 'N°',
-      cell: (obj: DetalleSolicitudMant) => `${obj.id}`
-    }, {
       columnDef: 'nomTipoProducto',
       header: 'TIPO',
       cell: (obj: DetalleSolicitudMant) => `${obj.nomTipoProducto}`
@@ -47,15 +44,15 @@ export class RegSolicitudMantComponent implements OnInit {
     }, {
       columnDef: 'cantidad',
       header: 'CANTIDAD',
-      cell: (obj: DetalleSolicitudMant) => `${obj.cantidad}`
+      cell: (obj: DetalleSolicitudMant) => `${this.decimalPipe.transform(obj.cantidad, '1.1-1')}`
     }, {
       columnDef: 'monto',
       header: 'MONTO',
-      cell: (obj: DetalleSolicitudMant) => `${obj.monto}`
+      cell: (obj: DetalleSolicitudMant) => `${this.decimalPipe.transform(obj.monto, '1.2-2')}`
     }, {
       columnDef: 'unidadMedida',
       header: 'UNIDAD MEDIDA',
-      cell: (obj: DetalleSolicitudMant) => `${obj.unidadMedida}`
+      cell: (obj: DetalleSolicitudMant) => obj.unidadMedida ? `${obj.unidadMedida}` : ''
     }];
 
   messages = {
@@ -136,7 +133,8 @@ export class RegSolicitudMantComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService,
-    private _snackBar: MatSnackBar) { }
+    private _snackBar: MatSnackBar,
+    private decimalPipe: DecimalPipe) { }
 
   ngOnInit() {
     this.definirTabla();
@@ -155,7 +153,7 @@ export class RegSolicitudMantComponent implements OnInit {
       fecha: ['', [Validators.required]],
       monto: [{ value: '', disabled: true }, [Validators.required]],
       proforma: [{ value: '', disabled: true }, [Validators.required]],
-      observacion: ['', [Validators.required]],
+      observacion: ['', []],
     });
 
     this.detFormularioGrp = this.fb.group({
@@ -163,7 +161,7 @@ export class RegSolicitudMantComponent implements OnInit {
       producto: ['', [Validators.required]],
       cantidad: ['', [Validators.required]],
       monto: ['', [Validators.required]],
-      unidadMedida: ['', [Validators.required]]
+      unidadMedida: ['', []]
     });
 
     console.log(this.detFormularioGrp);
@@ -238,8 +236,8 @@ export class RegSolicitudMantComponent implements OnInit {
     this.columnsGrilla.forEach(c => {
       this.displayedColumns.push(c.columnDef);
     });
+    this.displayedColumns.unshift('id');
     this.displayedColumns.push('opt');
-    console.log(this.displayedColumns);
   }
 
   public cargarDatosTabla(): void {

@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { MantenimientoVehicular } from 'src/app/model/mantenimiento-vehiculo.model';
-import { ESTADOSMANTENIMIENTO, TIPOSMANTENIMIENTO } from 'src/app/common';
+import { _estadosRequerimientoMant, TIPOSMANTENIMIENTO } from 'src/app/common';
 
 @Component({
   selector: 'app-sol-mant-vehiculo',
@@ -72,8 +72,8 @@ export class SolMantVehiculoComponent implements OnInit {
       kil.asuntoSolicitud = this.formularioGrp.get('asunto').value;
       kil.detalleSolicitud = this.formularioGrp.get('detalle').value;
 
-      kil.idEstadoMantenimiento = ESTADOSMANTENIMIENTO[0].id;
-      kil.nomEstadoMantenimiento = ESTADOSMANTENIMIENTO[0].nombre;
+      kil.idEstadoMantenimiento = _estadosRequerimientoMant[0].id;
+      kil.nomEstadoMantenimiento = _estadosRequerimientoMant[0].nombre;
 
       this.dialogRef.close(kil);
     } else {

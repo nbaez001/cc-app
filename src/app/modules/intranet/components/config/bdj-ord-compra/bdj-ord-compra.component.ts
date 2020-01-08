@@ -147,4 +147,8 @@ export class BdjOrdCompraComponent implements OnInit {
     });
   }
 
+  exportar() {
+
+  }
+
 }

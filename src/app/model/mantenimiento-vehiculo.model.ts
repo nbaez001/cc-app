@@ -7,6 +7,7 @@ export class MantenimientoVehicular {
 
     nroHojatramiteReq: string;
     nroInformeReq: string;
+    fecha: Date;
 
     idTipoAsigPresupuesto: number;
     nomTipoAsigPresupuesto: string;

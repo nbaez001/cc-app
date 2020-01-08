@@ -147,4 +147,8 @@ export class BdjOrdServicioComponent implements OnInit {
     });
   }
 
+  exportar() {
+
+  }
+
 }
