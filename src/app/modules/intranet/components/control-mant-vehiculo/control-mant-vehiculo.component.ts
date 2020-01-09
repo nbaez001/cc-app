@@ -5,10 +5,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/m
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UNIDADES, TIPOSMANTENIMIENTO, TIPOSPRESUPUESTO, MANTENIMIENTOS, _estadosRequerimientoMant } from 'src/app/common';
-import { VerObsMantComponent } from './ver-obs-mant/ver-obs-mant.component';
 import { RegMantVehiculoComponent } from './reg-mant-vehiculo/reg-mant-vehiculo.component';
-import { RegConfMantVehiculoComponent } from './reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
-import { SolMantVehiculoComponent } from './sol-mant-vehiculo/sol-mant-vehiculo.component';
 import { Router } from '@angular/router';
 import { DecimalPipe, DatePipe } from '@angular/common';
 
@@ -55,13 +52,9 @@ export class ControlMantVehiculoComponent implements OnInit {
       header: 'UNIDAD',
       cell: (mant: MantenimientoVehicular) => (mant.nomUnidad != null) ? `${mant.nomUnidad}` : ''
     }, {
-      columnDef: 'nomTipoMantenimiento',
-      header: 'TIPO MANTENIMIENTO',
-      cell: (mant: MantenimientoVehicular) => (mant.nomTipoMantenimiento != null) ? `${mant.nomTipoMantenimiento}` : ''
-    }, {
-      columnDef: 'nomTipoAsigPresupuesto',
-      header: 'TIPO PRESUPUESTO',
-      cell: (mant: MantenimientoVehicular) => (mant.nomTipoAsigPresupuesto != null) ? `${mant.nomTipoAsigPresupuesto}` : ''
+      columnDef: 'asuntoRequerimiento',
+      header: 'ASUNTO REQUERIMIENTO',
+      cell: (mant: MantenimientoVehicular) => (mant.asuntoRequerimiento != null) ? ((mant.asuntoRequerimiento.length > 70) ? `${mant.asuntoRequerimiento.substr(0, 69)}...` : `${mant.asuntoRequerimiento}`) : ''
     }, {
       columnDef: 'nroInformeReq',
       header: 'NRO INFORME REQ.',
@@ -75,6 +68,10 @@ export class ControlMantVehiculoComponent implements OnInit {
       header: 'FECHA REQUERIMIENTO',
       cell: (mant: MantenimientoVehicular) => (mant.fecha != null) ? `${this.datePipe.transform(mant.fecha, 'dd/MM/yyyy')}` : ''
     }, {
+      columnDef: 'nomTipoAsigPresupuesto',
+      header: 'TIPO PRESUPUESTO',
+      cell: (mant: MantenimientoVehicular) => (mant.nomTipoAsigPresupuesto != null) ? `${mant.nomTipoAsigPresupuesto}` : ''
+    }, {
       columnDef: 'codAsigPresupuesto',
       header: 'NRO. DOC. PRESUPUESTO',
       cell: (mant: MantenimientoVehicular) => (mant.codAsigPresupuesto != null) ? `${mant.codAsigPresupuesto}` : ''
@@ -83,6 +80,10 @@ export class ControlMantVehiculoComponent implements OnInit {
       header: 'MONTO PRESUPUESTO',
       cell: (mant: MantenimientoVehicular) => (mant.importeAsigPresupuesto != null) ? `${this.decimalPipe.transform(mant.importeAsigPresupuesto, '1.2-2')}` : ''
     }, {
+      columnDef: 'nroActaConf',
+      header: 'NRO ACTA CONFORMIDAD',
+      cell: (mant: MantenimientoVehicular) => (mant.nroActaConf != null) ? `${mant.nroActaConf}` : ''
+    }, {
       columnDef: 'nroInformeConf',
       header: 'NRO INFORME CONF.',
       cell: (mant: MantenimientoVehicular) => (mant.nroInformeConf != null) ? `${mant.nroInformeConf}` : ''
@@ -90,18 +91,6 @@ export class ControlMantVehiculoComponent implements OnInit {
       columnDef: 'nroHojatramiteConf',
       header: 'NRO H.T. CONF.',
       cell: (mant: MantenimientoVehicular) => (mant.nroHojatramiteConf != null) ? `${mant.nroHojatramiteConf}` : ''
-    }, {
-      columnDef: 'actaRecepcionEmpresa',
-      header: 'NRO ACTA RECEPCION EMPRESA',
-      cell: (mant: MantenimientoVehicular) => (mant.actaRecepcionEmpresa != null) ? `${mant.actaRecepcionEmpresa}` : ''
-    }, {
-      columnDef: 'cartaInformeProveedor',
-      header: 'CARTA INFORME PROVEEDOR',
-      cell: (mant: MantenimientoVehicular) => (mant.cartaInformeProveedor != null) ? `${mant.cartaInformeProveedor}` : ''
-    }, {
-      columnDef: 'actaRecepccionUURR',
-      header: 'ACTA RECEPCCION UURR',
-      cell: (mant: MantenimientoVehicular) => (mant.actaRecepccionUURR != null) ? `${mant.actaRecepccionUURR}` : ''
     }, {
       columnDef: 'nomEstadoMantenimiento',
       header: 'ESTADO MANTENIMIENTO',
@@ -127,7 +116,7 @@ export class ControlMantVehiculoComponent implements OnInit {
       if (this.user.getId) {
         this.bandejaGrp = this.fb.group({
           unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-          tipoMantenimiento: ['', [Validators.required]],
+          // tipoMantenimiento: ['', [Validators.required]],
           estadoRequerimiento: ['', [Validators.required]]
         });
 
@@ -144,7 +133,7 @@ export class ControlMantVehiculoComponent implements OnInit {
 
   public inicializarVariables(): void {
     this.cargarUnidades();
-    this.cargarTipomantenimiento();
+    // this.cargarTipomantenimiento();
     this.cargarEstadosRequerimiento();
 
     this.spinnerService.hide();
@@ -162,12 +151,12 @@ export class ControlMantVehiculoComponent implements OnInit {
     }
   }
 
-  public cargarTipomantenimiento() {
-    this.tiposMantenimiento = JSON.parse(JSON.stringify(TIPOSMANTENIMIENTO));
-    this.tiposMantenimiento.unshift({ id: 0, nombre: 'TODOS' });
+  // public cargarTipomantenimiento() {
+  //   this.tiposMantenimiento = JSON.parse(JSON.stringify(TIPOSMANTENIMIENTO));
+  //   this.tiposMantenimiento.unshift({ id: 0, nombre: 'TODOS' });
 
-    this.bandejaGrp.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
-  }
+  //   this.bandejaGrp.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
+  // }
 
   public cargarEstadosRequerimiento() {
     this.estadosRequerimiento = JSON.parse(JSON.stringify(_estadosRequerimientoMant));
@@ -216,11 +205,11 @@ export class ControlMantVehiculoComponent implements OnInit {
   buscar() {
     console.log('Buscar');
     let idUnidad = this.bandejaGrp.get('unidad').value.id;
-    let idTipomantenimiento = this.bandejaGrp.get('tipoMantenimiento').value.id;
+    // let idTipomantenimiento = this.bandejaGrp.get('tipoMantenimiento').value.id;
     let idEstadoRequerimiento = this.bandejaGrp.get('estadoRequerimiento').value.id;
 
     this.listaMantenimientos = MANTENIMIENTOS.filter(el => (el.idUnidad == idUnidad || 0 == idUnidad));
-    this.listaMantenimientos = this.listaMantenimientos.filter(el => (el.idTipomantenimiento == idTipomantenimiento || 0 == idTipomantenimiento));
+    // this.listaMantenimientos = this.listaMantenimientos.filter(el => (el.idTipomantenimiento == idTipomantenimiento || 0 == idTipomantenimiento));
     this.listaMantenimientos = this.listaMantenimientos.filter(el => (el.idEstadoMantenimiento == idEstadoRequerimiento || 0 == idEstadoRequerimiento));
 
     this.cargarDatosTabla();
@@ -228,18 +217,6 @@ export class ControlMantVehiculoComponent implements OnInit {
 
   exportarExcel() {
     console.log('Exportar');
-  }
-
-  confMantenimiento(obj): void {
-    console.log(obj);
-    const dialogRef = this.dialog.open(RegConfMantVehiculoComponent, {
-      width: '700px',
-      data: obj
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-
-    });
   }
 
   solMantenimientoVehicular(obj): void {
@@ -260,16 +237,4 @@ export class ControlMantVehiculoComponent implements OnInit {
       // this.cargarDatosTabla();
     });
   }
-
-  verObsMantenimientoVehicular(obj): void {
-    const dialogRef = this.dialog.open(VerObsMantComponent, {
-      width: '500px',
-      data: obj
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      // console.log(result);
-    });
-  }
-
 }

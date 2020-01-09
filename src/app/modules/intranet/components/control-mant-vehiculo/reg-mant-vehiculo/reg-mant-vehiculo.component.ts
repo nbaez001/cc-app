@@ -77,7 +77,7 @@ export class RegMantVehiculoComponent implements OnInit {
     'unidad': {
       'required': 'Campo obligatorio'
     },
-    'tipoMantenimiento': {
+    'asuntoRequerimiento': {
       'required': 'Campo obligatorio'
     },
     'cotizacion': {
@@ -95,7 +95,7 @@ export class RegMantVehiculoComponent implements OnInit {
   };
   formErrors1 = {
     'unidad': '',
-    'tipoMantenimiento': '',
+    'asuntoRequerimiento': '',
     'cotizacion': '',
     'nroHt': '',
     'nroInforme': '',
@@ -215,7 +215,7 @@ export class RegMantVehiculoComponent implements OnInit {
   ngOnInit() {
     this.formularioGrp1 = this.fb.group({
       unidad: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
+      asuntoRequerimiento: ['', [Validators.required]],
       tipoPresupuesto: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       cotizacion: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroHt: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
@@ -261,7 +261,7 @@ export class RegMantVehiculoComponent implements OnInit {
     if (this.data.objeto == null) {//NUEVO MANTENIMIENTO
       this.mantenimiento = new MantenimientoVehicular();
       this.mantenimiento.idEstadoMantenimiento = 1;
-      this.mantenimiento.idTipomantenimiento = 1;
+      // this.mantenimiento.idTipomantenimiento = 1;
       this.formularioGrp1.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
       this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
       this.cargarDatosTabla();
@@ -273,15 +273,15 @@ export class RegMantVehiculoComponent implements OnInit {
       this.cargarDatosTabla1();
       this.cargarDatosTabla();
       if (this.user.perfil.id == 3) {
-        this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => el.id == this.mantenimiento.idUnidad )[0]);
-        this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => el.id == this.mantenimiento.idTipomantenimiento )[0]);
+        this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => el.id == this.mantenimiento.idUnidad)[0]);
+        // this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => el.id == this.mantenimiento.idTipomantenimiento )[0]);
         this.formularioGrp1.get('cotizacion').setValue(this.mantenimiento.cotizacion);
         this.formularioGrp1.get('nroHt').setValue(this.mantenimiento.nroHojatramiteReq);
         this.formularioGrp1.get('nroInforme').setValue(this.mantenimiento.nroInformeReq);
         this.move(1);//IR A 2 TAB
       } else {
-        this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => el.id == this.mantenimiento.idUnidad )[0]);
-        this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => el.id == this.mantenimiento.idTipomantenimiento )[0]);
+        this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => el.id == this.mantenimiento.idUnidad)[0]);
+        // this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => el.id == this.mantenimiento.idTipomantenimiento )[0]);
         this.formularioGrp1.get('cotizacion').setValue(this.mantenimiento.cotizacion);
         this.formularioGrp1.get('nroHt').setValue(this.mantenimiento.nroHojatramiteReq);
         this.formularioGrp1.get('nroInforme').setValue(this.mantenimiento.nroInformeReq);
@@ -295,7 +295,8 @@ export class RegMantVehiculoComponent implements OnInit {
 
     this.deshabilitarCampos(this.mantenimiento);
     this.cargarUnidades();
-    this.cargarTipomantenimiento();
+    // this.cargarTipomantenimiento();
+    this.formularioGrp.get('cantVehiculos').setValue(1);
 
     this.calcularCotizacion();
 
@@ -409,13 +410,13 @@ export class RegMantVehiculoComponent implements OnInit {
     this.subformularioGrp = new FormGroup(frmCtrl);
   }
 
-  public cargarTipomantenimiento() {
-    this.tiposMantenimiento = JSON.parse(JSON.stringify(TIPOSMANTENIMIENTO));
-    this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
+  // public cargarTipomantenimiento() {
+  //   this.tiposMantenimiento = JSON.parse(JSON.stringify(TIPOSMANTENIMIENTO));
+  //   this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
 
-    this.formularioGrp.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
-    this.formularioGrp.get('cantVehiculos').setValue(1);
-  }
+  //   this.formularioGrp.get('tipoMantenimiento').setValue(this.tiposMantenimiento[0]);
+  //   this.formularioGrp.get('cantVehiculos').setValue(1);
+  // }
 
   public cargarUnidades() {
     this.unidades = JSON.parse(JSON.stringify(UNIDADES));
@@ -471,8 +472,8 @@ export class RegMantVehiculoComponent implements OnInit {
       kil.id = 0;
       kil.idUnidad = this.formularioGrp.get('unidad').value.id;
       kil.nomUnidad = this.formularioGrp.get('unidad').value.nombre;
-      kil.idTipomantenimiento = this.formularioGrp.get('tipoMantenimiento').value.id;
-      kil.nomTipoMantenimiento = this.formularioGrp.get('tipoMantenimiento').value.nombre;
+      kil.asuntoRequerimiento = this.formularioGrp.get('asuntoRequerimiento').value;
+      // kil.nomTipoMantenimiento = this.formularioGrp.get('tipoMantenimiento').value.nombre;
       kil.idTipoAsigPresupuesto = this.formularioGrp.get('tipoPresupuesto').value.id;
       kil.nomTipoAsigPresupuesto = this.formularioGrp.get('tipoPresupuesto').value.nombre;
       kil.codAsigPresupuesto = this.formularioGrp.get('codAsigPresupuesto').value;
@@ -586,8 +587,8 @@ export class RegMantVehiculoComponent implements OnInit {
           kil.id = 0;
           kil.idUnidad = this.formularioGrp1.get('unidad').value.id;
           kil.nomUnidad = this.formularioGrp1.get('unidad').value.nombre;
-          kil.idTipomantenimiento = this.formularioGrp1.get('tipoMantenimiento').value.id;
-          kil.nomTipoMantenimiento = this.formularioGrp1.get('tipoMantenimiento').value.nombre;
+          kil.asuntoRequerimiento = this.formularioGrp1.get('asuntoRequerimiento').value;
+          // kil.nomTipoMantenimiento = this.formularioGrp1.get('tipoMantenimiento').value.nombre;
 
           console.log(kil);
           stepper.next();

@@ -35,11 +35,8 @@ import { RegLubricantesAfinesComponent } from './components/home/reg-lubricantes
 import { RegLubricantesAfines2Component } from './components/bandeja-gen-electrico/reg-lubricantes-afines2/reg-lubricantes-afines2.component';
 import { RegLubricantesAfines3Component } from './components/bandeja-deslizadores/reg-lubricantes-afines3/reg-lubricantes-afines3.component';
 import { ControlMantVehiculoComponent } from './components/control-mant-vehiculo/control-mant-vehiculo.component';
-import { VerObsMantComponent } from './components/control-mant-vehiculo/ver-obs-mant/ver-obs-mant.component';
 import { RegMantVehiculoComponent } from './components/control-mant-vehiculo/reg-mant-vehiculo/reg-mant-vehiculo.component';
-import { RegConfMantVehiculoComponent } from './components/control-mant-vehiculo/reg-conf-mant-vehiculo/reg-conf-mant-vehiculo.component';
 import { RegDetMatVehiculoComponent } from './components/control-mant-vehiculo/reg-det-mat-vehiculo/reg-det-mat-vehiculo.component';
-import { SolMantVehiculoComponent } from './components/control-mant-vehiculo/sol-mant-vehiculo/sol-mant-vehiculo.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ControlSolicitudMantComponent } from './components/control-solicitud-mant/control-solicitud-mant.component';
 import { RegSolicitudMantComponent } from './components/control-solicitud-mant/reg-solicitud-mant/reg-solicitud-mant.component';
@@ -85,11 +82,8 @@ import { VisorPdfComponent } from './components/shared/visor-pdf/visor-pdf.compo
     RegLubricantesAfinesComponent,
     RegLubricantesAfines2Component,
     RegLubricantesAfines3Component,
-    VerObsMantComponent,
     RegMantVehiculoComponent,
-    RegConfMantVehiculoComponent,
     RegDetMatVehiculoComponent,
-    SolMantVehiculoComponent,
     RegSolicitudMantComponent,
     BuscarSolicitudMantComponent,
     BuscarOrdServcompComponent,
@@ -124,11 +118,8 @@ import { VisorPdfComponent } from './components/shared/visor-pdf/visor-pdf.compo
     RegLubricantesAfinesComponent,
     RegLubricantesAfines2Component,
     RegLubricantesAfines3Component,
-    VerObsMantComponent,
     RegMantVehiculoComponent,
-    RegConfMantVehiculoComponent,
     RegDetMatVehiculoComponent,
-    SolMantVehiculoComponent,
     RegSolicitudMantComponent,
     BuscarSolicitudMantComponent,
     BuscarOrdServcompComponent,

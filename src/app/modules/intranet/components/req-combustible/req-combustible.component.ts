@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { RequerimientoBien } from 'src/app/model/requerimiento-bien.model';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatSnackBar } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Router } from '@angular/router';
 import { UNIDADES, TIPOSPRESUPUESTO, _requerimientosBien } from 'src/app/common';
 import { RegReqCombustibleComponent } from './reg-req-combustible/reg-req-combustible.component';
+import { DecimalPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-req-combustible',
@@ -41,6 +42,34 @@ export class ReqCombustibleComponent implements OnInit {
   displayedColumns: string[];
   dataSource: MatTableDataSource<RequerimientoBien>;
 
+  // columnsGrilla = [
+  //   {
+  //     columnDef: 'id',
+  //     header: 'N°',
+  //     cell: (mant: RequerimientoBien) => (mant.id != null) ? `${mant.id}` : ''
+  //   }, {
+  //     columnDef: 'nomUnidad',
+  //     header: 'UNIDAD',
+  //     cell: (mant: RequerimientoBien) => (mant.nomUnidad != null) ? `${mant.nomUnidad}` : ''
+  //   }, {
+  //     columnDef: 'detalleRequerimiento',
+  //     header: 'DET. REQUERIMIENTO',
+  //     cell: (mant: RequerimientoBien) => (mant.detalleRequerimiento != null) ? `${mant.detalleRequerimiento}` : ''
+  //   }, {
+  //     columnDef: 'nomTipoAsigPresupuesto',
+  //     header: 'TIPO PRESUPUESTO',
+  //     cell: (mant: RequerimientoBien) => (mant.nomTipoAsigPresupuesto != null) ? `${mant.nomTipoAsigPresupuesto}` : ''
+  //   }, {
+  //     columnDef: 'codAsigPresupuesto',
+  //     header: 'NRO. RES. ADMINISTRACION/ NRO. ORDEN COMPRA',
+  //     cell: (mant: RequerimientoBien) => (mant.codAsigPresupuesto != null) ? `${mant.codAsigPresupuesto}` : ''
+  //   }, {
+  //     columnDef: 'importeAsigPresupuestoa',
+  //     header: 'MONTO PRESUPUESTO',
+  //     cell: (mant: RequerimientoBien) => (mant.importeAsigPresupuesto != null) ? `${mant.importeAsigPresupuesto}` : ''
+  //   }];
+
+
   columnsGrilla = [
     {
       columnDef: 'id',
@@ -51,21 +80,37 @@ export class ReqCombustibleComponent implements OnInit {
       header: 'UNIDAD',
       cell: (mant: RequerimientoBien) => (mant.nomUnidad != null) ? `${mant.nomUnidad}` : ''
     }, {
-      columnDef: 'detalleRequerimiento',
-      header: 'DET. REQUERIMIENTO',
-      cell: (mant: RequerimientoBien) => (mant.detalleRequerimiento != null) ? `${mant.detalleRequerimiento}` : ''
+      columnDef: 'asuntoRequerimiento',
+      header: 'ASUNTO REQUERIMIENTO',
+      cell: (mant: RequerimientoBien) => (mant.asuntoRequerimiento != null) ? ((mant.asuntoRequerimiento.length > 70) ? `${mant.asuntoRequerimiento.substr(0, 69)}...` : `${mant.asuntoRequerimiento}`) : ''
+    }, {
+      columnDef: 'nroInformeReq',
+      header: 'NRO INFORME REQ.',
+      cell: (mant: RequerimientoBien) => (mant.nroInformeReq != null) ? `${mant.nroInformeReq}` : ''
+    }, {
+      columnDef: 'nroHojatramiteReq',
+      header: 'NRO H.T. REQ.',
+      cell: (mant: RequerimientoBien) => (mant.nroHojatramiteReq != null) ? `${mant.nroHojatramiteReq}` : ''
+    }, {
+      columnDef: 'fecha',
+      header: 'FECHA REQUERIMIENTO',
+      cell: (mant: RequerimientoBien) => (mant.fecha != null) ? `${this.datePipe.transform(mant.fecha, 'dd/MM/yyyy')}` : ''
     }, {
       columnDef: 'nomTipoAsigPresupuesto',
       header: 'TIPO PRESUPUESTO',
       cell: (mant: RequerimientoBien) => (mant.nomTipoAsigPresupuesto != null) ? `${mant.nomTipoAsigPresupuesto}` : ''
     }, {
       columnDef: 'codAsigPresupuesto',
-      header: 'NRO. RES. ADMINISTRACION/ NRO. ORDEN COMPRA',
+      header: 'NRO. DOC. PRESUPUESTO',
       cell: (mant: RequerimientoBien) => (mant.codAsigPresupuesto != null) ? `${mant.codAsigPresupuesto}` : ''
     }, {
-      columnDef: 'importeAsigPresupuestoa',
+      columnDef: 'marcimporteAsigPresupuestoa',
       header: 'MONTO PRESUPUESTO',
-      cell: (mant: RequerimientoBien) => (mant.importeAsigPresupuesto != null) ? `${mant.importeAsigPresupuesto}` : ''
+      cell: (mant: RequerimientoBien) => (mant.importeAsigPresupuesto != null) ? `${this.decimalPipe.transform(mant.importeAsigPresupuesto, '1.2-2')}` : ''
+    }, {
+      columnDef: 'nomEstadoRequerimiento',
+      header: 'ESTADO REQUERIMIENTO',
+      cell: (mant: RequerimientoBien) => (mant.nomEstadoRequerimiento != null) ? `${mant.nomEstadoRequerimiento}` : ''
     }];
 
   conBadge: boolean = false;
@@ -75,6 +120,9 @@ export class ReqCombustibleComponent implements OnInit {
 
   constructor(private fb: FormBuilder, public dialog: MatDialog,
     private spinnerService: Ng4LoadingSpinnerService,
+    private decimalPipe: DecimalPipe,
+    private datePipe: DatePipe,
+    private _snackBar: MatSnackBar,
     @Inject(UsuarioService) private user: UsuarioService,
     private router: Router
   ) { }

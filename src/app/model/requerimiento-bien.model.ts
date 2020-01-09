@@ -2,7 +2,7 @@ export class RequerimientoBien {
     id: number;
     idUnidad: number;
     nomUnidad: string;
-    detalleRequerimiento: string;
+    asuntoRequerimiento: string;
 
     nroHojatramiteReq: string;
     nroInformeReq: string;
@@ -16,6 +16,7 @@ export class RequerimientoBien {
     nomEstadoRequerimiento: string;
 
     cotizacion: number;
+    fecha: Date;
 
     conBadge: boolean;
 }

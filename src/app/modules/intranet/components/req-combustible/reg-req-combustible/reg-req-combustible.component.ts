@@ -29,6 +29,9 @@ export class RegReqCombustibleComponent implements OnInit {
     'unidad': {
       'required': 'Campo obligatorio'
     },
+    'asuntoRequerimiento': {
+      'required': 'Campo obligatorio'
+    },
     'tipoPresupuesto': {
       'required': 'Campo obligatorio'
     },
@@ -47,6 +50,7 @@ export class RegReqCombustibleComponent implements OnInit {
   };
   formErrors1 = {
     'unidad': '',
+    'asuntoRequerimiento': '',
     'tipoPresupuesto': '',
     'cotizacion': '',
     'nroHt': '',
@@ -117,7 +121,8 @@ export class RegReqCombustibleComponent implements OnInit {
   ngOnInit() {
     this.formularioGrp1 = this.fb.group({
       unidad: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      tipoPresupuesto: [{ value: '', disabled: false }, [Validators.required]],
+      tipoPresupuesto: ['', [Validators.required]],
+      asuntoRequerimiento: [{ value: '', disabled: false }, [Validators.required]],
       cotizacion: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroHt: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroInforme: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
@@ -144,8 +149,12 @@ export class RegReqCombustibleComponent implements OnInit {
     if (this.data.objeto == null) {
       this.requerimiento = new RequerimientoBien();
       this.requerimiento.idEstadoRequerimiento = 1;
+      this.formularioGrp1.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
+      this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
     } else {
       this.requerimiento = JSON.parse(JSON.stringify(this.data.objeto));
+      this.formularioGrp1.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => el.id == this.requerimiento.idTipoAsigPresupuesto)[0]);
+      this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => el.id == this.requerimiento.idTipoAsigPresupuesto)[0]);
       if (this.user.perfil.id == 3) {
         this.formularioGrp1.get('unidad').setValue(this.unidades.filter(el => { el.id == this.requerimiento.idUnidad })[0]);
         // this.formularioGrp1.get('tipoMantenimiento').setValue(this.tiposMantenimiento.filter(el => { el.id == this.requerimiento.idTiporequerimiento })[0]);
