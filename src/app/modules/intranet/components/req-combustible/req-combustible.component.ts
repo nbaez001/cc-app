@@ -195,7 +195,23 @@ export class ReqCombustibleComponent implements OnInit {
   }
 
   exportarExcel() {
-    console.log('Exportar');
+    let url = "/assets/files/reportes/requerimiento-bienes.xlsx";
+
+    var blob = null;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+    xhr.onload = () => {
+      blob = xhr.response;//xhr.response is now a blob object
+      let file = new File([blob], 'requerimiento-bienes.xlsx', { type: 'application/xlsx', lastModified: Date.now() });
+
+      var a = document.createElement("a");
+      var fileURL = window.URL.createObjectURL(file);
+      a.href = fileURL;
+      a.download = file.name;
+      a.click();
+    }
+    xhr.send();
   }
 
   solRequerimientoBien(obj): void {

@@ -65,7 +65,7 @@
           <strong> NUEVO</strong>
         </button>
         <button mat-raised-button (click)="exportarExcel()">
-          <mat-icon>file_copy</mat-icon>
+          <mat-icon svgIcon="excel"></mat-icon>
           <strong>EXPORTAR A EXCEL</strong>
         </button>
       </mat-card-actions>
@@ -88,7 +88,7 @@
               <th mat-header-cell *matHeaderCellDef>OPC.</th>
               <td mat-cell *matCellDef="let element">
                 <button mat-icon-button matTooltip="revisar mantenimiento" (click)="regMantenimientoVehicular(element)">
-                  <mat-icon matBadge="1" matBadgeColor="warn" *ngIf="element.conBadge">search</mat-icon>
+                  <mat-icon matBadge="!" matBadgeColor="warn" *ngIf="element.conBadge">search</mat-icon>
                   <mat-icon *ngIf="!element.conBadge">search</mat-icon>
                 </button>
               </td>

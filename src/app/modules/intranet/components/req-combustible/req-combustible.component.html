@@ -55,7 +55,7 @@
           <strong> NUEVO</strong>
         </button>
         <button mat-raised-button (click)="exportarExcel()">
-          <mat-icon>file_copy</mat-icon>
+          <mat-icon svgIcon="excel"></mat-icon>
           <strong>EXPORTAR A EXCEL</strong>
         </button>
       </mat-card-actions>
@@ -81,7 +81,7 @@
                   <mat-icon>comment</mat-icon>
                 </button> -->
                 <button mat-icon-button matTooltip="revisar mantenimiento" (click)="regRequerimientoBien(element)">
-                  <mat-icon matBadge="1" matBadgeColor="warn" *ngIf="element.conBadge">search</mat-icon>
+                  <mat-icon matBadge="!" matBadgeColor="warn" *ngIf="element.conBadge">search</mat-icon>
                   <mat-icon *ngIf="!element.conBadge">search</mat-icon>
                 </button>
               </td>

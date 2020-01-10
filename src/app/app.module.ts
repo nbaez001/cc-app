@@ -10,6 +10,7 @@ import { MaterialModule } from './modules/material.module';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MaterialModule,
     Ng4LoadingSpinnerModule.forRoot(),
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule,//PARA ICONO SVG
   ],
   providers: [],
   bootstrap: [AppComponent]

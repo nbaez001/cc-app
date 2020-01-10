@@ -37,7 +37,7 @@
           <strong> BUSCAR</strong>
         </button>
         <button mat-raised-button (click)="exportarExcel()">
-          <mat-icon>file_copy</mat-icon>
+          <mat-icon svgIcon="excel"></mat-icon>
           <strong>EXPORTAR A EXCEL</strong>
         </button>
       </mat-card-actions>
@@ -141,7 +141,8 @@
                 <th class="mat-header-cell" rowspan="2" style="width: 12rem;"> UNIDAD TERRITORIAL</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 4rem;">PARTIDA</th>
                 <th class="mat-header-cell" colspan="3" style="width: 24rem;"> CONTROL PRESUPUESTAL (EJECUCION)</th>
-                <th class="mat-header-cell" colspan="3" style="width: 24rem;"> CONTROL PRESUPUESTAL (PROYECCCION KILOMETRAJES Y HORAS USO)</th>
+                <th class="mat-header-cell" colspan="3" style="width: 24rem;"> CONTROL PRESUPUESTAL (PROYECCCION
+                  KILOMETRAJES Y HORAS USO)</th>
               </tr>
               <tr class="mat-header-row">
                 <th class="mat-header-cell"> ASIG. PRESUPUESTAL</th>
@@ -154,7 +155,7 @@
             </thead>
             <tbody>
               <tr class="mat-row" *ngFor="let con of listaControl; let i=index">
-                <td class="mat-cell celda-center">  
+                <td class="mat-cell celda-center">
                   <ng-container *ngIf="con.idPartida==1">
                     {{con.secFun}}
                   </ng-container>

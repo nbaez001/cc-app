@@ -60,7 +60,7 @@
           <strong> NUEVO VEHICULO</strong>
         </button> -->
         <button mat-raised-button (click)="exportarExcel()">
-          <mat-icon>file_copy</mat-icon>
+          <mat-icon svgIcon="excel"></mat-icon>
           <strong>EXPORTAR A EXCEL</strong>
         </button>
       </mat-card-actions>
@@ -89,7 +89,7 @@
               </th>
               <td mat-cell *matCellDef="let element">
                 <button mat-icon-button matTooltip="alerta preventivo Lubricantes" (click)="regLubricante(element)">
-                  <mat-icon class="icono" matBadge="1" matBadgeColor="warn">
+                  <mat-icon class="icono" matBadge="!" matBadgeColor="warn">
                     party_mode
                   </mat-icon>
                 </button>

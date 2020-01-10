@@ -65,15 +65,16 @@
           <strong> NUEVO VEHICULO</strong>
         </button> -->
         <button mat-raised-button (click)="exportarExcel()" matTooltip="EXPORTAR ESTADO DE VEHICULOS">
-          <mat-icon>file_copy</mat-icon>
+          <mat-icon svgIcon="excel"></mat-icon>
           <strong>EXP. VEHICULOS</strong>
         </button>
-        <button mat-raised-button (click)="exportarArtEmerg()" matTooltip="EXPORTAR ARTICULOS DE EMERGENCIA DEL VEHICULO">
-          <mat-icon>file_copy</mat-icon>
+        <button mat-raised-button (click)="exportarArtEmerg()"
+          matTooltip="EXPORTAR ARTICULOS DE EMERGENCIA DEL VEHICULO">
+          <mat-icon svgIcon="excel"></mat-icon>
           <strong>EXP. ART. EMERGENCIA</strong>
         </button>
         <button mat-raised-button (click)="exportarConductores()" matTooltip="EXPORTAR CONDUCTORES DE VEHICULOS">
-          <mat-icon>file_copy</mat-icon>
+          <mat-icon svgIcon="excel"></mat-icon>
           <strong>EXP. CONDUCTORES</strong>
         </button>
       </mat-card-actions>
@@ -112,15 +113,17 @@
                 </button>
                 <button mat-icon-button matTooltip="Declaracion de articulos de emergencia"
                   (click)="regArticulosEmergencia(element)">
-                  <mat-icon>work</mat-icon>
+                  <mat-icon>
+                    <img style="height: 25px; width: auto;" src="../../../../../assets/images/icons/art-emerg.png">
+                  </mat-icon>
                 </button>
                 <button mat-icon-button matTooltip="Conductor del vehiculo" (click)="regConductor(element)">
                   <mat-icon>
-                    <img style="height: 25px; width: auto;" src="../../../../../assets/images/icons/car-driver.png">
+                    <img style="height: 25px; width: auto;" src="../../../../../assets/images/icons/conductor.png">
                   </mat-icon>
                 </button>
                 <button mat-icon-button matTooltip="Alerta preventivo Lubricantes" (click)="regLubricante(element)">
-                  <mat-icon class="icono" matBadge="1" matBadgeColor="warn">
+                  <mat-icon class="icono" matBadge="!" matBadgeColor="warn">
                     party_mode
                   </mat-icon>
                 </button>
