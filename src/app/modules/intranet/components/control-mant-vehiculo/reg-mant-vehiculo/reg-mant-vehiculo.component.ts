@@ -233,14 +233,15 @@ export class RegMantVehiculoComponent implements OnInit {
 
     this.formularioGrp = this.fb.group({
       unidad: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      presupuesto: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
+      // tipoMantenimiento: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
+      // presupuesto: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroHojatramiteConf: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       nroInformeConf: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
-      actaRecepcionEmpresa: [{ value: '', disabled: true }, [Validators.required]],
-      cartaInformeProveedor: [{ value: '', disabled: true }, [Validators.required]],
-      actaRecepccionUURR: [{ value: '', disabled: true }, [Validators.required]],
-      cantVehiculos: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
+      docsConformidad: [{ value: '', disabled: true }, [Validators.required]],
+      // actaRecepcionEmpresa: [{ value: '', disabled: true }, [Validators.required]],
+      // cartaInformeProveedor: [{ value: '', disabled: true }, [Validators.required]],
+      // actaRecepccionUURR: [{ value: '', disabled: true }, [Validators.required]],
+      // cantVehiculos: [{ value: '', disabled: this.user.perfil.id == 3 }, [Validators.required]],
       obsRecepccionUURR: [{ value: '', disabled: this.user.perfil.id == 3 }, []]
     });
     this.inicializarVariables();
@@ -267,7 +268,7 @@ export class RegMantVehiculoComponent implements OnInit {
       this.cargarDatosTabla();
     } else {//MANTENIMIENTO EXISTENTE
       this.mantenimiento = JSON.parse(JSON.stringify(this.data.objeto));
-      this.listaSolicitudesMant = _solicitudesMant;
+      this.listaSolicitudesMant = _solicitudesMant.slice(0,2);
       this.formularioGrp1.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => el.id == this.mantenimiento.idTipoAsigPresupuesto)[0]);
       this.formularioGrp2.get('tipoPresupuesto').setValue(this.tiposPresupuesto.filter(el => el.id == this.mantenimiento.idTipoAsigPresupuesto)[0]);
       this.cargarDatosTabla1();
@@ -296,7 +297,7 @@ export class RegMantVehiculoComponent implements OnInit {
     this.deshabilitarCampos(this.mantenimiento);
     this.cargarUnidades();
     // this.cargarTipomantenimiento();
-    this.formularioGrp.get('cantVehiculos').setValue(1);
+    // this.formularioGrp.get('cantVehiculos').setValue(1);
 
     this.calcularCotizacion();
 
@@ -487,51 +488,65 @@ export class RegMantVehiculoComponent implements OnInit {
 
   }
 
-  public buscarActa(evt): void {
+  public buscarDocsConformidad(evt): void {
     document.getElementById('fileInput').click();
   }
 
-  public cargarArchivo(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
+  public cargarDocsConformidad(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
     this.fileupload = event.target.files[0];
     if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
-      this.formularioGrp.get('actaRecepcionEmpresa').setValue(null);
+      this.formularioGrp.get('docsConformidad').setValue(null);
     } else {
       const nombreArchivo = this.fileupload.name;
-      this.formularioGrp.get('actaRecepcionEmpresa').setValue(nombreArchivo);
+      this.formularioGrp.get('docsConformidad').setValue(nombreArchivo);
     }
   }
 
-  public buscarActa2(evt): void {
-    document.getElementById('fileInput2').click();
-  }
+  // public buscarActa(evt): void {
+  //   document.getElementById('fileInput').click();
+  // }
 
-  public cargarArchivo2(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
-    this.fileupload = event.target.files[0];
-    if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
-      this.formularioGrp.get('cartaInformeProveedor').setValue(null);
-    } else {
-      const nombreArchivo = this.fileupload.name;
-      this.formularioGrp.get('cartaInformeProveedor').setValue(nombreArchivo);
-    }
-  }
+  // public cargarArchivo(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
+  //   this.fileupload = event.target.files[0];
+  //   if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
+  //     this.formularioGrp.get('actaRecepcionEmpresa').setValue(null);
+  //   } else {
+  //     const nombreArchivo = this.fileupload.name;
+  //     this.formularioGrp.get('actaRecepcionEmpresa').setValue(nombreArchivo);
+  //   }
+  // }
 
-  public buscarActa3(evt): void {
-    document.getElementById('fileInput3').click();
-  }
+  // public buscarActa2(evt): void {
+  //   document.getElementById('fileInput2').click();
+  // }
 
-  public cargarArchivo3(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
-    this.fileupload = event.target.files[0];
-    if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
-      this.formularioGrp.get('actaRecepccionUURR').setValue(null);
-    } else {
-      const nombreArchivo = this.fileupload.name;
-      this.formularioGrp.get('actaRecepccionUURR').setValue(nombreArchivo);
-    }
-  }
+  // public cargarArchivo2(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
+  //   this.fileupload = event.target.files[0];
+  //   if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
+  //     this.formularioGrp.get('cartaInformeProveedor').setValue(null);
+  //   } else {
+  //     const nombreArchivo = this.fileupload.name;
+  //     this.formularioGrp.get('cartaInformeProveedor').setValue(nombreArchivo);
+  //   }
+  // }
+
+  // public buscarActa3(evt): void {
+  //   document.getElementById('fileInput3').click();
+  // }
+
+  // public cargarArchivo3(event) {// NO SIRVE POR QUE NO DEBE SUBIRSE EL ARCHIVO INMEDIATAMENTE
+  //   this.fileupload = event.target.files[0];
+  //   if (typeof event === 'undefined' || typeof this.fileupload === 'undefined' || typeof this.fileupload.name === 'undefined') {
+  //     this.formularioGrp.get('actaRecepccionUURR').setValue(null);
+  //   } else {
+  //     const nombreArchivo = this.fileupload.name;
+  //     this.formularioGrp.get('actaRecepccionUURR').setValue(nombreArchivo);
+  //   }
+  // }
 
   regDetalleServicio(obj): void {
     const dialogRef2 = this.dialog.open(RegDetMatVehiculoComponent, {
-      width: '500px',
+      width: '600px',
       data: { name: 'NERIO' }
     });
 

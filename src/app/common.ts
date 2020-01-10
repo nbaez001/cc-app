@@ -21,6 +21,7 @@ import { OrdenCompra } from './model/config/orden-compra.model';
 import { OrdenServicio } from './model/config/orden-servicio.model';
 import { FondoEncargo } from './model/config/fondo-encargo.model';
 import { RequerimientoBien } from './model/requerimiento-bien.model';
+import { DetalleSolicitudMant } from './model/detalle-solicitud-mant.model';
 
 export const UNIDADES: Unidad[] = [
     { id: 1, nombre: 'U.T. AYACUCHO NORTE' },
@@ -206,22 +207,46 @@ export const ADQUISICION: Adquisicion[] = [
 ];
 
 export const CUADROCONTROL: CuadroControl[] = [
-    { secFun: 22, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 65889.00, combCamionetas: 10395.00, combMotocicletas: 52272.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 2500.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 22, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 2700.00, combCamionetas: 10395.00, combMotocicletas: 52272.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 2500.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 26, idUnidad: 4, nomUnidad: 'U.T. HUANUCO', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 34000.00, combCamionetas: 0.00, combMotocicletas: 32771.20, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 0, lubMotocicletas: 2800.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 26, idUnidad: 4, nomUnidad: 'U.T. HUANUCO', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 2800.00, combCamionetas: 0.00, combMotocicletas: 32771.20, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 0, lubMotocicletas: 2800.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 39, idUnidad: 3, nomUnidad: 'U.T. UCAYALI', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 5390.00, combCamionetas: 0.00, combMotocicletas: 4950.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 0, lubMotocicletas: 200.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 39, idUnidad: 3, nomUnidad: 'U.T. UCAYALI', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 200.00, combCamionetas: 0.00, combMotocicletas: 4950.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 0, lubMotocicletas: 200.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 24, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 80000.00, combCamionetas: 8339.10, combMotocicletas: 66528.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 2500.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 24, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 3000.00, combCamionetas: 8339.10, combMotocicletas: 66528.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 2500.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 32, idUnidad: 5, nomUnidad: 'U.T. MADRE DE DIOS', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 3520.07, combCamionetas: 0.00, combMotocicletas: 3080.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 160.00, lubMotocicletas: 160.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 32, idUnidad: 5, nomUnidad: 'U.T. MADRE DE DIOS', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 160.00, combCamionetas: 0.00, combMotocicletas: 3080.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 160.00, lubMotocicletas: 160.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 36, idUnidad: 6, nomUnidad: 'U.T. PUNO', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 70000.00, combCamionetas: 11440.00, combMotocicletas: 55440.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1816.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 36, idUnidad: 6, nomUnidad: 'U.T. PUNO', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 2016.00, combCamionetas: 11440.00, combMotocicletas: 55440.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1816.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 27, idUnidad: 7, nomUnidad: 'U.T. JUNIN', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 40000.00, combCamionetas: 11176.00, combMotocicletas: 23408.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1320.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 27, idUnidad: 7, nomUnidad: 'U.T. JUNIN', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 1600.00, combCamionetas: 11176.00, combMotocicletas: 23408.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1520.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 21, idUnidad: 8, nomUnidad: 'U.T. AYACUCHO SUR', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 35000.00, combCamionetas: 7480.00, combMotocicletas: 25839.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1816.00, lubGeneradores: 0, lubDeslizadores: 0 },
-    { secFun: 21, idUnidad: 8, nomUnidad: 'U.T. AYACUCHO SUR', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 2016.00, combCamionetas: 7480.00, combMotocicletas: 25839.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1816.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    { secFun: 22, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idPartida: 1, nomPartida: '2.3.13.11', totalAsignacionPresupuestal: 65889.00, totalConsumo: 63107.00, totalEjecucionPresupuestal: 64000.00 },
+    { secFun: 22, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idPartida: 2, nomPartida: '2.3.13.13', totalAsignacionPresupuestal: 2700.00, totalConsumo: 2700.00, totalEjecucionPresupuestal: 2700.00 },
+    { secFun: 22, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idPartida: 3, nomPartida: '2.3.24.13', totalAsignacionPresupuestal: 80000.00, totalConsumo: 0.00, totalEjecucionPresupuestal: 24000.00 },
+    { secFun: 26, idUnidad: 4, nomUnidad: 'U.T. HUANUCO', idPartida: 1, nomPartida: '2.3.13.11', totalAsignacionPresupuestal: 39000.00, totalConsumo: 33211.20, totalEjecucionPresupuestal: 35000.00 },
+    { secFun: 26, idUnidad: 4, nomUnidad: 'U.T. HUANUCO', idPartida: 2, nomPartida: '2.3.13.13', totalAsignacionPresupuestal: 3000.00, totalConsumo: 2800.00, totalEjecucionPresupuestal: 2800.00 },
+    { secFun: 26, idUnidad: 4, nomUnidad: 'U.T. HUANUCO', idPartida: 3, nomPartida: '2.3.24.13', totalAsignacionPresupuestal: 67000.00, totalConsumo: 0.00, totalEjecucionPresupuestal: 27000.00 },
+    { secFun: 39, idUnidad: 3, nomUnidad: 'U.T. UCAYALI', idPartida: 1, nomPartida: '2.3.13.11', totalAsignacionPresupuestal: 5390.00, totalConsumo: 5390.00, totalEjecucionPresupuestal: 5390.00 },
+    { secFun: 39, idUnidad: 3, nomUnidad: 'U.T. UCAYALI', idPartida: 2, nomPartida: '2.3.13.13', totalAsignacionPresupuestal: 200.00, totalConsumo: 200.00, totalEjecucionPresupuestal: 200.00 },
+    { secFun: 39, idUnidad: 3, nomUnidad: 'U.T. UCAYALI', idPartida: 3, nomPartida: '2.3.24.13', totalAsignacionPresupuestal: 23400.00, totalConsumo: 0.00, totalEjecucionPresupuestal: 22000.00 },
+    { secFun: 24, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idPartida: 1, nomPartida: '2.3.13.11', totalAsignacionPresupuestal: 80000.00, totalConsumo: 75307.10, totalEjecucionPresupuestal: 78000.00 },
+    { secFun: 24, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idPartida: 2, nomPartida: '2.3.13.13', totalAsignacionPresupuestal: 3000.00, totalConsumo: 2700.00, totalEjecucionPresupuestal: 3000.00 },
+    { secFun: 24, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idPartida: 3, nomPartida: '2.3.24.13', totalAsignacionPresupuestal: 36000.00, totalConsumo: 0.00, totalEjecucionPresupuestal: 24000.00 },
+    { secFun: 32, idUnidad: 5, nomUnidad: 'U.T. MADRE DE DIOS', idPartida: 1, nomPartida: '2.3.13.11', totalAsignacionPresupuestal: 3520.07, totalConsumo: 3520.00, totalEjecucionPresupuestal: 3520.00 },
+    { secFun: 32, idUnidad: 5, nomUnidad: 'U.T. MADRE DE DIOS', idPartida: 2, nomPartida: '2.3.13.13', totalAsignacionPresupuestal: 160.00, totalConsumo: 160.00, totalEjecucionPresupuestal: 160.00 },
+    { secFun: 32, idUnidad: 5, nomUnidad: 'U.T. MADRE DE DIOS', idPartida: 3, nomPartida: '2.3.24.13', totalAsignacionPresupuestal: 66000.00, totalConsumo: 0.00, totalEjecucionPresupuestal: 45000.00 },
+    { secFun: 36, idUnidad: 6, nomUnidad: 'U.T. PUNO', idPartida: 1, nomPartida: '2.3.13.11', totalAsignacionPresupuestal: 70000.00, totalConsumo: 67320.00, totalEjecucionPresupuestal: 68000.00 },
+    { secFun: 36, idUnidad: 6, nomUnidad: 'U.T. PUNO', idPartida: 2, nomPartida: '2.3.13.13', totalAsignacionPresupuestal: 2016.00, totalConsumo: 1516.00, totalEjecucionPresupuestal: 2000.00 },
+    { secFun: 36, idUnidad: 6, nomUnidad: 'U.T. PUNO', idPartida: 3, nomPartida: '2.3.24.13', totalAsignacionPresupuestal: 20016.00, totalConsumo: 0.00, totalEjecucionPresupuestal: 10000.00 },
+    { secFun: 27, idUnidad: 7, nomUnidad: 'U.T. JUNIN', idPartida: 1, nomPartida: '2.3.13.11', totalAsignacionPresupuestal: 40000.00, totalConsumo: 35024.00, totalEjecucionPresupuestal: 38000.00 },
+    { secFun: 27, idUnidad: 7, nomUnidad: 'U.T. JUNIN', idPartida: 2, nomPartida: '2.3.13.13', totalAsignacionPresupuestal: 1900.00, totalConsumo: 1720.00, totalEjecucionPresupuestal: 1800.00 },
+    { secFun: 27, idUnidad: 7, nomUnidad: 'U.T. JUNIN', idPartida: 3, nomPartida: '2.3.24.13', totalAsignacionPresupuestal: 45000.00, totalConsumo: 0.00, totalEjecucionPresupuestal: 42000.00 },
+    { secFun: 21, idUnidad: 8, nomUnidad: 'U.T. AYACUCHO SUR', idPartida: 1, nomPartida: '2.3.13.11', totalAsignacionPresupuestal: 35000.00, totalConsumo: 33759.00, totalEjecucionPresupuestal: 35000.00 },
+    { secFun: 21, idUnidad: 8, nomUnidad: 'U.T. AYACUCHO SUR', idPartida: 2, nomPartida: '2.3.13.13', totalAsignacionPresupuestal: 4000.00, totalConsumo: 2016.00, totalEjecucionPresupuestal: 2016.00 },
+    { secFun: 21, idUnidad: 8, nomUnidad: 'U.T. AYACUCHO SUR', idPartida: 3, nomPartida: '2.3.24.13', totalAsignacionPresupuestal: 86000.00, totalConsumo: 0.00, totalEjecucionPresupuestal: 45000.00 },
+    // { secFun: 22, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 65889.00, combCamionetas: 10395.00, combMotocicletas: 52272.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 2500.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 22, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 2700.00, combCamionetas: 10395.00, combMotocicletas: 52272.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 2500.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 26, idUnidad: 4, nomUnidad: 'U.T. HUANUCO', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 34000.00, combCamionetas: 0.00, combMotocicletas: 32771.20, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 0, lubMotocicletas: 2800.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 26, idUnidad: 4, nomUnidad: 'U.T. HUANUCO', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 2800.00, combCamionetas: 0.00, combMotocicletas: 32771.20, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 0, lubMotocicletas: 2800.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 39, idUnidad: 3, nomUnidad: 'U.T. UCAYALI', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 5390.00, combCamionetas: 0.00, combMotocicletas: 4950.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 0, lubMotocicletas: 200.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 39, idUnidad: 3, nomUnidad: 'U.T. UCAYALI', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 200.00, combCamionetas: 0.00, combMotocicletas: 4950.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 0, lubMotocicletas: 200.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 24, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 80000.00, combCamionetas: 8339.10, combMotocicletas: 66528.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 2500.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 24, idUnidad: 2, nomUnidad: 'U.T. CUSCO', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 3000.00, combCamionetas: 8339.10, combMotocicletas: 66528.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 2500.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 32, idUnidad: 5, nomUnidad: 'U.T. MADRE DE DIOS', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 3520.07, combCamionetas: 0.00, combMotocicletas: 3080.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 160.00, lubMotocicletas: 160.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 32, idUnidad: 5, nomUnidad: 'U.T. MADRE DE DIOS', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 160.00, combCamionetas: 0.00, combMotocicletas: 3080.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 160.00, lubMotocicletas: 160.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 36, idUnidad: 6, nomUnidad: 'U.T. PUNO', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 70000.00, combCamionetas: 11440.00, combMotocicletas: 55440.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1816.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 36, idUnidad: 6, nomUnidad: 'U.T. PUNO', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 2016.00, combCamionetas: 11440.00, combMotocicletas: 55440.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1816.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 27, idUnidad: 7, nomUnidad: 'U.T. JUNIN', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 40000.00, combCamionetas: 11176.00, combMotocicletas: 23408.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1320.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 27, idUnidad: 7, nomUnidad: 'U.T. JUNIN', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 1600.00, combCamionetas: 11176.00, combMotocicletas: 23408.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1520.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 21, idUnidad: 8, nomUnidad: 'U.T. AYACUCHO SUR', idPartida: 1, nomPartida: '2.3.13.11', totalAvancePresupuestal: 35000.00, combCamionetas: 7480.00, combMotocicletas: 25839.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1816.00, lubGeneradores: 0, lubDeslizadores: 0 },
+    // { secFun: 21, idUnidad: 8, nomUnidad: 'U.T. AYACUCHO SUR', idPartida: 2, nomPartida: '2.3.13.13', totalAvancePresupuestal: 2016.00, combCamionetas: 7480.00, combMotocicletas: 25839.00, combGeneradores: 220.00, combDeslizadores: 220.00, lubCamionetas: 200.00, lubMotocicletas: 1816.00, lubGeneradores: 0, lubDeslizadores: 0 },
 ];
 
 export const ASIGNACIONPRESUPUESTAL: AsignacionPresupuestal[] = [
@@ -309,7 +334,7 @@ export const ESTADOSOLICITUD = [
     { id: 2, nombre: 'ATENDIDO' },
 ];
 
-export const _estadosRequerimientoMant = [
+export const _estadosRequerimiento = [
     { id: 1, nombre: 'SOLICITADO' },
     { id: 2, nombre: 'PEND. AUTORIZACION' },
     // { id: 3, nombre: 'PEND. ASIGNACION' },
@@ -338,8 +363,8 @@ export const _estadosSolicitudMant = [
 ];
 
 export const _tiposProducto = [
-    { id: 1, nombre: 'REPUESTOS' },
-    { id: 2, nombre: 'SERVICIOS' },
+    { id: 1, nombre: 'REPUESTO' },
+    { id: 2, nombre: 'SERVICIO' },
 ];
 
 export const _tiposDocumento = [
@@ -358,6 +383,14 @@ export const _solicitudesMant: SolicitudMant[] = [
     { id: 8, idUnidad: 1, nomUnidad: 'U.T. AYACUCHO NORTE', idTambo: 7, nomTambo: 'CAYARPACHI', idTipoMantenimiento: 1, nomTipoMantenimiento: 'PREVENTIVO', idVehiculo: 3, idTipoVehiculo: 2, nomTipoVehiculo: 'MOTOCICLETA', marcaVehiculo: 'ZONGSHEN', placaVehiculo: 'EA-9546', idProveedor: 0, nomProveedor: 'ZEA SILVA VLADIMIR', idTipoDocumento: 1, nomTipoDocumento: 'RUC', nroDocumento: '10411143932', fecha: new Date('2019-10-09'), monto: 445.00, proforma: null, observacion: '', idEstado: 2, nomEstado: 'ATENDIDO', detalleSolicitudMant: null, fechaMant: null, kilometrajeInicio: null },
 ];
 
+
+export const _listaDetalleSolicitud: DetalleSolicitudMant[] = [
+    { id: 1, idTipoProducto: 1, nomTipoProducto: 'REPUESTO', producto: 'BATERIA N°01', cantidad: 1, unidadMedida: '', monto: 135.00, idSolicitudMant: 1 },
+    { id: 2, idTipoProducto: 1, nomTipoProducto: 'REPUESTO', producto: 'PROTECTOR DE BATERIA', cantidad: 1, unidadMedida: '', monto: 18.00, idSolicitudMant: 1 },
+    { id: 3, idTipoProducto: 1, nomTipoProducto: 'REPUESTO', producto: 'CAMARA N° 18', cantidad: 1, unidadMedida: '', monto: 36.00, idSolicitudMant: 1 },
+    { id: 4, idTipoProducto: 2, nomTipoProducto: 'SERVICIO', producto: 'MANTENIMIENTO GENERAL (reparacion de motor, cambio de aceite, limpieza cambio de bujia, limpieza de filtro de aire y revision de luces)', cantidad: 1, unidadMedida: '', monto: 48.00, idSolicitudMant: 1 },
+    { id: 5, idTipoProducto: 2, nomTipoProducto: 'SERVICIO', producto: 'REPARACION DE MOTOR', cantidad: 1, unidadMedida: '', monto: 90.00, idSolicitudMant: 1 },
+];
 
 //CONFIGURACION
 export const _estadosBanco = [

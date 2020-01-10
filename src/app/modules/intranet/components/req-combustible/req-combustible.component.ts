@@ -5,7 +5,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatDialog, MatSnackBar } fro
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Router } from '@angular/router';
-import { UNIDADES, TIPOSPRESUPUESTO, _requerimientosBien } from 'src/app/common';
+import { UNIDADES, TIPOSPRESUPUESTO, _requerimientosBien, _estadosRequerimiento } from 'src/app/common';
 import { RegReqCombustibleComponent } from './reg-req-combustible/reg-req-combustible.component';
 import { DecimalPipe, DatePipe } from '@angular/common';
 
@@ -37,38 +37,11 @@ export class ReqCombustibleComponent implements OnInit {
   tambos = [];
   tiposMantenimiento = [];
   tiposPresupuesto = [];
+  estadosRequerimiento = [];
   listaMantenimientos: RequerimientoBien[];
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<RequerimientoBien>;
-
-  // columnsGrilla = [
-  //   {
-  //     columnDef: 'id',
-  //     header: 'N°',
-  //     cell: (mant: RequerimientoBien) => (mant.id != null) ? `${mant.id}` : ''
-  //   }, {
-  //     columnDef: 'nomUnidad',
-  //     header: 'UNIDAD',
-  //     cell: (mant: RequerimientoBien) => (mant.nomUnidad != null) ? `${mant.nomUnidad}` : ''
-  //   }, {
-  //     columnDef: 'detalleRequerimiento',
-  //     header: 'DET. REQUERIMIENTO',
-  //     cell: (mant: RequerimientoBien) => (mant.detalleRequerimiento != null) ? `${mant.detalleRequerimiento}` : ''
-  //   }, {
-  //     columnDef: 'nomTipoAsigPresupuesto',
-  //     header: 'TIPO PRESUPUESTO',
-  //     cell: (mant: RequerimientoBien) => (mant.nomTipoAsigPresupuesto != null) ? `${mant.nomTipoAsigPresupuesto}` : ''
-  //   }, {
-  //     columnDef: 'codAsigPresupuesto',
-  //     header: 'NRO. RES. ADMINISTRACION/ NRO. ORDEN COMPRA',
-  //     cell: (mant: RequerimientoBien) => (mant.codAsigPresupuesto != null) ? `${mant.codAsigPresupuesto}` : ''
-  //   }, {
-  //     columnDef: 'importeAsigPresupuestoa',
-  //     header: 'MONTO PRESUPUESTO',
-  //     cell: (mant: RequerimientoBien) => (mant.importeAsigPresupuesto != null) ? `${mant.importeAsigPresupuesto}` : ''
-  //   }];
-
 
   columnsGrilla = [
     {
@@ -133,7 +106,7 @@ export class ReqCombustibleComponent implements OnInit {
       if (this.user.getId) {
         this.bandejaGrp = this.fb.group({
           unidad: [{ value: '', disabled: this.user.perfil.id != 3 }, [Validators.required]],
-          tipoPresupuesto: ['', [Validators.required]]
+          estadoRequerimiento: ['', [Validators.required]]
         });
 
         this.definirTabla();
@@ -149,7 +122,7 @@ export class ReqCombustibleComponent implements OnInit {
 
   public inicializarVariables(): void {
     this.cargarUnidades();
-    this.cargarTipopresupuesto();
+    this.cargarEstadosRequerimiento();
 
     this.spinnerService.hide();
     this.buscar();
@@ -166,11 +139,11 @@ export class ReqCombustibleComponent implements OnInit {
     }
   }
 
-  public cargarTipopresupuesto() {
-    this.tiposPresupuesto = JSON.parse(JSON.stringify(TIPOSPRESUPUESTO));
-    this.tiposPresupuesto.unshift({ id: 0, nombre: 'TODOS' });
+  public cargarEstadosRequerimiento() {
+    this.estadosRequerimiento = JSON.parse(JSON.stringify(_estadosRequerimiento));
+    this.estadosRequerimiento.unshift({ id: 0, nombre: 'TODOS' });
 
-    this.bandejaGrp.get('tipoPresupuesto').setValue(this.tiposPresupuesto[0]);
+    this.bandejaGrp.get('estadoRequerimiento').setValue(this.estadosRequerimiento[0]);
   }
 
   definirTabla(): void {
@@ -213,10 +186,10 @@ export class ReqCombustibleComponent implements OnInit {
   buscar() {
     console.log('Buscar');
     let idUnidad = this.bandejaGrp.get('unidad').value.id;
-    let idTipopresupuesto = this.bandejaGrp.get('tipoPresupuesto').value.id;
+    let idEstadoRequerimiento = this.bandejaGrp.get('estadoRequerimiento').value.id;
 
     this.listaMantenimientos = _requerimientosBien.filter(el => (el.idUnidad == idUnidad || 0 == idUnidad));
-    this.listaMantenimientos = this.listaMantenimientos.filter(el => (el.idTipoAsigPresupuesto == idTipopresupuesto || 0 == idTipopresupuesto));
+    this.listaMantenimientos = this.listaMantenimientos.filter(el => (el.idEstadoRequerimiento == idEstadoRequerimiento || 0 == idEstadoRequerimiento));
 
     this.cargarDatosTabla();
   }
@@ -238,21 +211,7 @@ export class ReqCombustibleComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
-      // this.listaMantenimientos.splice(indice,1);
-      // this.listaMantenimientos.push(result);
-      // this.cargarDatosTabla();
     });
   }
-
-  // verObsRequerimientoBien(obj): void {
-  //   const dialogRef = this.dialog.open(VerObsReqCombustibleComponent, {
-  //     width: '500px',
-  //     data: obj
-  //   });
-
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     // console.log(result);
-  //   });
-  // }
 
 }

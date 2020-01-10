@@ -60,9 +60,9 @@ const intranetRoutes: Routes = [
         component: CuadroControlComponent,
         data: { title: 'Cuadro control general' }
       }, {
-        path: 'cuadro-control-tambo',
+        path: 'cuadro-control-detallado',
         component: CuadroControlTamboComponent,
-        data: { title: 'Cuadro control tambos' }
+        data: { title: 'Cuadro control detallado' }
       }, {
         path: 'control-mantenimiento',
         component: ControlMantVehiculoComponent,

@@ -34,7 +34,7 @@
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}"
               *ngIf="formularioGrp1.get('tipoPresupuesto').value.id==1 || formularioGrp1.get('tipoPresupuesto').value.id==2">
               <mat-form-field>
-                <input formControlName="nomTdrEett" matInput type="text" placeholder="Documento TDR o EETT">
+                <input formControlName="nomTdrEett" matInput type="text" placeholder="Documento EETT">
                 <button mat-icon-button matTooltip="Buscar documento" type="button" class="btn-action" color="primary"
                   (click)="buscarTdrEett($event)"
                   [disabled]="getUser.perfil.id == 3 || requerimiento.idEstadoRequerimiento!=1">
@@ -47,7 +47,7 @@
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}"
               *ngIf="formularioGrp1.get('tipoPresupuesto').value.id==3">
               <mat-form-field>
-                <input formControlName="nroFondoEncargo" matInput type="text" placeholder="Nro solicitud fondo encargo">
+                <input formControlName="nroFondoEncargo" matInput type="text" placeholder="Documento fondo encargo">
                 <button mat-icon-button matTooltip="Elaborar solicitud fondo encargo" type="button" class="btn-action"
                   color="primary" (click)="solFondoEncargo()"
                   [disabled]="getUser.perfil.id == 3 || requerimiento.idEstadoRequerimiento!=1">
@@ -71,6 +71,13 @@
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+              <mat-form-field appearance="legacy">
+                <input matInput [matDatepicker]="picker" placeholder="Fecha">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
               <mat-form-field>
                 <input formControlName="documentacion" matInput type="text"
                   placeholder="Documentacion de requerimiento">
@@ -83,13 +90,6 @@
                   (change)="cargarRequerimiento($event)">
               </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
-              <mat-form-field appearance="legacy">
-                <input matInput [matDatepicker]="picker" placeholder="Fecha">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-            </mat-grid-tile>
           </mat-grid-list>
         </form>
       </div>
@@ -100,7 +100,7 @@
       </div>
     </mat-step>
     <mat-step [stepControl]="true">
-      <ng-template matStepLabel>Orden Servicio/Res. Administracion</ng-template>
+      <ng-template matStepLabel>Orden Compra/Res. Administracion</ng-template>
       <div>
         <form [formGroup]="formularioGrp2">
           <mat-grid-list cols="12" rowHeight="50px">

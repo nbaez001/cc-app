@@ -3,7 +3,7 @@
     <ng4-loading-spinner [timeout]="300000"></ng4-loading-spinner>
     <mat-card class="box-filtros">
       <mat-card-header class="box-section-header">
-        <mat-card-title class="box-section-title"> BUSQUEDA USO GENERADOR ELECTRICO </mat-card-title>
+        <mat-card-title class="box-section-title"> FILTROS CUADRO DE CONTROL </mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form *ngIf="bandejaGrp" [formGroup]="bandejaGrp" class="example-container">
@@ -28,16 +28,6 @@
                 </mat-select>
               </mat-form-field>
             </mat-grid-tile>
-            <!-- <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
-              <mat-form-field appearance="legacy">
-                <mat-label>Mes</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let mes of meses" [value]="mes.valor">
-                    {{mes.nombre}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </mat-grid-tile> -->
           </mat-grid-list>
         </form>
       </mat-card-content>
@@ -55,16 +45,16 @@
 
     <mat-card class="table-resultados">
       <mat-card-header>
-        <mat-card-title> CUADRO DE CONTROL DEL COMBUSTIBLE DE LA FLOTA VEHICULAR Y OTROS EQUIPOS </mat-card-title>
+        <mat-card-title> CUADRO DE CONTROL GENERAL - POR PARTIDAS </mat-card-title>
       </mat-card-header>
       <mat-card-content class="card-container">
         <div class="table-container clear-both">
-          <table class="mat-table">
+          <!-- <table class="mat-table">
             <thead>
               <tr class="mat-header-row">
-                <th class="mat-header-cell" rowspan="2" style="width: 4rem;"> NMonico</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 2rem;"> NMonico</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 12rem;"> UNIDADES TERRITORIALES</th>
-                <th class="mat-header-cell" rowspan="2" style="width: 6rem;">PARTIDA</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 4rem;">PARTIDA</th>
                 <th class="mat-header-cell" colspan="4" style="width: 32rem;"> CONSUMOS</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 6rem;">TOTAL CONSUMO</th>
                 <th class="mat-header-cell" rowspan="2" style="width: 6rem;">TOTAL AVANCE PRESUPUESTAL</th>
@@ -140,6 +130,60 @@
                   <ng-container *ngIf="con.idPartida==2">
                     {{(con.totalAvancePresupuestal -(con.lubCamionetas + con.lubMotocicletas + con.lubGeneradores + con.lubDeslizadores)) | number:'1.2-2'}}
                   </ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table> -->
+          <table class="mat-table">
+            <thead>
+              <tr class="mat-header-row">
+                <th class="mat-header-cell" rowspan="2" style="width: 3rem;"> NMonico</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 12rem;"> UNIDADES TERRITORIALES</th>
+                <th class="mat-header-cell" rowspan="2" style="width: 4rem;">PARTIDA</th>
+                <th class="mat-header-cell" colspan="3" style="width: 24rem;"> CONTROL PRESUPUESTAL (EJECUCION)</th>
+                <th class="mat-header-cell" colspan="3" style="width: 24rem;"> CONTROL PRESUPUESTAL (PROYECCCION KILOMETRAJES Y HORAS USO)</th>
+              </tr>
+              <tr class="mat-header-row">
+                <th class="mat-header-cell"> ASIG. PRESUPUESTAL</th>
+                <th class="mat-header-cell"> EJEC. PRESUPUESTAL</th>
+                <th class="mat-header-cell"> SALDO</th>
+                <th class="mat-header-cell"> ASIG. PRESUPUESTAL</th>
+                <th class="mat-header-cell"> CONSUMO PROYECTADO</th>
+                <th class="mat-header-cell"> SALDO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="mat-row" *ngFor="let con of listaControl; let i=index">
+                <td class="mat-cell celda-center">  
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.secFun}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell">
+                  <ng-container *ngIf="con.idPartida==1">
+                    {{con.nomUnidad}}
+                  </ng-container>
+                </td>
+                <td class="mat-cell celda-right">
+                  {{con.nomPartida}}
+                </td>
+                <td class="mat-cell celda-right">
+                  {{con.totalAsignacionPresupuestal | number:'1.2-2'}}
+                </td>
+                <td class="mat-cell celda-right">
+                  {{con.totalEjecucionPresupuestal | number:'1.2-2'}}
+                </td>
+                <td class="mat-cell celda-right">
+                  {{(con.totalAsignacionPresupuestal - con.totalEjecucionPresupuestal) | number:'1.2-2'}}
+                </td>
+                <td class="mat-cell celda-right">
+                  {{con.totalAsignacionPresupuestal | number:'1.2-2'}}
+                </td>
+                <td class="mat-cell celda-right">
+                  {{con.totalConsumo | number:'1.2-2'}}
+                </td>
+                <td class="mat-cell celda-right">
+                  {{(con.totalAsignacionPresupuestal - con.totalConsumo) | number:'1.2-2'}}
                 </td>
               </tr>
             </tbody>

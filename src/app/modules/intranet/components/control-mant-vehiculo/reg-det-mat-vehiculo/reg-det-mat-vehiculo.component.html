@@ -1,35 +1,5 @@
-<h1 mat-dialog-title>Registrar detalle servicio</h1>
+<h1 mat-dialog-title>Detalle solicitud mantenimiento</h1>
 <div mat-dialog-content>
-  <form [formGroup]="formularioGrp">
-    <mat-grid-list cols="12" rowHeight="50px">
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
-        <mat-form-field>
-          <mat-label>Tipo servicio</mat-label>
-          <mat-select formControlName="tipoServicio">
-            <mat-option *ngFor="let tipoServicio of listaTipoServicio" [value]="tipoServicio">
-              {{tipoServicio.nombre}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
-        <mat-form-field>
-          <input matInput formControlName="descripcion" placeholder="Descripcion" type="text" [Uppercased]>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
-        <mat-form-field>
-          <input matInput formControlName="cantidad" placeholder="Cantidad" type="number" [Uppercased]>
-        </mat-form-field>
-      </mat-grid-tile>
-      <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
-        <mat-form-field>
-          <input matInput formControlName="unidadMedida" placeholder="Unidad medida" type="text" [Uppercased]>
-        </mat-form-field>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </form>
-
   <div class="table-container">
     <table mat-table [dataSource]="dataSource" matSort>
 

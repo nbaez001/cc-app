@@ -20,10 +20,10 @@
             </mat-grid-tile>
             <mat-grid-tile [responsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
               <mat-form-field appearance="legacy">
-                <mat-label>Tipos presupuesto</mat-label>
-                <mat-select formControlName="tipoPresupuesto">
-                  <mat-option *ngFor="let tipoPresupuesto of tiposPresupuesto" [value]="tipoPresupuesto">
-                    {{tipoPresupuesto.nombre}}
+                <mat-label>Estado requerimiento</mat-label>
+                <mat-select formControlName="estadoRequerimiento">
+                  <mat-option *ngFor="let estadoRequerimiento of estadosRequerimiento" [value]="estadoRequerimiento">
+                    {{estadoRequerimiento.nombre}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

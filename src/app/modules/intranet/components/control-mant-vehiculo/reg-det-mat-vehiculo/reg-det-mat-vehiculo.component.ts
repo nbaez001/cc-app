@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatTableDataSource, MatPaginator, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { ServRepMantenimiento } from 'src/app/model/serv-rep-mantenimiento.model';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { ValidationService } from 'src/app/services/validation.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { DataDialog } from 'src/app/model/data-dialog.model';
+import { DetalleSolicitudMant } from 'src/app/model/detalle-solicitud-mant.model';
+import { _listaDetalleSolicitud } from 'src/app/common';
 
 @Component({
   selector: 'app-reg-det-mat-vehiculo',
@@ -14,63 +15,67 @@ import { DataDialog } from 'src/app/model/data-dialog.model';
   styleUrls: ['./reg-det-mat-vehiculo.component.scss']
 })
 export class RegDetMatVehiculoComponent implements OnInit {
-  formularioGrp: FormGroup;
-  messages = {
-    'tipoServicio': {
-      'required': 'Campo obligatorio'
-    },
-    'descripcion': {
-      'required': 'Campo obligatorio'
-    },
-    'cantidad': {
-      'required': 'Campo obligatorio'
-    },
-    'unidadMedida': {
-      'required': 'Campo obligatorio'
-    }
-  };
-  formErrors = {
-    'tipoServicio': '',
-    'descripcion': '',
-    'cantidad': '',
-    'unidadMedida': ''
-  };
+  // formularioGrp: FormGroup;
+  // messages = {
+  //   'tipoServicio': {
+  //     'required': 'Campo obligatorio'
+  //   },
+  //   'descripcion': {
+  //     'required': 'Campo obligatorio'
+  //   },
+  //   'cantidad': {
+  //     'required': 'Campo obligatorio'
+  //   },
+  //   'unidadMedida': {
+  //     'required': 'Campo obligatorio'
+  //   }
+  // };
+  // formErrors = {
+  //   'tipoServicio': '',
+  //   'descripcion': '',
+  //   'cantidad': '',
+  //   'unidadMedida': ''
+  // };
 
 
-  dataSource: MatTableDataSource<ServRepMantenimiento>;
+  dataSource: MatTableDataSource<DetalleSolicitudMant>;
   displayedColumns: string[];
   isLoading: boolean = false;
   columnsGrilla = [
     {
       columnDef: 'id',
       header: 'N°',
-      cell: (cond: ServRepMantenimiento) => `${cond.id}`
+      cell: (cond: DetalleSolicitudMant) => `${cond.id}`
     }, {
-      columnDef: 'nomTipoServicio',
-      header: 'Tipo servicio',
-      cell: (cond: ServRepMantenimiento) => `${cond.nomTipoServicio}`
+      columnDef: 'nomTipoProducto',
+      header: 'Tipo producto',
+      cell: (cond: DetalleSolicitudMant) => `${cond.nomTipoProducto}`
     }, {
-      columnDef: 'descripcion',
+      columnDef: 'producto',
       header: 'Descripcion',
-      cell: (cond: ServRepMantenimiento) => `${cond.descripcion}`
+      cell: (cond: DetalleSolicitudMant) => (cond.producto) ? (cond.producto.length > 60 ? `${cond.producto.substr(0, 59)}...` : `${cond.producto}`) : ''
     }, {
       columnDef: 'cantidad',
       header: 'Cantidad',
-      cell: (cond: ServRepMantenimiento) => `${cond.cantidad}`
+      cell: (cond: DetalleSolicitudMant) => `${cond.cantidad}`
     }, {
       columnDef: 'unidadMedida',
       header: 'Unidad medida',
-      cell: (cond: ServRepMantenimiento) => `${cond.unidadMedida}`
+      cell: (cond: DetalleSolicitudMant) => `${cond.unidadMedida}`
+    }, {
+      columnDef: 'monto',
+      header: 'Monto',
+      cell: (cond: DetalleSolicitudMant) => `${this.decimalPipe.transform(cond.monto, '1.2-2')}`
     }
   ];
 
-  listaServRepMantenimientos: ServRepMantenimiento[] = [];
+  listaDetalleSolicitudes: DetalleSolicitudMant[] = [];
 
 
-  listaTipoServicio: Object[] = [
-    { id: 1, nombre: 'REPUESTO' },
-    { id: 2, nombre: 'SERVICIO' },
-  ];
+  // listaTipoServicio: Object[] = [
+  //   { id: 1, nombre: 'REPUESTO' },
+  //   { id: 2, nombre: 'SERVICIO' },
+  // ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -80,21 +85,23 @@ export class RegDetMatVehiculoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DataDialog,
     @Inject(ValidationService) private validationService: ValidationService,
     @Inject(UsuarioService) private user: UsuarioService,
-    private datePipe: DatePipe) { }
+    private decimalPipe: DecimalPipe) { }
 
   ngOnInit() {
-    this.formularioGrp = this.fb.group({
-      tipoServicio: ['', [Validators.required]],
-      descripcion: ['', [Validators.required]],
-      cantidad: ['', [Validators.required]],
-      unidadMedida: ['', [Validators.required]]
-    });
+    // this.formularioGrp = this.fb.group({
+    //   tipoServicio: ['', [Validators.required]],
+    //   descripcion: ['', [Validators.required]],
+    //   cantidad: ['', [Validators.required]],
+    //   unidadMedida: ['', [Validators.required]]
+    // });
 
-    this.formularioGrp.valueChanges.subscribe((val: any) => {
-      this.validationService.getValidationErrors(this.formularioGrp, this.messages, this.formErrors, false);
-    });
+    // this.formularioGrp.valueChanges.subscribe((val: any) => {
+    //   this.validationService.getValidationErrors(this.formularioGrp, this.messages, this.formErrors, false);
+    // });
 
     this.inicializarVariables();
+    this.listaDetalleSolicitudes = _listaDetalleSolicitud;
+    this.cargarDatosTabla();
   }
 
   get getUser(): UsuarioService { return this.user; }
@@ -109,8 +116,8 @@ export class RegDetMatVehiculoComponent implements OnInit {
 
   public cargarDatosTabla(): void {
     this.dataSource = null;
-    if (this.listaServRepMantenimientos.length > 0) {
-      this.dataSource = new MatTableDataSource(this.listaServRepMantenimientos);
+    if (this.listaDetalleSolicitudes.length > 0) {
+      this.dataSource = new MatTableDataSource(this.listaDetalleSolicitudes);
       this.dataSource.paginator = this.paginator;
     }
   }
@@ -119,13 +126,13 @@ export class RegDetMatVehiculoComponent implements OnInit {
     this.definirTabla();
   }
 
-  validateForm(): void {
-    this.validationService.getValidationErrors(this.formularioGrp, this.messages, this.formErrors, true);
-  }
+  // validateForm(): void {
+  //   this.validationService.getValidationErrors(this.formularioGrp, this.messages, this.formErrors, true);
+  // }
 
   guardar(): void {
     // if (this.formularioGrp.valid) {
-    //   let mae = new ServRepMantenimiento();
+    //   let mae = new DetalleSolicitudMant();
     //   mae.id = 0;
     //   mae.nombres = this.formularioGrp.get('nombres').value;
     //   mae.apellidos = this.formularioGrp.get('apellidos').value;

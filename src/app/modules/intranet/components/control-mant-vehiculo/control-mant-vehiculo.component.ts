@@ -4,7 +4,7 @@ import { MantenimientoVehicular } from 'src/app/model/mantenimiento-vehiculo.mod
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { UNIDADES, TIPOSMANTENIMIENTO, TIPOSPRESUPUESTO, MANTENIMIENTOS, _estadosRequerimientoMant } from 'src/app/common';
+import { UNIDADES, TIPOSMANTENIMIENTO, TIPOSPRESUPUESTO, MANTENIMIENTOS, _estadosRequerimiento } from 'src/app/common';
 import { RegMantVehiculoComponent } from './reg-mant-vehiculo/reg-mant-vehiculo.component';
 import { Router } from '@angular/router';
 import { DecimalPipe, DatePipe } from '@angular/common';
@@ -159,7 +159,7 @@ export class ControlMantVehiculoComponent implements OnInit {
   // }
 
   public cargarEstadosRequerimiento() {
-    this.estadosRequerimiento = JSON.parse(JSON.stringify(_estadosRequerimientoMant));
+    this.estadosRequerimiento = JSON.parse(JSON.stringify(_estadosRequerimiento));
     this.estadosRequerimiento.unshift({ id: 0, nombre: 'TODOS' });
 
     this.bandejaGrp.get('estadoRequerimiento').setValue(this.estadosRequerimiento[0]);
